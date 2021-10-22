@@ -100,6 +100,8 @@ We fit all labels (elemental abundances and stellar parameters) simultaneously b
 
 \section{INTRODUCTION}
 
+\section{TARGET SELECTION AND OBSERVATION}
+
 \section{REDUCTION}
 
 Outcome of reduction pipeline:
@@ -146,7 +148,7 @@ For each part of the spectrum, we can create a model spectrum with flux $f_{m,n}
 \end{align}
 
 We describe how we actually model $f_{m,n} (\vec{l})$ in Sec.~\ref{subsec:model_spectra}. When confronting each model with with the data, we can calculate a likelihood function. In our case, we assume that the uncertainty of our measurement $\sigma_f$ is Gaussian and therefore can simplify the likelihood function to the $\chi^2$ sum of all pixels $n$
-\begin{align}
+\begin{align} \label{eq:likelihood_spectroscopic}
     P ( f \vert \sigma_{f}, \vec{l} ) = \sum_n \frac{1}{\sqrt{2 \pi} \sigma_{f,n}} \exp \left[ - \frac{\left( f_n - f_{m,n} (\vec{l} ) \right)^2}{2\sigma_{f,n}^2} \right]
 \end{align}
 
@@ -157,15 +159,26 @@ When we use additional non-spectroscopic information as prior, we have several c
 where we define the Solar values for $\nu_\text{max}$ ($3090\,\mathrm{\upmu Hz}$), $T_\mathrm{eff}$ ($5772\,\mathrm{K}$), and $\log g$ ($4.438\,\log{\mathrm{cm\,s^{-2}}}$) as constants.
 
 We can then calculate the likelihood that our model describes the measured $\nu_\text{max}$ and its Gaussian uncertainty $\sigma_{\nu_\text{max}}$ via
-\begin{align}
+\begin{align} 
     P (\nu_\text{max} \vert \sigma_{\nu_\text{max}}, \vec{l}) = \frac{1}{\sqrt{2 \pi} \sigma_{\nu_\text{max}}} \exp \left[ - \frac{\left( \nu_\text{max} - \nu_{\text{max},m} \right)^2}{2\sigma_{\nu_\text{max}}^2} \right].
 \end{align}
 
 This allows us to slightly adjust our overall likelihood function to
 
-\begin{align}
+\begin{align} \label{eq:likelihood_asterospectroscopic}
     P ( f, \nu_\text{max} \vert \sigma_{f}, \sigma_{\nu_\text{max}}, \vec{l} ) = P ( f \vert \sigma_{f}, \vec{l} ) \times P (\nu_\text{max} \vert \sigma_{\nu_\text{max}}, \vec{l})
 \end{align}
+
+\SB{Available but not used:
+\begin{itemize}
+    \item $\varpi$ and its uncertainty from the astrometric solution \citep{Lindegren2021a} of \Gaia eDR3 \citep{Brown2021}, including a zero point correction by \citet{Lindegren2021b}
+    \item Optical photometry $G_\text{BP}$, $G$, $G_\text{RP}$ and their uncertainties from \Gaia eDR3 \citep{Brown2021}
+    \item Near-infrared photometry $J$, $H$, $K_s$ and their uncertainties from 2MASS \citep{Skrutskie2006}
+    \item Infrared photometry $W_1$ - $W_4$ from WISE \citep{Cutri2013}
+    \item $\delta_\nu$ and its uncertainty from K2 \citep[][in prep.]{Zinn2020}
+\end{itemize}
+To be discussed: What do we do, if $\nu_\text{max}$ does not have uncertainties reported?
+}
 
 \subsubsection{Prior functions}
 
@@ -189,8 +202,8 @@ If we do only take into account spectroscopic information, we will use the poste
 \end{align}
 
 If we take both spectroscopic ($f$, $\sigma_f$) and asteroseismic ($\nu_\text{max}$, $\sigma_{\nu_\text{max}}$) information into account, we will use
-\begin{align}
-    P_{sa} = P ( \vec{l} \vert f, \nu_\text{max}, \sigma_f , \sigma_{\nu_\text{max}}) =  P ( f, \nu_\text{max} \vert \sigma_{f}, \sigma_{\nu_\text{max}}, \vec{l} )  \times P ( \vec{l} ).
+\begin{align}\label{eq:posterior}
+    P_{sa} = P ( \vec{l} \vert f, \nu_\text{max}, \sigma_f , \sigma_{\nu_\text{max}}) =  P ( f, \nu_\text{max} \vert \sigma_{f}, \sigma_{\nu_\text{max}}, \vec{l} ) ~ P ( \vec{l} ).
 \end{align}
 
 \subsection{Creating model spectra} \label{subsec:model_spectra}
@@ -201,20 +214,97 @@ To make this computationally feasible, we follow an idea reported by \citet{Rix2
 
 In order to confront these model spectra with the GALAH observations, we downgrade the model spectra on-the-fly with the available line-spread functions of each observation (see Sec.~\ref{subsec:lsf}).
 
-\subsubsection{Grid of synthetic spectra}
+\subsubsection{Grid of synthetic spectra} \label{subsubsec:spectrum_grid}
 
-\subsubsection{Polynomial models for a subset}
+To achieve a self-consistent grid of synthetic spectra, we compute significantly over-sampled synthetic spectra at 10- times higher then the typical GALAH resolution with Spectroscopy Made Easy (\sme). The stellar parameters (\Teff, \logg, \feh, \vmic) and elemental abundances [X/Fe] of all 30 elements are randomly sampled within reasonable limits (see Eq.~\ref{eq:grid_sample_limits}) and fed into \sme to create self-consistent synthetic spectra over the full wavelength range for \marcs atmospheres.
+
+To give an example, we show the limits of the randomly sampled points for the 3D bin with mid point $T_\text{eff} = 5750 \K$, $\log g = 4.5\dex$, and $\mathrm{[Fe/H]} = 0.0\dex$ (see also Fig.~\ref{fig:teff_logg_grid_coverage}):
+\begin{align}
+    T_\text{eff}~/~\K &\in {5250..5750..6250} \\
+    \log g~/~\dex &\in {4.0..4.5..5.0} \\
+    \mathrm{[Fe/H]}~/~\dex &\in {-0.5..0.0,0.5} \\
+    v_\text{mic}~/~\kms &\in {0.5..1.5..4.0} \\
+    v \sin i~/~\kms &\in \text{see Eq.~\ref{eq:vsini}} \\
+    \mathrm{[Li/Fe]} &\in {-3.0..1.0..5.0} \\
+    \mathrm{[X/Fe]} &\in {-1.0..0.0..1.0}
+\end{align}
+
+\begin{figure}[hbt!]
+ \centering
+ \includegraphics[width=\columnwidth]{figures/teff_logg_grid_coverage.png}
+ \caption{Coverage in \Teff and \logg of MARCS2014 grid (red) and GALAH DR3 (black, including density countour). Shown is also an example of one of the 3D bins used to create models with \TheCannon. MARCS grid points \Teff$\leq3100\K$ are neglected throughout GALAH DR4.}
+ \label{fig:teff_logg_grid_coverage}
+\end{figure}
+
+For each spectrum, we first run a test on all available lines in the GALAH linelist, which is adapted from \citet{Heiter2021} and includes small changes to correct wrong $\log gf$ values for few lines within the GALAH wavelength range. We keep all atomic lines for the final synthesis and restrict the molecular lines to those with \textsc{sme}.depth above 0.001.
+
+Spectra are computed at a resolution of $R = 1,000,000$ on a fine wavelength grid with 60,819 pixels spread over the extended wavelengths $4675.1- 4949.9$, $5624.1-5900.9$, $6424.1-6775.9$, and $7549.1-7925.9 \Angstroem$. We note that these extend significantly beyond the actual GALAH wavelength range.
+
+Default inputs are the grids of 1D \marcs atmospheres \citep[][version 2014]{Gustafsson2008}, which are interpolated for the choice of \Teff, \logg, and \feh. We use grids of non-LTE departure coefficients by \citet{Amarsi2020} for H, Li, C, N, O, Na, Mg, Al, Si, K, Ca, Mn, and Ba. For all, except C, we use the grid, which includes background scattering.
+
+To be able to test that the flux-label correlations found by our subsequent polynomial interpolation are limited to reasonable wavelength ranges, we also calculate one spectrum that is exactly in the middle of the parameter range and additional spectra, where we increase the value of one label at a time (e.g. increase [O/Fe] by $1\dex$) to test the response in the synthetic spectrum.
+
+To save computational power, we compute synthetic spectra without rotational or macroturbulence broadening ($v_\text{mac} = v\sin i = 0\kms$), but save the model continuum flux (\texttt{sme.cmod}) and the specific intensities (\texttt{sme.sint}) as a function of the equal-area midpoints of each equal-area annulus $\mu$ (see Fig.~\ref{fig:sme_mu_output}). These can be integrated after-the fact to sample different \vsini values for the polynomical models (see Sec.\~ref{subsubsec:polynomials}).
+
+\begin{figure}[hbt!]
+ \centering
+ \includegraphics[width=\columnwidth]{figures/sme_grid.png}
+ \caption{Example output of \sme for a solar spectrum. Shown are the the specific intensities (\texttt{sme.sint}) as a function of the equal-area midpoints of each equal-area annulus $\mu$.}
+ \label{fig:sme_mu_output}
+\end{figure}
+
+Our synthetic grid explicitly includes C and N abundances. C was previously included in the analysis of GALAH DR3, but limited to the atomic C line. The analysis thus neglected the molecular absorption features of $\mathrm{C_2}$ and CN at the beginning of CCD1 and end of CCD4, respectively. With the new self-consistent grid, we can however include these features, as they hold valuable information for both C and N, as well as several other features through the molecular equilibrium in stars \citep[see e.g.][]{Ting2018}.
+
+\subsubsection{Polynomial models for a subset} \label{subsubsec:polynomials}
+
+\begin{figure}[hbt!]
+ \centering
+ \includegraphics[width=\columnwidth]{figures/cannon_interpolation.png}
+ \caption{\SB{Outdated, because this is still not yet showing the actually randomly sampled points!} Explanation of \TheCannon interpolation. Shown are the \Teff and \logg values of the 28x4x6 input spectra for \TheCannon model grid (median $T_\text{eff} = 5750\K$, $\log g = 4.5\dex$, and $\mathrm{[Fe/H]} = 0.0\dex$) that would be used to analyse a Solar spectrum.}
+ \label{fig:cannon_interpolation}
+\end{figure}
+
+We are training 2067 models for overlapping 3D bins in \Teff, \logg, and \feh.
+
+At this stage, we explicitly include the broadening of spectra because of rotation (\vsini) and sample each of the synthetic spectra over a range of
+\begin{align} \label{eq:vsini}
+    v \sin i~/~\kms \in \{ 1.5, 3.0, 6.0, 9.0, 12.0, 24.0\}.
+\end{align}
+
+The decision for these values was made based on the distribution of \vsini in GALAH+ DR3 and comparison with the grid values used by APOGEE DR16 \citep{Joensson2020}.
+
+Because our interpolation method does not care about the stellar physics behind the correlation of stellar flux and labels, we introduce an intermediate step to verify that the found correlations are at least limited to the wavelength regions where we would expect a reaction to the specific label. This technique is called censoring \citep{Casey2016} or masking \citep{Buder2018}. For our analysis, we explicitly have included perturbations for one label at a time to a median spectrum of the grid. Comparing the median with each of the perturbed spectra at the highest rotational broadening ($v \sin i = 24.0\kms$) allows us to assess which pixels of the synthetic spectra change and only allow the polynomial fitting to find non-zero coefficients for the particular label for exactly these pixels. The idea here is, that coefficients related to Li should for example only be allowed to be non-zero for the Li line. 
+
+\SB{For elements like C, N, O, and Ti, whose molecular bands are visible in the GALAH, a change in either abundance might influence the strength of the other molecular features. We will have to follow this up in more detail!}
+
+\subsubsection{Selecting the best model for the labels at hand}
+
+For each combination of \TLF, we finding \TheCannon's nearest neighbor model via \textsc{scipy} \textsc{cKDTree}.
+
+\SB{Describe here the tests we do to make sure this actually provides a smooth transition between the different labels. Tests of the Cannon models show, that they can reproduce the spectra and their labels within for example $1\K$ \Teff, $0.01\dex$ \logg, and $0.01\dex$ \feh for the grid edges. But more thorough testing is needed}
 
 \subsection{Adjustments to observed spectra} \label{subsec:adjustments_observation}
 
 We make two additional adjustments to the reduced spectra, which come in the form of counts and uncertainty per wavelength, $f_\lambda$ and $\sigma_{f,\lambda}$.
 
-As we compare the observation to model spectra, we do not have to restrict ourselves to an a priory normalisation, but can take into account the residual information on the continuum in parts of the spectra. For each model spectrum that we compare to, we therefore perform a normalisation by fitting a chebyshev polynomial with outlier clipping to the ratio of model and observation. This allows us to both overcome previous shortcomings of the synthetic analysis in GALAH+ DR3 \citep{Buder2021}, which had to be restricted to small wavelength segments and assumed a linear relation for those. Our new approach allows us to properly assess the structure of deep and steep molecular features for cool stars, which dominate spectra of cool stars and carry significant information on \Teff as well as \vrad.
+As we compare the observation to model spectra, we do not have to restrict ourselves to an a priory normalisation, but can take into account the residual information on the continuum in parts of the spectra. For each model spectrum that we compare to, we therefore perform a normalisation by fitting a Chebyshev polynomial with outlier clipping to the ratio of model and observation (see Fig.~\ref{fig:ratio_normalisation}). This allows us to both overcome previous shortcomings of the synthetic analysis in GALAH+ DR3 \citep{Buder2021}, which had to be restricted to small wavelength segments and assumed a linear relation for those. Our new approach allows us to properly assess the structure of deep and steep molecular features for cool stars, which dominate spectra of cool stars and carry significant information on \Teff as well as \vrad.
+
+\begin{figure}[hbt!]
+ \centering
+ \includegraphics[width=\columnwidth]{figures/ratio_normalisation.png}
+ \caption{
+ \textbf{Example of normalisation for GALAH DR4 for a model spectrum that is selected during the label optimisation.}
+ \textbf{Panel (a):} Observed spectrum (counts) of star 2MASS XYZ.
+ \textbf{Panel (b):} Ratio (blue) of observed spectrum and model spectrum as well as Chebychev polynomial fit (orange).
+ \textbf{Panel (c):} Normalised observed spectrum (black) compared to the model spectrum (blue). Residuals (red) can then be used as input for the likelihood function.
+ }
+ \label{fig:ratio_normalisation}
+\end{figure}
 
 For each CCD, the reduction has found the most suitable wavelength solution, linking pixels with actual wavelengths, based on the ThXe arc lines. In GALAH DR3 \citep{Buder2021}, we have found several issues for spectra, where not enough ThXe lines could be used to constrain the wavelength solution. Improvements have been made for the new reduction version to improve the number of useful ThXe lines. Two additional pieces of information are, however, unused by the reduction pipeline, namely (i) the telluric lines\footnote{\SB{Check with Janez if that is actually still true!}} that are present throughout GALAH spectra and (ii) the absorption lines of the stellar spectra. Both hold valuable information, as their position (in rest wavelength) is known very well.
 
 The reduction is providing spectra and other parameters in an array of $n$ pixels, that is linked to wavelengths $\lambda_n$ through a linear function
-\begin{align}
+\begin{align} \label{eq:wavelength_solution}
     \lambda (n) = \lambda_0 + n \cdot \Delta_\lambda.
 \end{align}
 In particular, for each CCD, the pipeline reports $\lambda_0$ as \texttt{cdelt} and $\Delta_\lambda$ as \texttt{CRVAl}.\footnote{\SB{Can we take into account uncertainties on these values through the pipeline? e.g. rms?}}
@@ -224,95 +314,12 @@ Because we can directly compare to model spectra with a perfect wavelength solut
 
 \subsection{Finding the most likely set of stellar labels}
 
+To find the most set of stellar labels that best describe the data at hand, we need to either (i) maximise/sample the likelihood functions
+(Eqs.~\ref{eq:likelihood_spectroscopic} or \ref{eq:likelihood_asterospectroscopic}) or maximise/sample the posterior function (Eq.~\ref{eq:posterior}).
 
-In this data release, we aim to estimate even more accurate and precise elemental abundances of the 30 elements with absorption features in GALAH spectra by using as much information of the spectra as possible. This includes the previously neglected molecular absorption features of $\mathrm{C_2}$ and CN, who can only be analysed with a self-consistent grid of synthetic spectra.
+In addition to the parameters included in these functions, we need to optimise the nuisance parameters of \vrad as well as the wavelength solution for the four CCDs (Eq.~\ref{eq:wavelength_solution}).
 
-To achieve a self-consistent grid of synthetic spectra, we compute significantly over-sampled synthetic spectra at 10- times higher then the typical GALAH resolution with Spectroscopy Made Easy (\sme). The stellar parameters (\Teff, \logg, \feh, \vmic) and elemental abundances [X/Fe] of all 30 elements are randomly sampled within reasonable limits (e.g. $\pm 1 \dex$ for most [X/Fe]) and fed into \sme to create self-consistent synthetic spectra over the full wavelength range for \marcs atmospheres.
-
-To limit computational costs of the randomly drawn MCMC samples, we employ a novel method: We select 2076 reasonably small 3-dimensional bins in the \sme grid, that is \Teff$= \pm 500\K$, \logg$ = \pm 0.5\dex$, and \feh$ = \pm 0.5\dex$ and train a quadratic \TheCannon model for each of these bins. We select the bins so that they overlap in all 3-dimensions and allow us to find a reasonably smooth interpolation between different bins / \TheCannon models. In this step, we also apply different rotational broadening and add them as a label for \TheCannon. For each combination of \Teff, \logg, and \feh of the MCMC sampler, we quickly lookup the nearest-neigbhor model of \TheCannon with a KD-tree method and create a synthetic spectrum with \TheCannon. These high-resolution synthetic spectra are then degraded with the measured resolution profile of each spectrum.
-
-The MCMC fitting algorithm further fits for \vrad the following nuisance labels: starting wavelength of each CCD (not degenarate with \vrad if more than 1 CCD are fitted), dispersion of each CCD.
-
-\begin{figure}[hbt!]
- \centering
- \includegraphics[width=\columnwidth]{figures/sme_grid.png}
- \caption{Explanation of SME grids}
- \label{fig:sme_grid}
-\end{figure}
-
-For each spectrum, we first run a test on all available lines in the GALAH linelist, which is adapted from \citet{Heiter2021} and includes small changes to correct wrong $\log gf$ values for few lines within the GALAH wavelength range. We keep all atomic lines for the final synthesis and restrict the molecular lines to those with \textsc{sme}.depth above 0.001.
-
-Spectra are computed at a resolution of $R = 1,000,000$ on a fine wavelength grid with 60,819 pixels spread over the extended wavelengths $4675.1- 4949.9$, $5624.1-5900.9$, $6424.1-6775.9$, and $7549.1-7925.9 \Angstroem$. We note that these extend significantly beyond the actual GALAH wavelength range.
-
-Default inputs are the grids of 1D \marcs atmospheres \citep[][version 2014]{Gustafsson2008}, which are interpolated for the choice of \Teff, \logg, and \feh. We use grids of non-LTE departure coefficients by \citet{Amarsi2020} for H, Li, C, N, O, Na, Mg, Al, Si, K, Ca, Mn, and Ba. For all, except C, we use the grid, which includes background scattering.
-
-We compute the fluxes for 7 equal-area midpoints of equal-area annulii and save them for the later disk integration under consideration of different rotational broadening \vsini (see Sec.~\ref{sec:cannon_input}).
-
-\subsection{Synthetic spectrum interpolation via \TheCannon}
-
-\begin{figure}[hbt!]
- \centering
- \includegraphics[width=\columnwidth]{figures/cannon_interpolation.png}
- \caption{Explanation of cannon interpolation}
- \label{fig:cannon_interpolation}
-\end{figure}
-
-We are training 2067 models for overlapping 3D bins in \Teff, \logg, and \feh.
-
-\subsubsection{Training \TheCannon} \label{sec:cannon_input}
-
-We have a sample of synthetic spectra $f_\lambda (\mu)$ that lay within each 3D bin of \TLF. These cover different choices of \TLF as well as \vmic and [X/Fe], but are assuming no rotational broadening. We therefore add an additional label, \vsini~$\in~[2.5, 5, 10, 15, 30] \kms$.
-
-\subsubsection{Creating synthetic spectra for a set of labels} \label{sec:cannon_synthesis}
-
-For each combination of \TLF, we finding \TheCannon's nearest neighbor model via \textsc{scipy} \textsc{cKDTree}.
-
-Available but not used:
-\begin{itemize}
-    \item $\varpi$ and its uncertainty from the astrometric solution
-    \item Optical photometry $G_\text{BP}$, $G$, $G_\text{RP}$ and their uncertainties from \Gaia eDR3 \citep{Brown2021}
-    \item Near-infrared photometry $J$, $H$, $K_s$ and their uncertainties from 2MASS \citep{Skrutskie2006}
-    \item Infrared photometry $W_1$ - $W_4$ from WISE \citep{Cutri2013}
-    \citep{Lindegren2021a} of \Gaia eDR3 \citep{Brown2021}, including a zeropoint correction by \citet{Lindegren2021b}
-    \item \numax and its uncertainty from K2 \citep[][in prep.]{Zinn2020}
-    \item $\delta \nu$ and its uncertainty from K2 \citep[][in prep.]{Zinn2020}
-\end{itemize}
-
-\subsubsection{Bayesian Framework}
-
-\textbf{Posterior}
-\begin{align}
-    \ln p (l \vert f_\text{obs}, \sigma_\text{obs})
-    \propto
-    \ln p (l) + \ln p (f_\text{obs} \vert \sigma_\text{obs}, l)
-\end{align}
-
-\textbf{Likelihood}
-\begin{align}
-    \ln p \left( f_\text{syn} \vert f_\text{obs}, l \right) = - \frac{1}{2} \left[ \frac{\left(f_\text{syn}(l) - f_\text{obs} \right)^2}{\sigma_\text{obs}} \right]
-\end{align}
-
-\textbf{Priors}
-
-Prior on \logg from \numax etc.?
-
-\begin{align}
-    p (l) = \begin{cases} 0 \\ 1 \end{cases}
-\end{align}
-
-\subsubsection{MCMC}
-
-\subsubsection{Nuisance fitting along the way}
-
-
-\begin{figure}[hbt!]
- \centering
- \includegraphics[width=\columnwidth]{figures/ratio_normalisation.png}
- \caption{Explanation of normalisation}
- \label{fig:ratio_normalisation}
-\end{figure}
-
-Chebychev polynomials are fitted between each synthetic spectrum from Sec.~\ref{sec:cannon_synthesis}
+\SB{MCMC from here}
 
 \section{POST-PROCESSING}
 
@@ -328,7 +335,7 @@ For each star, we therefore take the best-fit model and assess the change in the
 
 \subsection{Flagging of problematic measurements}
 
-Flag if parameters outside of the range of \TheCannon (e.g. \vsini$ > 30 \kms$, see Sec.~\ref{sec:cannon_input})
+Flag if parameters outside of the range of \TheCannon (e.g. \vsini$ > 30 \kms$, see Sec.~\ref{subsubsec:polynomials})
 
 \section{VALIDATION}
 
