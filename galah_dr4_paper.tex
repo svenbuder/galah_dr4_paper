@@ -416,7 +416,7 @@ At this stage, we explicitly include the broadening of spectra because of rotati
     v \sin i~/~\kms \in \{ 1.5, 3.0, 6.0, 9.0, 12.0, 24.0\}.
 \end{align}
 
-The decision for these values was made based on the distribution of \vsini ($7.21_{-1.63}^{4.86}\kms$ with 90\% between 4.7 and $29.0\kms$) in GALAH+ DR3 and comparison with the grid values used by APOGEE DR16 \citep{Joensson2020}.
+The decision for these values was made based on the distribution of \vsini ($7.2_{-1.6}^{4.9}\kms$ with 90\% between 4.7 and $29.0\kms$) in GALAH+ DR3 and comparison with the grid values used by APOGEE DR16 \citep{Joensson2020}.
 
 Our interpolation method does not care about the stellar physics behind the correlation of stellar flux and labels. We thus introduce an intermediate step to verify that the found correlations are at least limited to the wavelength regions where we would expect a reaction to the specific label. This technique is called censoring \citep{Casey2016} or masking \citep{Buder2018}. For our analysis, we explicitly have included perturbations for one label at a time to a median spectrum of the grid. Comparing the median with each of the perturbed spectra at the highest rotational broadening ($v \sin i = 24.0\kms$) allows us to assess which pixels of the synthetic spectra change and only allow the polynomial fitting to find non-zero coefficients for the particular label for exactly these pixels. The idea here is, that coefficients related to Li should for example only be allowed to be non-zero where the spectrum also responds to Li (like the Li line).
 
