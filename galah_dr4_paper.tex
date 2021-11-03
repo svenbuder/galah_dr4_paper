@@ -504,7 +504,7 @@ For each star, we therefore take the best-fit model and assess the change in the
 
 \SB{Can we be sure, that we are interpolating properly between different models of \TheCannon?}
 
-\newpage
+\newpage $\,$ \newpage
 \section{CONCLUSIONS} \label{sec:conclusion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -564,24 +564,79 @@ We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
 
 \bibliography{bib}
 
+\newpage
+
 \appendix
 
 \section{Gradient Spectra}
 
-\subsection{Gradient Spectra for the Solar twins}
+\subsection{Gradient Spectra for Sun-like stars}
+
+We show the \sme gradient spectra for Sun-like stars in Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_4}. These were created by a comparing rotationally broadened ($v \sin i = 24\kms$) median spectrum of the 3D bin with synthetic spectra, for which we increased one label at a time. These were used to create masks in order to restrict \TheCannon to only those pixels, where the most extreme changes within our parameter limits caused less than \SB{0.001} change in normalised flux
+
+\subsection{Gradient Spectra for Arcturus-like stars}
 
 \begin{figure*}[hbt!]
- \centering  \label{fig:gradient_spectra_1931_1}
+ \centering
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_teff.png}
- %\includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_logg.png}
- %\includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_fe_h.png}
- %\includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_vmic.png}
- %\includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_li_fe.png}
- %\includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_c_fe.png}
- %\includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_n_fe.png}
- %\includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_o_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_logg.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_fe_h.png}
  \caption{\textbf{\sme gradient spectra for 3D bin 1931 (\Teff 5750, \logg 4.5, \feh 0.0).} Shown are differences of the normalised flux (blue) between the median synthetic spectrum and synthetic spectra increased by a certain value for each stellar label (see legend for details). Red dots indicate pixels where the absolute change of flux was above 0.0001, orange ones those pixels with changes above 0.001.
-}
+} \label{fig:gradient_spectra_1931_1}
+\end{figure*}
+
+\begin{figure*}[hbt!]
+ \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_vmic.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_li_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_c_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_n_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_o_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_na_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_mg_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_al_fe.png}
+ \caption{\textbf{Continuation of Fig.~\ref{fig:gradient_spectra_1931_1}.}} \label{fig:gradient_spectra_1931_2}
+\end{figure*}
+
+\begin{figure*}[hbt!]
+ \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_si_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_k_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ca_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_sc_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ti_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_v_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_cr_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_mn_fe.png}
+ \caption{\textbf{Continuation of Figs.~\ref{fig:gradient_spectra_1931_1} and \ref{fig:gradient_spectra_1931_2}.}} \label{fig:gradient_spectra_1931_3}
+\end{figure*}
+
+
+\begin{figure*}[hbt!]
+ \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_co_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ni_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_cu_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_zn_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_rb_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_sr_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_y_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_zr_fe.png}
+ \caption{\textbf{Continuation of Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_3}.}} \label{fig:gradient_spectra_1931_4}
+\end{figure*}
+
+
+\begin{figure*}[hbt!]
+ \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_mo_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ru_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ba_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_la_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ce_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_nd_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_sm_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_eu_fe.png}
+ \caption{\textbf{Continuation of Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_4}.}} \label{fig:gradient_spectra_1931_5}
 \end{figure*}
 
 % \section{Hospital Anxiety and Depression Scale (Italian Version)}
