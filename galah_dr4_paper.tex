@@ -420,7 +420,11 @@ The decision for these values was made based on the distribution of \vsini ($7.2
 
 Our interpolation method does not care about the stellar physics behind the correlation of stellar flux and labels. We thus introduce an intermediate step to verify that the found correlations are at least limited to the wavelength regions where we would expect a reaction to the specific label. This technique is called censoring \citep{Casey2016} or masking \citep{Buder2018}. For our analysis, we explicitly have included perturbations for one label at a time to a median spectrum of the grid. Comparing the median with each of the perturbed spectra at the highest rotational broadening ($v \sin i = 24.0\kms$) allows us to assess which pixels of the synthetic spectra change and only allow the polynomial fitting to find non-zero coefficients for the particular label for exactly these pixels. The idea here is, that coefficients related to Li should for example only be allowed to be non-zero where the spectrum also responds to Li (like the Li line).
 
+\input{tables/cannon_mask_percentage_1931.tex}
+
 \SB{For elements like C, N, O, and Ti, whose molecular bands are visible in the GALAH, a change in either abundance might influence the strength of the other molecular features. We will have to follow this up in more detail!}
+
+
 
 \subsubsection{Selecting the best model for the labels at hand}
 
@@ -480,11 +484,12 @@ In addition to the parameters included in these functions, we need to optimise t
 
 \subsubsection{Masking of spectrum pixels}
 
+We have analysed the difference between the observed Solar spectrum by \citet{Hinkle2000} and a synthetic spectrum with Solar parameters and abundances. In detail, we created a synthetic spectrum with $T_\text{eff} = 5772\K$, $\log g = 4.438\dex$, $\mathrm{[Fe/H]} = 0.00\dex$, $v_\text{mic} = 1.06\kms$, $v \sin i = 1.6\kms$, $v_\text{mac} = 4.2\kms$ \citep{Prsa2016, Jofre2017}, and $\mathrm{[X/Fe]} = 0.00\dex$ for the default Solar abundance pattern for \marcs by \citet{Grevesse2007}. We have identified all lines that showed differences of the normalised flux of more than $0.1$, lines where either a synthetic line or an observed one was completely missing, or lines that were significantly misaligned. Examples of these masks are shown in Fig.~\ref{fig:example_masking_sun}.
+
 \begin{figure*}[hbt!]
  \centering  
  \includegraphics[width=\textwidth]{figures/example_masking_sun.png}
- \caption{\caption{\textbf{Examples of masks applied to unreliable pixels for the spectrum fitting, that is the minimisation of residuals (red) between observation (black) and synthesis (blue).} \textbf{Panel a)} showing a strong synthetic line, where no line is observed in the Sun. \textbf{Panel b)} showing an observed line without any line being synthesised. \textbf{Panel c)} showing significant disagreement between the two observed lines and the synthesis.}
-} \label{fig:example_masking_sun}
+\caption{\textbf{Examples of masks applied to unreliable pixels for the spectrum fitting, that is the minimisation of residuals (red) between observation (black) and synthesis (blue).} \textbf{Panel a)} showing a strong synthetic line, where no line is observed in the Sun. \textbf{Panel b)} showing an observed line without any line being synthesised. \textbf{Panel c)} showing significant disagreement between the two observed lines and the synthesis.} \label{fig:example_masking_sun}
 \end{figure*}
 
 \newpage
@@ -566,8 +571,6 @@ We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
 % \end{threeparttable}
 % \end{table*}
 
-% PASA uses footnotes, not endnotes. \endnote in this template will behave like \footnote; and \printendnotes will not output anything.
-% \printendnotes
 
 \bibliography{bib}
 
