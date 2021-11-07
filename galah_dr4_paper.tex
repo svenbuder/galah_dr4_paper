@@ -409,6 +409,8 @@ Our synthetic grid explicitly includes C and N abundances. C was previously incl
  \label{fig:cannon_interpolation}
 \end{figure*}
 
+\SB{How to go about that in practice? We do not have to calculate all 2499 models. We start by selecting the 3D with the most stars with initial \Teff, \logg, \feh in them. + calculate the 26 closest 3D bins. We then move on to the next bin and calculate the next set of 3D bins (they would be between 9 and 27 if the bin is a direct neighbor or more than 2 steps away, respectively.}
+
 We are training 2499 models for the individual but overlapping 3D bins in \Teff, \logg, and \feh (see again Fig.~\ref{fig:teff_logg_grid_coverage} as example).
 
 At this stage, we explicitly include the broadening of spectra because of rotation (\vsini) and sample each of the synthetic spectra over a range of
@@ -418,7 +420,7 @@ At this stage, we explicitly include the broadening of spectra because of rotati
 
 The decision for these values was made based on the distribution of \vsini ($7.2_{-1.6}^{4.9}\kms$ with 90\% between 4.7 and $29.0\kms$) in GALAH+ DR3 and comparison with the grid values used by APOGEE DR16 \citep{Joensson2020}.
 
-Our interpolation method does not care about the stellar physics behind the correlation of stellar flux and labels. We thus introduce an intermediate step to verify that the found correlations are at least limited to the wavelength regions where we would expect a reaction to the specific label. This technique is called censoring \citep{Casey2016} or masking \citep{Buder2018}. For our analysis, we explicitly have included perturbations for one label at a time to a median spectrum of the grid. Comparing the median with each of the perturbed spectra at the highest rotational broadening ($v \sin i = 24.0\kms$) allows us to assess which pixels of the synthetic spectra change and only allow the polynomial fitting to find non-zero coefficients for the particular label for exactly these pixels. The idea here is, that coefficients related to Li should for example only be allowed to be non-zero where the spectrum also responds to Li (like the Li line). The responses for an example 3D bin (again the solar 3D bin), are shown in Figs.~\ref{fig:gradient_spectra_1931_1}-\ref{fig:gradient_spectra_1931_5}, with percentage values listed in Tab.~\ref{tab:cannon_mask_percentage}. Several labels influence almost the entire spectrum. This is not surprising for the stellar parameters \Teff, \logg, \feh, and \vmic. We note, however, also a significant response above 0.001 flux units and 50\% for C, N, O, Mg, and Si. These elements are show strong molecular features (like CN in the GALAH wavelength range) or are important electron donors. For N, O, Mg, and Si we even note a strong response in the cores of the H Balmer lines. Half of the elements (Li, K, Sc, Cu, Zn, Rb, Sr, Y, Zr, Mo, Ru, Ba, La, Sm, and Eu) are responding solely to their atomic absorption lines and 10\% of the spectrum. We find even more minimal changes in the flux below 0.0001, that is below 0.01\% of the normalised flux for the most extreme cases of labels. These changes would only be picked up in the most extreme case and with in outstanding observed spectra (with S/N ratios much above 1000). We do not reach such high quality with the nominal GALAH observations (aiming for a typical S/N ratios around or below 50). Thus, for the fitting of \TheCannon models, we allow only the coefficients to be nonzero for pixels which changed by $\vert \Delta f \vert > 0.001$, that is 0.1\%, in our tests.
+Our interpolation method does not care about the stellar physics behind the correlation of stellar flux and labels. We thus introduce an intermediate step to verify that the found correlations are at least limited to the wavelength regions where we would expect a reaction to the specific label. This technique is called censoring \citep{Casey2016} or masking \citep{Buder2018}. For our analysis, we explicitly have included perturbations for one label at a time to a median spectrum of the grid. Comparing the median with each of the perturbed spectra at the highest rotational broadening ($v \sin i = 24.0\kms$) allows us to assess which pixels of the synthetic spectra change and only allow the polynomial fitting to find non-zero coefficients for the particular label for exactly these pixels. The idea here is, that coefficients related to Li should for example only be allowed to be non-zero where the spectrum also responds to Li (like the Li line). The responses for an example 3D bin (again the solar 3D bin), are shown in Figs.~\ref{fig:gradient_spectra_1931_1}-\ref{fig:gradient_spectra_1931_5}, with percentage values listed in Tab.~\ref{tab:cannon_mask_percentage}. Several labels influence almost the entire spectrum. This is not surprising for the stellar parameters \Teff, \logg, \feh, and \vmic. We note, however, also a significant response above 0.001 flux units and 50\% for C, N, O, Mg, and Si. These elements show broad molecular features (like CN in the GALAH wavelength range) or are important electron donors. For N, O, Mg, and Si we even note a strong response for the H Balmer lines. Half of the elements (Li, K, Sc, Cu, Zn, Rb, Sr, Y, Zr, Mo, Ru, Ba, La, Sm, and Eu) are responding solely to their atomic absorption lines and are thus influencing less than 10\% of the spectrum. We find even more minimal changes in the flux below 0.0001, that is below 0.01\% of the normalised flux, for the most extreme cases of labels. These changes would only be picked up in the most extreme case and with in outstanding observed spectra (with S/N ratios much above 1000). We do not reach such high quality with the nominal GALAH observations (aiming for a typical S/N ratios around or below 50). Thus, for the fitting of \TheCannon models, we allow only the coefficients to be nonzero for the main stellar parameters (\Teff, \logg, \feh, \vmic, and \vsini) or for pixels which changed by $\vert \Delta f \vert > 0.001$, that is 0.1\%, during our tests of the response to the other labels.
 
 \input{tables/cannon_mask_percentage_1931.tex}
 
@@ -436,7 +438,7 @@ We make two additional adjustments to the reduced spectra, which come in the for
 
 As we compare the observation to model spectra, we do not have to restrict ourselves to an a priory normalisation, but can take into account the residual information on the continuum in parts of the spectra. For each model spectrum that we compare to, we therefore perform a normalisation by fitting a Chebyshev polynomial with outlier clipping to the ratio of model and observation (see Fig.~\ref{fig:ratio_normalisation}). This allows us to both overcome previous shortcomings of the synthetic analysis in GALAH+ DR3 \citep{Buder2021}, which had to be restricted to small wavelength segments and assumed a linear relation for those. Our new approach allows us to properly assess the structure of deep and steep molecular features for cool stars, which dominate spectra of cool stars and carry significant information on \Teff as well as \vrad.
 
-\begin{figure}[hbt!]
+\begin{figure*}[hbt!]
  \centering
  \includegraphics[width=\textwidth]{figures/Nuisance_example.png}
  \caption{
@@ -446,7 +448,7 @@ As we compare the observation to model spectra, we do not have to restrict ourse
  \textbf{Panel (c):} Normalised observed spectrum (black) compared to the model spectrum (blue). Residuals (red) can then be used as input for the likelihood function.
  }
  \label{fig:ratio_normalisation}
-\end{figure}
+\end{figure*}
 
 For each CCD, the reduction has found the most suitable wavelength solution, linking pixels with actual wavelengths, based on the ThXe arc lines. In GALAH DR3 \citep{Buder2021}, we have found several issues for spectra, where not enough ThXe lines could be used to constrain the wavelength solution. Improvements have been made for the new reduction version to improve the number of useful ThXe lines. Two additional pieces of information are, however, unused by the reduction pipeline, namely (i) the telluric lines\footnote{\SB{Check with Janez if that is actually still true!}} that are present throughout GALAH spectra and (ii) the absorption lines of the stellar spectra. Both hold valuable information, as their position (in rest wavelength) is known very well.
 
@@ -464,7 +466,9 @@ Because we can directly compare to model spectra with a perfect wavelength solut
 To find the most set of stellar labels that best describe the data at hand, we need to either (i) maximise/sample the likelihood functions
 (Eqs.~\ref{eq:likelihood_spectroscopic}, \ref{eq:likelihood_photoastrometric}, or \ref{eq:likelihood_asteroseismic}) or maximise/sample the posterior functions (Eq.~\ref{eq:posterior_s}-\ref{eq:posterior_spa}).
 
-In addition to the parameters included in these functions, we need to optimise the nuisance parameters of \vrad as well as the wavelength solution for the four CCDs (Eq.~\ref{eq:wavelength_solution}).
+In addition to the parameters included in these functions, we need to optimise the nuisance parameters of \vrad\SB{ as well as the wavelength solution for the four CCDs (Eq.~\ref{eq:wavelength_solution})}.
+
+We start the optimisation process by using the \vrad reported by the reduction pipeline and stellar parameters as well as abundances from GALAH+ DR3 \citep{Buder2021}, if available and unflagged. We use \Teff, \logg, \vmic, and \vsini (\texttt{vbroad}) from GALAH+ DR3, if they were reported with $\texttt{flag\_sp} = 0$. Otherwise we use the values suggested by the reduction pipeline. We use \feh from GALAH+ DR3, if they were reported with $\texttt{flag\_fe\_h} = 0$. Otherwise we use the value suggested by the reduction pipeline. For each of the 30 elemental abundances [X/Fe], we use the GALAH+ DR3, if they were reported with $\texttt{flag\_X\_fe} = 0$. Otherwise we use the value provided by the reduction pipeline for C, O, Mg, Si, Ca, Ti via $\mathrm{[\upalpha/Fe]}$ or assume $\mathrm{[X/Fe]} = 0$ for elements other than the aforementioned.
 
 \SB{MCMC from here?}
 
@@ -580,7 +584,7 @@ We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
 
 We show the \sme gradient spectra for Sun-like stars in Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_4}. These were created by a comparing rotationally broadened ($v \sin i = 24\kms$) median spectrum of the 3D bin with synthetic spectra, for which we increased (black) and decreased (blue) one particular label at a time. These were used to create masks in order to restrict \TheCannon to only those pixels, where the most extreme changes within our parameter limits caused less than \SB{0.001} change in normalised flux (orange dots).
 
-\begin{figure*}[h!]
+\begin{figure*}[!ht]
  \centering
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_teff.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_logg.png}
