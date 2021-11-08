@@ -492,7 +492,8 @@ We have analysed the difference between the observed Solar spectrum by \citet{Hi
 \caption{\textbf{Examples of masks applied to unreliable pixels for the spectrum fitting, that is the minimisation of residuals (red) between observation (black) and synthesis (blue).} \textbf{Panel a)} showing a strong synthetic line, where no line is observed in the Sun. \textbf{Panel b)} showing an observed line without any line being synthesised. \textbf{Panel c)} showing significant disagreement between the two observed lines and the synthesis.} \label{fig:example_masking_sun}
 \end{figure*}
 
-\newpage
+\SB{What about pixels that are strongly affected by interstellar extinction. See e.g. the strong DIBs around 5780, 5795, 6610, 7000. See also Fig. 7 of \citep{Buder2018} for the $A_Ks$ response. Should we simply mask these pixels? Or can we add a correction to them with a certain RV and amplitude to do a 1st order correction (and also correct the interstellar contribution to the K7699 line)?}
+
 \section{POST-PROCESSING} \label{sec:post_processing}
 
 \subsection{Abundance detection or upper limit}
@@ -511,12 +512,10 @@ For each star, we therefore take the best-fit model and assess the change in the
 
 \SB{Flag if parameters are outside of convex hull of isochrone grid, when using photoastrometric information. Also note that we have cut away \Teff above $10,000\K$ and \logg above $6\dex$.}
 
-\newpage
 \section{VALIDATION} \label{sec:validation}
 
 \SB{Can we be sure, that we are interpolating properly between different models of \TheCannon?}
 
-\newpage $\,$ \newpage
 \section{CONCLUSIONS} \label{sec:conclusion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -574,72 +573,69 @@ We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
 
 \bibliography{bib}
 
-\appendix
-
-\section{Gradient Spectra}
-
-\newpage
-
-\subsection{Gradient Spectra for Sun-like stars}
-
-We show the \sme gradient spectra for Sun-like stars in Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_4}. These were created by a comparing rotationally broadened ($v \sin i = 24\kms$) median spectrum of the 3D bin with synthetic spectra, for which we increased (black) and decreased (blue) one particular label at a time. These were used to create masks in order to restrict \TheCannon to only those pixels, where the most extreme changes within our parameter limits caused less than \SB{0.001} change in normalised flux (orange dots).
-
 \begin{figure*}[!ht]
  \centering
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_teff.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_logg.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_fe_h.png}
-  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_vmic.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_li_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_c_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_n_fe.png}
-
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_vmic.png}
  \caption{\textbf{\sme gradient spectra for 3D bin 1931 (\Teff 5750, \logg 4.5, \feh 0.0).} Shown are differences of the normalised flux (blue) between the median synthetic spectrum and synthetic spectra increased by a certain value for each stellar label (see legend for details). Red dots indicate pixels where the absolute change of flux was above 0.0001, orange ones those pixels with changes above 0.001.
 } \label{fig:gradient_spectra_1931_1}
 \end{figure*}
 
+\appendix
+
+\section{Gradient Spectra}
+
+\subsection{Gradient Spectra for Sun-like stars}
+
+We show the \sme gradient spectra for Sun-like stars in Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_4}. These were created by a comparing rotationally broadened ($v \sin i = 24\kms$) median spectrum of the 3D bin with synthetic spectra, for which we increased (black) and decreased (blue) one particular label at a time. These were used to create masks in order to restrict \TheCannon to only those pixels, where the most extreme changes within our parameter limits caused less than \SB{0.001} change in normalised flux (orange dots).
+
 \begin{figure*}[hbt!]
  \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_li_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_c_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_n_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_o_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_na_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_mg_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_al_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_si_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_k_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ca_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_sc_fe.png}
  \caption{\textbf{Continuation of Fig.~\ref{fig:gradient_spectra_1931_1}.}} \label{fig:gradient_spectra_1931_2}
 \end{figure*}
 
 \begin{figure*}[hbt!]
  \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_si_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_k_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ca_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_sc_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ti_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_v_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_cr_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_mn_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_co_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ni_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_cu_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_zn_fe.png}
  \caption{\textbf{Continuation of Figs.~\ref{fig:gradient_spectra_1931_1} and \ref{fig:gradient_spectra_1931_2}.}} \label{fig:gradient_spectra_1931_3}
 \end{figure*}
 
 
 \begin{figure*}[hbt!]
  \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_co_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ni_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_cu_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_zn_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_rb_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_sr_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_y_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_zr_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_mo_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ru_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ba_fe.png}
- \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_la_fe.png}
  \caption{\textbf{Continuation of Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_3}.}} \label{fig:gradient_spectra_1931_4}
 \end{figure*}
 
 \begin{figure*}[hbt!]
  \centering  
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_mo_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ru_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ba_fe.png}
+ \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_la_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_ce_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_nd_fe.png}
  \includegraphics[width=\textwidth]{figures/gradient_spectrum_1931_sm_fe.png}
@@ -647,34 +643,8 @@ We show the \sme gradient spectra for Sun-like stars in Figs.~\ref{fig:gradient_
  \caption{\textbf{Continuation of Figs.~\ref{fig:gradient_spectra_1931_1}--\ref{fig:gradient_spectra_1931_4}.}} \label{fig:gradient_spectra_1931_5}
 \end{figure*}
 
-\subsection{Gradient Spectra for Arcturus-like stars}
+% \subsection{Gradient Spectra for Arcturus-like stars}
 
-We show the \sme gradient spectra for Arcturus-like stars in Figs.~XX--YY. These were created by a comparing rotationally broadened ($v \sin i = 24\kms$) median spectrum of the 3D bin with synthetic spectra, for which we increased (black) and decreased (blue) one particular label at a time. These were used to create masks in order to restrict \TheCannon to only those pixels, where the most extreme changes within our parameter limits caused less than \SB{0.001} change in normalised flux (orange dots).
-
-% \section{Hospital Anxiety and Depression Scale (Italian Version)}
-
-% \section{Openness to Discuss Cancer in the Family Scale Questionario sulla Comunicazione in Famiglia (Italian Version)}
-
-% \begin{table}[hbt!]
-% \centering
-% \begin{threeparttable}
-% \caption{Predicting approval of one's own house member}\label{tab:predictapproval}
-% \begin{tabular}{lSSS}
-%   \toprule
-%   & {(1)} & {(2)} & {(3)} \\
-%   \midrule
-%   Religion Match & 0.077\tnote{***} & -0.029 & -0.027 \\
-%                   & {(0.014)} & {(0.061)} & {(0.062)} \\
-%   \bottomrule
-% \end{tabular}
-% \begin{tablenotes}[para]
-%   \item[]Note: Entries are coefficients from a probit regression model. Robust standard errors in parentheses.
-%   \item[***] $p < 0.01$,
-%   \item[**] $p < 0.05$,
-%   \item[*] $p < 0.1$, two-tailed test.
-% \end{tablenotes}
-% \end{threeparttable}
-% \end{table}
-
+% We show the \sme gradient spectra for Arcturus-like stars in Figs.~XX--YY. These were created by a comparing rotationally broadened ($v \sin i = 24\kms$) median spectrum of the 3D bin with synthetic spectra, for which we increased (black) and decreased (blue) one particular label at a time. These were used to create masks in order to restrict \TheCannon to only those pixels, where the most extreme changes within our parameter limits caused less than \SB{0.001} change in normalised flux (orange dots).
 
 \end{document}
