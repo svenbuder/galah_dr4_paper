@@ -2,7 +2,7 @@
   journal=pasa,
   manuscript=research-paper, %% or "review"
   year=2021,
-  volume=37,
+  volume=37
 ]{cup-journal}
 
 \usepackage{microtype,siunitx,booktabs}
@@ -17,6 +17,8 @@
 \usepackage{amssymb}	% Extra maths symbols
 \usepackage{xspace}
 \usepackage{upgreek}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -66,6 +68,9 @@
 \affiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 \email[S. Buder]{sven.buder@anu.edu.au}
 
+\author{Main contributors}
+\author{survey builders}
+\author{other co-authors with significant contribution}
 \author{The GALAH Collaboration}
 % \alsoaffiliation{Joint first authors}
 
@@ -76,7 +81,7 @@
 \received {dd Mmm YYYY}
 \revised  {dd Mmm YYYY}
 \accepted {dd Mmm YYYY}
-\published{22 September 2020}
+\published{16 November 2021}
 
 \keywords{
 Surveys; the Galaxy; methods: observational; methods: data analysis; stars: fundamental parameters; stars: abundances} %% First letter not capped
@@ -94,49 +99,49 @@ Surveys; the Galaxy; methods: observational; methods: data analysis; stars: fund
 
 \begin{abstract}
 
-For each spectrum, we find the best fitting model spectrum by employing a Bayesian framework that takes into account data as well as model uncertainties and can take non-spectroscopic information into account.
+For each star, we find the best set of stellar labels within a Bayesian framework that takes into account high-resolution spectroscopic and a diverse set of non-spectroscopic data and their uncertainties as well as model uncertainties.
 
 We fit all labels (elemental abundances and stellar parameters) simultaneously by using polynomial models created from synthetic spectra with randomly sampled labels for a restricted space in \Teff, \logg, and [Fe/H].
 
 \end{abstract}
 
-\section{INTRODUCTION}
+% \section{INTRODUCTION}
 
-\section{TARGET SELECTION AND OBSERVATION}
+% \section{TARGET SELECTION AND OBSERVATION}
 
-\section{REDUCTION} \label{sec:reduction}
+% \section{REDUCTION} \label{sec:reduction}
 
-Outcome of reduction pipeline:
-\begin{table}
-    \centering
-    \caption{Data product 1: FITS files of reduced spectra}
-    \label{tab:reduction_fits}
-    \begin{tabular}{c|c}
-    \hline \hline
-    FITS Ext. & Description \\
-    \hline
-    Ext. 0 & Un-normalised signal~/~counts \\
-    Ext. 1 & Normalised signal (by reduction pipeline) \\
-    Ext. 2 & Relative uncertainty of signal \\
-    Ext. 3 & Subtracted sky signal~/~counts \\
-    Ext. 4 & Applied telluric correction \\
-    Ext. 5 & Scattered light~/~counts \\
-    Ext. 6 & Cross-talk \\
-    Ext. 7 & Resolution profile~/~FWHM \\
-    \hline
-    \end{tabular}
-\end{table}
+% Outcome of reduction pipeline:
+% \begin{table}
+%     \centering
+%     \caption{Data product 1: FITS files of reduced spectra}
+%     \label{tab:reduction_fits}
+%     \begin{tabular}{c|c}
+%     \hline \hline
+%     FITS Ext. & Description \\
+%     \hline
+%     Ext. 0 & Un-normalised signal~/~counts \\
+%     Ext. 1 & Normalised signal (by reduction pipeline) \\
+%     Ext. 2 & Relative uncertainty of signal \\
+%     Ext. 3 & Subtracted sky signal~/~counts \\
+%     Ext. 4 & Applied telluric correction \\
+%     Ext. 5 & Scattered light~/~counts \\
+%     Ext. 6 & Cross-talk \\
+%     Ext. 7 & Resolution profile~/~FWHM \\
+%     \hline
+%     \end{tabular}
+% \end{table}
 
-\subsection{Line-spread function} \label{subsec:lsf}
+% \subsection{Line-spread function} \label{subsec:lsf}
 
-$\texttt{fwhm}\,(\lambda)$, and $\texttt{b}$ reported for each CCD.
+% $\texttt{fwhm}\,(\lambda)$, and $\texttt{b}$ reported for each CCD.
 
-\begin{align}
-    \exp \left(-0.693147 \vert 2x/\texttt{fwhm}\vert^\texttt{b}\right) \label{eq:lsf}
-\end{align}
+% \begin{align}
+%     \exp \left(-0.693147 \vert 2x/\texttt{fwhm}\vert^\texttt{b}\right) \label{eq:lsf}
+% \end{align}
 
-\newpage $\,$
-\newpage
+% \newpage $\,$
+% \newpage
 
 \section{ANALYSIS}
 
@@ -167,7 +172,7 @@ Because we run our pipeline with different sets of observables, we describe the 
 
 The industrial revolution in stellar surveys has allowed us to collect a plethora of spectroscpic ($f_\lambda~\pm~\sigma_{f_\lambda}$), photometric ($m_i~\pm~\sigma_{m_i}$), astrometric ($\varpi~\pm~\sigma_\varpi$), asteroseismic ($\nu_\text{max}~\pm~\sigma_{\nu_\text{max}}$ and $\delta_\nu~\pm~\sigma_{\delta_\nu}$)\SB{, and interferometric ($\Theta_\text{LD} \pm \sigma_{\Theta_\text{LD}}$)} measurements of stars. Each contribute ${\boldsymbol{y}_i} \pm \sigma_{\boldsymbol{y}_i}$ to our set of observables ${\boldsymbol{y}} \pm \sigma_{\boldsymbol{y}}$.
 
-In our case, the GALAH reduction pipeline delivers $f_\lambda~\pm~\sigma_{f_\lambda}$ (see Sec.~\ref{sec:reduction}), but throughout our estimation of optimal stellar labels, we perform several adjustments to the data on-the-fly (see Sec.~\ref{subsec:adjustments_observation}).
+In our case, the GALAH reduction pipeline delivers $f_\lambda~\pm~\sigma_{f_\lambda}$ (see Sec.~(sec:reduction), but throughout our estimation of optimal stellar labels, we perform several adjustments to the data on-the-fly (see Sec.~\ref{subsec:adjustments_observation}).
 
 We make use of photometric measurements from both the \Gaia mission \citep{Gaia-Collaboration2016}, specifically its eDR3 \citep{Brown2021}, and 2MASS \citep{Skrutskie2006}. The latter provides near infrared magnitudes $m_J$, $m_H$, and $m_{K_\text{S}}$. We use the three \Gaia bandpasses $m_G$, $m_{G_\text{BP}}$, and $m_{G_\text{RP}}$. We correct the $G$ flux and estimate the \Gaia magnitude uncertainties as described by \citet{Riello2021}. We use astrometric information $\varpi~\pm~\sigma_\varpi$ is provided by \Gaia eDR3 \citep{Lindegren2021a} and we apply the zero point correction to these measurements as described by \citep{Lindegren2021b}. Crossmatches to these catalogues are performed with \textsc{ADQL} queries on the \Gaia archive via \textsc{astroquery} by linking catalogue entries through the \texttt{source\_id} via the nearest neighbor matches provided by the \Gaia consortium on the \Gaia archive \citep[see][]{Marrese2017, Marrese2019}
 
@@ -352,7 +357,7 @@ In our endeavour to push the limits even further, we are advancing our analysis 
 
 To make this computationally feasible, we follow an idea reported by \citet{Rix2016} and create polynomial models for smaller parts of the parameters space from only a limited number of ab initio models \citep[see also][]{Ting2016b}. Our ab initio models are calculated with Spectroscopy Made Easy \citep[\textsc{sme}][]{Valenti1996,Piskunov2017} for the whole wavelength range and all visible atomic and molecular lines for random selections of elemental abundances and stellar parameters within the range of \textsc{marcs} atmospheres \citep{Gustafsson2008}. We then select subsets of these spectra within a restricted space of the three main spectroscopic parameters \Teff, \logg, and [Fe/H]. This idea is comparable to selecting solar twin spectra when analysing the Sun \citep[see e.g.][who applied this idea with tremendous success in the opposite direction]{Nissen2015}. For each subset, we train a quadratic model that correlates stellar flux and labels (stellar parameters and abundances) in the framework of \textit{The Cannon} \citep{Ness2015, Casey2016}. With these models, we can then create model spectra with all lines over the whole wavelength range for any combination of element abundances within this restricted parameter space within less than a second (compared to minutes or hours for physics-driven syntheses). 
 
-In order to confront these model spectra with the GALAH observations, we downgrade the model spectra on-the-fly with the available line-spread functions of each observation (see Sec.~\ref{subsec:lsf}).
+In order to confront these model spectra with the GALAH observations, we downgrade the model spectra on-the-fly with the available line-spread functions of each observation (see Sec.~(subsec:lsf)).
 
 \subsubsection{Grid of synthetic spectra} \label{subsubsec:spectrum_grid}
 
@@ -472,16 +477,6 @@ We start the optimisation process by using the \vrad reported by the reduction p
 
 \SB{MCMC from here?}
 
-\begin{figure*}[hbt!]
- \centering
- \includegraphics[width=\textwidth]{figures/150606003401143_mcmc_median.png}
- \caption{
- \textbf{Example of best-fit model spectrum (blue) for the observed spectrum (black) of 2MASS 16103957-2602249 for the 4 CCDs of HERMES.}
- Residuals are shown in orange. Grey areas show parts of the spectrum that were neglected (masked) while fitting.
- }
- \label{fig:best_fit_spectrum}
-\end{figure*}
-
 \subsubsection{Masking of spectrum pixels}
 
 We have analysed the difference between the observed Solar spectrum by \citet{Hinkle2000} and a synthetic spectrum with Solar parameters and abundances. In detail, we created a synthetic spectrum with $T_\text{eff} = 5772\K$, $\log g = 4.438\dex$, $\mathrm{[Fe/H]} = 0.00\dex$, $v_\text{mic} = 1.06\kms$, $v \sin i = 1.6\kms$, $v_\text{mac} = 4.2\kms$ \citep{Prsa2016, Jofre2017}, and $\mathrm{[X/Fe]} = 0.00\dex$ for the default Solar abundance pattern for \marcs by \citet{Grevesse2007}. We have identified all lines that showed differences of the normalised flux of more than $0.1$, lines where either a synthetic line or an observed one was completely missing, or lines that were significantly misaligned. Examples of these masks are shown in Fig.~\ref{fig:example_masking_sun}.
@@ -494,7 +489,20 @@ We have analysed the difference between the observed Solar spectrum by \citet{Hi
 
 \SB{What about pixels that are strongly affected by interstellar extinction. See e.g. the strong DIBs around 5780, 5795, 6610, 7000. See also Fig. 7 of \citep{Buder2018} for the $A_Ks$ response. Should we simply mask these pixels? Or can we add a correction to them with a certain RV and amplitude to do a 1st order correction (and also correct the interstellar contribution to the K7699 line)?}
 
+\SB{We mask pixels that are within predefined masks from solar spectrum comparison}
+\SB{We also mask pixels that differ more than 0.25 of the normalised flux and 5 sigma of it}
+
 \section{POST-PROCESSING} \label{sec:post_processing}
+
+\begin{figure*}[hbt!]
+ \centering
+ \includegraphics[width=\textwidth]{figures/150606003401143_mcmc_median.png}
+ \caption{
+ \textbf{Example of best-fit model spectrum (blue) for the observed spectrum (black) of 2MASS 16103957-2602249 for the 4 CCDs of HERMES.}
+ Residuals are shown in orange. Grey areas show parts of the spectrum that were neglected (masked) while fitting.
+ }
+ \label{fig:best_fit_spectrum}
+\end{figure*}
 
 \subsection{Abundance detection or upper limit}
 
