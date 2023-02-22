@@ -1,7 +1,7 @@
 \documentclass[
   journal=pasa,
   manuscript=research-paper, %% or "review"
-  year=2021,
+  year=2023,
   volume=37
 ]{cup-journal}
 
@@ -18,8 +18,6 @@
 \usepackage{xspace}
 \usepackage{upgreek}
 \usepackage{hyperref}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -123,59 +121,81 @@ The combination of chemical compositions across multiple nucleosynthesis pats, o
 \label{sec:introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Our spectroscopic analyses uses a dedicated pipeline for GALAH spectra that implements the latest advancements in the modelling of stellar spectra taking into account for example 1D non-LTE effects and interpolating in the model space with computationally cheaper algorithms that allow a fast combination of two spectra for binary stars.
+The workflow of GALAH DR4 is depicted in Fig.~\ref{fig:workflow_galah_dr4}. Following this workflow throughout this manuscript, we first describe the collection of data in Sec.~\ref{sec:data}, most notably the observation of HERMES spectra. In Sec.~\ref{sec:allspec_analysis}, we describe how we extract stellar labels from individual observations (without non-spectroscopic information folded in), while Sec.~\ref{sec:allstar_analysis} describes how we coadd repeated observations and fold in non-spectroscopic information for each star. Sec.~\ref{sec:binary_analysis} describes how we estimate main stellar labels for binary stars. We describe the post-processing of our data in Sec.~\ref{sec:post_processing} and validate our measurements in Sec.~\ref{sec:validation}. We describe the data products of this data release in Sec.~\ref{sec:catalogues_release_products} and conclude this manuscript in Sec.~\ref{sec:conclusion}.
 
-\paragraph{Workflow of GALAH DR4 analysis:}
-\begin{enumerate}
-    \item Purely spectroscopic analysis assuming single star (including RV monitoring for multiple peaks)
-    \item If multiple peaks: Purely spectroscopic analysis assuming binary star
-    \item Spectroscopic analysis that assumes a single star and uses astro- and photomotric information
-\end{enumerate}
+\begin{figure}[hbt!]
+ \centering
+ \includegraphics[width=\textwidth]{figures/workflow_galah_dr4.png}
+ \caption{\textbf{Workflow of GALAH DR4}}
+ \label{fig:workflow_galah_dr4}
+\end{figure}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{DATA}
 \label{sec:data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The GALAH Survey is using the combination of the High Efficiency and Resolution Multi-Element Spectrograph (HERMES) spectrograph fed through up to 400 fibres from the Two-Degree Field positioning system (2dF) at the top-end of the Anglo-Australian Telescope at Siding Spring Observatory.
+The GALAH Survey is using the combination of the High Efficiency and Resolution Multi-Element Spectrograph (HERMES) spectrograph \citep{Sheinis2015} fed through up to 400 fibres from the Two-Degree Field positioning system (2dF) at the top-end \citep{Lewis2002} of the Anglo-Australian Telescope at Siding Spring Observatory on Gamilaraay Country. The data used in this data release is primarily based on observations of stars with said setup, but also makes us of auxiliary photometric and astrometric information for the stars, where available.
 
-The data used in this data release is primarily based on observations of stars with said setup, but also makes us of auxiliary photometric, astrometric, and asteroseismic information for the stars, where available.
-
-In this Section, we describe which stars we have targeted and observed (Sec.~\ref{sec:target_selection_observations}) with the 2dF-HERMES setup, including the first description of the second phase of GALAH observations (GALAH Phase 2). In Sec.~\ref{sec:spectroscopic_data_from_galah_observations}, we briefly summarise the properties of the spectropic data and how it was reduced. We also point out major changes of the observations and reductions with respect to GALAH's previous third data release \citep{Buder2021}. We further elaborate on the auxiliary information that was used for the analysis in Sec.~\ref{sec:non-spec_data}.
+In this Section, we describe which stars we have targeted and observed (Sec.~\ref{sec:target_selection_observations}) with the 2dF-HERMES setup, including the first description of the second phase of GALAH observations (GALAH Phase 2) with a sharper focus on main-sequence turnoff stars to estimate more precise ages. In Sec.~\ref{sec:spectroscopic_data_from_galah_observations}, we briefly summarise the properties of the spectroscopic data and how they were reduced to one-dimensional spectra. We also point out major changes of the observations and reductions with respect to the previous third data release \citep{Buder2021}. We further elaborate on the auxiliary information that was used for the analysis in Sec.~\ref{sec:non-spec_data}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Target selection and observations} \label{sec:target_selection_observations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Targets and observations go into this data release}
+\subsubsection{Targets and observations go into this data release} $\,$
 
-\begin{itemize}
-    \item List of the projects whose observations go into this release, with citations.
-    \item Cutoff date for Phase 2 observations!
-\end{itemize}
+\begin{equation}
+V_\mathrm{JK} = K+2(J-K+0.14)+0.382e^{((J-K-0.2)/0.5)}
+\end{equation}
 
-\subsubsection{GALAH Phase 2: A stronger focus on turnoff stars}
+\begin{table}
+\centering
+ \caption{\textbf{Overview of stars observed for the programs included in this data release.} Numbers of open and globular cluster observations were estimated after observations as described in Sec.~\ref{sec:oc_gc}. We have observed 18 globular clusters (13 with $\geq$ 5 stars) and 286 open clusters (94 with $\geq$ 5 stars).}
+\label{tab:field_ids}
+\begin{tabular}{crcr}
+\hline \hline
+Program & Nr. Stars & Program & Nr. Stars \\
+\hline
+galah\_bright & 65\,188 & 
+k2\_hermes & 117\,708\\
+galah\_main & 427\,699 & 
+tess\_hermes & 37\,228\\
+galah\_faint & 25\,802 & 
+globular clusters & 1\,185\\
+galah\_phase2 & 125\,058 & 
+open clusters & 4\,487\\
+commissioning & 2\,625 & 
+other & 20\,308\\
+  \hline
+ \end{tabular}
+\end{table}
 
-Explain GALAH Phase 2 in more detail, since this is the first data release
+\subsubsection{GALAH Phase 2: A stronger focus on turnoff stars} $\,$
+
+%Explain GALAH Phase 2 in more detail, since this is the first data release
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Spectroscopic data from GALAH observations}
 \label{sec:spectroscopic_data_from_galah_observations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Since the commissioning of the HERMES spectrograph in late 2013, the GALAH collaboration and its partners have observed 943\,654 spectra of 827\,288 stars.
+
 \subsubsection{Overview of the spectroscopic data} \label{sec:overview_spectroscopic_data}
 
-Description of wavelength coverage, resolution, etc.
+%Description of wavelength coverage, resolution, etc.
 
 \subsubsection{Overview of the reduction process}
 
-Summary of how we reduce data
+%Summary of how we reduce data
 
 \subsubsection{Major changes to previous data releases} \label{sec:major_changes_to_previous_data_releases}
 
-\begin{itemize}
-    \item Line-Spread Function
-\end{itemize}
+%\begin{itemize}
+%    \item Line-Spread Function
+%\end{itemize}
 
 % Outcome of reduction pipeline:
 % \begin{table}
@@ -210,30 +230,64 @@ Summary of how we reduce data
 % \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Auxiliary data from $Gaia$, K2, and literature} \label{sec:non-spec_data}
+\subsection{Auxiliary data from $Gaia$, 2MASS, and literature} \label{sec:non-spec_data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-$Gaia$: 826\,468 (99.9\%) of the 827\,288 stars observed by GALAH have photometric measurements catalogued in \Gaia DR3 and the 2MASS Survey, 820\,716 (99.2\%) also have astrometric information. The average parallax uncertainty of the GALAH stars is $\sigma_{\varpi} / \varpi = 1.5_{-0.9}^{+2.6}\,\mathrm{\%}$. Only $5.2\%$ of GALAH stars have no parallax measurements or parallax measurements beyond $10\%$ uncertainty.
+%SELECT
+%galah.sobject_id,
+%tmass.designation as tmass_id,
+%tmass.ph_qual as tmass_ph_qual,
+%tmass.ra as raj2000,
+%tmass.dec as dej2000,
+%tmass.j_m, tmass.j_msigcom,
+%tmass.h_m, tmass.h_msigcom,
+%tmass.ks_m, tmass.ks_msigcom,
+%calj.r_med_geo,calj.r_lo_geo,calj.r_hi_geo,
+%calj.r_med_photogeo,calj.r_lo_photogeo,calj.r_hi_photogeo,
+%calj.flag as calj_flag,
+%gaia.*
+%FROM gaiadr3.gaia_source as gaia
+%LEFT OUTER JOIN
+%	external.gaiaedr3_distance as calj
+%	ON calj.source_id = gaia.source_id
+%LEFT OUTER JOIN
+%	gaiadr3.tmass_psc_xsc_best_neighbour AS tmassxmatch
+%	ON tmassxmatch.source_id = gaia.source_id
+%LEFT OUTER JOIN
+%	gaiadr3.tmass_psc_xsc_join AS tmass_join
+%	ON tmass_join.clean_tmass_psc_xsc_oid = tmassxmatch.clean_tmass_psc_xsc_oid
+%LEFT OUTER JOIN
+%	gaiadr1.tmass_original_valid as tmass
+%	ON tmass.designation = tmass_join.original_psc_source_id
+%INNER JOIN
+%	user_sbuder.dr6_0_230101_unique_ids as galah
+%	ON galah.tmass_id = tmass.designation
 
+To support our spectroscopic analysis, we make use of astrometric and photometric information from the \Gaia satellite \citep{Gaia-Collaboration2016} and 2MASS survey \citep{Skrutskie2006} which is available for essentially all our targets. $Gaia$: 826\,076 (99.9\,\%) of the 827\,288 stars observed by GALAH have photometric measurements catalogued in \Gaia DR3 and the 2MASS Survey. We further use the value-added catalogues, like distance estimates for field stars by \citep{BailerJones2021} as well as open and globular clusters by \citet{CantatGaudin2020} as well as \citet{Vasiliev2021} and \citet{Baumgardt2021}.
 
-K2,
+\subsubsection{\Gaia DR3}
 
-\citet{CantatGaudin2020}:
+We crossmatch our observations to the \Gaia DR3 catalogue \citep{Brown2021,Vallenari2022} via the 2MASS via the nearest neighbour crossmatches provided as part of \Gaia DR3 \citep{Torra2021}. 820\,715 (99.2\,\%) also have astrometric information \citep{Lindegren2021a} and 774\,915 stars (93.7\,\%) have radial velocity estimates \citep{Katz2022}. We apply the corrections to both photometric \citep{Riello2021} and astrometric \citep{Lindegren2021b}information. Where possible we prefer the photogeometric distances over the geometric distances by \citep{BailerJones2021}. Where neither are available, we further try to find parallaxes from \cite{vanLeeuwen2007}. The average parallax uncertainty of the GALAH stars is $\sigma_{\varpi} / \varpi = 1.5_{-0.9}^{+2.6}\,\mathrm{\%}$. Only $2.3\,\%$ of GALAH stars have no parallax measurements or parallax measurements beyond $20\%$ uncertainty, for which the priors by \citep{BailerJones2021} start to dominate distance estimates.
 
-\citet{Vasiliev2021} and \citet{Baumgardt2021}:
+\subsubsection{2MASS, WISE, and extinction}
 
+In addition to the excellent infrared photometry for 99.9\,\% of our sources from the 2MASS survey \citep{Skrutskie2006}, 98.7\,\% of them have far-infrared measurements from the WISE mission \citep{Cutri2013}. We therefore can estimate the extinction in the $K_S$, via the RJCE method \citep{Majewski2011} $A_{K_S}  = 0.917 \cdot \left( H - W2 - 0.08 \right)$ for most stars. We confirm this estimate by estimating the extinction in $K_S$ via the extrapolation of the color extinction of $B-V$, that is, $A(K_S) \sim 0.36 \cdot E(B-V)$ \citep{Cardelli1989}. We revert to this value, if it is less than half the value of the RJCE estimate or if either of the H and W2 bands does not have an excellent quality flag 'A'. For negative estimates by the RJCE method and very nearby stars ($<100\,\mathrm{pc}$) we null the value.
+
+\subsubsection{Open and Globular Cluster members and distances} \label{sec:oc_gc}
+
+We identify open cluster members via the membership catalogue from \citet{CantatGaudin2020} via crossmatch with the \Gaia \texttt{source\_id} and adjust their parallaxes and distance estimates to the average cluster values if the latter are more precise. We identify globular cluster members (with more than 70\% probability) via the membership catalogue from \citet{Vasiliev2021} by crossmatching with the \Gaia \texttt{source\_id}. We then adjust the parallaxes and distances for the member stars to the mean values listed by \citet{Baumgardt2021}.
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{SPECTROSCOPIC ANALYSIS}
-\label{sec:spectroscopic_analysis}
+\section{SYNTHETIC SPECTRA FOR 2DF-HERMES}
+\label{sec:allspec_analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The spectroscopic analysis is estimating the best set of stellar properties (labels) that influence a stellar spectrum by minimising the difference of observed stellar spectra to synthetic ones that were created with said stellar labels. In this release we implement the possibility to also create synthetic binary star spectra through the superposition of two synthetic spectra and optimise them and respective radial velocity shifts of the binary stars.
-
-In this section, we lay out how we create high-resolution synthetic stellar spectra (Sec.~\ref{sec:higher_resolution_synthetic_spectra}) and train neural networks to quickly predict/interpolate new synthetic spectra (Sec.~\ref{sec:interpolating_synthetic_spectra_with_neural_networks}).
-
-In our endeavour to push the limits even further, we are advancing our analysis to fit all 31 elemental abundances and stellar parameters across the full GALAH wavelength range simultaneously with the appropriate model spectra.
+The spectroscopic analysis is estimating the best set of stellar properties (labels) that influence a stellar spectrum by minimising the difference of observed stellar spectra to synthetic ones that were created with said stellar labels. In our endeavour to push the limits even further, we are advancing our analysis to fit all 31 elemental abundances and stellar parameters across the full GALAH wavelength range simultaneously with the appropriate model spectra. In this release we implement the possibility to also create synthetic binary star spectra through the superposition of two synthetic spectra and optimise them and respective radial velocity shifts of the binary stars.
 
 To make this computationally feasible, we follow an idea reported by \citet{Rix2016} and create flexible models for smaller parts of the parameters space from only a limited number of ab initio models \citep[see also][]{Ting2016b}. Our ab initio models are calculated with Spectroscopy Made Easy \citep[\textsc{sme}][]{Valenti1996,Piskunov2017} for the whole wavelength range and all visible atomic and molecular lines for random selections of elemental abundances and stellar parameters within the range of \textsc{marcs} atmospheres \citep{Gustafsson2008} at much higher resolution and sampling than our HERMES spectra. We then select subsets of these spectra within a restricted space of the three main spectroscopic parameters \Teff, \logg, and [Fe/H]. This idea is comparable to selecting stellar solar twin spectra when analysing the Sun \citep[see e.g.]{Nissen2015} or differential abundance analysis of globular cluster stars \citep[e.g.][and Monty et al. in prep]{Yong2013}. As they cancel out several systematic issues of line data and atmospheric effect, these approaches have been highly successful \citep{Nissen2018}. For each subset, we train a neutral network that correlates stellar flux and labels (stellar parameters and abundances) similar to \textit{The Payne} \citep{Ting2019}. With these models, we can then create model spectra with all lines over the whole wavelength range for any combination of element abundances within this restricted parameter space within less than a second (compared to minutes or hours for physics-driven syntheses). 
+
+In this section, we lay out how we create high-resolution synthetic stellar spectra (Sec.~\ref{sec:higher_resolution_synthetic_spectra}) and train neural networks to quickly predict/interpolate new synthetic spectra (Sec.~\ref{sec:interpolating_synthetic_spectra_with_neural_networks}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Higher-resolution synthetic spectra with \sme}
@@ -289,34 +343,28 @@ Spectra are computed at a resolution of $R = 300,000$ on a fine wavelength grid 
 
 We use 1D \marcs atmospheres from the \marcs grid \citep[][version 2014]{Gustafsson2008}, and interpolate them for combinations of \Teff, \logg, and \feh. We use grids of non-LTE departure coefficients by \citet{Amarsi2020} for H, Li, C, N, O, Na, Mg, Al, Si, K, Ca, Mn, and Ba. For all, except C, we use grids that include background scattering.
 
+Our synthetic grid explicitly includes C and N abundances. C was previously included in the analysis of GALAH DR3, but limited to the atomic C line. The analysis thus neglected the molecular absorption features of $\mathrm{C_2}$ and CN at the beginning of CCD1 and end of CCD4, respectively. With the new self-consistent grid, we can however include these features, as they hold valuable information for both C and N, as well as several other features through the molecular equilibrium in stars \citep[see e.g.][]{Ting2018}.
+
 To be able to test that the flux-label correlations found by our subsequent polynomial interpolation are limited to reasonable wavelength ranges, we also calculate one spectrum that is exactly in the middle of the parameter range and additional spectra, where we increase the value of one label at a time (e.g. increase [O/Fe] by $1\dex$) to test the response in the synthetic spectrum.
 
-To save computational costs, we compute synthetic spectra with no rotational or macroturbulence broadening ($v_\text{mac} = v\sin i = 0\kms$), but save the model continuum flux (\texttt{sme.cmod}) and the specific intensities (\texttt{sme.sint}) as a function of the equal-area midpoints of each equal-area annulus $\mu$ (see Fig.~\ref{fig:sme_mu_output}).
+To save computational costs, we compute synthetic spectra with no rotational or macroturbulence broadening ($v_\text{mac} = v\sin i = 0\kms$), but save the model continuum flux (\texttt{sme.cmod}) and the specific intensities (\texttt{sme.sint}) as a function of the equal-area midpoints of each equal-area annulus $\mu$ (see Fig.~\ref{fig:sme_mu_output}). We then apply the broadening of spectra due to rotation (\vsini) with the flux integration code of the python-implementation \textsc{PySME} \citep{Wehrhahn2021} of \textsc{SME} \citep{Piskunov2017}. Depending on the expected rotational velocities (increasing with temperature) we sample a range of
+\begin{align} \label{eq:vsini}
+    v \sin i~/~\kms \in \{ 1.5, 3, 6, 9, 12, 18, 24^\star, 36^{\star \star}\}.
+\end{align}
 
-\begin{figure*}[hbt!]
+For bins with \Teff$\geq 5000\,\mathrm{K}$, we also include $v \sin i = 24 \kms$ and for those with \Teff$\geq 6000\,\mathrm{K}$ we also include $v \sin i = 36 \kms$. 
+% The decision for these values was made based on the distribution of \vsini ($7.2_{-1.6}^{4.9}\kms$ with 90\% between 4.7 and $29.0\kms$) in GALAH+ DR3 \citep{Buder2021} and comparison with the grid values used by APOGEE DR16 \citep{Joensson2020}.
+
+\begin{figure}[hbt!]
  \centering
  \includegraphics[width=\textwidth]{figures/solar_twin_specific_intensity.png}
  \caption{Example output of \sme for a solar spectrum in HERMES CCD3 (around the Balmer $\mathrm{H}_\alpha$ line). Shown are the the specific intensities (\texttt{sme.sint}) as a function of the equal-area midpoints of each equal-area annulus $\mu$.}
  \label{fig:sme_mu_output}
-\end{figure*}
+\end{figure}
 
-Our synthetic grid explicitly includes C and N abundances. C was previously included in the analysis of GALAH DR3, but limited to the atomic C line. The analysis thus neglected the molecular absorption features of $\mathrm{C_2}$ and CN at the beginning of CCD1 and end of CCD4, respectively. With the new self-consistent grid, we can however include these features, as they hold valuable information for both C and N, as well as several other features through the molecular equilibrium in stars \citep[see e.g.][]{Ting2018}.
-
-In this step, synthetic spectra are calculated for different angles $\mu$ between the outward normal and the line of sight angles and assuming $v \sin i = 0\kms$. 
-
-Once the synthetic spectra are calculated for different angles $\mu$ between the outward normal and the line of sight angles with $v \sin i = 0\kms$, we apply the broadening of spectra due to rotation (\vsini) and sample each of the synthetic spectra over a range of
-\begin{align} \label{eq:vsini}
-    v \sin i~/~\kms \in \{ 1.5, 3, 6, 9, 12, 18, 24^\star, 36^{\star \star}\}.
-\end{align}
-% The decision for these values was made based on the distribution of \vsini ($7.2_{-1.6}^{4.9}\kms$ with 90\% between 4.7 and $29.0\kms$) in GALAH+ DR3 \citep{Buder2021} and comparison with the grid values used by APOGEE DR16 \citep{Joensson2020}.
-
-For bins with \Teff$\geq 5000\,\mathrm{K}$, we also include $v \sin i = 24 \kms$ and for those with \Teff$\geq 6000\,\mathrm{K}$ we also include $v \sin i = 36 \kms$. 
-
-In this post-processing steps, we then integrate the flux over these angles and simultaneously broadening the spectra with the different rotational velocities (Eq.~\ref{eq:vsini}). For this we use code from the python-implementation \textsc{PySME} \citep{Wehrhahn2021} of \textsc{SME} \citep{Piskunov2017}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Interpolating synthetic spectra with neural networks} \label{sec:interpolating_synthetic_spectra_with_neural_networks}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 To allow a fast interpolation with new and different stellar labels, we use the method of training descriptive models to connect stellar fluxes at given pixels from a combination of stellar labels. This method is well established in stellar spectroscopy through the successful applications of quadratic models with \textit{The Cannon} \citep[see e.g.][]{Ness2015, Ness2016, Casey2016, Casey2017, Ho2017, Buder2018} as well as neural networks with \textit{The Payne} \citep[see e.g.][]{Ting2019, Xiang2019, Xiang2021}. Because of the needed flexibility\footnote{For a more detailed discussion on the advantages of neural networks for predicting spectra see \citet{Ting2019}.} to predict synthetic spectra with 36 stellar labels for a large parameter space, we are also choosing neural networks to interpolate between our synthetic spectra in this data release.
 
@@ -342,6 +390,13 @@ where $\sigma$ is the Sigmoid function $\sigma (x) = 1/(1 + e^{-x})$ that encaps
 
 Note that in an earlier version of our grids, we had explored the range of $\mathrm{A(Li)} = -1..5$, which caused sinusoidal shaped of the weak Li line \citep[see also][]{Wang2020}. The synthetic lines stayed in the expected Gaussian-like shape for all our test cases, when limiting the range of $\mathrm{A(Li)}$ to a more reasonable $0..4$.
 
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SINGLE SPECTRUM ANALYSIS (ALLSPEC)}
+\label{sec:allspec_analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Comparison of synthetic spectra to observations}
 \label{sec:comparison_synthetic_spectra_to_observations}
@@ -361,21 +416,21 @@ Measurements of the GALAH flux and flux uncertainty are reported in counts by th
 
 This specific approach is similar to the internal routine of \textsc{SME} \citep{Piskunov2017} and has the important advantage, that no continuum points have to be defined. This is advantageous, because we try to cover the full parameter range of FGKM stars for which positions of continuum points -- corresponding to 1 on a (pseudo-)continuum-normalised spectrum -- differ significantly or for which continuum points may not even be present (as is the case for M stars).
 
-% We make two additional adjustments to the reduced spectra, which come in the form of counts and uncertainty per wavelength, $f_\lambda$ and $\sigma_{f,\lambda}$.
+ We make two additional adjustments to the reduced spectra, which come in the form of counts and uncertainty per wavelength, $f_\lambda$ and $\sigma_{f,\lambda}$.
 
-% As we compare the observation to model spectra, we do not have to restrict ourselves to an a priory normalisation, but can take into account the residual information on the continuum in parts of the spectra. For each model spectrum that we compare to, we therefore perform a normalisation by fitting a Chebyshev polynomial with outlier clipping to the ratio of model and observation (see Fig.~\ref{fig:ratio_normalisation}). This allows us to both overcome previous shortcomings of the synthetic analysis in GALAH+ DR3 \citep{Buder2021}, which had to be restricted to small wavelength segments and assumed a linear relation for those. Our new approach allows us to properly assess the structure of deep and steep molecular features for cool stars, which dominate spectra of cool stars and carry significant information on \Teff as well as \vrad.
+ As we compare the observation to model spectra, we do not have to restrict ourselves to an a priory normalisation, but can take into account the residual information on the continuum in parts of the spectra. For each model spectrum that we compare to, we therefore perform a normalisation by fitting a Chebyshev polynomial with outlier clipping to the ratio of model and observation (see Fig.~\ref{fig:ratio_normalisation}). This allows us to both overcome previous shortcomings of the synthetic analysis in GALAH+ DR3 \citep{Buder2021}, which had to be restricted to small wavelength segments and assumed a linear relation for those. Our new approach allows us to properly assess the structure of deep and steep molecular features for cool stars, which dominate spectra of cool stars and carry significant information on \Teff as well as \vrad.
 
-% \begin{figure*}[hbt!]
-%  \centering
-%  \includegraphics[width=\textwidth]{figures/Nuisance_example.png}
-%  \caption{
-%  \textbf{Example of normalisation for GALAH DR4 for a model spectrum that is selected during the label optimisation.}
-%  \textbf{Panel (a):} Observed spectrum (counts) of star 2MASS XYZ.
-%  \textbf{Panel (b):} Ratio (blue) of observed spectrum and model spectrum as well as Chebychev polynomial fit (orange).
-%  \textbf{Panel (c):} Normalised observed spectrum (black) compared to the model spectrum (blue). Residuals (red) can then be used as input for the likelihood function.
-%  }
-%  \label{fig:ratio_normalisation}
-% \end{figure*}
+ \begin{figure}[hbt!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/Nuisance_example.png}
+  \caption{
+  \textbf{Example of normalisation for GALAH DR4 for a model spectrum that is selected during the label optimisation.}
+  \textbf{Panel (a):} Observed spectrum (counts) of star 2MASS XYZ.
+  \textbf{Panel (b):} Ratio (blue) of observed spectrum and model spectrum as well as Chebychev polynomial fit (orange).
+  \textbf{Panel (c):} Normalised observed spectrum (black) compared to the model spectrum (blue). Residuals (red) can then be used as input for the likelihood function.
+  }
+  \label{fig:ratio_normalisation}
+ \end{figure}
 
 % For each CCD, the reduction has found the most suitable wavelength solution, linking pixels with actual wavelengths, based on the ThXe arc lines. In GALAH DR3 \citep{Buder2021}, we have found several issues for spectra, where not enough ThXe lines could be used to constrain the wavelength solution. Improvements have been made for the new reduction version to improve the number of useful ThXe lines. Two additional pieces of information are, however, unused by the reduction pipeline, namely (i) the telluric lines\footnote{\SB{Check with Janez if that is actually still true!}} that are present throughout GALAH spectra and (ii) the absorption lines of the stellar spectra. Both hold valuable information, as their position (in rest wavelength) is known very well.
 
@@ -403,296 +458,124 @@ This specific approach is similar to the internal routine of \textsc{SME} \citep
 \label{sec:stellar_label_optimissation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Stellar label estimation assuming single star}
-\label{sec:stellar_label_estimation_assuming_single_star}
+%\subsubsection{Stellar label estimation assuming single star}
+%\label{sec:stellar_label_estimation_assuming_single_star}
+%
+%\paragraph{Workflow of the optimisation}
+%
+%In up to four major loops, we optimise the radial velocities and all other stellar labels and report a) their values, b) their co-variances, c) the best fit synthetic and re-normalised spectra along with their uncertainties and masks that indicate which pixels were used in the final optimisation.
+%
+%Starting from the initial values, a first synthetic spectrum is computed and compared with the observation in order to assess the initial radial velocity. This is done by applying the \textsc{scipy.signal.find\_peaks} algorithm on a the residuals\footnote{We use the inverse of the residuals that were normalised with the smallest residual values.} of non-shifted observed and synthetic spectra, when the latter is shifted by $v_\text{rad} = -1000..(2)..1000\kms$ (see Fig.~\ref{fig:181221003101356_single_fit_rv}a). If no peak is found, the initial \vrad value is used hereafter. If more than one peak is found (see Fig.~\ref{fig:181221003101356_single_fit_rv} with \Gaia DR3 agreeing with the systemic radial velocity), the two strongest peaks are reported and trigger a stellar label estimation assuming binary star (Sec.~\ref{sec:stellar_label_estimation_assuming_binary_star}. For the purpose of the single star analysis, a narrower search is conducted around the highest peak with a \vrad shift of $-20.00..(0.04)..20.00\kms$ around said peak by fitting a Gaussian function to the inverse of the residuals that were normalised with the smallest residual values (see Fig.~\ref{fig:181221003101356_single_fit_rv}c). The mean of this fit and its uncertainty are reported by the pipeline.
+%
+%\begin{figure}[hbt!]
+% \centering
+% \includegraphics[width=\textwidth]{figures/181221003101356_single_fit_rv.png}
+% \caption{\textbf{Output of the radial velocity fitting module.} \textbf{Panel a)} shows the initial broad search on a \vrad array of $-1000..(2)..1000\kms$. In the case of 2MASS J06084657-7815235, two peaks (yellow, dashed) are visible for this line-splitting spectroscopic binary. \textbf{Panel b)} shows the same plot, but overlaid with the GALAH DR4 reduction pipeline (red) and \Gaia DR3 (blue, dashed) estimates. \textbf{Panel c)} shows the narrow window of $-20.00..(0.04)..20.00\kms$ around the highest peak and the Gaussian fit (yellow) to it.}
+% \label{fig:181221003101356_single_fit_rv}
+%\end{figure}
+%
+%The centerpiece of our optimisation is the \textsc{scipy.optimise.curve\_fit} function, which we call with counts and uncertainties (\texttt{absolute\_sigma = True}) as input to estimate the labels via the least squares optimisation within less than $10^4$ iterations and a desired relative error (\texttt{xtol}) below 0.0001.
+%
+%For the each optimisation loop, a new, best-fit 3D bin and neural network is identified via a grid search in the \TLF dimensions with \textsc{sklearn.cKDtree}. If the stellar labels that are being fitted have changed (for example if an element is deemed not detectable for the new 3D bin), the label and its value is either deleted or initialised with $\mathrm{[X/Fe]} = 0$.
+%
+%While the optimisation has not converged (the final parameters \TLF are not within the current 3D bin), the optimisation is repeated, starting with the previous best-fit parameters as starting guesses.
+%
+%\paragraph{Initial and intermediate label values}
+%
+%Initial values of all stellar labels are needed for creating a first synthetic spectrum. For \vrad, \Teff, \logg, and \vsini we use a combination of sources, namely the GALAH DR4 reduction pipeline, GALAH DR3 \citep{Buder2021}, $\Gaia$ DR3 \citep{Brown2021}, and 2MASS \citep{Skrutskie2006}. In selected cases, we adjust the starting parameters towards reasonable limits. Below we briefly describe the general approach to finding initial values, but refer to the \href{https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_initial_parameters.ipynb}{online repository} for the detailed implementation. 
+%
+%Based on the chosen \Teff and \logg, we then apply calculate an initial value for \vmic within limits of $0.5$ to $4.0\kms$ based on Eq.~\ref{eq:vmic_initial} for $T_\text{eff}^\prime = T_\text{eff} - 5500\,\mathrm{K}$ as well as $\log g^\prime = \log g - 4.0$:
+%\begin{align} 
+%v_\text{mic} = \begin{array}{l}
+%1.198 + 3.16 \cdot 10^{-4} \cdot T_\text{eff}^\prime - 0.253 \cdot \log g^\prime \\ - 2.86\cdot 10^{-4} \cdot T_\text{eff}^\prime \cdot \log g^\prime + 0.165 \cdot \log g^\prime
+%\end{array} \label{eq:vmic_initial}
+%\end{align}
+%This relation is shifted by $+0.2\kms$ from the originally reported relation by \citet{DutraFerreira2016} based on 3D model atmospheres.
+%
+%Based on the value of \feh we apply an offset to the $\mathrm{\alpha}$-elements O, Mg, Si, Ca, and Ti within our wavelength range. The initial value is 0.4 for $\mathrm{[Fe/H]} < -1$, 0.0 for $\mathrm{[Fe/H]} > 0$, and $-0.4\cdot \mathrm{[Fe/H]}$ for $-1 \leq \mathrm{[Fe/H]} \leq 0$. All other abundances are initialised at $\mathrm{[Fe/H]} = 0$.
+%
+%\SB{Describe more of the special cases and when what is used in combination with the reference to Fig.~\ref{fig:initial_parameters}.}
+%% https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_initial_parameters.ipynb
+%
+%\paragraph{Which labels are optimised?}
+%
+%% This paragraph is based on the combination of 
+%% spectrum_interpolation/galah_dr4_grid_interpolation_recommend_labels.ipynb
+%% and
+%% spectrum_analysis/galah_dr4_spectrum_analysis_single.ipynb
+%
+%As part of the synthetic grid computations, we have perturbed each label individually to our chosen maximum and minimum ranges (see Sec.~\ref{subsubsec:spectrum_grid}). This allows us to also judge which stellar labels to fit for each given star. We choose to fit a stellar label, if either of the two cases applies to said label for the GALAH wavelength range when neglecting the cores of the Balmer lines: Does the spectrum between minimum and maximum label value at any pixel change more than a certain threshold (0.07 of the normalised spectrum)? Does the spectrum between minimum and maximum label value change by more than 0.005 of the normalised spectrum for at least 25\% of the spectrum? While the first case is constructed for atomic lines, such as \ion{Li}{i} 6708, the second case is addressing in particular molecular lines like the $\mathrm{C_2}$ and $\mathrm{CN}$ lines. For spectra that are missing the infrared arm (CCD4) we exclude the otherwise possibly fit labels for N, O, L, and Rb.
+%
+%Initial tests of the pipeline have revealed that in cases where the initial parameter guesses are deviating significantly from the final ones, several elemental abundance estimates were shifted towards their boundaries, leading to a masking of their elemental abundances lines by the masking module (Sec.~\ref{sec:masking_of_unreliable_wavelength_regions}) at the beginning of each optimisation loop. To minimise this effect, we therefore shift the interim abundance values towards the narrow label boundaries. In practise, we this limit the initial and interim abundances to 1.05..3.26 for A(Li), $\mathrm{[X/Fe]} = -0.5..1.0$ for C, N, O, Y, Ba, La, Ce, and Nd, and $\mathrm{[X/Fe]} = -0.5..0.5$ for all other elements before optimising them again. For warm and hot stars ($T_\text{eff} > 6000\K$), this effect was seen to effect multiple abundances, such that we needed to implement a zeroing of all abundances (except Lithium) for stars above $6000\K$, which would on average be expected to be young and have a solar-like composition.
+%
+%\SB{Mention issues with \vsini going unreasonably high for some giants (>10kms), causing [C/Fe] to go high as well, with chi2/gradient descent seemingly not being able to control this process. This issue was also realised after GALAH DR3 with several of the coolest giants. To guide the pipeline, we therefore implement a hard upper limit of the initial values of each optimisation of $v \sin i = 8km/s$ for giant stars with $T_\text{eff} < 5000$, $\log g < 3$, $v \sin i > 10km/s$. If [C/Fe] was a fitted label for these stars, we also reset it to 0. OR: We adjust the initial values at the beginning?}
+%
+%\subsubsection{Stellar label estimation assuming binary star} \label{sec:stellar_label_estimation_assuming_binary_star}
+%
+%% spectrum_analysis/galah_dr4_spectrum_analysis_binary.ipynb
+%
+%motivated by the extensive study of GALAH binary star spectra by \citet{Traven2020}.
+%
+%In our strictly spectroscopic implementation, we only use the stellar GALAH spectra and the two radial velocity peaks identified in the radial velocity optimisation step (see Fig.~\ref{fig:181221003101356_single_fit_rv}) of the single star analysis (Sec.~\ref{sec:stellar_label_estimation_assuming_single_star}).
+%
+%Fitting RV1, RV2, Teff1, Teff2, logg1, logg2, FeH, vmic1, vmic2, vsini1, vsini2
+%
+%\subsubsection{Masking of unreliable wavelength regions} \label{sec:masking_of_unreliable_wavelength_regions}
+%
+%Not all pixels of the observed or synthetic spectra might prove useful for estimating reliable stellar labels. Observations can include bad pixels/patterns and incorrect corrections (for example of telluric or sky lines). Flux predictions of synthetic spectra are only as good as the input physics (limited for example for specific lines via uncertain oscillator strengths).
+%
+%% Based on https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_solar_analysis.ipynb
+%To minimise the influence of inaccurate synthetic pixel predictions, we have compared a 2dF-HERMES observation of the asteroid 4~Vesta and a high-quality  Solar spectrum by \citet{Hinkle2000} with the flux that would be predicted through our pipeline for a star with Solar labels ($T_\text{eff} = 5772\K$, $\log g = 4.438\dex$, $\mathrm{[Fe/H]} = 0.00\dex$, $v_\text{mic} = 1.06\kms$, $v \sin i = 1.6\kms$, $v_\text{mac} = 4.2\kms$ \citep{Prsa2016, Jofre2017}, and $\mathrm{[X/Fe]} = 0.00\dex$ for the default Solar abundance pattern for \marcs by \citet{Grevesse2007}).
+%
+%\begin{figure*}[hbt!]
+% \centering  
+% \includegraphics[width=\textwidth]{figures/example_masking_sun.png}
+%\caption{\textbf{Examples of masks applied to unreliable pixels for the spectrum fitting, that is the minimisation of residuals (red) between observation (black) and synthesis (blue).} \textbf{Panel a)} showing a strong synthetic line, where no line is observed in the Sun. \textbf{Panel b)} showing an observed line without any line being synthesised. \textbf{Panel c)} showing significant disagreement between the two observed lines and the synthesis.} \label{fig:example_masking_sun}
+%\end{figure*}
+%
+%We have identified all lines that showed differences of the normalised flux of more than $0.1$, lines where either a synthetic line or an observed one was completely missing, or lines that were significantly misaligned. Examples of this \href{https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/spectrum_masks/solar_spectrum_mask.fits}{list} of masks are shown in Fig.~\ref{fig:example_masking_sun}. To avoid the influence of bad spectrum regions with an observational origin, we mask pixels where the synthetic and re-normalised observed spectrum differ by more than $5\sigma$ or a flux of 0.3 (0.4 before the initial optimisation). To avoid the masking of lines that are vital for our spectroscopic analysis, we have created a \href{https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/spectrum_masks/vital_lines.fits}{list} with segments of such lines that is mainly based on the previous element masks from GALAH DR3 \citep{Buder2021}. The final mask of pixels to use for the optimisation then includes all vital line regions and those wavelengths that are not unreliable in the synthesis show a too strong disagreement between observation and synthesis.
+%
+%We further indirectly take into account the currently less constrained molecular data for cool stars in optical spectra, in particular towards the blue (REF from A. Rains 2021). For presumably cool stars (with initial $T_\text{eff} < 4100\,\mathrm{K}$), we therefore double the observational uncertainty of the blue arm.
 
-\paragraph{Workflow of the optimisation}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SINGLE STAR ANALYSIS (ALLSTAR)}
+\label{sec:allstar_analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In up to four major loops, we optimise the radial velocities and all other stellar labels and report a) their values, b) their co-variances, c) the best fit synthetic and re-normalised spectra along with their uncertainties and masks that indicate which pixels were used in the final optimisation.
 
-Starting from the initial values, a first synthetic spectrum is computed and compared with the observation in order to assess the initial radial velocity. This is done by applying the \textsc{scipy.signal.find\_peaks} algorithm on a the residuals\footnote{We use the inverse of the residuals that were normalised with the smallest residual values.} of non-shifted observed and synthetic spectra, when the latter is shifted by $v_\text{rad} = -1000..(2)..1000\kms$ (see Fig.~\ref{fig:181221003101356_single_fit_rv}a). If no peak is found, the initial \vrad value is used hereafter. If more than one peak is found (see Fig.~\ref{fig:181221003101356_single_fit_rv} with \Gaia DR3 agreeing with the systemic radial velocity), the two strongest peaks are reported and trigger a stellar label estimation assuming binary star (Sec.~\ref{sec:stellar_label_estimation_assuming_binary_star}. For the purpose of the single star analysis, a narrower search is conducted around the highest peak with a \vrad shift of $-20.00..(0.04)..20.00\kms$ around said peak by fitting a Gaussian function to the inverse of the residuals that were normalised with the smallest residual values (see Fig.~\ref{fig:181221003101356_single_fit_rv}c). The mean of this fit and its uncertainty are reported by the pipeline.
+\subsection{Self-consistent surface gravities}
 
-\begin{figure}[hbt!]
- \centering
- \includegraphics[width=\textwidth]{figures/181221003101356_single_fit_rv.png}
- \caption{\textbf{Output of the radial velocity fitting module.} \textbf{Panel a)} shows the initial broad search on a \vrad array of $-1000..(2)..1000\kms$. In the case of 2MASS J06084657-7815235, two peaks (yellow, dashed) are visible for this line-splitting spectroscopic binary. \textbf{Panel b)} shows the same plot, but overlaid with the GALAH DR4 reduction pipeline (red) and \Gaia DR3 (blue, dashed) estimates. \textbf{Panel c)} shows the narrow window of $-20.00..(0.04)..20.00\kms$ around the highest peak and the Gaussian fit (yellow) to it.}
- \label{fig:181221003101356_single_fit_rv}
-\end{figure}
+We can estimate the logarithmic surface gravity, $\log g$, as a combination of its definition ($g \propto \frac{\mathcal{M}}{\mathcal{R}^2}$) and the Stefan-Boltzmann law relative to the Solar values:
+\begin{equation}
+\log g = \log g_\odot + \log \frac{\mathcal{M}}{\mathcal{M_\odot}} + 4 \log \frac{T_\mathrm{eff}}{T_\mathrm{eff,\odot}} - \log \frac{L_\mathrm{bol}}{L_\mathrm{bol,\odot}} \label{eq:logg}
+\end{equation}
 
-The centerpiece of our optimisation is the \textsc{scipy.optimise.curve\_fit} function, which we call with counts and uncertainties (\texttt{absolute\_sigma = True}) as input to estimate the labels via the least squares optimisation within less than $10^4$ iterations and a desired relative error (\texttt{xtol}) below 0.0001.
+While we can use our spectroscopically determined $T_\mathrm{eff}$, the other values have to be estimated through models or non-spectroscopic information. The logarithmic bolometric luminosity, $L_\mathrm{bol}$, can be estimated from the bolometric magnitude, such that $\log \frac{L_\mathrm{bol}}{L_\mathrm{bol,\odot}} = -0.4 \cdot \left(M_\mathrm{bol} - M_\mathrm{bol,\odot} \right)$. The bolometric magnitude can be estimated from any given apparent magnitude, if we correct the latter by the distance modulus, bolometric correction, and extinction. Because for essentially all stars of GALAH DR4, we have outstanding infrared magnitudes available which suffer less from (uncertain) extinction corrections, we continue to chose $K_S$ as the magnitude to estimate our bolometric magnitudes and luminosities via
+\begin{equation}
+M_\mathrm{bol} = K_S - 5\cdot \log \frac{D_\varpi}{10} + BC(K_S) - A(K_S). \label{eq:mbol}
+\end{equation}
 
-For the each optimisation loop, a new, best-fit 3D bin and neural network is identified via a grid search in the \TLF dimensions with \textsc{sklearn.cKDtree}. If the stellar labels that are being fitted have changed (for example if an element is deemed not detectable for the new 3D bin), the label and its value is either deleted or initialised with $\mathrm{[X/Fe]} = 0$.
+While the values for $K_S$, $D_\varpi$, and $A(K_S)$ are readily available (see Sec.~\ref{sec:non-spec_data}), we need to estimate the bolometric correction from tabulated values using the routines provided by \citet{Casagrande2018}:
+\begin{equation}
+BC(K_S) = f(T_\mathrm{eff}, \log g, \mathrm{[Fe/H]})
+\label{eq:bc_ks}
+\end{equation}
+We choose to assume an extinction value of $E(B-V) = 0\,\mathrm{mag}$ for this particular interpolation and post-correct the value by $A(K_S)$ our actual extinctions can exceed the tabulated values of $E(B-V) = 0.72\,\mathrm{mag}$ by \citet{Casagrande2018} and our available $E(B-V)$ values from \citet{Schlegel1998} are upper limits that can overestimate the actual extinction of our observed targets.
 
-While the optimisation has not converged (the final parameters \TLF are not within the current 3D bin), the optimisation is repeated, starting with the previous best-fit parameters as starting guesses.
+Because of the appearance of $\log g$ in Eq.~\ref{eq:bc_ks}, we iterate the calculation of $BC(K_S)$ and subsequently $\log g$ up to four times or until the latter value changes less than $0.02\,\mathrm{dex}$ between iterations. Similarly, we need to estimate the stellar masses (and ages as a byproduct) from tabulated values, that is,
+\begin{equation}
+\mathcal{M}, \tau = f(T_\mathrm{eff}, \log g, \mathrm{[Fe/H]}, L_\mathrm{bol,\odot})
+\label{eq:mass_age}
+\end{equation}
+For this on-the-fly estimate of masses and ages we use an earlier version of the \texttt{ELLI} code by \cite{Lin2018} for a likelihood-weighted estimate with default uncertainties of $100\,\mathrm{K}$, $0.25\,\mathrm{dex}$, $0.2\,\mathrm{dex}$, and an average uncertainty of $L_\mathrm{bol,\odot}$ from propagated uncertainties of Eq.~\ref{eq:mbol}.
 
-\paragraph{Initial and intermediate label values}
-
-Initial values of all stellar labels are needed for creating a first synthetic spectrum. For \vrad, \Teff, \logg, and \vsini we use a combination of sources, namely the GALAH DR4 reduction pipeline, GALAH DR3 \citep{Buder2021}, $\Gaia$ DR3 \citep{Brown2021}, and 2MASS \citep{Skrutskie2006}. In selected cases, we adjust the starting parameters towards reasonable limits. Below we briefly describe the general approach to finding initial values, but refer to the \href{https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_initial_parameters.ipynb}{online repository} for the detailed implementation. 
-
-Based on the chosen \Teff and \logg, we then apply calculate an initial value for \vmic within limits of $0.5$ to $4.0\kms$ based on Eq.~\ref{eq:vmic_initial} for $T_\text{eff}^\prime = T_\text{eff} - 5500\,\mathrm{K}$ as well as $\log g^\prime = \log g - 4.0$:
-\begin{align} 
-v_\text{mic} = \begin{array}{l}
-1.198 + 3.16 \cdot 10^{-4} \cdot T_\text{eff}^\prime - 0.253 \cdot \log g^\prime \\ - 2.86\cdot 10^{-4} \cdot T_\text{eff}^\prime \cdot \log g^\prime + 0.165 \cdot \log g^\prime
-\end{array} \label{eq:vmic_initial}
-\end{align}
-This relation is shifted by $+0.2\kms$ from the originally reported relation by \citet{DutraFerreira2016} based on 3D model atmospheres.
-
-Based on the value of \feh we apply an offset to the $\mathrm{\alpha}$-elements O, Mg, Si, Ca, and Ti within our wavelength range. The initial value is 0.4 for $\mathrm{[Fe/H]} < -1$, 0.0 for $\mathrm{[Fe/H]} > 0$, and $-0.4\cdot \mathrm{[Fe/H]}$ for $-1 \leq \mathrm{[Fe/H]} \leq 0$. All other abundances are initialised at $\mathrm{[Fe/H]} = 0$.
-
-\SB{Describe more of the special cases and when what is used in combination with the reference to Fig.~\ref{fig:initial_parameters}.}
-% https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_initial_parameters.ipynb
-
-\paragraph{Which labels are optimised?}
-
-% This paragraph is based on the combination of 
-% spectrum_interpolation/galah_dr4_grid_interpolation_recommend_labels.ipynb
-% and
-% spectrum_analysis/galah_dr4_spectrum_analysis_single.ipynb
-
-As part of the synthetic grid computations, we have perturbed each label individually to our chosen maximum and minimum ranges (see Sec.~\ref{subsubsec:spectrum_grid}). This allows us to also judge which stellar labels to fit for each given star. We choose to fit a stellar label, if either of the two cases applies to said label for the GALAH wavelength range when neglecting the cores of the Balmer lines: Does the spectrum between minimum and maximum label value at any pixel change more than a certain threshold (0.07 of the normalised spectrum)? Does the spectrum between minimum and maximum label value change by more than 0.005 of the normalised spectrum for at least 25\% of the spectrum? While the first case is constructed for atomic lines, such as \ion{Li}{i} 6708, the second case is addressing in particular molecular lines like the $\mathrm{C_2}$ and $\mathrm{CN}$ lines. For spectra that are missing the infrared arm (CCD4) we exclude the otherwise possibly fit labels for N, O, L, and Rb.
-
-Initial tests of the pipeline have revealed that in cases where the initial parameter guesses are deviating significantly from the final ones, several elemental abundance estimates were shifted towards their boundaries, leading to a masking of their elemental abundances lines by the masking module (Sec.~\ref{sec:masking_of_unreliable_wavelength_regions}) at the beginning of each optimisation loop. To minimise this effect, we therefore shift the interim abundance values towards the narrow label boundaries. In practise, we this limit the initial and interim abundances to 1.05..3.26 for A(Li), $\mathrm{[X/Fe]} = -0.5..1.0$ for C, N, O, Y, Ba, La, Ce, and Nd, and $\mathrm{[X/Fe]} = -0.5..0.5$ for all other elements before optimising them again. For warm and hot stars ($T_\text{eff} > 6000\K$), this effect was seen to effect multiple abundances, such that we needed to implement a zeroing of all abundances (except Lithium) for stars above $6000\K$, which would on average be expected to be young and have a solar-like composition.
-
-\SB{Mention issues with \vsini going unreasonably high for some giants (>10kms), causing [C/Fe] to go high as well, with chi2/gradient descent seemingly not being able to control this process. This issue was also realised after GALAH DR3 with several of the coolest giants. To guide the pipeline, we therefore implement a hard upper limit of the initial values of each optimisation of $v \sin i = 8km/s$ for giant stars with $T_\text{eff} < 5000$, $\log g < 3$, $v \sin i > 10km/s$. If [C/Fe] was a fitted label for these stars, we also reset it to 0. OR: We adjust the initial values at the beginning?}
-
-\subsubsection{Stellar label estimation assuming binary star} \label{sec:stellar_label_estimation_assuming_binary_star}
-
-% spectrum_analysis/galah_dr4_spectrum_analysis_binary.ipynb
-
-motivated by the extensive study of GALAH binary star spectra by \citet{Traven2020}.
-
-In our strictly spectroscopic implementation, we only use the stellar GALAH spectra and the two radial velocity peaks identified in the radial velocity optimisation step (see Fig.~\ref{fig:181221003101356_single_fit_rv}) of the single star analysis (Sec.~\ref{sec:stellar_label_estimation_assuming_single_star}).
-
-Fitting RV1, RV2, Teff1, Teff2, logg1, logg2, FeH, vmic1, vmic2, vsini1, vsini2
-
-\subsubsection{Masking of unreliable wavelength regions} \label{sec:masking_of_unreliable_wavelength_regions}
-
-Not all pixels of the observed or synthetic spectra might prove useful for estimating reliable stellar labels. Observations can include bad pixels/patterns and incorrect corrections (for example of telluric or sky lines). Flux predictions of synthetic spectra are only as good as the input physics (limited for example for specific lines via uncertain oscillator strengths).
-
-% Based on https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_solar_analysis.ipynb
-To minimise the influence of inaccurate synthetic pixel predictions, we have compared a 2dF-HERMES observation of the asteroid 4~Vesta and a high-quality  Solar spectrum by \citet{Hinkle2000} with the flux that would be predicted through our pipeline for a star with Solar labels ($T_\text{eff} = 5772\K$, $\log g = 4.438\dex$, $\mathrm{[Fe/H]} = 0.00\dex$, $v_\text{mic} = 1.06\kms$, $v \sin i = 1.6\kms$, $v_\text{mac} = 4.2\kms$ \citep{Prsa2016, Jofre2017}, and $\mathrm{[X/Fe]} = 0.00\dex$ for the default Solar abundance pattern for \marcs by \citet{Grevesse2007}).
-
-\begin{figure*}[hbt!]
- \centering  
- \includegraphics[width=\textwidth]{figures/example_masking_sun.png}
-\caption{\textbf{Examples of masks applied to unreliable pixels for the spectrum fitting, that is the minimisation of residuals (red) between observation (black) and synthesis (blue).} \textbf{Panel a)} showing a strong synthetic line, where no line is observed in the Sun. \textbf{Panel b)} showing an observed line without any line being synthesised. \textbf{Panel c)} showing significant disagreement between the two observed lines and the synthesis.} \label{fig:example_masking_sun}
-\end{figure*}
-
-We have identified all lines that showed differences of the normalised flux of more than $0.1$, lines where either a synthetic line or an observed one was completely missing, or lines that were significantly misaligned. Examples of this \href{https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/spectrum_masks/solar_spectrum_mask.fits}{list} of masks are shown in Fig.~\ref{fig:example_masking_sun}. To avoid the influence of bad spectrum regions with an observational origin, we mask pixels where the synthetic and re-normalised observed spectrum differ by more than $5\sigma$ or a flux of 0.3 (0.4 before the initial optimisation). To avoid the masking of lines that are vital for our spectroscopic analysis, we have created a \href{https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/spectrum_masks/vital_lines.fits}{list} with segments of such lines that is mainly based on the previous element masks from GALAH DR3 \citep{Buder2021}. The final mask of pixels to use for the optimisation then includes all vital line regions and those wavelengths that are not unreliable in the synthesis show a too strong disagreement between observation and synthesis.
-
-We further indirectly take into account the currently less constrained molecular data for cool stars in optical spectra, in particular towards the blue (REF from A. Rains 2021). For presumably cool stars (with initial $T_\text{eff} < 4100\,\mathrm{K}$), we therefore double the observational uncertainty of the blue arm.
+We interpolate over the detault tables of {\sc parsec+colibri} isochrones \citep{Bressan2012, Marigo2017} from that cover the logarithmic ages of $\log \tau = 6.19..(0.01)..10.18$ and metallicities $\mathrm{[M/H]} = -2.75..(0.25)..-0.75$ as well as $\mathrm{[M/H]} = -0.6..(0.1)..0.7$. We exclude hot stars above $10\,000\,\mathrm{K}$ as well as extremely evolved stars ($\log g > 6\,\mathrm{dex}$ or $J - K_S > 2\,\mathrm{mag}$) as they fall far outside our spectroscopic pipeline range. We convert between the theoretical [M/H] and our measured [Fe/H] as well as $\mathrm{[\upalpha/Fe]}$ via the correlation by \citet{Salaris2006}, $\mathrm{[M/H]} = \mathrm{[Fe/H]} + \log\left(10^{\mathrm{[\upalpha/Fe]} \cdot 0.694 + 0.306} \right)$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{ASTROPHYSICAL ANALYSIS}
-\label{sec:astrophysical_analysis}
+\section{BINARY STAR ANALYSIS (BINARY)}
+\label{sec:binary_analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Finally, we implement a Bayesian framework to estimate consistent astrophysical parameters: we first only use spectroscopic information to estimate the most likely set of stellar labels (stellar parameters and abundances) to describe our data. In a second iteration, we also employ non-spectroscopic information as prior information to inform our analysis. We will denote posterior probability functions depending on the available/used observables:
-% \begin{align}
-%     P_\text{S} \quad &: \quad \text{only spectroscopy assuming single star,} \\
-%     P_\text{B} \quad &: \quad \text{only spectroscopy assuming binary star,} %\\
-%     % P_\text{SP} \quad &: \quad \text{also photo- and astrometry, and} \\
-%     % P_\text{SPA} \quad &: \quad \text{also asteroseismology.}
-% \end{align}
-
-% We present the Bayesian framework to compute these functions in Sec.~\ref{subsec:bayes}. The link between these functions and our observables are several physical relations as well as models, most importantly the models that link stellar flux with stellar parameters and abundances. We describe this centerpiece of our spectroscopic analysis in Sec.~\ref{subsec:model_spectra} and how we adjust the observed spectra to best overcome imperfections based in the reduction on-the-fly in Sec.~\ref{subsec:adjustments_observation}. The machinery to find the best set of labels to describe our observables is described in Sec.~\ref{subsec:finding_best_labels}. The post-processing of outcomes on a spectrum-by-spectrum basis is described in Sec.~\ref{sec:post_processing} and the pipeline is validated in Sec.~\ref{sec:validation}.
-
-% \subsection{Bayesian framework} \label{subsec:bayes}
-
-% Previous versions of the GALAH pipelines used strict $\chi^2$ optimisation \citep{Buder2018} or treated non-spectroscopic information as ground-truth for computational reasons \citep{Buder2021}.
-
-% With the new modelling methodology available this data release, we are inspired by the previous works \citep[e.g.][]{Schoenrich2014, BailerJones2015, McMillan2018, Sharma2018} to simultaneously make a statistically more sound use of non-spectroscopic and prior information. 
-
-% We present the observables $\boldsymbol{y}$ and their uncertainties $\sigma_{\boldsymbol{y}}$ of our analysis in Sec.~\ref{subsubsec:observables}. In Sec.~\ref{subsubsec:labels}, we introduce the set of parameters, hereafter called labels $\boldsymbol{l}$ to generate models/predictions $\boldsymbol{y}_m(\boldsymbol{l})$ of the observables. Our analysis applies a simplified Bayesian statement
-% \begin{align}
-%     P( \boldsymbol{l} \vert \boldsymbol{y},\sigma_ {\boldsymbol{y}}) \propto P (\boldsymbol{y} \vert \boldsymbol{l}, \sigma_{\boldsymbol{y}}) P (\boldsymbol{l}).
-% \end{align}
-% Note here, that we ignore the normalisation constant $P(\boldsymbol{y}, \sigma_ {\boldsymbol{y}})$. We present our likelihood functions $P (\boldsymbol{y} \vert \boldsymbol{l}, \sigma_ {\boldsymbol{y}})$ in Sec.~\ref{subsubsec:likelihood} and the prior functions $P (\boldsymbol{l})$ in Sec.~\ref{subsubsec:prior}.
-
-% Because we run our pipeline with different sets of observables, we describe the different sets of probability functions $P( \boldsymbol{l} \vert \boldsymbol{y},\sigma_ {\boldsymbol{y}})$ in Sec.~\ref{subsubsec:probability}, which we will sample in order to create probability density functions (pdfs).
-
-% \subsubsection{Observables} \label{subsubsec:observables}
-
-% The industrial revolution in stellar surveys has allowed us to collect a plethora of spectroscpic ($f_\lambda~\pm~\sigma_{f_\lambda}$), photometric ($m_i~\pm~\sigma_{m_i}$), astrometric ($\varpi~\pm~\sigma_\varpi$), asteroseismic ($\nu_\text{max}~\pm~\sigma_{\nu_\text{max}}$ and $\delta_\nu~\pm~\sigma_{\delta_\nu}$)\SB{, and interferometric ($\Theta_\text{LD} \pm \sigma_{\Theta_\text{LD}}$)} measurements of stars. Each contribute ${\boldsymbol{y}_i} \pm \sigma_{\boldsymbol{y}_i}$ to our set of observables ${\boldsymbol{y}} \pm \sigma_{\boldsymbol{y}}$.
-
-% In our case, the GALAH reduction pipeline delivers $f_\lambda~\pm~\sigma_{f_\lambda}$ (see Sec.~(sec:reduction), but throughout our estimation of optimal stellar labels, we perform several adjustments to the data on-the-fly (see Sec.~\ref{subsec:adjustments_observation}).
-
-% We make use of photometric measurements from both the \Gaia mission \citep{Gaia-Collaboration2016}, specifically its eDR3 \citep{Brown2021}, and 2MASS \citep{Skrutskie2006}. The latter provides near infrared magnitudes $m_J$, $m_H$, and $m_{K_\text{S}}$. We use the three \Gaia bandpasses $m_G$, $m_{G_\text{BP}}$, and $m_{G_\text{RP}}$. We correct the $G$ flux and estimate the \Gaia magnitude uncertainties as described by \citet{Riello2021}. We use astrometric information $\varpi~\pm~\sigma_\varpi$ is provided by \Gaia eDR3 \citep{Lindegren2021a} and we apply the zero point correction to these measurements as described by \citep{Lindegren2021b}. Crossmatches to these catalogues are performed with \textsc{ADQL} queries on the \Gaia archive via \textsc{astroquery} by linking catalogue entries through the \texttt{source\_id} via the nearest neighbor matches provided by the \Gaia consortium on the \Gaia archive \citep[see][]{Marrese2017, Marrese2019}
-
-% We further crossmatch with the open cluster catalogue by \citet{CantatGaudin2020}\footnote{\SB{Update on this with \Gaia eDR3 as part of his 2021 paper?}} via \texttt{source\_id} and use their parallax estimates for stars with more than $70\%$ membership probabilities and more precise parallaxes. Similarly, we crossmatch with the globular cluster catalog by \citet{Vasiliev2021} via \texttt{source\_id} and use their parallax estimates for stars with more than $70\%$ membership probabilities and more precise parallaxes for the clusters NGC~104~/ 47~Tuc, NGC~288, NGC~362, NGC~1851, NGC~5139~/ $\omega$Cen, NGC~6362, NGC~6397, and NGC~7099~/ M~30.
-
-% Where available, we further use the asteroseismic parameters $\nu_\text{max}~\pm~\sigma_{\nu_\text{max}}$ and $\delta_\nu~\pm~\sigma_{\delta_\nu}$ by \SB{Zinn et al. (2021)}\footnote{\SB{Check this! What do we do if not all entries have uncertainties?}}.
-
-% \SB{For interferometric information ($\Theta_\text{LD} \pm \sigma_{\Theta_\text{LD}}$), we use a collection by \citet{Karovicova2020}, \citet{Karovicova2018}, and \citet{Heiter2015}, preferring the most recent values for each star.\footnote{\SB{Check this and also point to a catalog for people to trace back which one was used in the end... for each star. Also do not forget to cite the sources within \citet{Heiter2015}!}}}
-
-% \subsubsection{Model parameters (labels)} \label{subsubsec:labels}
-
-% To describe these observables (and their presumably Gaussian uncertainties), we can build models based on a specific set of parameters, hereafter called labels $\boldsymbol{l}$.
-
-% To predict a normalised stellar spectrum with flux $f \pm \sigma_f$, we need labels $\boldsymbol{l}_S$ that describe the photosphere of a star
-% \begin{align}
-%     \boldsymbol{l}_\text{S} \in \{
-%     T_\text{eff}, \log g, \mathrm{[Fe/H]}, \mathrm{[X/Fe]}, v_\mathrm{mic}, v \sin i, v_\text{rad}
-%     \}.
-% \end{align}
-
-% To describe photometric measurements of stars, typically reported in magnitudes $m_i \pm \sigma_{m_i}$ for filters $i$ with different bandpasses, we need a similar set of labels and information on the distance and extinction to properly scale a model star,
-% \begin{align}
-%     \boldsymbol{l}_\text{P} \in \{ T_\text{eff}, \log g, \mathrm{[Fe/H]}, \mathrm{[X/Fe]}, D_\varpi, A_V \}.
-% \end{align}
-% The distance will also allow us to predict measurements of parallaxes $\varpi \pm \sigma_\varpi$.
-
-% To describe the solar-like oscillations within low-mass stars, which can be transcribed to oscillation frequencies $\nu_\text{max} \pm \sigma_{\nu_\text{max}}$ \SB{and $\delta_\nu \pm \sigma_{\delta_\nu}$} via empirical asteroseismic scaling relations, we need \Teff, \logg, and masses,
-% \begin{align}
-%     \boldsymbol{l}_\text{A} \in \{ T_\text{eff}, \log g, \mathcal{M} \}.
-% \end{align}
-
-% Note that to avoid redundancy with labels in $\boldsymbol{l}_\text{S}$ and $\boldsymbol{l}_\text{P}$, we prefer the use of \logg over radius $\mathcal{R}$, which are fundamentally linked via $R = \sqrt{\mathrm{G} \mathcal{M} g^{-1}}$.
-
-% \subsubsection{Likelihood functions} \label{subsubsec:likelihood}
-
-% Assuming that the uncertainties $\sigma_{\boldsymbol{y}_i}$ of our observables $\boldsymbol{x}$ are Gaussian, we can define a likelihood for each individual observable ${\boldsymbol{y}_i}$ with a model prediction $\boldsymbol{y}_{i,m} (\boldsymbol{l})$
-% \begin{align}
-%     G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}), \sigma_y) = \frac{1}{\sqrt{2\pi} \sigma_{\boldsymbol{y}_i}} \exp \left( -  \frac{\left({\boldsymbol{y}_i} - {\boldsymbol{y}_{i,m}} (\boldsymbol{l})\right)^2}{2 \sigma_{\boldsymbol{y}_i}^2}\right)
-% \end{align}
-% or in logarithmic form
-% \begin{align}
-%     \ln G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}), \sigma_{\boldsymbol{y}_i}) = - \frac{1}{2} \left( \ln (2 \pi \sigma_y) + \frac{\left({\boldsymbol{y}_i} - {\boldsymbol{y}_{i,m}} (\boldsymbol{l})\right)^2}{\sigma_{\boldsymbol{y}_i}^2} \right).
-% \end{align}
-
-% We describe how we actually create model spectra ${\boldsymbol{y}_{i,m}} (\boldsymbol{l}_S)$ in Sec.~\ref{subsec:model_spectra}. To calculate the total spectroscopic logarithmic likelihood, we sum the likelihood of each pixel $i=\lambda$ over all $n$ pixels
-% \begin{align} \label{eq:likelihood_spectroscopic}
-%     \ln P_S ({\boldsymbol{f}} \vert {\boldsymbol{l}_S}, \sigma_{\boldsymbol{f}}) = \sum_\lambda^n \ln G({\boldsymbol{f}_\lambda}, {\boldsymbol{f}_{\lambda,m}} (\boldsymbol{l}_S), \sigma_{\boldsymbol{f}_\lambda}).
-% \end{align}
-
-% Predicting photometric and astrometric observables, that is magnitudes and parallaxes, is an interconnected task. While the parallax $\varpi$ can be easily predicted by the inverse of the distance $D_\varpi$,
-% \begin{align}
-%     \varpi = \frac{1000\,\mathrm{mas}}{D_\varpi~/~\mathrm{pc}},
-% \end{align}
-% magnitudes $m_i$ of certain photometric filters $i$ need to be predicted on an absolute scale $M_i$ and then scaled with distance $D_\varpi$ and a possible extinction within the filter $A_i$
-% \begin{align} \label{eq:magnitudes}
-%     m_i = M_i + 5 \log\frac{D_\varpi}{10\,\mathrm{pc}} + A_i.
-% \end{align}
-% We use the isochrone tables provided by the stellar evolutionary \textsc{parsec} \citep[v. 1.2][]{Bressan2012, Tang2014, Chen2014, Chen2015} and \textsc{colibri} \citep[S\_37, S\_35 and PR16][]{Marigo2013, Rosenfield2016, Marigo2017, Pastorelli2019, Pastorelli2020} to predict magnitudes in the photometric systems of 2MASS \citep{Cohen2003} and \Gaia eDR3 \citep{Riello2021}. We use version 3.5 of the interface \textsc{cmd}\footnote{\url{http://stev.oapd.inaf.it/cmd}} to download isochrone grids with a fine sampling of $\log (\tau~/~\mathrm{Gyr}) = 6.19..(0.01)..10.18$ for age as well as a broad and fine sampling of $\mathrm{[M/H]} = -2.75..(0.25)..-0.75\,\mathrm{dex}$ and $\mathrm{[M/H]} = -0.60..(0.10)..0.70\,\mathrm{dex}$, respectively. We adopt default values of \textsc{cmd} version 3.5, except for the initial mass function, for which we use the exponential function (see also Eq.~\ref{eq:chabrier}) by \citet{Chabrier2001}. For the extinction in the individual filters, we adopt the \textsc{cmd} values of $A_{G}/A_V = 0.83627$,
-% $A_{G_\text{BP}}/A_V = 1.08337$,
-% $A_{G_\text{RP}}/A_V = 0.63439$
-% $A_{J}/A_V = 0.28665$,
-% $A_{H}/A_V = 0.18082$, and
-% $A_{K_\text{S}}/A_V = 0.11675$.
-% % $A_{W_1}/A_V = 0.05688$,
-% % $A_{W_2}/A_V = 0.03427$,
-% % $A_{W_3}/A_V = 0.00707$, and
-% % $A_{W_4}/A_V = 0.00274$
-% We train a \textsc{sklearn} \textsc{cKDtree} on the isochrone grid points of \Teff, \logg, \SB{[M/H]}\footnote{\SB{Currently we use [M/H] = [Fe/H], rather than [M/H] = $f(\mathrm{[Fe/H]},\mathrm{[X/Fe]})$!}}. We can then query it with the specific labels to get a prediction of mass $\mathcal{M}$ and age $\tau$ as well as absolute magnitudes $M_i$ (see Eq.~\ref{eq:magnitudes}) for $i \in \{G, G_\text{BP}, G_\text{RP}, J, H, K_\text{S}\}$.
-
-% Thanks to the GALAH selection function, all GALAH targets have both astrometric and asteroseismic information and we can thus treat this information always together. This allows us to define a photoastrometric logarithmic likelihood functions
-% \begin{align} \label{eq:likelihood_photoastrometric}
-%     \ln P_P (\varpi, {\boldsymbol{m}} \vert {\boldsymbol{l}_P}, \sigma_\varpi, \sigma_{\boldsymbol{m}} ) = 
-%     \sum_{i \in {\varpi,{\boldsymbol{m}}}}
-%     \ln G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}_P), \sigma_{\boldsymbol{y}_i}).
-% \end{align}
-
-% Asteroseismic observables are typically predicted via empirical scaling relations by \citet{Kjeldsen1995}. In our case, we use labels ${\boldsymbol{l}_A}$ to predict the frequency of maximum power
-% \begin{align}
-%     % \nu_{\text{max},m} = \frac{\mathcal{M}~/~\mathrm{M_\odot}}{\left(\mathcal{R}~/~\mathrm{R_\odot}\right)^2} \sqrt{\frac{T_\text{eff}}{5772\,\mathrm{K}}} \times 3090\muHz,
-%     \nu_{\text{max},m} = \frac{10^{\log g}}{10^{4.438}\,\mathrm{cm\,s^{-2}}} \sqrt{\frac{T_\text{eff}}{5772\,\mathrm{K}}} \times 3090\muHz
-% \end{align}
-% and the large frequency separation
-% \begin{align}
-%     %\delta_{\nu,m} = \left( \mathcal{M}~/~\mathrm{M_\odot} \right)^{\frac{1}{2}} \left( \mathcal{R}~/~\mathrm{R_\odot} \right)^{-\frac{3}{2}} \times 134.9\muHz.
-%     \delta_{\nu,m} = \left( \frac{\mathcal{M}}{\mathrm{M_\odot}} \right)^{\frac{-1}{4}} \left( \frac{10^{4.438}\,\mathrm{cm\,s^{-2}}}{10^{\log g}} \right)^{-\frac{3}{4}} \times 134.9\muHz.
-% \end{align}
-% In these, we incorporate the Solar values $\nu_{\text{max},\odot} = 3090\muHz$, $\delta_{\nu,\odot} = 134.9\muHz$ and $T_{\mathrm{eff},\odot} = 5772\,\mathrm{K}$ as constants. This allows us to define a logarithmic likelihood function\footnote{\SB{Note: We are currently only using $\nu_\text{max}$, because some $\delta_\nu$ are missing, and some $\sigma_{\delta_\nu}$ are 0.}}
-% \begin{align} \label{eq:likelihood_asteroseismic}
-%     \ln P_A (\nu_\text{max}, \delta_\nu \vert {\boldsymbol{l}_A}, \sigma_{\nu_\text{max}}, \sigma_{\delta_\nu}) = 
-%     \sum_{i \in {\nu_\text{max},\delta_\nu}}
-%     \ln G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}_A), \sigma_{\boldsymbol{y}_i}).
-% \end{align}
-
-% \SB{We predict the angular diameters $\Theta_\text{LD}$ based on the mass, surface gravity and distance via
-% \begin{align}
-%     \Theta_\text{LD} = 2 \arctan \left( \sqrt{\frac{\mathrm{G} \mathcal{M}}{10^{\log g}}} \frac{1}{D_\varpi} \right).
-% \end{align}}
-
-% \SB{Available but not used: infrared photometry $W_1$ - $W_4$ from WISE \citep{Cutri2013}}
-
-% \subsubsection{Prior functions} \label{subsubsec:prior}
-
-% We formulate a series of priors and apply the relevant ones depending on the set of input information.
-
-% As our model spectra are restricted to the \marcs model grid (see red points in Fig.~\ref{fig:teff_logg_grid_coverage}), we will impose the convex hull as prior on the main stellar parameters \Teff, \logg, and \feh to be within the \marcs atmosphere model grid \citep{Gustafsson2008}, used to create model spectra (see Sec.~\ref{subsec:model_spectra}).
-% \begin{align}
-%     P(T_\mathrm{eff}, \log g, \mathrm{[Fe/H]}) = \begin{cases}
-%     1 \quad \text{within \marcs grid} \\
-%     0 \quad \text{otherwise} \\
-%     \end{cases}
-% \end{align}
-% We restrict to the $T_\text{eff} \geq 3100 - 100\K$ for computational reasons as well as $\mathrm{[Fe/H]} \geq -3 - 1\dex$ and because we do expect only a handful of stars below this range. The maximum extend of this hull is then up to $3000 \leq T_\text{eff}~/~\mathrm{K} \leq 8000$, $-0.5 \leq \log (g~/~\mathrm{cm\,s^{-2}}) \leq 5.5$, and $-4 \leq \mathrm{[Fe/H]}~/~\mathrm{dex} \leq 1$.
-
-% \begin{align}
-%     P(v_\text{mic}) &= \begin{cases}
-%     1 \quad v_\text{mic} > 0.0\kms \\
-%     0 \quad \text{otherwise} \\
-%     \end{cases} \\
-%     P(v \sin i) &= \begin{cases}
-%     1 \quad v \sin i > 0.0\kms \\
-%     0 \quad \text{otherwise} \\
-%     \end{cases} \\
-%     P(\nu_\text{max}) &= \begin{cases}
-%     1 \quad \nu_\text{max} > 0\muHz \\
-%     0 \quad \text{otherwise} \\
-%     \end{cases} \\
-%     P(D_\varpi) &= \begin{cases}
-%     1 \quad D_\varpi \geq 0\kpc \\
-%     0 \quad \text{otherwise} \\
-%     \end{cases} \\
-%     P(A_V) &= \begin{cases}
-%     1 \quad A_V \geq 0\mags \\
-%     0 \quad \text{otherwise} \\
-%     \end{cases}
-% \end{align}
-
-% \SB{Mass is not a stellar label at the moment, but interpolated from isochrones. If we include it to be sampled and used both for isochrones and $\delta_\nu$, shall we impose a flat mass prior between 0.1 and $4.0\Msol$ or a mass prior à la \citet{Chabrier2001}, as done in \citet{Sharma2018}?
-% \begin{align} \label{eq:chabrier}
-%     P(\mathcal{M}) = 22.8978 \exp \left[ - \left(\frac{716.4\Msol}{\mathcal{M}}\right)^{0.25} \right] \left( \frac{\mathcal{M}}{\Msol} \right)^{-3.3}
-% \end{align}
-% }
-
-% With this, we can formulate a prior function $P_s (\boldsymbol{l}_S)$ for the purely spectroscopic analysis:
-% \begin{align}
-%     P_S ( \boldsymbol{l}_S ) = P(T_\text{eff}, \log g, \mathrm{[Fe/H]}) P(v_\text{mic}) P(v\sin i)
-% \end{align}
-
-% If we also fit photo-astrometric information, we further impose a prior
-% \begin{align}
-%     P_{SP} ( \boldsymbol{l}_S ) = P_s ( \boldsymbol{l}_S ) P(D_\varpi) P (A_V)
-% \end{align}
-
-% If we also fit asteroseismic information, we further impose a prior
-% \begin{align}
-%     P_{SPA} ( \boldsymbol{l}_S ) = P_S ( \boldsymbol{l}_S ) P(\nu_\text{max}) P(\delta_\nu) P(D_\varpi) P (A_V)
-% \end{align}
-
-% \subsubsection{Posterior probability functions} \label{subsubsec:probability}
-
-% With our likelihood and prior functions, we can find combinations of different posterior probability functions.
-
-% If we do only take into account spectroscopic information, we will use the posterior
-% \begin{align} \label{eq:posterior_s}
-%     P_S = P ( \boldsymbol{l}_S \vert {\boldsymbol{f}}, \sigma_{\boldsymbol{f}} ) = P ( {\boldsymbol{f}} \vert \boldsymbol{l}_S, \sigma_{\boldsymbol{f}} ) \times P_S ( \boldsymbol{l}_S ).
-% \end{align}
-
-% If we take both spectroscopic and photoastrometric information into account, we will use
-% \begin{align}\label{eq:posterior_sp}
-%     P_{SP} = P ( \boldsymbol{l}_{SP} \vert {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi, \sigma_{\boldsymbol{f}} , \sigma_{\boldsymbol{m}}, \sigma_\varpi) = \notag\\
-%     P ( {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi \vert \sigma_{f}, \sigma_{\boldsymbol{m}}, \sigma_\varpi, \boldsymbol{l}_{SP} ) ~ P_{SP} ( \boldsymbol{l}_{SP} ).
-% \end{align}
-
-% If we additionally also use available asteroseismic measurements, we use
-% \begin{align}\label{eq:posterior_spa}
-%     P_{SPA} = P ( \boldsymbol{l}_{SPA} \vert {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi, {\nu_\text{max}}, {\delta_\nu}, \sigma_{\boldsymbol{f}} , \sigma_{\boldsymbol{m}}, \sigma_\varpi, \sigma_{\nu_\text{max}}, \sigma_{\delta_\nu}) = \notag\\
-%     P ( {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi, {\nu_\text{max}}, {\delta_\nu} \vert \sigma_{f}, \sigma_{\boldsymbol{m}}, \sigma_\varpi, \sigma_{\nu_\text{max}}, \sigma_{\delta_\nu}, \boldsymbol{l}_{SP} ) ~ P_{SPA} ( \boldsymbol{l}_{SPA}).
-% \end{align}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -712,38 +595,37 @@ We further indirectly take into account the currently less constrained molecular
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Abundance detection or upper limit}
 \label{sec:abundance_detection_or_upper_limit}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Our pipeline will find the most suitable model and in particular set of abundances for the given observation. That does, however, not necessarily mean that the abundance of each element is actually well determined, because lines of the element may actually not be detected. For each element, we therefore run a post-processing routine to estimate if the measured abundance is indeed significant compared to the uncertainty of the spectrum. For each star, we therefore take the best-fit labels and neural network model and assess the change in the model spectrum when changing one abundance at a time to the lower boundary of the neural network model. If the difference between the spectrum of the best-fit and the lowest possible abundance is not above $3\sigma$ for a given elemental label, we do not consider it a reliable detection and thus raise the flag \textsc{flag\_x\_fe} for this label.
-
-% see https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_spectrum_analysis_single.py
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \subsection{Goodness of fit}
-% \label{sec:goodness_of_fit}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Raise flag\_sp by 4
-
-% \subsection{Rotational broadening}
-
-% vsini only provided from 1.5 to 24.
-
-% Values below 0 and above 25 raise flag\_sp b 8
-
-% \subsection{Emission lines}
-
-% We use the composite trapezoidal rule to estimate equivalent width for emission based on the difference between observed and model spectrum around $2\,\mathrm{\AA}$ of each Balmer line. We flag the spectrum (raising flag\_sp by 16), if the observed spectrum is without a doubt in emission with a median observed flux above zero for the Balmer line cores ($\pm 0.5\,\mathrm{\AA}$ of the line center).
-
-% \subsection{Flagging of problematic measurements}
-
-% \SB{Flag if parameters outside of the range of \TheCannon (e.g. \vsini$ > 30 \kms$, see Sec.~\ref{subsubsec:polynomials})}
-
-% \SB{Flag if parameters are outside of convex hull of isochrone grid, when using photoastrometric information. Also note that we have cut away \Teff above $10,000\K$ and \logg above $6\dex$.}
+%Our pipeline will find the most suitable model and in particular set of abundances for the given observation. That does, however, not necessarily mean that the abundance of each element is actually well determined, because lines of the element may actually not be detected. For each element, we therefore run a post-processing routine to estimate if the measured abundance is indeed significant compared to the uncertainty of the spectrum. For each star, we therefore take the best-fit labels and neural network model and assess the change in the model spectrum when changing one abundance at a time to the lower boundary of the neural network model. If the difference between the spectrum of the best-fit and the lowest possible abundance is not above $3\sigma$ for a given elemental label, we do not consider it a reliable detection and thus raise the flag \textsc{flag\_x\_fe} for this label.
+%
+%% see https://github.com/svenbuder/GALAH_DR4/blob/main/spectrum_analysis/galah_dr4_spectrum_analysis_single.py
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \subsection{Goodness of fit}
+%% \label{sec:goodness_of_fit}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% Raise flag\_sp by 4
+%
+%% \subsection{Rotational broadening}
+%
+%% vsini only provided from 1.5 to 24.
+%
+%% Values below 0 and above 25 raise flag\_sp b 8
+%
+%% \subsection{Emission lines}
+%
+%% We use the composite trapezoidal rule to estimate equivalent width for emission based on the difference between observed and model spectrum around $2\,\mathrm{\AA}$ of each Balmer line. We flag the spectrum (raising flag\_sp by 16), if the observed spectrum is without a doubt in emission with a median observed flux above zero for the Balmer line cores ($\pm 0.5\,\mathrm{\AA}$ of the line center).
+%
+%% \subsection{Flagging of problematic measurements}
+%
+%% \SB{Flag if parameters outside of the range of \TheCannon (e.g. \vsini$ > 30 \kms$, see Sec.~\ref{subsubsec:polynomials})}
+%
+%% \SB{Flag if parameters are outside of convex hull of isochrone grid, when using photoastrometric information. Also note that we have cut away \Teff above $10,000\K$ and \logg above $6\dex$.}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -751,50 +633,61 @@ Our pipeline will find the most suitable model and in particular set of abundanc
 \label{sec:validation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Fig.~\ref{fig:c2_cn_lines_example}
+
+\begin{figure}[hbt!]
+ \centering
+ \includegraphics[width=\textwidth]{figures/c2_cn_lines_example.png}
+ \caption{\textbf{Validation of C2 and CN molecular line fitting as part of GALAH DR4 for the $\mathrm{\omega Cen}$ member 2MASS J13283993-4726329.}} % 140314005201392
+ \label{fig:c2_cn_lines_example}
+\end{figure}
+
+
+
 % \SB{Can we be sure, that we are interpolating properly between different models of \TheCannon?}
 
 % \SB{Zero points: \citet{Magg2022} for solar abundances}
 
-What validations do we need to incldue?
-
-\begin{itemize}
-    \item \Gaia FGK Benchmark stars overall \citep{Jofre2018}
-    \item Teff:
-    \begin{itemize}
-        \item ang. diameters \citep{Karovicova2018,Karovicova2020}
-        \item IRFM \citep{Casagrande2020}
-    \end{itemize}
-    \item logg:
-    \begin{itemize}
-        \item K2/Tess \citet{Zinn2020}
-    \end{itemize}
-    \item [Fe/H]
-    \begin{itemize}
-        \item intrinsic scatter in clusters: M~67, 
-    \end{itemize}
-    \item Binarity. How accurate is the flagging. Compare ratios of true/false, false-positive detections aided by \citet{Traven2020}. Get in contact with Alex Wallace and Andy Casey regarding their binarity identification from BP/RP spectra. see
-    \item Globular Clusters:
-    \begin{itemize}
-        \item \citet{Carretta2009, Carretta2009b}
-        \item NGC~104 / 47Tuc
-        \item NGC~288
-        \item NGC~362
-        \item Omega Cen: \cite{Johnson2010}
-        \item NGC~1851: \citet{Yong2015}, including CNO
-        \item NGC~6121 / M~4?
-        \item NGC~6362
-        \item NGC~6397
-        \item NGC~7099 / M~30
-        \item We have observed also NGC~4590 / M~68, NGC~5986, NGC~6144, NGC~6541, NGC~6584, NGC~6723, BH~140 and E~3.
-\end{itemize}
-    
-\end{itemize}
-
-\subsection{Caveats}
-
-\begin{itemize}
-    \item Chemical composition of \textsc{MARCS} model atmospheres do not match those of all the synthetic spectra. Ask \textsc{MARCS} people to compute them for us in next data release (as they have done for APOGEE and \Gaia)?
-\end{itemize}
+%What validations do we need to include?
+%
+%\begin{itemize}
+%    \item \Gaia FGK Benchmark stars overall \citep{Jofre2018}
+%    \item Teff:
+%    \begin{itemize}
+%        \item ang. diameters \citep{Karovicova2018,Karovicova2020}
+%        \item IRFM \citep{Casagrande2020}
+%    \end{itemize}
+%    \item logg:
+%    \begin{itemize}
+%        \item K2/Tess \citet{Zinn2020}
+%    \end{itemize}
+%    \item [Fe/H]
+%    \begin{itemize}
+%        \item intrinsic scatter in clusters: M~67, 
+%    \end{itemize}
+%    \item Binarity. How accurate is the flagging. Compare ratios of true/false, false-positive detections aided by \citet{Traven2020}. Get in contact with Alex Wallace and Andy Casey regarding their binarity identification from BP/RP spectra. see
+%    \item Globular Clusters:
+%    \begin{itemize}
+%        \item \citet{Carretta2009, Carretta2009b}
+%        \item NGC~104 / 47Tuc
+%        \item NGC~288
+%        \item NGC~362
+%        \item Omega Cen: \cite{Johnson2010}
+%        \item NGC~1851: \citet{Yong2015}, including CNO
+%        \item NGC~6121 / M~4?
+%        \item NGC~6362
+%        \item NGC~6397
+%        \item NGC~7099 / M~30
+%        \item We have observed also NGC~4590 / M~68, NGC~5986, NGC~6144, NGC~6541, NGC~6584, NGC~6723, BH~140 and E~3.
+%\end{itemize}
+%    
+%\end{itemize}
+%
+%\subsection{Caveats}
+%
+%\begin{itemize}
+%    \item Chemical composition of \textsc{MARCS} model atmospheres do not match those of all the synthetic spectra. Ask \textsc{MARCS} people to compute them for us in next data release (as they have done for APOGEE and \Gaia)?
+%\end{itemize}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -802,30 +695,30 @@ What validations do we need to incldue?
 \label{sec:catalogues_release_products}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Data release atalogues}
-
-\begin{enumerate}
-    \item galah\_dr4\_allstar\_astrophysical.fits: analysis for each star based on best spectrum (\SB{even stacked?}) for each star and using non-spectropic information
-    \item galah\_dr4\_allspec\_single.fits: analysis for each spectrum (incl. RV) assuming single star
-    \item galah\_dr4\_allspec\_binary.fits: analysis for those spectra that are suspected line-splitting spectroscopic binaries (SB2) assuming two sources for spectrum with same [Fe/H] but different RV
-\end{enumerate}
-
-\subsection{Data products for each spectrum}
-\label{sec:data_products_for_each_spectrum}
-
-\begin{enumerate}
-    \item 210115002201239\_single\_fit\_comparison.pdf (see Fig.~\ref{fig:210115002201239_single_fit_comparison}) \SB{Maybe actually use OmegaCen star 140314005201392: cool, metal-poor, strong CNO features and a good spectrum to explain why continuum points may not always work for a pipeline.}
-    \item 210115002201239\_single\_fit\_covariances.npz
-    \item 210115002201239\_single\_fit\_results.fits
-    \item 210115002201239\_single\_fit\_rv.png (see Fig.~\ref{fig:181221003101356_single_fit_rv})
-    \item 210115002201239\_single\_fit\_spectrum.fits
-\end{enumerate}
-
-\begin{figure*}[hbt!]
- \centering  
- \includegraphics[width=0.9\textwidth]{figures/210115002201239_single_fit_comparison.pdf}
-\caption{\textbf{Comparison of the observed (black) and best-fit spectrum (red) for the 2dF-HERMES spectrum of the asteroid 4~Vesta.} Important element lines are annotated in each of the wavelength regions colored by their element group. Vertical areas indicate masked regions that were neglected for the label optimisation, most notably $\mathrm{H}_\beta$ at $4861\,\text{\AA}$ and $\mathrm{H}_\alpha$ at $6563\,\text{\AA}$. \SB{Maybe actually use OmegaCen star 140314005201392: cool, metal-poor, strong CNO features and a good spectrum to explain why continuum points may not always work for a pipeline. See Sec.~\ref{sec:data_products_for_each_spectrum}}} \label{fig:210115002201239_single_fit_comparison}
-\end{figure*}
+%\subsection{Data release catalogues}
+%
+%\begin{enumerate}
+%    \item galah\_dr4\_allstar\_astrophysical.fits: analysis for each star based on best spectrum (\SB{even stacked?}) for each star and using non-spectropic information
+%    \item galah\_dr4\_allspec\_single.fits: analysis for each spectrum (incl. RV) assuming single star
+%    \item galah\_dr4\_allspec\_binary.fits: analysis for those spectra that are suspected line-splitting spectroscopic binaries (SB2) assuming two sources for spectrum with same [Fe/H] but different RV
+%\end{enumerate}
+%
+%\subsection{Data products for each spectrum}
+%\label{sec:data_products_for_each_spectrum}
+%
+%\begin{enumerate}
+%    \item 210115002201239\_single\_fit\_comparison.pdf (see Fig.~\ref{fig:210115002201239_single_fit_comparison}) \SB{Maybe actually use OmegaCen star 140314005201392: cool, metal-poor, strong CNO features and a good spectrum to explain why continuum points may not always work for a pipeline.}
+%    \item 210115002201239\_single\_fit\_covariances.npz
+%    \item 210115002201239\_single\_fit\_results.fits
+%    \item 210115002201239\_single\_fit\_rv.png (see Fig.~\ref{fig:181221003101356_single_fit_rv})
+%    \item 210115002201239\_single\_fit\_spectrum.fits
+%\end{enumerate}
+%
+%\begin{figure*}[hbt!]
+% \centering  
+% \includegraphics[width=0.9\textwidth]{figures/210115002201239_single_fit_comparison.pdf}
+%\caption{\textbf{Comparison of the observed (black) and best-fit spectrum (red) for the 2dF-HERMES spectrum of the asteroid 4~Vesta.} Important element lines are annotated in each of the wavelength regions colored by their element group. Vertical areas indicate masked regions that were neglected for the label optimisation, most notably $\mathrm{H}_\beta$ at $4861\,\text{\AA}$ and $\mathrm{H}_\alpha$ at $6563\,\text{\AA}$. \SB{Maybe actually use OmegaCen star 140314005201392: cool, metal-poor, strong CNO features and a good spectrum to explain why continuum points may not always work for a pipeline. See Sec.~\ref{sec:data_products_for_each_spectrum}}} \label{fig:210115002201239_single_fit_comparison}
+%\end{figure*}
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -859,31 +752,7 @@ The research for this publication was coded in \textsc{python} (version 3.7.4) a
 \textsc{NumPy} \citep[v. 1.17.2;][]{numpy},
 \textsc{scipy} \citep[version 1.3.1;][]{scipy},
 \textsc{sklearn} \citep[v. 0.21.3;][]{scikit-learn},
-\textsc{statsmodels} (v. 0.10.1),
-\textsc{xdgmm} (v. 1.1).
 We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
-
-
-% \begin{table*}
-% \begin{threeparttable}
-% \caption{Identified backscatter from objects in orbit and their properties}\label{satdet}
-% \begin{tabular}{ c c c c c c } \toprule
-% Satellite\tnote{a}   &NORAD           &Start      &End               &Mean intensity         &RCS\tnote{b}            \\
-% name        &ID \#           &time (UT)       &time (UT)             & (Jy/beam)      &($m^{2}$)        \\ \midrule
-% BGUSAT      & 41999 &2020-01-31 14:40:09.9  &2020-01-31 14:43:11.9  &1060  &$<$0.1       \\ 
-% ISS (ZARYA) & 25544 &2020-01-31 17:17:41.9  &2020-01-31 17:19:00.9  &440  & $>$1.0      \\ 
-% MAX VALIER SAT& 42778 &2020-02-03 01:18:16.9  &2020-02-03 01:20:09.9  &650  &0.1 $-$ 1.0       \\
-% ISS (ZARYA) &22554 &2020-02-03 01:31:07.9  &2020-02-03 01:33:14.9  &930  &$>$1.0         \\ 
-% FLOCK 3P 71 & 42024 &2020-02-01 14:16:22.9& 2020-02-01 14:18:05.9  &330  &$<$0.1       \\ 
-% ISS (ZARYA) & 25544 &2020-02-02 02:18:17.9  &2020-02-02 02:20:16.9  &740  &$>$1.0 \\  
-% BGUSAT      & 41999 &2020-02-02 02:18:17.9  &2020-02-02 02:20:16.9  &1010  &$<$0.1 \\ \bottomrule
-% \end{tabular}
-% \begin{tablenotes}
-% \item[a] TLE information for predicted trajectories from space-track.org for the epoch of observation: 2020-02-01
-% \item[b] Radar Cross Section (RCS) is categorised by space-track.org as: small ($<$0.1); medium (0.1 $<$ RCS $<$ 1.0); and large ($>$1.0)
-% \end{tablenotes}
-% \end{threeparttable}
-% \end{table*}
 
 
 \bibliography{bib}
