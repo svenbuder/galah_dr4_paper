@@ -1,0 +1,207 @@
+
+% Finally, we implement a Bayesian framework to estimate consistent astrophysical parameters: we first only use spectroscopic information to estimate the most likely set of stellar labels (stellar parameters and abundances) to describe our data. In a second iteration, we also employ non-spectroscopic information as prior information to inform our analysis. We will denote posterior probability functions depending on the available/used observables:
+% \begin{align}
+%     P_\text{S} \quad &: \quad \text{only spectroscopy assuming single star,} \\
+%     P_\text{B} \quad &: \quad \text{only spectroscopy assuming binary star,} %\\
+%     % P_\text{SP} \quad &: \quad \text{also photo- and astrometry, and} \\
+%     % P_\text{SPA} \quad &: \quad \text{also asteroseismology.}
+% \end{align}
+
+% We present the Bayesian framework to compute these functions in Sec.~\ref{subsec:bayes}. The link between these functions and our observables are several physical relations as well as models, most importantly the models that link stellar flux with stellar parameters and abundances. We describe this centerpiece of our spectroscopic analysis in Sec.~\ref{subsec:model_spectra} and how we adjust the observed spectra to best overcome imperfections based in the reduction on-the-fly in Sec.~\ref{subsec:adjustments_observation}. The machinery to find the best set of labels to describe our observables is described in Sec.~\ref{subsec:finding_best_labels}. The post-processing of outcomes on a spectrum-by-spectrum basis is described in Sec.~\ref{sec:post_processing} and the pipeline is validated in Sec.~\ref{sec:validation}.
+
+% \subsection{Bayesian framework} \label{subsec:bayes}
+
+% Previous versions of the GALAH pipelines used strict $\chi^2$ optimisation \citep{Buder2018} or treated non-spectroscopic information as ground-truth for computational reasons \citep{Buder2021}.
+
+% With the new modelling methodology available this data release, we are inspired by the previous works \citep[e.g.][]{Schoenrich2014, BailerJones2015, McMillan2018, Sharma2018} to simultaneously make a statistically more sound use of non-spectroscopic and prior information. 
+
+% We present the observables $\boldsymbol{y}$ and their uncertainties $\sigma_{\boldsymbol{y}}$ of our analysis in Sec.~\ref{subsubsec:observables}. In Sec.~\ref{subsubsec:labels}, we introduce the set of parameters, hereafter called labels $\boldsymbol{l}$ to generate models/predictions $\boldsymbol{y}_m(\boldsymbol{l})$ of the observables. Our analysis applies a simplified Bayesian statement
+% \begin{align}
+%     P( \boldsymbol{l} \vert \boldsymbol{y},\sigma_ {\boldsymbol{y}}) \propto P (\boldsymbol{y} \vert \boldsymbol{l}, \sigma_{\boldsymbol{y}}) P (\boldsymbol{l}).
+% \end{align}
+% Note here, that we ignore the normalisation constant $P(\boldsymbol{y}, \sigma_ {\boldsymbol{y}})$. We present our likelihood functions $P (\boldsymbol{y} \vert \boldsymbol{l}, \sigma_ {\boldsymbol{y}})$ in Sec.~\ref{subsubsec:likelihood} and the prior functions $P (\boldsymbol{l})$ in Sec.~\ref{subsubsec:prior}.
+
+% Because we run our pipeline with different sets of observables, we describe the different sets of probability functions $P( \boldsymbol{l} \vert \boldsymbol{y},\sigma_ {\boldsymbol{y}})$ in Sec.~\ref{subsubsec:probability}, which we will sample in order to create probability density functions (pdfs).
+
+% \subsubsection{Observables} \label{subsubsec:observables}
+
+% The industrial revolution in stellar surveys has allowed us to collect a plethora of spectroscpic ($f_\lambda~\pm~\sigma_{f_\lambda}$), photometric ($m_i~\pm~\sigma_{m_i}$), astrometric ($\varpi~\pm~\sigma_\varpi$), asteroseismic ($\nu_\text{max}~\pm~\sigma_{\nu_\text{max}}$ and $\delta_\nu~\pm~\sigma_{\delta_\nu}$)\SB{, and interferometric ($\Theta_\text{LD} \pm \sigma_{\Theta_\text{LD}}$)} measurements of stars. Each contribute ${\boldsymbol{y}_i} \pm \sigma_{\boldsymbol{y}_i}$ to our set of observables ${\boldsymbol{y}} \pm \sigma_{\boldsymbol{y}}$.
+
+% In our case, the GALAH reduction pipeline delivers $f_\lambda~\pm~\sigma_{f_\lambda}$ (see Sec.~(sec:reduction), but throughout our estimation of optimal stellar labels, we perform several adjustments to the data on-the-fly (see Sec.~\ref{subsec:adjustments_observation}).
+
+% We make use of photometric measurements from both the \Gaia mission \citep{Gaia-Collaboration2016}, specifically its eDR3 \citep{Brown2021}, and 2MASS \citep{Skrutskie2006}. The latter provides near infrared magnitudes $m_J$, $m_H$, and $m_{K_\text{S}}$. We use the three \Gaia bandpasses $m_G$, $m_{G_\text{BP}}$, and $m_{G_\text{RP}}$. We correct the $G$ flux and estimate the \Gaia magnitude uncertainties as described by \citet{Riello2021}. We use astrometric information $\varpi~\pm~\sigma_\varpi$ is provided by \Gaia eDR3 \citep{Lindegren2021a} and we apply the zero point correction to these measurements as described by \citep{Lindegren2021b}. Crossmatches to these catalogues are performed with \textsc{ADQL} queries on the \Gaia archive via \textsc{astroquery} by linking catalogue entries through the \texttt{source\_id} via the nearest neighbor matches provided by the \Gaia consortium on the \Gaia archive \citep[see][]{Marrese2017, Marrese2019}
+
+% We further crossmatch with the open cluster catalogue by \citet{CantatGaudin2020}\footnote{\SB{Update on this with \Gaia eDR3 as part of his 2021 paper?}} via \texttt{source\_id} and use their parallax estimates for stars with more than $70\%$ membership probabilities and more precise parallaxes. Similarly, we crossmatch with the globular cluster catalog by \citet{Vasiliev2021} via \texttt{source\_id} and use their parallax estimates for stars with more than $70\%$ membership probabilities and more precise parallaxes for the clusters NGC~104~/ 47~Tuc, NGC~288, NGC~362, NGC~1851, NGC~5139~/ $\omega$Cen, NGC~6362, NGC~6397, and NGC~7099~/ M~30.
+
+% Where available, we further use the asteroseismic parameters $\nu_\text{max}~\pm~\sigma_{\nu_\text{max}}$ and $\delta_\nu~\pm~\sigma_{\delta_\nu}$ by \SB{Zinn et al. (2021)}\footnote{\SB{Check this! What do we do if not all entries have uncertainties?}}.
+
+% \SB{For interferometric information ($\Theta_\text{LD} \pm \sigma_{\Theta_\text{LD}}$), we use a collection by \citet{Karovicova2020}, \citet{Karovicova2018}, and \citet{Heiter2015}, preferring the most recent values for each star.\footnote{\SB{Check this and also point to a catalog for people to trace back which one was used in the end... for each star. Also do not forget to cite the sources within \citet{Heiter2015}!}}}
+
+% \subsubsection{Model parameters (labels)} \label{subsubsec:labels}
+
+% To describe these observables (and their presumably Gaussian uncertainties), we can build models based on a specific set of parameters, hereafter called labels $\boldsymbol{l}$.
+
+% To predict a normalised stellar spectrum with flux $f \pm \sigma_f$, we need labels $\boldsymbol{l}_S$ that describe the photosphere of a star
+% \begin{align}
+%     \boldsymbol{l}_\text{S} \in \{
+%     T_\text{eff}, \log g, \mathrm{[Fe/H]}, \mathrm{[X/Fe]}, v_\mathrm{mic}, v \sin i, v_\text{rad}
+%     \}.
+% \end{align}
+
+% To describe photometric measurements of stars, typically reported in magnitudes $m_i \pm \sigma_{m_i}$ for filters $i$ with different bandpasses, we need a similar set of labels and information on the distance and extinction to properly scale a model star,
+% \begin{align}
+%     \boldsymbol{l}_\text{P} \in \{ T_\text{eff}, \log g, \mathrm{[Fe/H]}, \mathrm{[X/Fe]}, D_\varpi, A_V \}.
+% \end{align}
+% The distance will also allow us to predict measurements of parallaxes $\varpi \pm \sigma_\varpi$.
+
+% To describe the solar-like oscillations within low-mass stars, which can be transcribed to oscillation frequencies $\nu_\text{max} \pm \sigma_{\nu_\text{max}}$ \SB{and $\delta_\nu \pm \sigma_{\delta_\nu}$} via empirical asteroseismic scaling relations, we need \Teff, \logg, and masses,
+% \begin{align}
+%     \boldsymbol{l}_\text{A} \in \{ T_\text{eff}, \log g, \mathcal{M} \}.
+% \end{align}
+
+% Note that to avoid redundancy with labels in $\boldsymbol{l}_\text{S}$ and $\boldsymbol{l}_\text{P}$, we prefer the use of \logg over radius $\mathcal{R}$, which are fundamentally linked via $R = \sqrt{\mathrm{G} \mathcal{M} g^{-1}}$.
+
+% \subsubsection{Likelihood functions} \label{subsubsec:likelihood}
+
+% Assuming that the uncertainties $\sigma_{\boldsymbol{y}_i}$ of our observables $\boldsymbol{x}$ are Gaussian, we can define a likelihood for each individual observable ${\boldsymbol{y}_i}$ with a model prediction $\boldsymbol{y}_{i,m} (\boldsymbol{l})$
+% \begin{align}
+%     G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}), \sigma_y) = \frac{1}{\sqrt{2\pi} \sigma_{\boldsymbol{y}_i}} \exp \left( -  \frac{\left({\boldsymbol{y}_i} - {\boldsymbol{y}_{i,m}} (\boldsymbol{l})\right)^2}{2 \sigma_{\boldsymbol{y}_i}^2}\right)
+% \end{align}
+% or in logarithmic form
+% \begin{align}
+%     \ln G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}), \sigma_{\boldsymbol{y}_i}) = - \frac{1}{2} \left( \ln (2 \pi \sigma_y) + \frac{\left({\boldsymbol{y}_i} - {\boldsymbol{y}_{i,m}} (\boldsymbol{l})\right)^2}{\sigma_{\boldsymbol{y}_i}^2} \right).
+% \end{align}
+
+% We describe how we actually create model spectra ${\boldsymbol{y}_{i,m}} (\boldsymbol{l}_S)$ in Sec.~\ref{subsec:model_spectra}. To calculate the total spectroscopic logarithmic likelihood, we sum the likelihood of each pixel $i=\lambda$ over all $n$ pixels
+% \begin{align} \label{eq:likelihood_spectroscopic}
+%     \ln P_S ({\boldsymbol{f}} \vert {\boldsymbol{l}_S}, \sigma_{\boldsymbol{f}}) = \sum_\lambda^n \ln G({\boldsymbol{f}_\lambda}, {\boldsymbol{f}_{\lambda,m}} (\boldsymbol{l}_S), \sigma_{\boldsymbol{f}_\lambda}).
+% \end{align}
+
+% Predicting photometric and astrometric observables, that is magnitudes and parallaxes, is an interconnected task. While the parallax $\varpi$ can be easily predicted by the inverse of the distance $D_\varpi$,
+% \begin{align}
+%     \varpi = \frac{1000\,\mathrm{mas}}{D_\varpi~/~\mathrm{pc}},
+% \end{align}
+% magnitudes $m_i$ of certain photometric filters $i$ need to be predicted on an absolute scale $M_i$ and then scaled with distance $D_\varpi$ and a possible extinction within the filter $A_i$
+% \begin{align} \label{eq:magnitudes}
+%     m_i = M_i + 5 \log\frac{D_\varpi}{10\,\mathrm{pc}} + A_i.
+% \end{align}
+% We use the isochrone tables provided by the stellar evolutionary \textsc{parsec} \citep[v. 1.2][]{Bressan2012, Tang2014, Chen2014, Chen2015} and \textsc{colibri} \citep[S\_37, S\_35 and PR16][]{Marigo2013, Rosenfield2016, Marigo2017, Pastorelli2019, Pastorelli2020} to predict magnitudes in the photometric systems of 2MASS \citep{Cohen2003} and \Gaia eDR3 \citep{Riello2021}. We use version 3.5 of the interface \textsc{cmd}\footnote{\url{http://stev.oapd.inaf.it/cmd}} to download isochrone grids with a fine sampling of $\log (\tau~/~\mathrm{Gyr}) = 6.19..(0.01)..10.18$ for age as well as a broad and fine sampling of $\mathrm{[M/H]} = -2.75..(0.25)..-0.75\,\mathrm{dex}$ and $\mathrm{[M/H]} = -0.60..(0.10)..0.70\,\mathrm{dex}$, respectively. We adopt default values of \textsc{cmd} version 3.5, except for the initial mass function, for which we use the exponential function (see also Eq.~\ref{eq:chabrier}) by \citet{Chabrier2001}. For the extinction in the individual filters, we adopt the \textsc{cmd} values of $A_{G}/A_V = 0.83627$,
+% $A_{G_\text{BP}}/A_V = 1.08337$,
+% $A_{G_\text{RP}}/A_V = 0.63439$
+% $A_{J}/A_V = 0.28665$,
+% $A_{H}/A_V = 0.18082$, and
+% $A_{K_\text{S}}/A_V = 0.11675$.
+% % $A_{W_1}/A_V = 0.05688$,
+% % $A_{W_2}/A_V = 0.03427$,
+% % $A_{W_3}/A_V = 0.00707$, and
+% % $A_{W_4}/A_V = 0.00274$
+% We train a \textsc{sklearn} \textsc{cKDtree} on the isochrone grid points of \Teff, \logg, \SB{[M/H]}\footnote{\SB{Currently we use [M/H] = [Fe/H], rather than [M/H] = $f(\mathrm{[Fe/H]},\mathrm{[X/Fe]})$!}}. We can then query it with the specific labels to get a prediction of mass $\mathcal{M}$ and age $\tau$ as well as absolute magnitudes $M_i$ (see Eq.~\ref{eq:magnitudes}) for $i \in \{G, G_\text{BP}, G_\text{RP}, J, H, K_\text{S}\}$.
+
+% Thanks to the GALAH selection function, all GALAH targets have both astrometric and asteroseismic information and we can thus treat this information always together. This allows us to define a photoastrometric logarithmic likelihood functions
+% \begin{align} \label{eq:likelihood_photoastrometric}
+%     \ln P_P (\varpi, {\boldsymbol{m}} \vert {\boldsymbol{l}_P}, \sigma_\varpi, \sigma_{\boldsymbol{m}} ) = 
+%     \sum_{i \in {\varpi,{\boldsymbol{m}}}}
+%     \ln G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}_P), \sigma_{\boldsymbol{y}_i}).
+% \end{align}
+
+% Asteroseismic observables are typically predicted via empirical scaling relations by \citet{Kjeldsen1995}. In our case, we use labels ${\boldsymbol{l}_A}$ to predict the frequency of maximum power
+% \begin{align}
+%     % \nu_{\text{max},m} = \frac{\mathcal{M}~/~\mathrm{M_\odot}}{\left(\mathcal{R}~/~\mathrm{R_\odot}\right)^2} \sqrt{\frac{T_\text{eff}}{5772\,\mathrm{K}}} \times 3090\muHz,
+%     \nu_{\text{max},m} = \frac{10^{\log g}}{10^{4.438}\,\mathrm{cm\,s^{-2}}} \sqrt{\frac{T_\text{eff}}{5772\,\mathrm{K}}} \times 3090\muHz
+% \end{align}
+% and the large frequency separation
+% \begin{align}
+%     %\delta_{\nu,m} = \left( \mathcal{M}~/~\mathrm{M_\odot} \right)^{\frac{1}{2}} \left( \mathcal{R}~/~\mathrm{R_\odot} \right)^{-\frac{3}{2}} \times 134.9\muHz.
+%     \delta_{\nu,m} = \left( \frac{\mathcal{M}}{\mathrm{M_\odot}} \right)^{\frac{-1}{4}} \left( \frac{10^{4.438}\,\mathrm{cm\,s^{-2}}}{10^{\log g}} \right)^{-\frac{3}{4}} \times 134.9\muHz.
+% \end{align}
+% In these, we incorporate the Solar values $\nu_{\text{max},\odot} = 3090\muHz$, $\delta_{\nu,\odot} = 134.9\muHz$ and $T_{\mathrm{eff},\odot} = 5772\,\mathrm{K}$ as constants. This allows us to define a logarithmic likelihood function\footnote{\SB{Note: We are currently only using $\nu_\text{max}$, because some $\delta_\nu$ are missing, and some $\sigma_{\delta_\nu}$ are 0.}}
+% \begin{align} \label{eq:likelihood_asteroseismic}
+%     \ln P_A (\nu_\text{max}, \delta_\nu \vert {\boldsymbol{l}_A}, \sigma_{\nu_\text{max}}, \sigma_{\delta_\nu}) = 
+%     \sum_{i \in {\nu_\text{max},\delta_\nu}}
+%     \ln G({\boldsymbol{y}_i}, {\boldsymbol{y}_{i,m}} (\boldsymbol{l}_A), \sigma_{\boldsymbol{y}_i}).
+% \end{align}
+
+% \SB{We predict the angular diameters $\Theta_\text{LD}$ based on the mass, surface gravity and distance via
+% \begin{align}
+%     \Theta_\text{LD} = 2 \arctan \left( \sqrt{\frac{\mathrm{G} \mathcal{M}}{10^{\log g}}} \frac{1}{D_\varpi} \right).
+% \end{align}}
+
+% \SB{Available but not used: infrared photometry $W_1$ - $W_4$ from WISE \citep{Cutri2013}}
+
+% \subsubsection{Prior functions} \label{subsubsec:prior}
+
+% We formulate a series of priors and apply the relevant ones depending on the set of input information.
+
+% As our model spectra are restricted to the \marcs model grid (see red points in Fig.~\ref{fig:teff_logg_grid_coverage}), we will impose the convex hull as prior on the main stellar parameters \Teff, \logg, and \feh to be within the \marcs atmosphere model grid \citep{Gustafsson2008}, used to create model spectra (see Sec.~\ref{subsec:model_spectra}).
+% \begin{align}
+%     P(T_\mathrm{eff}, \log g, \mathrm{[Fe/H]}) = \begin{cases}
+%     1 \quad \text{within \marcs grid} \\
+%     0 \quad \text{otherwise} \\
+%     \end{cases}
+% \end{align}
+% We restrict to the $T_\text{eff} \geq 3100 - 100\K$ for computational reasons as well as $\mathrm{[Fe/H]} \geq -3 - 1\dex$ and because we do expect only a handful of stars below this range. The maximum extend of this hull is then up to $3000 \leq T_\text{eff}~/~\mathrm{K} \leq 8000$, $-0.5 \leq \log (g~/~\mathrm{cm\,s^{-2}}) \leq 5.5$, and $-4 \leq \mathrm{[Fe/H]}~/~\mathrm{dex} \leq 1$.
+
+% \begin{align}
+%     P(v_\text{mic}) &= \begin{cases}
+%     1 \quad v_\text{mic} > 0.0\kms \\
+%     0 \quad \text{otherwise} \\
+%     \end{cases} \\
+%     P(v \sin i) &= \begin{cases}
+%     1 \quad v \sin i > 0.0\kms \\
+%     0 \quad \text{otherwise} \\
+%     \end{cases} \\
+%     P(\nu_\text{max}) &= \begin{cases}
+%     1 \quad \nu_\text{max} > 0\muHz \\
+%     0 \quad \text{otherwise} \\
+%     \end{cases} \\
+%     P(D_\varpi) &= \begin{cases}
+%     1 \quad D_\varpi \geq 0\kpc \\
+%     0 \quad \text{otherwise} \\
+%     \end{cases} \\
+%     P(A_V) &= \begin{cases}
+%     1 \quad A_V \geq 0\mags \\
+%     0 \quad \text{otherwise} \\
+%     \end{cases}
+% \end{align}
+
+% \SB{Mass is not a stellar label at the moment, but interpolated from isochrones. If we include it to be sampled and used both for isochrones and $\delta_\nu$, shall we impose a flat mass prior between 0.1 and $4.0\Msol$ or a mass prior à la \citet{Chabrier2001}, as done in \citet{Sharma2018}?
+% \begin{align} \label{eq:chabrier}
+%     P(\mathcal{M}) = 22.8978 \exp \left[ - \left(\frac{716.4\Msol}{\mathcal{M}}\right)^{0.25} \right] \left( \frac{\mathcal{M}}{\Msol} \right)^{-3.3}
+% \end{align}
+% }
+
+% With this, we can formulate a prior function $P_s (\boldsymbol{l}_S)$ for the purely spectroscopic analysis:
+% \begin{align}
+%     P_S ( \boldsymbol{l}_S ) = P(T_\text{eff}, \log g, \mathrm{[Fe/H]}) P(v_\text{mic}) P(v\sin i)
+% \end{align}
+
+% If we also fit photo-astrometric information, we further impose a prior
+% \begin{align}
+%     P_{SP} ( \boldsymbol{l}_S ) = P_s ( \boldsymbol{l}_S ) P(D_\varpi) P (A_V)
+% \end{align}
+
+% If we also fit asteroseismic information, we further impose a prior
+% \begin{align}
+%     P_{SPA} ( \boldsymbol{l}_S ) = P_S ( \boldsymbol{l}_S ) P(\nu_\text{max}) P(\delta_\nu) P(D_\varpi) P (A_V)
+% \end{align}
+
+% \subsubsection{Posterior probability functions} \label{subsubsec:probability}
+
+% With our likelihood and prior functions, we can find combinations of different posterior probability functions.
+
+% If we do only take into account spectroscopic information, we will use the posterior
+% \begin{align} \label{eq:posterior_s}
+%     P_S = P ( \boldsymbol{l}_S \vert {\boldsymbol{f}}, \sigma_{\boldsymbol{f}} ) = P ( {\boldsymbol{f}} \vert \boldsymbol{l}_S, \sigma_{\boldsymbol{f}} ) \times P_S ( \boldsymbol{l}_S ).
+% \end{align}
+
+% If we take both spectroscopic and photoastrometric information into account, we will use
+% \begin{align}\label{eq:posterior_sp}
+%     P_{SP} = P ( \boldsymbol{l}_{SP} \vert {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi, \sigma_{\boldsymbol{f}} , \sigma_{\boldsymbol{m}}, \sigma_\varpi) = \notag\\
+%     P ( {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi \vert \sigma_{f}, \sigma_{\boldsymbol{m}}, \sigma_\varpi, \boldsymbol{l}_{SP} ) ~ P_{SP} ( \boldsymbol{l}_{SP} ).
+% \end{align}
+
+% If we additionally also use available asteroseismic measurements, we use
+% \begin{align}\label{eq:posterior_spa}
+%     P_{SPA} = P ( \boldsymbol{l}_{SPA} \vert {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi, {\nu_\text{max}}, {\delta_\nu}, \sigma_{\boldsymbol{f}} , \sigma_{\boldsymbol{m}}, \sigma_\varpi, \sigma_{\nu_\text{max}}, \sigma_{\delta_\nu}) = \notag\\
+%     P ( {\boldsymbol{f}}, {\boldsymbol{m}}, \varpi, {\nu_\text{max}}, {\delta_\nu} \vert \sigma_{f}, \sigma_{\boldsymbol{m}}, \sigma_\varpi, \sigma_{\nu_\text{max}}, \sigma_{\delta_\nu}, \boldsymbol{l}_{SP} ) ~ P_{SPA} ( \boldsymbol{l}_{SPA}).
+% \end{align}
