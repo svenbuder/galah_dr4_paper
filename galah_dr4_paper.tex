@@ -523,13 +523,9 @@ We further indirectly take into account the currently less constrained molecular
 \label{sec:allstar_analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-After spectroscopic estimates are computed for all spectra (Sec.~\ref{sec:allspec_analysis}), all spectra of the same star are co-added and re-analysed while taking into account photometric and astrometric information to constrain the surface gravities. This approach was already very succesfully applied for GALAH DR3 \citep{Buder2021} with \Gaia DR2 distances \citep{BailerJones2018} to overcome spectroscopic degeneracies.
+After the \textit{allspec} module (Sec.~\ref{sec:allspec_analysis}) was used to estimate spectroscopic labels for all spectra, we use the \textit{allstar} module to co-add spectra and analyse one spectrum per star while taking into account photometric and astrometric information to constrain the surface gravities. This approach was already very successfully applied for GALAH DR3 \citep{Buder2021} with \Gaia DR2 distances \citep{BailerJones2018} to overcome spectroscopic degeneracies.
 
-We explain the implementation of the self-consistent surface gravities into the fitting routine in Sec.~\ref{sec:logg_phot}.
-
-\subsection{Self-consistent surface gravities} \label{sec:logg_phot}
-
-We can estimate the logarithmic surface gravity, $\log g$, as a combination of its definition ($g \propto \frac{\mathcal{M}}{\mathcal{R}^2}$) and the Stefan-Boltzmann law relative to the Solar values:
+To speed up computation, we use the mean results of the \textit{allspec} analyses as initial stellar labels. All other methodology of the comparison of synthetic spectra to observations (Sec.~\ref{sec:comparison_synthetic_spectra_to_observations} and label optimisation (Sec.~\ref{sec:stellar_label_optimissation}) apply also to this module, with the exception of the optimisation of \logg. Contrary to the \textit{allspec} approach, we do not fit \logg in thi module, but estimate the logarithmic surface gravity, $\log g$, as a combination of its definition ($g \propto \frac{\mathcal{M}}{\mathcal{R}^2}$) and the Stefan-Boltzmann law relative to the Solar values:
 \begin{equation}
 \log g = \log g_\odot + \log \frac{\mathcal{M}}{\mathcal{M_\odot}} + 4 \log \frac{T_\mathrm{eff}}{T_\mathrm{eff,\odot}} - \log \frac{L_\mathrm{bol}}{L_\mathrm{bol,\odot}} \label{eq:logg}
 \end{equation}
@@ -582,8 +578,6 @@ Fitting RV1, RV2, Teff1, Teff2, logg1, logg2, FeH, vmic1, vmic2, vsini1, vsini2
 
 Fig.~\ref{fig:examples_flag_sp}
 
-
-
 \begin{figure*}[ht]
  \centering
  \includegraphics[width=\textwidth]{figures/examples_flag_sp.png}
@@ -600,13 +594,6 @@ Fig.~\ref{fig:teff_logg_vsini}
  \textbf{Overview of rotational velocity of stars}
 } \label{fig:teff_logg_vsini}
 \end{figure*}
-
-Issues with wavelength solution: 170509
-CRVAL flag 2 for dates around 190204, 190205
-CRVAL flag 8 for dates 170828, 170829, 170904, 190204, 190205
-
-Forgot to run dates 170128,171230,180126
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Abundance detection or upper limit}
@@ -872,6 +859,13 @@ We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
  \includegraphics[width=\textwidth]{figures/initial_teff_fe_h.png}
  \includegraphics[width=\textwidth]{figures/initial_teff_vmic.png}
  \includegraphics[width=\textwidth]{figures/initial_teff_vsini.png} \caption{\textbf{Comparison of initial parameters used for GALAH DR4 (first column) with the GALAH DR4 reduction pipeline (second column), \Gaia DR3 (third column with \vmic based on the adjusted formula from \citet{DutraFerreira2016}), and GALAH DR3 (fourth column).}} \label{fig:initial_parameters}
+\end{figure*}
+
+\section{Example Fit Comparison}
+
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=0.9\textwidth]{figures/210115002201239_single_fit_comparison.pdf} \caption{\textbf{Example output of the \textit{allspec} fitting routine for VESTA / 210115002201239.}} \label{fig:210115002201239_single_fit_comparison}
 \end{figure*}
 
 
