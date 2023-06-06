@@ -67,13 +67,63 @@
 \title{The GALAH Survey: Data Release 4}
 
 \author{S. Buder}
-\affiliation{Research School of Astronomy \& Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
-\affiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 \email[S. Buder]{sven.buder@anu.edu.au}
 
 \author{Main contributors}
-\author{survey builders}
-\author{other co-authors with significant contribution}
+\affiliation{To Be Decided. Including Janez Kos, Madeleine McKenzie, Ella Wang, Thomas Nordlander}
+
+\author{Joss Bland-Hawthorn}
+\affiliation{Sydney Institute for Astronomy, School of Physics, A28, The University of Sydney, NSW 2006, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+\author{Gayandhi~M. De~Silva}
+\affiliation{Macquarie University Research Centre for Astronomy, Astrophysics and Astrophotonics, Sydney, NSW 2109, Australia}
+
+\author{Ken~C. Freeman}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+\author{Michael~R. Hayden}
+\affiliation{Sydney Institute for Astronomy, School of Physics, A28, The University of Sydney, NSW 2006, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+\author{Janez Kos}
+\affiliation{Faculty of Mathematics and Physics, University of Ljubljana, Jadranska 19, 1000 Ljubljana, Slovenia}
+
+\author{Sarah~L. Martell}
+\affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+\author{Geraint~F. Lewis}
+\affiliation{Sydney Institute for Astronomy, School of Physics, A28, The University of Sydney, NSW 2006, Australia}
+
+\author{Karin Lind}
+\affiliation{Department of Astronomy, Stockholm University, AlbaNova University Centre, SE-106 91 Stockholm, Sweden}
+
+\author{Sanjib Sharma}
+\affiliation{Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD, 21218, USA}
+
+\author{Jeffrey~D. Simpson}
+\affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+\author{Dennis Stello}
+\affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
+\alsoaffiliation{Sydney Institute for Astronomy, School of Physics, A28, The University of Sydney, NSW 2006, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+\alsoaffiliation{Stellar Astrophysics Centre, Aarhus University, Ny Munkegade 120, DK-8000 Aarhus C, Denmark}
+
+\author{Daniel~B. Zucker}
+\affiliation{School of Mathematical and Physical Sciences, Macquarie University, Sydney, NSW 2109, Australia}
+\alsoaffiliation{Macquarie University Research Centre for Astronomy, Astrophysics and Astrophotonics, Sydney, NSW 2109, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+\author{Toma\v{z} Zwitter}
+\affiliation{Faculty of Mathematics and Physics, University of Ljubljana, Jadranska 19, 1000 Ljubljana, Slovenia}
+
+\author{other co-authors with significant contribution, including Ioana Ciuc{\u{a}}, Kevin Beeson, Gregor Traven, Rok Vogrin{\v{c}}i{\v{c}}}
 \author{The GALAH Collaboration}
 % \alsoaffiliation{Joint first authors}
 
@@ -652,20 +702,22 @@ The difference between synthetic and observed Balmer line absorption holds valua
 \label{sec:uncertainty}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The uncertainties that we report for our spectroscopic data analysis are based on the covariance matrix of the fitting process. While we report the covariance matrix for each spectrum (see Fig.~\ref{fig:covariance_vesta_arcturus} for the covariance matrices of VESTA and Arcturus), we restrict ourselves to the standard deviations of each feature (square root values of the diagonal variance entries).
+
 \begin{table}
 \centering
-\caption{List of accuracy and representative precision uncertainties for stellar parameters of GALAH DR4. Precision values are extracted from our empirical precision uncertainty estimates for a spectrum with $SNR = 50$ of a star with stellar parameters \Teff, \logg, \feh.}
+\caption{List of accuracy and representative precision uncertainties for stellar parameters of GALAH DR4. Accuracy values are estimated from comparisons with literature references (see Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}). Precision values are extracted from the median covariance uncertainties for stars with $SNR = 50 \pm 10$ in CCD2 (see Fig.~\ref{fig:galah_dr4_precision_parameters}).}
 \label{tab:accuracy_precision}
 \begin{tabular}{ccc}
 \hline \hline
 Parameter / Unit & Accuracy & Precision ($SNR = 50$)\\
 \hline
-$T_\text{eff}~/~\mathrm{K}$          & 66     & X.X \\
-$\log (g~/~\mathrm{cm\,s^{-2}})$     &  0.042 & X.X \\
-$\mathrm{[Fe/H]}~/~\mathrm{dex}$     &  0.064 & X.X \\
-$v_\text{mic}~/~\mathrm{km\,s^{-1}}$ &  0.28  & X.X \\
-$v \sin i~/~\mathrm{km\,s^{-1}}$     &  1.4   & X.X \\
-$v_\text{rad}~/~\mathrm{km\,s^{-1}}$ &  0.15  & X.X \\
+$T_\text{eff}~/~\mathrm{K}$          & 66     & $23 \pm 5$ \\
+$\log (g~/~\mathrm{cm\,s^{-2}})$     &  0.042 & -- \\
+$\mathrm{[Fe/H]}~/~\mathrm{dex}$     &  0.064 & $0.025 \pm 0.004$ \\
+$v_\text{mic}~/~\mathrm{km\,s^{-1}}$ &  0.28  & $0.05 \pm 0.03$ \\
+$v \sin i~/~\mathrm{km\,s^{-1}}$     &  1.4   & $0.5 \pm 0.2$ \\
+$v_\text{rad}~/~\mathrm{km\,s^{-1}}$ &  0.15  & $0.17 \pm 0.02$ \\
 \hline
 \end{tabular}
 \end{table}
@@ -688,15 +740,15 @@ Estimating the accuracy of spectroscopic measurements has always been a complica
 
 \begin{figure*}[ht]
  \centering
- \includegraphics[width=\textwidth]{figures/galah_dr4_age_xfe_trends_solar_twins.png}
+ \includegraphics[width=\textwidth]{figures/galah_dr4_age_xfe_trends_solar_twins_allstar.png}
  \caption{\textbf{Solar twins}}
- \label{fig:galah_dr4_age_xfe_trends_solar_twins}
+ \label{fig:galah_dr4_age_xfe_trends_solar_twins_allstar}
 \end{figure*}
 
 
-\SB{Still to Do: Wide Binaries for Fig.~\ref{fig:galah_dr4_zeropoint_checks}}
+\SB{Still to Do: Wide Binaries for Fig.~\ref{fig:galah_dr4_zeropoint_checks_allstar}}
 
-Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar} for stellar parameters and Fig.~\ref{fig:galah_dr4_zeropoint_checks} for abundances.
+Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar} for stellar parameters and Fig.~\ref{fig:galah_dr4_zeropoint_checks_allstar} for abundances.
 
 \begin{figure*}[ht]
  \centering
@@ -717,12 +769,23 @@ Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar} for stellar param
 \end{figure*}
 
 
+\begin{figure}
+ \centering
+ \includegraphics[width=\textwidth]{figures/galah_dr4_allstar_globular_cluster_feh_comparison.png}
+ \caption{\textbf{Comparison of iron abundances (16th, 50th and 84th percentiles) and overview of spectroscopic and photometric properties of globular cluster stars in GALAH DR4.}
+ \textbf{Left panels} show histograms of iron abundances from GALAH DR4 (blue) as well as literature estimates for the globular clusters from Giraffe (orange) and UVES (red) observations by \citep{Carretta2009, Carretta2009c} as well as observations from \cite{Johnson2010}.
+ \textbf{Middle panels} show the spectroscopic \Teff-\logg diagrams colored by iron abundance {[Fe/H]}.
+ \textbf{Right panels} show the \Gaia DR3 color absolute magnitude diagrams.
+}
+ \label{fig:galah_dr4_allstar_globular_cluster_feh_comparison}
+\end{figure}
+
 
 \begin{figure*}[ht]
  \centering
- \includegraphics[width=\textwidth]{figures/galah_dr4_zeropoint_checks.png}
+ \includegraphics[width=\textwidth]{figures/galah_dr4_zeropoint_checks_allstar.png}
  \caption{\textbf{Zeropoint estimates of elemental abundances for GALAH DR4.}. Each panel shows the comparison to literare (DR4 - literature) for VESTA (blue), \Gaia FKG Benchmark Stars (orange), Stars with $\vert \mathrm{[Fe/H]} \vert \leq 0.1$ closer than $D_\varpi < 0.5\,\mathrm{kpc}$ (red), as well as the overlap with APOGEE DR17 (purple).}
- \label{fig:galah_dr4_zeropoint_checks}
+ \label{fig:galah_dr4_zeropoint_checks_allstar}
 \end{figure*}
 
 \begin{itemize}
@@ -731,16 +794,24 @@ Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar} for stellar param
     \item K2/TESS \citet{Zinn2020} Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}b
     \item APOGEE DR17 Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}a-f
     \item \Gaia DR3 for \vrad Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}f
-    \item Globular Clusters for low [Fe/H] accuracy
+    \item Globular Clusters for low [Fe/H] accuracy Fig.~\ref{fig:galah_dr4_allstar_globular_cluster_feh_comparison}
     \begin{itemize}
-        \item \citet{Carretta2009, Carretta2009b}
+        \item 47 Tuc \citet{Carretta2009, Carretta2009b}
+        \item NGC 6362
+        \item M4
+        \item NGC 362 \citet{Monty2023}?
+        \item NGC 288 \citet{Monty2023}?
+        \item NGC 1851
+        \item M2 NGC 7089, with 3 populations in [Fe/H] according to \citet{Yong2014}. 21331790-0048198 was even observed by \citet{Yong2014} as NR 79 / HI-104 with $\mathrm{[Fe/H]} = -1.69$. We get $-1.37 \pm 0.26$, but at SNR around 10.
         \item Omega Cen \cite{Johnson2010}
-        \item M30 (Gruyters?)
+        \item NGC 6397 \citet{Carretta2009, Carretta2009b}
+        \item M30 \citet{Carretta2009, Carretta2009b}
     \end{itemize}
     \item Abundance Zeropoints
     \begin{itemize}
         \item VESTA
         \item APOGEE DR17
+        \item Solar Twins
         \item  M~67, Ruprecht~147 and a few others cover stars across several evolutionary stages. Check them roughly (could also be problematic because of atomic diffusion etc.)
     \end{itemize}
 
@@ -1127,6 +1198,14 @@ lbol	&	float32	&	Bolometric Luminosity used for calculating logg(plx)	&		\\
 
 \section{CAVEATS AND FUTURE IMPROVEMENTS} \label{sec:caveats}
 
+\subsection{Actual Bugs}
+
+\texttt{flag\_fe\_h} was computed similar to the elemental abundances, that is by comparing the best-fit spectrum with a spectrum with the lowest grid value. In the case of [Fe/H], however, this is incorrect. It can lead to a comparison of a spectrum with -0.74 to one with -0.75, which can easily be too similar within the SNR range. Wrongfully affecting 34\% of stars and making the flag useless.
+
+\subsection{Rerunning?}
+
+neglecting ccds with flux uncertainty below 0 for more than 5\% of spectra. test cases were 200514003201389 and 200514002701209. Is there a way to identify these stars more systematically? These were found because their [Mg/Fe] maxed out without any reason or flag\_sp raised. Is it only 200514?
+
 \subsection{Limitations of our implemented multiple neural networks}
 
 \subsubsection{Consistency between models and noding in the 3Ddomain}
@@ -1134,6 +1213,10 @@ lbol	&	float32	&	Bolometric Luminosity used for calculating logg(plx)	&		\\
 \subsubsection{Flexibility of our neural network implementation for extreme abundances}
 
 While this approach has proved to be powerful for all elements across their abundance ranges, we have noticed sinusoidal shapes for weak Li lines \citep[see also][]{Wang2020}. This is likely caused by the large dynamical range that has to be covered by the neural network of $0 < \mathrm{A(Li)} < 4$. \SB{Elaborate on this! Ella's EW estimation code will limit the impact of this caveat!}
+
+\subsubsection{Coverage of chemical compositions}
+
+Before the neural networks are computed, it should actually be tested, what the abundance zeropoints are. In the case of several elements, like Na, Al, Eu, they were significant on the order of 0.2-0.3dex. In that case, stars with high abundances of 0.7-0.8 dex are not be sufficiently covered, although expected (e.g. in old stars and especially globular clusters). -> rerun neural networks for these cases?
 
 \subsection{Which analysis setup should be used?}
 
