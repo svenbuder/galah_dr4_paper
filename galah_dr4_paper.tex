@@ -667,9 +667,9 @@ After the \textit{allspec} (Sec.~\ref{sec:allspec_analysis}), \textit{allstar} a
 
 \subsubsection{Binary signatures to trigger the \textit{binary} module} \label{sec:trigger_binary_module}
 
-The residual spectrum of our best fitting single star analysis can help us to identify a second flux contributor to the observed spectrum. In our case, there are two points in the analysis, where we can identify such an influence. Firstly, the residuals are visible in the $\chi^2$ distribution as a function of radial velocity shifts (see Fig.~\ref{fig:181221003101356_single_fit_rv}). While a single star would only show one peak (saved in \texttt{rv\_comp\_1}), a binary system like 2MASS J06084657-7815235 shows a second peak ($-70\,\mathrm{km\,s^{-1}}$ in addition to $74\,\mathrm{km\,s^{-1}}$) that is saved in the \texttt{rv\_comp\_2}. Secondly, we perform an automatic search for re-occuring residuals as a function of radial velocity for a few selected lines. We chose the combination of strong lines in the spectra (Balmer lines, Fe lines at 4890 and $4891\,\text{\AA}$, Ni at $6644\,\text{\AA}$) as well as those with the largest expected wavelength shift in the infrared detector (O triplet att $7772-7775\,\text{\AA}$ as well as Mg at $7692\,\text{\AA}$). If we find several peaks with a reasonably similar radial velocity, the likely $X \in {16,50,84}^\text{th}$ percentiles of this radial velocities are saved in \texttt{sb2\_rv\_X}\footnote{\SB{Should we better run the Gaussian fitting to residuals in RV space, as we do during the RV estimation?}}
+The residual spectrum of our best fitting single star analysis can help us to identify a second flux contributor to the observed spectrum. In our case, there are two points in the analysis, where we can identify such an influence. Firstly, the residuals are visible in the $\chi^2$ distribution as a function of radial velocity shifts (see Fig.~\ref{fig:181221003101356_single_fit_rv}). While a single star would only show one peak (saved in \texttt{rv\_comp\_1}), a binary system like 2MASS J06084657-7815235 shows a second peak ($-70\,\mathrm{km\,s^{-1}}$ in addition to $74\,\mathrm{km\,s^{-1}}$) that is saved in the \texttt{rv\_comp\_2}. Secondly, we perform an automatic search for re-occuring residuals as a function of radial velocity for a few selected lines. We chose the combination of strong lines in the spectra (Balmer lines, Fe lines at 4890 and $4891\,\text{\AA}$, Ni at $6644\,\text{\AA}$) as well as those with the largest expected wavelength shift in the infrared detector (O triplet att $7772-7775\,\text{\AA}$ as well as Mg at $7692\,\text{\AA}$). If we find several peaks with a reasonably similar radial velocity, the likely $X \in {16,50,84}^\text{th}$ percentiles of this radial velocities are saved in \texttt{sb2\_rv\_X}\footnote{\SB{Should we better run CCF or the Gaussian fitting to residuals in RV space, as we do during the RV estimation?}}
 
-Because we radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2022} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare the radial velocity estimates. For 6\% (50\,577) of our stars, we find difference with respect to \Gaia DR3 beyond $10\,\mathrm{km\,s^{-1}}$. For these as well as stars for which we estimate unrealistic \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in \textit{allspec}\footnote{\SB{\textit{allspec} was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged. \textit{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.}} or \vsini above $10\,\mathrm{km\,s^{-1}}$ or identify a secondary component in \texttt{rv\_comp\_2} and \texttt{sb2\_rv\_X}, we trigger the run of the \textit{binary} module (see Sec.~\ref{sec:binary_analysis}).
+Because radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2022} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare the radial velocity estimates. For 6\% (50\,577) of our stars, we find difference with respect to \Gaia DR3 beyond $10\,\mathrm{km\,s^{-1}}$. For these as well as stars for which we estimate unrealistic \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in \textit{allspec}\footnote{\SB{\textit{allspec} was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged. \textit{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.}} or \vsini above $10\,\mathrm{km\,s^{-1}}$ or identify a secondary component in \texttt{rv\_comp\_2} and \texttt{sb2\_rv\_X}, we trigger the run of the \textit{binary} module (see Sec.~\ref{sec:binary_analysis}).
 
 \begin{figure*}[ht]
  \centering
@@ -1202,52 +1202,52 @@ flag\_x\_fe	&	int32	&	Quality bitmask flag of x\_fe	&		\\
 \end{tabular}
 \end{table*}
 
-\begin{table*}
-\caption{Table schema of the GALAH DR4 main catalogues. (Continuation of Tab.~\ref{tab:main_catalog_schema1}).} \label{tab:main_catalog_schema2}
-\centering
-\begin{tabular}{lccc}
-\hline
-Keyword	&	Type	&	Description	&	Section	\\
-\hline
-sb2\_rv\_16	&	float32	&	16th perc. radial velocity of fit to syn-obs residuals	&		\\
-sb2\_rv\_50	&	float32	&	50th perc. radial velocity of fit to syn-obs residuals	&		\\
-sb2\_rv\_84	&	float32	&	84th perc. radial velocity of fit to syn-obs residuals	&		\\
-ew\_h\_beta	&	float32	&	Equivalent Width of fit for syn-obs residuals at Hbeta core	&		\\
-ew\_h\_alpha	&	float32	&	Equivalent Width of fit for syn-obs residuals at Halpha core	&		\\
-ew\_k\_is	&	float32	&	Equivalent Width of fit for K7699 Interstellar Line	&		\\
-sigma\_k\_is	&	float32	&	Sigma auf Gaussian fit for K7699 Interstellar Line	&		\\
-rv\_k\_is	&	float32	&	Radial velocity of fit to syn-obs residuals around K7699 line	&		\\
-ew\_dibX	&	float32	&	Equivalent Width of fit for X Diffiuse Interstellar Band	&		\\
-sigma\_dibX	&	float32	&	Sigma auf Gaussian fit for X DIB	&		\\
-rv\_dibX	&	float32	&	Radial velocity of fit to syn-obs residuals around X DIB	&		\\
-logg\_spec	&	float32	&	Spectroscopic surface gravity (used for fitting)	&		\\
-e\_logg\_spec	&	float32	&	Uncertainty logg\_spec	&		\\
-phot\_g\_mean\_mag	&	float32	&	Mean Gaia DR3 G-band apparent magnitude	&		\\
-phot\_bp\_mean\_mag	&	float32	&	Mean Gaia DR3 BP-band apparent magnitude	&		\\
-bp\_rp	&	float32	&	Color of BP-RP bands	&		\\
-h\_m	&	float32	&	2MASS H-band magnitude	&		\\
-h\_msigcom	&	float32	&	Uncertainty of h\_m	&		\\
-ks\_m	&	float32	&	2MASS Ks-band magnitude	&		\\
-ks\_msigcom	&	float32	&	Uncertainty of ks\_m	&		\\
-W2mag	&	float32	&	AllWISE W2-band magnitude	&		\\
-e\_W2mag	&	float32	&	uncertainty of W2mag	&		\\
-ebv	&	float32	&	Extinction E(B-V)	&		\\
-parallax	&	float32	&	Astrometric parallax used for GALAH DR4	&		\\
-e\_parallax	&	float32	&	Uncertainty of astrometric parallax used for GALAH DR4	&		\\
-parallax\_gaia\_edr3	&	float32	&	Parallax reported with corrections by Gaia EDR3	&		\\
-e\_parallax\_gaia\_edr3	&	float32	&	Uncertainty of parallax reported with corrections by Gaia EDR3	&		\\
-ruwe\_gaia\_dr3	&	float32	&	RUWE reported by Gaia DR3	&		\\
-r\_med	&	float32	&	Median Distance used for calculating logg(plx)	&		\\
-r\_lo	&	float32	&	Lower Limit Distance used for calculating logg(plx)	&		\\
-r\_hi	&	float32	&	Higher Limit Distance used for calculating logg(plx)	&		\\
-a\_ks	&	float32	&	Attenuation in Ks-band A(Ks) used for calculating logg(plx)	&		\\
-mass	&	float32	&	Mass used for calculating logg(plx)	&		\\
-age	&	float32	&	Age estimated when calculating mass	&		\\
-bc\_ks	&	float32	&	Bolometric Correction of Ks, BC(Ks), used for calculating logg(plx)	&		\\
-lbol	&	float32	&	Bolometric Luminosity used for calculating logg(plx)	&		\\
-\hline
-\end{tabular}
-\end{table*}
+% \begin{table*}
+% \caption{Table schema of the GALAH DR4 main catalogues. (Continuation of Tab.~\ref{tab:main_catalog_schema1}).} \label{tab:main_catalog_schema2}
+% \centering
+% \begin{tabular}{lccc}
+% \hline
+% Keyword	&	Type	&	Description	&	Section	\\
+% \hline
+% sb2\_rv\_16	&	float32	&	16th perc. radial velocity of fit to syn-obs residuals	&		\\
+% sb2\_rv\_50	&	float32	&	50th perc. radial velocity of fit to syn-obs residuals	&		\\
+% sb2\_rv\_84	&	float32	&	84th perc. radial velocity of fit to syn-obs residuals	&		\\
+% ew\_h\_beta	&	float32	&	Equivalent Width of fit for syn-obs residuals at Hbeta core	&		\\
+% ew\_h\_alpha	&	float32	&	Equivalent Width of fit for syn-obs residuals at Halpha core	&		\\
+% ew\_k\_is	&	float32	&	Equivalent Width of fit for K7699 Interstellar Line	&		\\
+% sigma\_k\_is	&	float32	&	Sigma auf Gaussian fit for K7699 Interstellar Line	&		\\
+% rv\_k\_is	&	float32	&	Radial velocity of fit to syn-obs residuals around K7699 line	&		\\
+% ew\_dibX	&	float32	&	Equivalent Width of fit for X Diffiuse Interstellar Band	&		\\
+% sigma\_dibX	&	float32	&	Sigma auf Gaussian fit for X DIB	&		\\
+% rv\_dibX	&	float32	&	Radial velocity of fit to syn-obs residuals around X DIB	&		\\
+% logg\_spec	&	float32	&	Spectroscopic surface gravity (used for fitting)	&		\\
+% e\_logg\_spec	&	float32	&	Uncertainty logg\_spec	&		\\
+% phot\_g\_mean\_mag	&	float32	&	Mean Gaia DR3 G-band apparent magnitude	&		\\
+% phot\_bp\_mean\_mag	&	float32	&	Mean Gaia DR3 BP-band apparent magnitude	&		\\
+% bp\_rp	&	float32	&	Color of BP-RP bands	&		\\
+% h\_m	&	float32	&	2MASS H-band magnitude	&		\\
+% h\_msigcom	&	float32	&	Uncertainty of h\_m	&		\\
+% ks\_m	&	float32	&	2MASS Ks-band magnitude	&		\\
+% ks\_msigcom	&	float32	&	Uncertainty of ks\_m	&		\\
+% W2mag	&	float32	&	AllWISE W2-band magnitude	&		\\
+% e\_W2mag	&	float32	&	uncertainty of W2mag	&		\\
+% ebv	&	float32	&	Extinction E(B-V)	&		\\
+% parallax	&	float32	&	Astrometric parallax used for GALAH DR4	&		\\
+% e\_parallax	&	float32	&	Uncertainty of astrometric parallax used for GALAH DR4	&		\\
+% parallax\_gaia\_edr3	&	float32	&	Parallax reported with corrections by Gaia EDR3	&		\\
+% e\_parallax\_gaia\_edr3	&	float32	&	Uncertainty of parallax reported with corrections by Gaia EDR3	&		\\
+% ruwe\_gaia\_dr3	&	float32	&	RUWE reported by Gaia DR3	&		\\
+% r\_med	&	float32	&	Median Distance used for calculating logg(plx)	&		\\
+% r\_lo	&	float32	&	Lower Limit Distance used for calculating logg(plx)	&		\\
+% r\_hi	&	float32	&	Higher Limit Distance used for calculating logg(plx)	&		\\
+% a\_ks	&	float32	&	Attenuation in Ks-band A(Ks) used for calculating logg(plx)	&		\\
+% mass	&	float32	&	Mass used for calculating logg(plx)	&		\\
+% age	&	float32	&	Age estimated when calculating mass	&		\\
+% bc\_ks	&	float32	&	Bolometric Correction of Ks, BC(Ks), used for calculating logg(plx)	&		\\
+% lbol	&	float32	&	Bolometric Luminosity used for calculating logg(plx)	&		\\
+% \hline
+% \end{tabular}
+% \end{table*}
 
 \begin{landscape}
 \begin{figure}
@@ -1272,6 +1272,8 @@ lbol	&	float32	&	Bolometric Luminosity used for calculating logg(plx)	&		\\
    \item 210115002201239\_single\_fit\_rv.png (see Fig.~\ref{fig:181221003101356_single_fit_rv})
    \item 210115002201239\_single\_fit\_spectrum.fits
 \end{enumerate}
+
+For easier downloading, we also provide these files in tar-files per night. Furthermore, we have interpolated all normalised allstar spectra onto a common wavelength that includes the largest possible wavelength coverage of 99.9\% of radial velocity corrected spectra (neglecting pixels below 7680\AA for the infrared channel).
 
 %\begin{figure*}[hbt]
 % \centering  
@@ -1355,6 +1357,10 @@ For each CCD, the reduction has found the most suitable wavelength solution, lin
 \subsection{Chemical composition differences of model atmospheres and spectra}
 
 \SB{For several of our synthetic spectra, the chosen chemical composition differs significantly from the scaled-Solar pattern of the \textsc{MARCS} model atmospheres. We note that APOGEE DR17 \citep{SDSSDR17} have managed to compute \textsc{MARCS} that match their chemical compositions.}
+
+\subsection{Red clump stars}
+
+\SB{Some red clump stars have too high logg, because the isochrones were selected imperfect. Possible fixes include selecting better isochrones or including [C/N] when adjusting logg? could help to put the RCs closer to 2.5dex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{CONCLUSIONS}
