@@ -142,8 +142,16 @@
   Vol. 7735, Ground-based and Airborne Instrumentation for Astronomy III,
   773509
 
+\bibitem[{{Bashi} {et~al.}(2023){Bashi}, {Mazeh}, \& {Faigler}}]{Bashi2023}
+{Bashi}, D., {Mazeh}, T., \& {Faigler}, S. 2023, \mnras, 522, 1184
+
 \bibitem[{{Baumgardt} \& {Vasiliev}(2021)}]{Baumgardt2021}
 {Baumgardt}, H., \& {Vasiliev}, E. 2021, \mnras, 505, 5957
+
+\bibitem[{{Bedell} {et~al.}(2018){Bedell}, {Bean}, {Mel{\'e}ndez}, {Spina},
+  {Ram{\'\i}rez}, {Asplund}, {Alves-Brito}, {dos Santos}, {Dreizler}, {Yong},
+  {Monroe}, \& {Casagrande}}]{Bedell2018}
+{Bedell}, M., {Bean}, J.~L., {Mel{\'e}ndez}, J., {et~al.} 2018, \apj, 865, 68
 
 \bibitem[{{Belokurov} {et~al.}(2018){Belokurov}, {Erkal}, {Evans}, {Koposov},
   \& {Deason}}]{Belokurov2018}
@@ -236,6 +244,9 @@
   {Bienaym{\'e}}, {Bland-Hawthorn}, {Gibson}, {Grebel}, {Helmi}, {Munari},
   {Navarro}, {Reid}, {Siebert}, \& {Wyse}}]{Casey2017}
 {Casey}, A.~R., {Hawkins}, K., {Hogg}, D.~W., {et~al.} 2017, \apj, 840, 59
+
+\bibitem[{{Chabrier}(2001)}]{Chabrier2001}
+{Chabrier}, G. 2001, \apj, 554, 1274
 
 \bibitem[{{Cutri} {et~al.}(2014)}]{Cutri2013}
 {Cutri}, R.~M., {et~al.} 2014, VizieR Online Data Catalog, 2328
@@ -749,6 +760,11 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
 {Gustafsson}, B., {Edvardsson}, B., {Eriksson}, K., {et~al.} 2008, \aap, 486,
   951
 
+\bibitem[{{Halbwachs} {et~al.}(2023){Halbwachs}, {Pourbaix}, {Arenou},
+  {Galluccio}, {Guillout}, {Bauchet}, {Marchal}, {Sadowski}, \&
+  {Teyssier}}]{Halbwachs2023}
+{Halbwachs}, J.-L., {Pourbaix}, D., {Arenou}, F., {et~al.} 2023, \aap, 674, A9
+
 \bibitem[{{Heijmans} {et~al.}(2012){Heijmans}, {Asplund}, {Barden}, {Birchall},
   {Carollo}, {Bland-Hawthorn}, {Brzeski}, {Case}, {Churilov}, {Colless},
   {Dean}, {De Silva}, {Farrell}, {Fiegert}, {Freeman}, {Gers}, {Goodwin},
@@ -774,12 +790,18 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
 
 \bibitem[{{Hinkle} {et~al.}(2000){Hinkle}, {Wallace}, {Valenti}, \&
   {Harmer}}]{Hinkle2000}
-{Hinkle}, K., {Wallace}, L., {Valenti}, J., \& {Harmer}, D. 2000, {Visible and
-  Near Infrared Atlas of the Arcturus Spectrum 3727-9300 A} (ASP)
+{Hinkle}, K., {Wallace}, L., {Valenti}, J., \& {Harmer}, D., eds. 2000, Visible
+  and Near Infrared Atlas of the Arcturus Spectrum, 3727-9300 {\AA} (Astron.
+  Soc. Pac.)
 
 \bibitem[{{Ho} {et~al.}(2017){Ho}, {Ness}, {Hogg}, {Rix}, {Liu}, {Yang},
   {Zhang}, {Hou}, \& {Wang}}]{Ho2017}
 {Ho}, A.~Y.~Q., {Ness}, M.~K., {Hogg}, D.~W., {et~al.} 2017, \apj, 836, 5
+
+\bibitem[{{Hon} {et~al.}(2022){Hon}, {Kuszlewicz}, {Huber}, {Stello}, \&
+  {Reyes}}]{Hon2022}
+{Hon}, M., {Kuszlewicz}, J.~S., {Huber}, D., {Stello}, D., \& {Reyes}, C. 2022,
+  \aj, 164, 135
 
 \bibitem[{Hunter(2007)}]{matplotlib}
 Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
@@ -809,6 +831,10 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 {Katz}, D., {Sartoretti}, P., {Guerrier}, A., {et~al.} 2022, arXiv e-prints,
   arXiv:2206.05902
 
+\bibitem[{{Kawka} {et~al.}(2020){Kawka}, {Simpson}, {Vennes}, {Bessell}, {Da
+  Costa}, {Marino}, \& {Murphy}}]{Kawka2020}
+{Kawka}, A., {Simpson}, J.~D., {Vennes}, S., {et~al.} 2020, \mnras, 495, L129
+
 \bibitem[{{Kobayashi} {et~al.}(2020){Kobayashi}, {Karakas}, \&
   {Lugaro}}]{Kobayashi2020}
 {Kobayashi}, C., {Karakas}, A.~I., \& {Lugaro}, M. 2020, \apj, 900, 179
@@ -832,6 +858,13 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
   {Lewis}, {Munari}, {Nataf}, {Stello}, {Tinney}, {Traven}, {Watson}, \&
   {Wittenmyer}}]{Kos2017}
 {Kos}, J., {Lin}, J., {Zwitter}, T., {et~al.} 2017, \mnras, 464, 1259
+
+\bibitem[{{Kos} {et~al.}(2018){Kos}, {Bland-Hawthorn}, {Betters}, {Leon-Saval},
+  {Asplund}, {Buder}, {Casey}, {D'Orazi}, {de Silva}, {Freeman}, {Lewis},
+  {Lin}, {Martell}, {Schlesinger}, {Sharma}, {Simpson}, {Zucker}, {Zwitter},
+  {Hayden}, {Horner}, {Nataf}, \& {Ting}}]{Kos2018b}
+{Kos}, J., {Bland-Hawthorn}, J., {Betters}, C.~H., {et~al.} 2018, \mnras, 480,
+  5475
 
 \bibitem[{{Lewis} {et~al.}(2002){Lewis}, {Cannon}, {Taylor}, {Glazebrook},
   {Bailey}, {Baldry}, {Barton}, {Bridges}, {Dalton}, {Farrell}, {Gray},
@@ -934,12 +967,12 @@ P\'erez, F., \& Granger, B.~E. 2007, Comput Sci Eng, 9, 21
 \bibitem[{{Piskunov} \& {Valenti}(2017)}]{Piskunov2017}
 {Piskunov}, N., \& {Valenti}, J.~A. 2017, \aap, 597, A16
 
-\bibitem[{Pr{\v s}a {et~al.}(2016)Pr{\v s}a, Harmanec, Torres, Mamajek,
-  Asplund, Capitaine, Christensen-Dalsgaard, Depagne, Haberreiter, Hekker,
-  Hilton, Kopp, Kostov, Kurtz, Laskar, Mason, Milone, Montgomery, Richards,
-  Schmutz, Schou, \& Stewart}]{Prsa2016}
-Pr{\v s}a, A., Harmanec, P., Torres, G., {et~al.} 2016, The Astronomical
-  Journal, 152, 41
+\bibitem[{{Pr{\v{s}}a} {et~al.}(2016){Pr{\v{s}}a}, {Harmanec}, {Torres},
+  {Mamajek}, {Asplund}, {Capitaine}, {Christensen-Dalsgaard}, {Depagne},
+  {Haberreiter}, {Hekker}, {Hilton}, {Kopp}, {Kostov}, {Kurtz}, {Laskar},
+  {Mason}, {Milone}, {Montgomery}, {Richards}, {Schmutz}, {Schou}, \&
+  {Stewart}}]{Prsa2016}
+{Pr{\v{s}}a}, A., {Harmanec}, P., {Torres}, G., {et~al.} 2016, \aj, 152, 41
 
 \bibitem[{{Rains} {et~al.}(2021){Rains}, {{\v{Z}}erjal}, {Ireland},
   {Nordlander}, {Bessell}, {Casagrande}, {Onken}, {Joyce}, {Kammerer}, \&
@@ -956,6 +989,15 @@ Pr{\v s}a, A., Harmanec, P., Torres, G., {et~al.} 2016, The Astronomical
   {Richards}, {Sanna}, {Walton}, {Weiler}, \& {Yoldas}}]{Riello2021}
 {Riello}, M., {De Angeli}, F., {Evans}, D.~W., {et~al.} 2021, \aap, 649, A3
 
+\bibitem[{{Rimoldini} {et~al.}(2023){Rimoldini}, {Holl}, {Gavras}, {Audard},
+  {De Ridder}, {Mowlavi}, {Nienartowicz}, {Jevardat de Fombelle},
+  {Lecoeur-Ta{\"\i}bi}, {Karbevska}, {Evans}, {{\'A}brah{\'a}m}, {Carnerero},
+  {Clementini}, {Distefano}, {Garofalo}, {Garc{\'\i}a-Lario}, {Gomel},
+  {Klioner}, {Kruszy{\'n}ska}, {Lanzafame}, {Lebzelter}, {Marton}, {Mazeh},
+  {Molinaro}, {Panahi}, {Raiteri}, {Ripepi}, {Szabados}, {Teyssier},
+  {Trabucchi}, {Wyrzykowski}, {Zucker}, \& {Eyer}}]{Rimoldini2023}
+{Rimoldini}, L., {Holl}, B., {Gavras}, P., {et~al.} 2023, \aap, 674, A14
+
 \bibitem[{{Rix} {et~al.}(2016){Rix}, {Ting}, {Conroy}, \& {Hogg}}]{Rix2016}
 {Rix}, H.-W., {Ting}, Y.-S., {Conroy}, C., \& {Hogg}, D.~W. 2016, \apjl, 826,
   L25
@@ -963,6 +1005,11 @@ Pr{\v s}a, A., Harmanec, P., Torres, G., {et~al.} 2016, The Astronomical
 \bibitem[{{Salaris} \& {Cassisi}(2006)}]{Salaris2006}
 {Salaris}, M., \& {Cassisi}, S. 2006, {Evolution of Stars and Stellar
   Populations} (J. Wiley)
+
+\bibitem[{{Saydjari} {et~al.}(2022){Saydjari}, {Zucker}, {Peek}, \&
+  {Finkbeiner}}]{Saydjari2022}
+{Saydjari}, A.~K., {Zucker}, C., {Peek}, J.~E.~G., \& {Finkbeiner}, D.~P. 2022,
+  arXiv e-prints, arXiv:2212.03879
 
 \bibitem[{{Schlegel} {et~al.}(1998){Schlegel}, {Finkbeiner}, \&
   {Davis}}]{Schlegel1998}
