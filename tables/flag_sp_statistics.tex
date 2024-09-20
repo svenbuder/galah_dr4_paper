@@ -1,0 +1,27 @@
+\begin{table}[ht]
+\centering
+\caption{List of major quality flag \texttt{flag\_sp} listing the bit, description and how often the flag was raised for the \textit{allstar} and \textit{allspec} routines. Notes: Multiple bits can be raised for each of the 1\,085\,520 spectra spectra of the  of 917\,588 stars.}
+\label{tab:flag_sp}
+\begin{tabular}{ccccc}
+\hline \hline
+Raised Bit & Flag & Description & \textit{allstar} & \textit{allspec} \\
+\hline
+  & 0 & No flag & 700125 & 663075 \\ 
+0 & 1 & Emission & 9568 & 7646 & \\
+1 & 2 & CCD missing & 70078 & 44344 & \\
+2 & 4 & Spectr. Binary 1 & 0 & 25538 & \\
+3 & 8 & Spectr. Binary 2 & 34833 & 32566 & \\
+4 & 16 & $\chi^2 > 3\sigma$ & 66859 & 20544 & \\
+5 & 32 & \vsini warning & 138317 & 95990 & \\
+6 & 64 & \vmic warning & 99692 & 78686 & \\
+7 & 128 & Triple Binary warning & 0 & 0 & \\
+8 & 256 & \Teff warning & 0 & 0 & \\
+9 & 512 & \logg warning & 19863 & 10900 & \\
+10 & 1024 & \feh warning & 0 & 0 & \\
+11 & 2048 & S/N low & 123736 & 71154 & \\
+12 & 4096 & Not converged & 32986 & 0 & \\
+13 & 8192 & Model extrapolated & 69613 & 5953 & \\
+14 & 16384 & No Results & 7400 & 10899 & \\
+\hline
+\end{tabular}
+\end{table}
