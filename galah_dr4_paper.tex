@@ -179,7 +179,14 @@
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
+\author{M.~K. Ness}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+%%%% NEW AUTHOR
 \author{The GALAH Collaboration}
+\affiliation{https://www.galah-survey.org}
+
 
 \doi{10.1017/pasa.2020.32}
 
@@ -212,6 +219,8 @@ The stars in our Milky Way carry the chemical history of our galaxy in their atm
 For this data release, we utilise neural networks to simultaneously fit all stellar labels (stellar parameters and elemental abundances) for the full wavelength range. The neural networks are trained on grids of synthetic spectra that were computed with Spectroscopy Made Easy. In a first iteration, we fit the best set of labels and in particular radial velocities for all \allspecnumber spectra (including repeat observations). These are used to properly co-add spectra (for example of spectroscopic binaries without line-splitting) for the second major iteration. This loop uses the distances inferred from astrometric data of the \Gaia satellite and 2MASS photometry to self-consistently infer more accurate and precise surface gravities for each star.
 
 Notable improvements of this data release are the newly available abundances of carbon and nitrogen from molecular features as well as the significantly improved precision and number of elemental abundances, in particular for neutron-capture elements.
+
+\SB{Some note that higher precision and more daring extraction of abundances through multiple neural networks comes at a risk, as we line out in caveats section.}
 
 The combination of chemical compositions across multiple nucleosynthetic paths, orbit information, and age estimates for almost a million stars from GALAH DR4 provides a rich data set for Galactic exploration.
 
@@ -980,34 +989,6 @@ In python, the check for a bitmask flag (e.g. 3rd flag with value $2^3 = 8$) is 
 \end{verbatim}
 
 \input{tables/flag_sp_statistics}
-
-\begin{table}[ht]
-\centering
-\caption{List of major quality flag \texttt{flag\_sp} listing the bit, description and how often the flag was raised for the \textit{allstar} and \textit{allspec} routines. Notes: Multiple bits can be raised for each of the 943\,654 spectra spectra of the  of 827\,288 stars. $(^\star)$ No \logg could be estimated for 15,319 spectra in the post-processing due to missing astrometric information.}
-\label{tab:flag_sp}
-\begin{tabular}{ccccc}
-\hline \hline
-Raised Bit & Flag & Description & \textit{allstar} & \textit{allspec} \\
-\hline
- & 0 & No flag & 166764 & $\text{633322}^\star$ \\
-0 & 1 & Emission & 1576 & 6490 \\
-1 & 2 & CCD missing & 221 & 48787 \\
-2 & 4 & SB1 & 9292 & 0 \\
-3 & 8 & SB2 & 6132 & 31404 \\
-4 & 16 & $\chi^2 > 3\sigma$ & 11552 & 58862 \\
-5 & 32 & \vsini warning & 17325 & 118341 \\
-6 & 64 & \vmic warning & 15495 & 81621 \\
-7 & 128 & Triple Binary warning & 0 & 0 \\
-8 & 256 & \Teff warning & 0 & 0 \\
-9 & 512 & \logg warning & 0 & 0 \\
-10 & 1024 & \feh warning & 0 & 0 \\
-11 & 2048 & S/N low & 17323 & 89881 \\
-12 & 4096 & not converged & 0 & 18042 \\
-13 & 8192 & Model extrapolated & 5316 & 56742 \\
-14 & 16384 & No Results & 2835 & 6599 \\
-\hline
-\end{tabular}
-\end{table}
 
 
 
