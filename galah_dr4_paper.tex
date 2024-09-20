@@ -1104,51 +1104,23 @@ Binarity. How accurate is the flagging. Compare ratios of true/false, false-posi
 
 \subsection{Variable stars in GALAH DR4}
 
-We have crossmatched the sources from GALAH DR4 with those from \Gaia DR3's variability catalogues \citep{Rimoldini2023}.
-
-\begin{table}
-\centering
-\caption{\textbf{Overlap of GALAH DR4 with \textit{Gaia} DR3 variability catalogues.} Classifications are taken from the \textit{gaiadr3.vari\_classifier\_result} table and described in \cite{Rimoldini2023}. Abbreviations: ACV ({$\upalpha^2$}Canum Venaticorum), MCP and CP ((magnetic) chemically peculiar), ROAM and ROAP (rapidly oscillating Am- and Ap-type), SXARI (SXArietis), BE (B-type emission line), GCAS ({$\upgamma$}Cassiopeiae), SDOR (SDoradus), WR (Wolf-Rayet), DSCT ({$\updelta$}Scuti), GDOR ({$\upgamma$} Doradus), SXPHE (SXPhoenicis), SOLAR\_LIKE (solar-like variable, including BY Draconis type, rotating spotted star, and flaring stars).}
-\label{tab:overlap_gaiadr3_vari}
-\begin{tabular}{ccc}
-\hline \hline
-Classification & DR4 allspec & DR4 allstar \\
-\hline
-ACV \vert CP\vert MCP\vert ROAM\vert ROAP\vert SXARI & 330 & 285 \\
-ACYG ({$\upalpha$}Cygni-type) & 45 & 34 \\
-BCEP ($\upbeta$Cephei) & 16 & 15 \\
-BE\vert GCAS\vert SDOR\vert WR & 67 & 54 \\
-CEP (Cepheid) & 133 & 103 \\
-CV (cataclysmic variable) & 3 & 3 \\
-DSCT\vert GDOR\vert SXPHE & 16342 & 14477 \\
-ECL (eclipsing binary) & 4610 & 4074 \\
-ELL (ellipsoidal variable) & 95 & 11 \\
-EP (star with exoplanet transits) & 19 & 14 \\
-LPV (long-period variable) & 7351 & 6247 \\
-RCB (R Coronae Borealis variable) & 4 & 1 \\
-RR (RR Lyrae type) & 561 & 401 \\
-RS (RS Canum Venaticorum variable) & 3950 & 3355 \\
-S (short-timescale object) & 40 & 33 \\
-SDB (subdwarf B star) & 6 & 6 \\
-SOLAR\_LIKE & 20027 & 17256 \\
-SPB (slowly pulsating B-type variable) & 31 & 24 \\
-SYST (symbiotic variable star) & 3 & 3 \\
-WD (variable white dwarf) & 1 & 1 \\
-YSO (young stellar object) & 1534 & 1096 \\
-\hline
-Total & 55168 & 47493 \\
-\hline
-\end{tabular}
-\end{table}
+We have crossmatched the sources from GALAH DR4 with those from \Gaia DR3's variability catalogues \citep{Rimoldini2023}. We find 47\,493 stars in GALAH DR4 that are overlapping with the the \textit{gaiadr3.vari\_classifier\_result} catalogue. In particular, we find 17\,256 SOLAR\_LIKE variables, 14\,477 stars in the DSCT/GDOR/SXPHE category ({$\updelta$}Scuti, {$\upgamma$} Doradus, or SXPhoenicis), 6\,247 LPV (long-period variables), 4\,074 ECL (eclipsing binaries), 3\,355 RS (RS Canum Venaticorum variables), 1\,096 YSO (young stellar objects), 401 RR (RR Lyrae types), and a large variety of other variables, including the white dwarf 2MASS J05005185-0930549 that was already found in GALAH data by \citet{Kawka2020}.
 
 \SB{Put list of vari catalogues and their respective publications in here, e.g. \Gaia DR3 binary star parameters from \texttt{gaiadr3.nss\_non\_linear\_spectro.fits} \citep{Halbwachs2023}.
 }
 
-1 White dwarf crossmatched, indeed the one (2MASS J05005185-0930549) that was found in GALAH data by \citet{Kawka2020}.
+
 
 \subsection{Minimal Science Verification}
 
 Fig. 3 from https://arxiv.org/abs/2203.05463: logAge vs. [C/N]
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/cn_mass.png}
+    \caption{The ratio of [C/N] and isochrone masses in comparison (panel a), and as a function of \Teff and \logg in panels b) and c), respectively}
+    \label{fig:cn_mass}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{DATA RELEASE PRODUCTS}
@@ -1324,9 +1296,9 @@ In this section, we attempt a detailed discussion of caveats along different ste
 
 Although a significant amount of work was spent on improving the spectrum reduction, we want to lay out a few areas that could still suffer from imperfection.
 
-\subsubsection{Unreliable wavelength solutions}
+\subsubsection{Wavelength solutions}
 
-For each CCD, the reduction pipeline estimates the most suitable wavelength solution, linking pixels with actual wavelengths based on the ThXe arc lines. In GALAH DR3 \citep{Buder2021} we identified several issues for spectra where not enough ThXe lines could be used to constrain the wavelength solution. Improvements have been made for the new reduction version to improve the number of useful ThXe lines. This has helped us to decrease the amount of problematic wavelength solutions towards the end of CCD3, with the only used absorption lines of Li and Eu, from an initially bad wavelength solution for 7.9\% of the spectra.
+For each CCD, the reduction pipeline estimates the most suitable wavelength solution, linking pixels with actual wavelengths based on the ThXe arc lines. In GALAH DR3 \citep{Buder2021} we identified several issues for spectra where not enough ThXe lines could be used to constrain the wavelength solution. Improvements have been made for the new reduction version to improve the number of useful ThXe lines and restrict the flexibility of wavelength solutions to move them closer towards previous results. This has helped us to decrease the amount of problematic wavelength solutions towards the end of CCD3, with the only used absorption lines of Li and Eu, from an initially bad wavelength solution for 7.9\% of the spectra.
 
 \subsubsection{Holistic spectrum extraction}
 
