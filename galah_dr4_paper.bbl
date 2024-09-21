@@ -202,6 +202,12 @@
 {Bergemann}, M., {Gallagher}, A.~J., {Eitner}, P., {et~al.} 2019, \aap, 631,
   A80
 
+\bibitem[{{Binney}(2012)}]{Binney2012}
+{Binney}, J. 2012, \mnras, 426, 1324
+
+\bibitem[{{Bland-Hawthorn} \& {Gerhard}(2016)}]{BlandHawthorn_Gerhard2016}
+{Bland-Hawthorn}, J., \& {Gerhard}, O. 2016, \araa, 54, 529
+
 \bibitem[{{Bovy}(2015)}]{Bovy2015}
 {Bovy}, J. 2015, \apjs, 216, 29
 
@@ -1039,6 +1045,9 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 {Lindegren}, L., {Klioner}, S.~A., {Hern{\'a}ndez}, J., {et~al.}
   2021{\natexlab{b}}, \aap, 649, A2
 
+\bibitem[{{Mackereth} \& {Bovy}(2018)}]{Mackereth2018}
+{Mackereth}, J.~T., \& {Bovy}, J. 2018, \pasp, 130, 114501
+
 \bibitem[{{Majewski} {et~al.}(2011){Majewski}, {Zasowski}, \&
   {Nidever}}]{Majewski2011}
 {Majewski}, S.~R., {Zasowski}, G., \& {Nidever}, D.~L. 2011, \apj, 739, 25
@@ -1063,6 +1072,9 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 
 \bibitem[{{Masseron} \& {Gilmore}(2015)}]{Masseron2015}
 {Masseron}, T., \& {Gilmore}, G. 2015, \mnras, 453, 1855
+
+\bibitem[{{McMillan}(2017)}]{McMillan2017}
+{McMillan}, P.~J. 2017, \mnras, 465, 76
 
 \bibitem[{{Monty} {et~al.}(2023){Monty}, {Yong}, {Marino}, {Karakas},
   {McKenzie}, {Grundahl}, \& {Mura-Guzm{\'a}n}}]{Monty2023}
@@ -1133,6 +1145,9 @@ P\'erez, F., \& Granger, B.~E. 2007, Comput Sci Eng, 9, 21
   {Mel{\'e}ndez}}]{Reggiani2019}
 {Reggiani}, H., {Amarsi}, A.~M., {Lind}, K., {et~al.} 2019, \aap, 627, A177
 
+\bibitem[{{Reid} \& {Brunthaler}(2004)}]{Reid2004}
+{Reid}, M.~J., \& {Brunthaler}, A. 2004, \apj, 616, 872
+
 \bibitem[{{Riello} {et~al.}(2021){Riello}, {De Angeli}, {Evans}, {Montegriffo},
   {Carrasco}, {Busso}, {Palaversa}, {Burgess}, {Diener}, {Davidson}, {Rowell},
   {Fabricius}, {Jordi}, {Bellazzini}, {Pancino}, {Harrison}, {Cacciari}, {van
@@ -1172,6 +1187,10 @@ P\'erez, F., \& Granger, B.~E. 2007, Comput Sci Eng, 9, 21
 \bibitem[{{Schlegel} {et~al.}(1998){Schlegel}, {Finkbeiner}, \&
   {Davis}}]{Schlegel1998}
 {Schlegel}, D.~J., {Finkbeiner}, D.~P., \& {Davis}, M. 1998, \apj, 500, 525
+
+\bibitem[{{Sch{\"o}nrich} {et~al.}(2010){Sch{\"o}nrich}, {Binney}, \&
+  {Dehnen}}]{Schoenrich2010}
+{Sch{\"o}nrich}, R., {Binney}, J., \& {Dehnen}, W. 2010, \mnras, 403, 1829
 
 \bibitem[{{Sharma} {et~al.}(2018){Sharma}, {Stello}, {Buder}, {Kos},
   {Bland-Hawthorn}, {Asplund}, {Duong}, {Lin}, {Lind}, {Ness}, {Huber},
