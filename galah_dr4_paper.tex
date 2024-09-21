@@ -539,7 +539,7 @@ which encapsulates the so-called layers of a neural network with $i = 300$ neuro
     \end{cases}
 \end{equation}
 
-After optimising the loss function for $10^4$ steps, we consider the network trained with an optimised combination of three sets of weights and biases within the minimum and maximum ranges of each label. We discuss this caveats of this particular setup of the training and neural networks in Section~\ref{sec:caveats}. The trained networks can then be used with new input labels to quickly create synthetic spectra for the label optimisation.
+After optimising the loss function for $10^4$ steps, we consider the network trained with an optimised combination of three sets of weights and biases within the minimum and maximum ranges of each label. We discuss this caveats of this particular neural network architecture and training setup in Section~\ref{sec:caveats}. The trained networks can then be used with new input labels to quickly create synthetic spectra for the label optimisation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{SINGLE SPECTRUM ANALYSIS (ALLSPEC)}
@@ -548,7 +548,7 @@ After optimising the loss function for $10^4$ steps, we consider the network tra
 
 As outlined in Sec.~\ref{sec:introduction}, the workflow of GALAH DR4 includes a first analysis step of all observed spectra without taking non-spectroscopic information for the optimisation. This allows us to identify shifts in radial velocity between separate spectroscopic observations of the same star\footnote{While repeat observations were only done for quality assurance in GALAH Phase 1, we have started to revisit a number of the fields for another 2x15 minutes to reach the updated needed exposure time for main GALAH fields of 1.5 hours.} and a more accurate co-adding of spectra for the \textit{allstar} analysis (see Sec.~\ref{sec:allstar_analysis}). Another motivation for this step is to get a first estimate of stellar labels without potentially biased photometric and astrometric information, for example for binary stars.
 
-The optimisation of stellar labels is thus aiming to minimise the absolute difference between synthetic and observed spectra for all unmasked pixels, weighted by their uncertainty. Starting from a set of initial labels (Sec.~\ref{sec:initial_stellar_labels}), we create high-resolution synthetic spectra and convolve them to the resolution and wavelength grid of each observed spectrum. In an important improvement of our analysis, we perform an on-the-fly re-normalisation of the observed spectrum, which allows a more accurate comparison of synthetic and observed spectra (Sec.~\ref{sec:comparison_synthetic_spectra_to_observations}) and thus a more accurate stellar label optimisation (see Sec.~\ref{sec:stellar_label_optimisation}).
+The optimisation of stellar labels is thus aiming to minimise the absolute difference between synthetic and observed spectra for all unmasked\footnote{We describe the masking process in Section~\ref{sec:which_labels_are_optimised}.} pixels, weighted by their uncertainty. Starting from a set of initial labels (Sec.~\ref{sec:initial_stellar_labels}), we create high-resolution synthetic spectra and convolve them to the resolution and wavelength grid of each observed spectrum. In an important improvement of our analysis, we perform an on-the-fly re-normalisation of the observed spectrum, which allows a more accurate comparison of synthetic and observed spectra (Sec.~\ref{sec:comparison_synthetic_spectra_to_observations}) and thus a more accurate stellar label optimisation (see Sec.~\ref{sec:stellar_label_optimisation}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Initial stellar labels}
@@ -818,16 +818,7 @@ Zeropoints in Table~\ref{tab:zeropoints}
  \label{fig:galah_dr4_validation_parameter_accuracy_allstar}
 \end{figure*}
 
-\begin{figure*}[ht]
- \centering
- \includegraphics[width=\textwidth]{figures/galah_dr4_vrad_gaia_dr3.png}
- \caption{\textbf{Comparison of radial velocities between GALAH DR4 and \Gaia DR3.}
- \textbf{Panel a)} shows the difference of radial velocities as function of \Gaia $G$ magnitude.
- \textbf{Panel b)} shows a histogram of the difference with two Gaussian distributions (with same mean) fitted to them to estimate a more robust, that is binary independent, radial velocity difference.
- \textbf{Panel c)} shows the difference of radial velocities as function of radial velocity, showing the systematic scatter introduced by binaries.
-}
- \label{fig:galah_dr4_vrad_gaia_dr3}
-\end{figure*}
+
 
 
 \begin{figure}
@@ -964,9 +955,9 @@ The description of the implemented bits/flags for \texttt{flag\_sp} and how ofte
 
 Fig.~\ref{fig:examples_flag_sp_1} and Fig.~\ref{fig:examples_flag_sp_2}
 
-In python, the check for a bitmask flag (e.g. 3rd flag with value $2^3 = 8$) is best performed via 
+In python, the check for a bitmask flag (e.g. 3rd bit with flag value $2^3 = 8$) is best performed via 
 \begin{verbatim}
-    flag_8_raised = (galah_dr4['flag_sp'] & 8) != 0
+    flag_8_raised = (dr4['flag_sp'] & 8) != 0
 \end{verbatim}
 
 \input{tables/flag_sp_statistics}
@@ -1092,6 +1083,17 @@ Binaries from Bashi et al. : 2304.00043 \citep{Bashi2023}
 
 Thanks to the radial velocity estimates provided for bright stars from the \Gaia radial velocity spectrometer \citep{Katz2022}, we have radial velocity estimates for 94\% (774\,914) of the stars observed for GALAH DR4.
 
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=\textwidth]{figures/galah_dr4_vrad_gaia_dr3.png}
+ \caption{\textbf{Comparison of radial velocities between GALAH DR4 and \Gaia DR3.}
+ \textbf{Panel a)} shows the difference of radial velocities as function of \Gaia $G$ magnitude.
+ \textbf{Panel b)} shows a histogram of the difference with two Gaussian distributions (with same mean) fitted to them to estimate a more robust, that is binary independent, radial velocity difference.
+ \textbf{Panel c)} shows the difference of radial velocities as function of radial velocity, showing the systematic scatter introduced by binaries.
+}
+ \label{fig:galah_dr4_vrad_gaia_dr3}
+\end{figure*}
+
 Fig.~\ref{fig:vrad_comparison_comp1_comp2_gaiadr3}
 
 \begin{figure*}[hbt]
@@ -1193,52 +1195,52 @@ flag\_x\_fe	&	int32	&	Quality bitmask flag of x\_fe	&		\\
 \end{tabular}
 \end{table*}
 
-% \begin{table*}
-% \caption{Table schema of the GALAH DR4 main catalogues. (Continuation of Tab.~\ref{tab:main_catalog_schema1}).} \label{tab:main_catalog_schema2}
-% \centering
-% \begin{tabular}{lccc}
-% \hline
-% Keyword	&	Type	&	Description	&	Section	\\
-% \hline
-% sb2\_rv\_16	&	float32	&	16th perc. radial velocity of fit to syn-obs residuals	&		\\
-% sb2\_rv\_50	&	float32	&	50th perc. radial velocity of fit to syn-obs residuals	&		\\
-% sb2\_rv\_84	&	float32	&	84th perc. radial velocity of fit to syn-obs residuals	&		\\
-% ew\_h\_beta	&	float32	&	Equivalent Width of fit for syn-obs residuals at Hbeta core	&		\\
-% ew\_h\_alpha	&	float32	&	Equivalent Width of fit for syn-obs residuals at Halpha core	&		\\
-% ew\_k\_is	&	float32	&	Equivalent Width of fit for K7699 Interstellar Line	&		\\
-% sigma\_k\_is	&	float32	&	Sigma auf Gaussian fit for K7699 Interstellar Line	&		\\
-% rv\_k\_is	&	float32	&	Radial velocity of fit to syn-obs residuals around K7699 line	&		\\
-% ew\_dibX	&	float32	&	Equivalent Width of fit for X Diffiuse Interstellar Band	&		\\
-% sigma\_dibX	&	float32	&	Sigma auf Gaussian fit for X DIB	&		\\
-% rv\_dibX	&	float32	&	Radial velocity of fit to syn-obs residuals around X DIB	&		\\
-% logg\_spec	&	float32	&	Spectroscopic surface gravity (used for fitting)	&		\\
-% e\_logg\_spec	&	float32	&	Uncertainty logg\_spec	&		\\
-% phot\_g\_mean\_mag	&	float32	&	Mean Gaia DR3 G-band apparent magnitude	&		\\
-% phot\_bp\_mean\_mag	&	float32	&	Mean Gaia DR3 BP-band apparent magnitude	&		\\
-% bp\_rp	&	float32	&	Color of BP-RP bands	&		\\
-% h\_m	&	float32	&	2MASS H-band magnitude	&		\\
-% h\_msigcom	&	float32	&	Uncertainty of h\_m	&		\\
-% ks\_m	&	float32	&	2MASS Ks-band magnitude	&		\\
-% ks\_msigcom	&	float32	&	Uncertainty of ks\_m	&		\\
-% W2mag	&	float32	&	AllWISE W2-band magnitude	&		\\
-% e\_W2mag	&	float32	&	uncertainty of W2mag	&		\\
-% ebv	&	float32	&	Extinction E(B-V)	&		\\
-% parallax	&	float32	&	Astrometric parallax used for GALAH DR4	&		\\
-% e\_parallax	&	float32	&	Uncertainty of astrometric parallax used for GALAH DR4	&		\\
-% parallax\_gaia\_edr3	&	float32	&	Parallax reported with corrections by Gaia EDR3	&		\\
-% e\_parallax\_gaia\_edr3	&	float32	&	Uncertainty of parallax reported with corrections by Gaia EDR3	&		\\
-% ruwe\_gaia\_dr3	&	float32	&	RUWE reported by Gaia DR3	&		\\
-% r\_med	&	float32	&	Median Distance used for calculating logg(plx)	&		\\
-% r\_lo	&	float32	&	Lower Limit Distance used for calculating logg(plx)	&		\\
-% r\_hi	&	float32	&	Higher Limit Distance used for calculating logg(plx)	&		\\
-% a\_ks	&	float32	&	Attenuation in Ks-band A(Ks) used for calculating logg(plx)	&		\\
-% mass	&	float32	&	Mass used for calculating logg(plx)	&		\\
-% age	&	float32	&	Age estimated when calculating mass	&		\\
-% bc\_ks	&	float32	&	Bolometric Correction of Ks, BC(Ks), used for calculating logg(plx)	&		\\
-% lbol	&	float32	&	Bolometric Luminosity used for calculating logg(plx)	&		\\
-% \hline
-% \end{tabular}
-% \end{table*}
+\begin{table*}
+\caption{Table schema of the GALAH DR4 main catalogues. (Continuation of Tab.~\ref{tab:main_catalog_schema1}).} \label{tab:main_catalog_schema2}
+\centering
+\begin{tabular}{lccc}
+\hline
+Keyword	&	Type	&	Description	&	Section	\\
+\hline
+sb2\_rv\_16	&	float32	&	16th perc. radial velocity of fit to syn-obs residuals	&		\\
+sb2\_rv\_50	&	float32	&	50th perc. radial velocity of fit to syn-obs residuals	&		\\
+sb2\_rv\_84	&	float32	&	84th perc. radial velocity of fit to syn-obs residuals	&		\\
+ew\_h\_beta	&	float32	&	Equivalent Width of fit for syn-obs residuals at Hbeta core	&		\\
+ew\_h\_alpha	&	float32	&	Equivalent Width of fit for syn-obs residuals at Halpha core	&		\\
+ew\_k\_is	&	float32	&	Equivalent Width of fit for K7699 Interstellar Line	&		\\
+sigma\_k\_is	&	float32	&	Sigma auf Gaussian fit for K7699 Interstellar Line	&		\\
+rv\_k\_is	&	float32	&	Radial velocity of fit to syn-obs residuals around K7699 line	&		\\
+ew\_dibX	&	float32	&	Equivalent Width of fit for X Diffiuse Interstellar Band	&		\\
+sigma\_dibX	&	float32	&	Sigma auf Gaussian fit for X DIB	&		\\
+rv\_dibX	&	float32	&	Radial velocity of fit to syn-obs residuals around X DIB	&		\\
+logg\_spec	&	float32	&	Spectroscopic surface gravity (used for fitting)	&		\\
+e\_logg\_spec	&	float32	&	Uncertainty logg\_spec	&		\\
+phot\_g\_mean\_mag	&	float32	&	Mean Gaia DR3 G-band apparent magnitude	&		\\
+phot\_bp\_mean\_mag	&	float32	&	Mean Gaia DR3 BP-band apparent magnitude	&		\\
+bp\_rp	&	float32	&	Color of BP-RP bands	&		\\
+h\_m	&	float32	&	2MASS H-band magnitude	&		\\
+h\_msigcom	&	float32	&	Uncertainty of h\_m	&		\\
+ks\_m	&	float32	&	2MASS Ks-band magnitude	&		\\
+ks\_msigcom	&	float32	&	Uncertainty of ks\_m	&		\\
+W2mag	&	float32	&	AllWISE W2-band magnitude	&		\\
+e\_W2mag	&	float32	&	uncertainty of W2mag	&		\\
+ebv	&	float32	&	Extinction E(B-V)	&		\\
+parallax	&	float32	&	Astrometric parallax used for GALAH DR4	&		\\
+e\_parallax	&	float32	&	Uncertainty of astrometric parallax used for GALAH DR4	&		\\
+parallax\_gaia\_edr3	&	float32	&	Parallax reported with corrections by Gaia EDR3	&		\\
+e\_parallax\_gaia\_edr3	&	float32	&	Uncertainty of parallax reported with corrections by Gaia EDR3	&		\\
+ruwe\_gaia\_dr3	&	float32	&	RUWE reported by Gaia DR3	&		\\
+r\_med	&	float32	&	Median Distance used for calculating logg(plx)	&		\\
+r\_lo	&	float32	&	Lower Limit Distance used for calculating logg(plx)	&		\\
+r\_hi	&	float32	&	Higher Limit Distance used for calculating logg(plx)	&		\\
+a\_ks	&	float32	&	Attenuation in Ks-band A(Ks) used for calculating logg(plx)	&		\\
+mass	&	float32	&	Mass used for calculating logg(plx)	&		\\
+age	&	float32	&	Age estimated when calculating mass	&		\\
+bc\_ks	&	float32	&	Bolometric Correction of Ks, BC(Ks), used for calculating logg(plx)	&		\\
+lbol	&	float32	&	Bolometric Luminosity used for calculating logg(plx)	&		\\
+\hline
+\end{tabular}
+\end{table*}
 
 \begin{landscape}
 \begin{figure}
@@ -1276,15 +1278,6 @@ For easier downloading, we also provide these files in tar-files per night. Furt
 Fig.~\ref{fig:galah_dr4_lz_jr_with_gcs}
 
 % \begin{landscape}
-% \begin{figure}
-% \includegraphics[width=0.975\columnwidth]{figures/galah_dr4_lz_jr_with_gcs.png}
-% \caption{
-% \textbf{Overview of the dynamical content of GALAH DR4 (black) as well as selected globular clusters (colored) in action space of angular momentum $L_Z$ versus radial action $J_R$.} Cluster members were selected as those with more than 70 percent membership probability according to \citet{Vasiliev2021}.
-% }
-% \label{fig:galah_dr4_lz_jr_with_gcs}
-% \end{figure}
-% \end{landscape}
-
 \begin{figure*}
 \includegraphics[width=\textwidth]{figures/galah_dr4_lz_jr_with_gcs.png}
 \caption{
@@ -1292,6 +1285,7 @@ Fig.~\ref{fig:galah_dr4_lz_jr_with_gcs}
 }
 \label{fig:galah_dr4_lz_jr_with_gcs}
 \end{figure*}
+% \end{landscape}
 
 \subsubsection{VAC of 3D NLTE lithium abundances}
 
