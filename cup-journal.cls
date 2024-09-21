@@ -11,7 +11,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{cup-journal}
-  [2021/07/27 v1.0 Submission to CUP journals]
+  [2023/05/02 v1.3 Submission to CUP journals]
 \LoadClass[10pt,letter,twoside]{article}
 % Style the sectioning elements:
 \renewcommand\section{\@startsection {section}{1}{\z@}%
@@ -37,11 +37,6 @@
 \def\@hangfrom#1{\setbox\@tempboxa\hbox{{#1}}%
   \hangindent 0pt%\wd\@tempboxa
   \noindent\box\@tempboxa}
-% Approximations of commercial fonts:
-\RequirePackage[scaled=0.97]{fbb}
-\RequirePackage[semibold]{sourcesanspro}
-\RequirePackage{sansmath}
-\RequirePackage[italic,eulergreek]{mathastext}
 \RequirePackage{lastpage} % For getting the last page in the first page header
 \RequirePackage{enumitem} % For list styling
 \setlist{noitemsep,leftmargin=\parindent}
@@ -83,6 +78,7 @@
 \newif\ifcup@hyperref
 \newif\ifcup@keywords
 \newif\ifcup@super
+\newif\ifcup@simfonts
 \define@key{cup}{abbreviations}[true]{%
   \cup@keyval@bool{abbreviations}{#1}%
 }
@@ -143,6 +139,9 @@
 \define@key{cup}{usetitle}[true]{%
   \cup@keyval@bool{articletitle}{#1}%
 }
+\define@key{cup}{simfonts}[true]{%
+  \cup@keyval@bool{simfonts}{#1}%
+}
 \newcommand*\cup@journal{jcupat}
 \newcommand*\cup@doi{\cup@warning{No DOI provided}}
 \newcommand*\cup@layout{traditional}
@@ -174,12 +173,20 @@
 \setkeys{cup}{
   articletitle,
   super,
-  dates,
-  copyright,
+  % dates,
+  % copyright,
   abbreviations,
   jel,
   msc,
   keywords,
+  simfonts
+}
+% Approximations of commercial fonts:
+\newcommand{\simfonts}{%
+  \RequirePackage[scaled=0.97]{fbb}
+  \RequirePackage[semibold]{sourcesanspro}
+  \RequirePackage{sansmath}
+  \RequirePackage[italic,eulergreek]{mathastext}
 }
 \RequirePackage{geometry}
 \RequirePackage{changepage}
@@ -564,7 +571,8 @@
   \parbox[b]{\dimexpr\textwidth-26mm\relax}{%
     \firstheadsize{\journalnamefont\cup@journal@name} 
     (\cup@year), {\volumefont\cup@vol}, \thepage--\pageref{LastPage}
-    \par doi:{\cup@doi}}\hfill\includegraphics[width=26mm]{cup-logo-new}\par
+    \par% doi:{\cup@doi}
+    }\hfill\includegraphics[width=26mm]{cup-logo-new}\par
   \vspace*{\baselineskip}
   {\sffamily\bfseries\color{structure@color}\MakeUppercase{\convertchar{\cup@manuscript}{-}{ }}\par}
   \vspace*{\cup@space@pre@title}%
@@ -609,7 +617,7 @@
           \datesize
           \datefont
           \ifcup@dates
-            (Received \cup@recvd; revised \cup@revd; accepted \cup@accptd; first published online \cup@publd)
+            (Received \cup@recvd; revised \cup@revd; accepted \cup@accptd)%; first published online \cup@publd)
             \vspace*{\cup@space@post@date}%
           \fi
           \ifcup@copyright
@@ -1214,6 +1222,7 @@
 \let\CUPTWOCOL\relax
 %%%% CUSTOMISATIONS FOR LARGE LAYOUT
 \newcommand*\cup@layout@large{%
+  \ifcup@simfonts\simfonts\fi
   \newlength{\cup@sidebar@width}
   \newlength{\cup@real@lmargin}
   \setlength{\cup@sidebar@width}{5cm}
@@ -1270,8 +1279,8 @@
           \ifcup@dates
             Received \cup@recvd\\%
             Revised \cup@revd\\%
-            Accepted \cup@accptd\\%
-            First published online \cup@publd%
+            Accepted \cup@accptd%\\%
+            % First published online \cup@publd%
             \par\vspace*{\cup@space@inter@extra}%
           \fi
           \cup@abstract@extras\par
@@ -1290,14 +1299,14 @@
         % \vspace*{\cup@space@inter@extra}%        
         \end{textblock*}
         % }%
-        \ifcup@copyright
-          \begin{textblock*}{\cup@sidebar@width}[0,1](\cup@real@lmargin,\dimexpr\paperheight-\Gm@bmargin\relax)
+        \begin{textblock*}{\cup@sidebar@width}[0,1](\cup@real@lmargin,\dimexpr\paperheight-\Gm@bmargin\relax)
+          \ifcup@copyright
             \raggedright\sidebarfont
             \cup@copyright@notice\par
             \vspace*{2\baselineskip}
-            \includegraphics[width=\linewidth]{cup-logo-new}
-          \end{textblock*}
-        \fi
+          \fi
+          \includegraphics[width=\linewidth]{cup-logo-new}
+        \end{textblock*}
         {%
           \titlefont
           \titlesize
@@ -1330,6 +1339,7 @@
     }%
 }
 \newcommand*\cup@layout@largetwo{%
+  \ifcup@simfonts\simfonts\fi
   \geometry{paperwidth=210mm,paperheight=280mm,
       left=1.5cm,top=2.3cm,bottom=1.7cm,right=1.4cm,
       columnsep=2em,headsep=0.8cm
@@ -1360,11 +1370,13 @@
   \pagestyle{plain}
 }
 \newcommand*\cup@layout@medium{%
+  \ifcup@simfonts\simfonts\fi
   \geometry{paperwidth=174mm,paperheight=247mm,
     top=2.3cm,bottom=1.4cm,left=1.8cm,right=1.5cm,
     headsep=0.8cm}
 }
 \newcommand*\cup@layout@small{%
+  \ifcup@simfonts\simfonts\fi
   \geometry{paperwidth=152mm,paperheight=228mm,
     top=2cm,bottom=1.5cm,left=1.7cm,right=1.5cm,
     headsep=0.5cm}
@@ -1373,7 +1385,7 @@
 \newcommand*\suppsize{\normalsize}
 \newcommand*\patch@numeric@authors{%
   %%% Make author markers numeric...
-  \renewcommand{\cup@author@fnsymbol@symbol}[1]{##1}
+  \renewcommand{\cup@author@fnsymbol@aux}[1]{##1}
   \pretocmd{\cup@author@fnsymbol}{\let\ensuremath\relax}{}{}
   \patchcmd{\cup@author@star@aux}{\else}{,\else}{}{}
   \patchcmd{\cup@author@star@aux}
@@ -1394,56 +1406,201 @@
   \def\cup@journal@name{Cambridge Default Journal}
   \cup@layout@medium
 }%
-\def\cup@jnl@testsmall{%
-  \def\cup@journal@name{Cambridge Test Journal---Small Layout}
+\def\cup@jnl@small{%
+  \def\cup@journal@name{Cambridge Small}
   \cup@layout@small
 }%
-\def\cup@jnl@testmedium{%
-  \def\cup@journal@name{Cambridge Test Journal---Medium Layout}
+\def\cup@jnl@medium{%
+  \def\cup@journal@name{Cambridge Medium}
   \cup@layout@medium
 }%
-%%%% change journal name for AOG/JOG %%%
-\def\cup@jnl@testlarge{%
-  \def\cup@journal@name{Cambridge Test Journal---Large Layout}
+\def\cup@jnl@large{%
+  \def\cup@journal@name{Cambridge Large One}
   \cup@layout@large
   \patch@numeric@authors
+}
+% v1.3: numbered sectional headings for largetwo journals
+\def\cup@jnl@largetwo{
+  \def\cup@journal@name{Cambridge Large Two}
+  \cup@layout@largetwo
+  % \setcounter{secnumdepth}{0} 
+  \patchcmd{\@maketitle}
+    {{\volumefont\cup@vol}, }{}{}{}
+  \patch@numeric@authors
+  \renewcommand{\email}[2][]{%
+    \cup@emailtrue%
+    \def\cup@contact@details{%
+      {\emailfont \textbf{Author for correspondence: }##1, Email: ##2.}%
+    }%
+  }
+  \let\endnote\footnote
+  \let\printendnotes\relax
+  \renewcommand{\thefootnote}{\alphalph{\value{footnote}}}
+  \renewcommand\footnoterule{}
+  \advance\skip\footins 4\p@\@plus2\p@\relax
 }
 \def\cup@jnl@aog{
-  \def\cup@journal@name{Annals of Glaciology}
+  % v1.01: AOG and JOG do NOT want the journal name visible
+  \def\cup@journal@name{}
   \cup@layout@large
   \patch@numeric@authors
+  \patchcmd{\@maketitle}
+    {\includegraphics[width=\linewidth]{cup-logo-new}}
+    {\journalnamefont\upshape\normalsize\bfseries cambridge.org}
+    {}{}
+  \patchcmd{\@maketitle}
+    {\textbf{www.cambridge.org}}
+    {\includegraphics[width=\linewidth]{cup-logo-new}}
+    {}{}
+  \renewcommand{\email}[2][]{%
+    \cup@emailtrue%
+    \def\cup@contact@details{%
+      {\emailfont\textbf{Author for correspondence:}\\##1,\\E-mail: ##2}%
+    }%
+  }
+  \renewmdenv[hidealllines=true,leftmargin=\z@,rightmargin=\z@,innerleftmargin=\z@,innerrightmargin=\z@,innertopmargin=\z@,innerbottommargin=\z@,frametitle={\abstractfont\sffamily Abstract},frametitleaboveskip=2mm,frametitlebelowskip=2mm]{cup@abstract@box}
+  \setcounter{secnumdepth}{3}
+  \renewcommand*\cup@etal{et al.}
+  \providecommand{\cup@reference@code}{%
+    \RequirePackage{natbib}
+    \bibliographystyle{igs}
+    \renewcommand{\bibpreamble}{\let\doi\relax}
+    \renewcommand*{\bibfont}{\footnotesize}
+    \renewcommand*{\bibsep}{\parsep}
+  }
+  \renewcommand{\figurename}{Fig.}
+  \AtEndOfClass{%
+    \colorlet{tbrowcolor}{white}
+    \colorlet{tbheadcolor}{white}
+    \arrayrulecolor{black}
+  }
+  \patchcmd{\trfiller}{structure@color}{black}{}{}
+  \patchcmd{\thfiller}{structure@color}{black}{}{}
 }
 \def\cup@jnl@jog{
-  \def\cup@journal@name{Journal of Glaciology}
+  % v1.01: AOG and JOG do NOT want the journal name visible
+  \def\cup@journal@name{}
   \cup@layout@large
   \patch@numeric@authors
+  \patchcmd{\@maketitle}
+    {\includegraphics[width=\linewidth]{cup-logo-new}}
+    {\journalnamefont\upshape\normalsize\bfseries cambridge.org}
+    {}{}
+  \patchcmd{\@maketitle}
+    {\textbf{www.cambridge.org}}
+    {\includegraphics[width=\linewidth]{cup-logo-new}}
+    {}{}
+  \renewcommand{\email}[2][]{%
+    \cup@emailtrue%
+    \def\cup@contact@details{%
+      {\emailfont\textbf{Author for correspondence:}\\##1,\\E-mail: ##2}%
+    }%
+  }
+  \renewmdenv[hidealllines=true,leftmargin=\z@,rightmargin=\z@,innerleftmargin=\z@,innerrightmargin=\z@,innertopmargin=\z@,innerbottommargin=\z@,frametitle={\abstractfont\sffamily Abstract},frametitleaboveskip=2mm,frametitlebelowskip=2mm]{cup@abstract@box}
+  \setcounter{secnumdepth}{3}
+  \renewcommand*\cup@etal{et al.}
+  \providecommand{\cup@reference@code}{%
+    \RequirePackage{natbib}
+    \bibliographystyle{igs}
+    \renewcommand{\bibpreamble}{\let\doi\relax}
+    \renewcommand*{\bibfont}{\footnotesize}
+    \renewcommand*{\bibsep}{\parsep}
+  }
+  \renewcommand{\figurename}{Fig.}
+  \AtEndOfClass{%
+    \colorlet{tbrowcolor}{white}
+    \colorlet{tbheadcolor}{white}
+    \arrayrulecolor{black}
+  }
+  \patchcmd{\trfiller}{structure@color}{black}{}{}
+  \patchcmd{\thfiller}{structure@color}{black}{}{}
 }
-\def\cup@jnl@bjps{
+
+% v1.1: Add BTD, BEL, ONE, QUT, CBP journals to use Large 1
+\def\cup@jnl@btd{
+  \def\cup@journal@name{Biotechnology Design}
+  \cup@layout@large
+} 
+
+\def\cup@jnl@bel{
+  \def\cup@journal@name{Bioelectronics}
+  \cup@layout@large
+} 
+
+\def\cup@jnl@one{
+  \def\cup@journal@name{One Health}
+  \cup@layout@large
+} 
+
+\def\cup@jnl@qut{
+  \def\cup@journal@name{Quantum Technologies}
+  \cup@layout@large
+} 
+
+\def\cup@jnl@cbp{
+  \def\cup@journal@name{Cyber-Physical Systems}
+  \cup@layout@large
+} 
+
+
+\def\cup@jnl@bjps{\cup@jnl@jps}
+\def\cup@jnl@bjpols{\cup@jnl@jps}
+\def\cup@jnl@jps{
   \def\cup@journal@name{British Journal of Political Science}
   \cup@layout@medium 
-  \colorlet{structure@color}{green!40!black}
-  \patchcmd{\@maketitle}
-    {\includegraphics[width=26mm]{cup-logo-new}}
-    {\parbox{5em}{\fontsize{1em}{1em}\fontfamily{NimbusSans}\bfseries\color{structure@color}British\\Journal of\\Political\\Science}}{}{}
+  % \colorlet{structure@color}{green!40!black}
+  % \patchcmd{\@maketitle}
+  %   {\includegraphics[width=26mm]{cup-logo-new}}
+  %   {\parbox{5em}{\fontsize{1em}{1em}\fontfamily{NimbusSans}\bfseries\color{structure@color}British\\Journal of\\Political\\Science}}{}{}
   \patch@numeric@authors
   \let\endnote\footnote
   \let\printendnotes\relax
 }
-\def\cup@jnl@jjps{
-  \def\cup@journal@name{Japanese Journal of Political Science}
-  \cup@layout@medium 
+% \def\cup@jnl@jjps{
+%   \def\cup@journal@name{Japanese Journal of Political Science}
+%   \cup@layout@medium 
+%   % \patchcmd{\@maketitle}
+%   %   {\includegraphics[width=26mm]{cup-logo-new}}
+%   %   {{\fontsize{2em}{2em}{\fontfamily{LinuxBiolinumT-LF}\selectfont JJPS}}}{}{}
+%   % \patchcmd{\@maketitle}
+%   %   {(Received \cup@recvd; revised \cup@revd; accepted \cup@accptd; first published online \cup@publd)}
+%   %   {(First published online \cup@publd)}
+%   %   {}{}
+%   \patch@numeric@authors
+%   \let\endnote\footnote
+%   \let\printendnotes\relax
+%   % \renewcommand{\cup@copyright@notice}
+%   %   {\scriptsize\textcopyright\ Cambridge University Press \cup@year.}
+% }
+
+\def\cup@jnl@ash{
+  \def\cup@journal@name{Antimicrobial Stewardship \& Healthcare Epidemiology}
+  \cup@layout@largetwo
+  % \setcounter{secnumdepth}{0}
+  % \definecolor{structure@color}{RGB}{36,62,112}
   \patchcmd{\@maketitle}
-    {\includegraphics[width=26mm]{cup-logo-new}}
-    {{\fontsize{2em}{2em}{\fontfamily{LinuxBiolinumT-LF}\selectfont JJPS}}}{}{}
-  \patchcmd{\@maketitle}
-    {(Received \cup@recvd; revised \cup@revd; accepted \cup@accptd; first published online \cup@publd)}
-    {(First published online \cup@publd)}
-    {}{}
+    {{\volumefont\cup@vol}, }{}{}{}
   \patch@numeric@authors
+  \renewcommand{\email}[2][]{%
+    \cup@emailtrue%
+    \def\cup@contact@details{%
+      {\emailfont \textbf{Author for correspondence: }##1, Email: ##2.}%
+    }%
+  }
   \let\endnote\footnote
   \let\printendnotes\relax
-  \renewcommand{\cup@copyright@notice}
-    {\scriptsize\textcopyright\ Cambridge University Press \cup@year.}
+  \renewcommand{\thefootnote}{\alphalph{\value{footnote}}}
+  \renewcommand\footnoterule{}
+  \advance\skip\footins 4\p@\@plus2\p@\relax
+
+  \providecommand{\cup@reference@code}{%
+    \RequirePackage[style=nejm,autocite=superscript]{biblatex}
+    \renewcommand*{\bibfont}{\footnotesize}
+  }
+
+  \AtEndOfClass{%
+    \arrayrulecolor{black}
+  }
 }
 \def\cup@jnl@pasa{
   \def\cup@journal@name{Publications of the Astronomical Society of Australia}
@@ -1482,13 +1639,14 @@
   \patchcmd{\trfiller}{structure@color}{black}{}{}
   \patchcmd{\thfiller}{structure@color}{black}{}{}
 }
-\def\cup@jnl@psrm{
+\def\cup@jnl@psrm{\cup@jnl@ram}
+\def\cup@jnl@ram{
   \def\cup@journal@name{Political Science Research and Methods}
   \cup@layout@medium 
-  \colorlet{structure@color}{red!70!black}
+  % \colorlet{structure@color}{red!70!black}
   \patch@numeric@authors
-  \patchcmd{\@maketitle}
-    {cup-logo-new}{epsa-outline-black}{}{}
+  % \patchcmd{\@maketitle}
+    % {cup-logo-new}{epsa-outline-black}{}{}
   \let\endnote\footnote
   \let\printendnotes\relax
   \AtEndOfClass{%
@@ -1499,23 +1657,49 @@
   \patchcmd{\trfiller}{structure@color}{black}{}{}
   \patchcmd{\thfiller}{structure@color}{black}{}{}
 }
-\def\cup@jnl@jpup{
-  \def\cup@journal@name{Journal of Public Policy}
-  \cup@layout@small 
-  \patch@numeric@authors
-  \patchcmd{\@maketitle}
-    {\includegraphics[width=26mm]{cup-logo-new}}
-    {\fcolorbox{black}{black}{\includegraphics[height=2em]{pup-logo}}}{}{}
-  \let\endnote\footnote
-  \let\printendnotes\relax
-  \AtEndOfClass{%
-    \colorlet{tbrowcolor}{white}
-    \colorlet{tbheadcolor}{white}
-    \arrayrulecolor{black}
-  }
-  \patchcmd{\trfiller}{structure@color}{black}{}{}
-  \patchcmd{\thfiller}{structure@color}{black}{}{}
+
+% v1.1: Add NWS, AAS journals to Medium layout
+\def\cup@jnl@nws{
+  \def\cup@journal@name{Network Science}
+  \cup@layout@medium
 }
+\def\cup@jnl@aas{
+  \def\cup@journal@name{Annals of Actuarial Science}
+  \cup@layout@medium
+}
+
+% v1.1: Add MDY, JLC, SPQ to Small layout
+\def\cup@jnl@mdy{
+  \def\cup@journal@name{Macroeconomic Dynamics}
+  \cup@layout@small
+}
+\def\cup@jnl@jlc{
+  \def\cup@journal@name{Journal of Law and Courts}
+  \cup@layout@small
+}
+\def\cup@jnl@spq{
+  \def\cup@journal@name{State Politics \& Policy Quarterly}
+  \cup@layout@small
+}
+
+% \def\cup@jnl@jpup{
+%   \def\cup@journal@name{Journal of Public Policy}
+%   \cup@layout@small 
+%   \patch@numeric@authors
+%   % \patchcmd{\@maketitle}
+%   %   {\includegraphics[width=26mm]{cup-logo-new}}
+%   %   {\fcolorbox{black}{black}{\includegraphics[height=2em]{pup-logo}}}{}{}
+%   \let\endnote\footnote
+%   \let\printendnotes\relax
+%   \AtEndOfClass{%
+%     \colorlet{tbrowcolor}{white}
+%     \colorlet{tbheadcolor}{white}
+%     \arrayrulecolor{black}
+%   }
+%   \patchcmd{\trfiller}{structure@color}{black}{}{}
+%   \patchcmd{\thfiller}{structure@color}{black}{}{}
+% }
+
 \ifcsname cup@jnl@\cup@journal\endcsname%
   \csname cup@jnl@\cup@journal\endcsname%
 \else%

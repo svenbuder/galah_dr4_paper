@@ -1,7 +1,7 @@
 \documentclass[
   journal=pasa,
   manuscript=research-paper, %% or "review"
-  year=2023,
+  year=2024,
   volume=37
 ]{cup-journal}
 
@@ -85,6 +85,11 @@
 \affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
+
+%%%%%%%%%%%%%%%%%%%%
+% Core Tier
+%%%%%%%%%%%%%%%%%%%%
+
 %%%% NEW AUTHOR
 \author{M.~McKenzie}
 \affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
@@ -99,6 +104,7 @@
 \author{S.~L.~Martell}
 \affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+\alsoaffiliation{UNSW Data Science Hub, University of New South Wales, Sydney, NSW 2052, Australia}
 
 %%%% NEW AUTHOR
 \author{M.~R.~Hayden}
@@ -112,6 +118,18 @@
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
+\author{R.~de~Grijs}
+\affiliation{School of Mathematical and Physical Sciences, Macquarie University, Balaclava Road, Sydney, NSW 2109, Australia}
+\alsoaffiliation{Astrophysics and Space Technologies Research Centre, Macquarie University, Balaclava Road, Sydney, NSW 2109, Australia}
+\alsoaffiliation{International Space Science Institute-Beijing, 1 Nanertiao, Zhongguancun, Beijing 100190, China}
+
+%%%% NEW AUTHOR
+\author{B.~T.~Montet}
+\affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+\alsoaffiliation{UNSW Data Science Hub, University of New South Wales, Sydney, NSW 2052, Australia}
+
+%%%% NEW AUTHOR
 \author{T.~Nordlander}
 \affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
@@ -119,6 +137,10 @@
 %%%% NEW AUTHOR
 \author{G.~Traven}
 \affiliation{Faculty of Mathematics \& Physics, University of Ljubljana, Jadranska 19, 1000 Ljubljana, Slovenia}
+
+%%%%%%%%%%%%%%%%%%%%
+% SMG Tier
+%%%%%%%%%%%%%%%%%%%%
 
 %%%% NEW AUTHOR
 \author{J.~Bland-Hawthorn}
@@ -162,6 +184,14 @@
 \author{T.~Zwitter}
 \affiliation{Faculty of Mathematics \& Physics, University of Ljubljana, Jadranska 19, 1000 Ljubljana, Slovenia}
 
+%%%%%%%%%%%%%%%%%%%%
+% Additional Tier
+%%%%%%%%%%%%%%%%%%%%
+
+%%%% NEW AUTHOR
+\author{A.~M.~Amarsi}
+\affiliation{Theoretical Astrophysics, Department of Physics and Astronomy, Uppsala University, Box 516, 751 20 Uppsala, Sweden}
+
 %%%% NEW AUTHOR
 \author{K.~Banks}
 \affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
@@ -172,9 +202,18 @@
 \affiliation{Faculty of Mathematics \& Physics, University of Ljubljana, Jadranska 19, 1000 Ljubljana, Slovenia}
 
 %%%% NEW AUTHOR
+\author{B.~Chen}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+%%%% NEW AUTHOR
 \author{I.~Ciuc{\u{a}}}
 \affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+%%%% NEW AUTHOR
+\author{D.~Nataf}
+\affiliation{Center for Astrophysical Sciences and Department of Physics and Astron- omy, The Johns Hopkins University, Baltimore, MD 21218, USA}
 
 %%%% NEW AUTHOR
 \author{M.~K.~Ness}
@@ -190,13 +229,20 @@
 \affiliation{Faculty of Mathematics \& Physics, University of Ljubljana, Jadranska 19, 1000 Ljubljana, Slovenia}
 
 %%%% NEW AUTHOR
+\author{Z.~Wang}
+\affiliation{Sydney Institute for Astronomy, School of Physics, A28, The University of Sydney, NSW 2006, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+\alsoaffiliation{Department of Physics and Astronomy, University of Utah, Salt Lake City, UT 84112, USA}
+
+%%%% NEW AUTHOR
 \author{The GALAH Collaboration}
 \affiliation{https://www.galah-survey.org}
 
+%%%% OBSERVERS NOT COAUTHORS YET: M. Perko, S. Campbell, F. Liu, A. Hughes, G. Nandakumar, W. Oliver, M. Zerjal,
 
 \doi{10.1017/pasa.2020.32}
 
-\received {dd Mmm 2024}
+\received {01 October 2024}
 \revised  {dd Mmm 2024}
 \accepted {dd Mmm 2024}
 \published{dd Mmm 2024}
@@ -1327,7 +1373,9 @@ In particular the dedicated observing programs of GALAH towards low angular mome
 
 \subsubsection{VAC of 3D NLTE lithium abundances}
 
-\SB{Ella: Can you add your description here?}
+\SB{Ella: Can you add your description here? Maybe also an example of a fit to the Li6708 line to impress people?}
+
+For convenience, we have already included the most important columns \SB{LIST THEM HERE} of this catalogue in the \texttt{allstar} catalogue, as we recommend to use them instead of the less accurate 1D NLTE abundance estimates.
 
 \subsubsection{Ages}
 
@@ -1390,15 +1438,10 @@ While we have tried to stars with diverse abundance, such as carbon-enhanced met
 \subsubsection{Over- and underdensities at neural network edges}
 
 While the use of one neural network to interpolate the high-dimensional spectrum space is preferable, in practice, different science cases may drive the decision to use several networks.
-
 If the science case is to reach maximum precision, one neural network that is trained on the typical spectrum could be used at the expense of properly modelling peculiar spectra.
-
 If the science case is to reach maximum accuracy, only the regions with reliable line data and spectrum synthesis might be preferable.
-
 If the science case is to find peculiar stars, a larger coverage is needed to avoid the inaccurate extrapolation of stars with extreme abundances.
-
 In practice, large collaborations likely unite all of these goals, and a compromise has to be struck between the different approaches.
-
 For future analyses, a possible solution could therefore be to follow a 2-step approach of first running one generic neural network for all spectra and then using optimized neural networks -- or full spectrum synthesis -- on smaller target samples of specific science cases.
 
 \subsection{Mismatch of spectroscopic and photometric information} \label{sec:caveats_photospec}
