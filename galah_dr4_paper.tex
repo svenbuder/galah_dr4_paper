@@ -245,7 +245,7 @@ With this fourth data release (DR4) from the Galactic Archaeology with HERMES (G
 
 The unique observational setup of GALAH allows us to deliver chemical abundance information for a powerful and substantial set of stars: those which have exquisite astrometric information from the revolutionary \Gaia satellite \citep{Gaia-Collaboration2016} and for which we can estimate stellar ages either from empirical or theoretical models, like stellar isochrones or mass- and age-dependent changes of chemical compositions. By combining stellar ages, orbits, and chemistry, we have made major advances in our understanding of our galaxy. In particular, the discovery of the major merger of the Milky Way with another slightly less massive galaxy between 8 and $10\,\mathrm{Gyr}$ ago \citep{Belokurov2018, Helmi2018} was paradigm shifting and motivated a new rush to collect more (and more diverse) information about the stars in our Milky Way.
 
-The work of this data release is motivated by expanding the previous analysis of spectra towards a more holistic workflow that can aid upcoming surveys like 4MOST \citep{4MOST2019} and WEAVE \citep{Dalton2014}. Switching to the use of neural networks for interpolating synthetic spectra allows us to model the full wavelength range, including broad absorption features from $\mathrm{C_2}$ and CN molecules, rather than a small selection of wavelength windows around narrow atomic lines. It even enables us to model all stellar labels (global parameters and elemental abundances) simultaneously and derive interstellar properties from the residuals of observations and synthetic stellar spectra.
+GALAH DR4 is the natural continuation of both the observing program aiming to take spectra of 1 million stars \citep{DeSilva2015}, as well as our continuous work on improving both the spectrum reduction and analysis pipelines. While we had developed a novel data-driven pipeline to analyse the full spectrum with \textit{The Cannon} \citep{Ness2015} interpolation and fitting code for GALAH DR1 and DR2 \citep{Martell2017, Buder2018}, we have returned to the costly spectrum synthesis in DR3 \citep{Buder2021} we we only afforded for a small wavelength range in order to confirm the accuracy of the data-driven approach. In this data release, we are now using a hybrid approach. We create a training set of synthetic spectra across the full wavelength range with the same synthesis code as was used for DR3 and then train a neural network interpolation routine to quickly interpolate them in a high-dimensional space. Switching to the use of neural networks for interpolating synthetic spectra allows us to model the full wavelength range, including broad absorption features from $\mathrm{C_2}$ and CN molecules, rather than a small selection of wavelength windows around narrow atomic lines. It even enables us to model all stellar labels (global parameters and elemental abundances) simultaneously and derive interstellar properties from the residuals of observations and synthetic stellar spectra while also being able to include non-spectroscopic information during the optimisation. We lay out our workflow in the following section and detail it through this manuscript in the hope that it will proof useful for  upcoming surveys like 4MOST \citep{4MOST2019} and WEAVE \citep{Dalton2014}.
 
 \subsection{Workflow} \label{sec:workflow}
 
@@ -263,13 +263,9 @@ The workflow of GALAH DR4 is depicted in Fig.~\ref{fig:workflow_galah_dr4} and w
 \label{sec:data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The GALAH Survey uses the 3.9-metre Anglo-Australian Telescope at Siding Spring Observatory on Gamilaraay Country and its Two-Degree Field positioning system (2dF) top end \citep{Lewis2002}. 2dF magnetically places up to 400 fibre entrances on one of two metal field plates, which can be tumbled to allow observing of one set of fibres while configuring the other. Light is delivered through the fibres to the High Efficiency and Resolution Multi-Element Spectrograph (HERMES) spectrograph \citep{Barden2010, Brzeski2011, Heijmans2012, Farrell2014, Sheinis2015} and dispersed into four non-contiguous wavelength bands in the optical. The data used in this data release is primarily based on observations of stars with said setup, but also makes us of auxiliary photometric and astrometric information for the stars where available.
+The GALAH Survey uses the 3.9-metre Anglo-Australian Telescope at Siding Spring Observatory on Gamilaraay Country and its Two-Degree Field positioning system (2dF) top end \citep{Lewis2002}. 2dF magnetically places up to 400 fibre entrances on one of two metal field plates, which can be tumbled to allow observing of one set of fibres while configuring the other. Light is delivered through the fibres to the High Efficiency and Resolution Multi-Element Spectrograph (HERMES) spectrograph \citep{Barden2010, Brzeski2011, Heijmans2012, Farrell2014, Sheinis2015} and dispersed into four non-contiguous wavelength bands in the optical that cover $\sim 1000\,\text{\AA}$ in the range of $4713-4903$ (blue CCD or CCD1), $5648-5873$ (green / CCD2), $6478-6737$ (red / CCD3), and $7585-7887\,\text{\AA}$ (infrared IR / CCD4). The data used in this data release is primarily based on observations of stars with said setup, but also makes us of auxiliary photometric and astrometric information for the stars where available.
 
 In this Section, we describe which stars we have targeted and observed (Sec.~\ref{sec:target_selection_observations}) with the 2dF-HERMES setup, including the first description of the second phase of GALAH observations (GALAH Phase 2) with a sharper focus on main-sequence turnoff stars to estimate more precise ages. In Sec.~\ref{sec:spectroscopic_data_from_galah_observations}, we briefly summarise the properties of the spectroscopic data and how they were reduced to one-dimensional spectra. We also point out major changes in the observations and reductions with respect to the previous (third) data release \citep{Buder2021}. We further elaborate on the auxiliary information that was used for the analysis in Sec.~\ref{sec:non-spec_data}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Target selection and observational setup} \label{sec:target_selection_observations}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure*}[ht]
  \centering
@@ -279,6 +275,10 @@ Shown are the targets of GALAH Phase 1 (dark blue) and Phase 2 (medium blue), th
 }
  \label{fig:galah_dr4_skymap_gaiadr3}
 \end{figure*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Target selection and observational setup} \label{sec:target_selection_observations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 GALAH DR4 is a combination of the main GALAH survey and additional projects to observe asteroseismic targets from the K2 \citep{Sharma2019} and TESS missions \citep{Sharma2018}, as well as hand-picked and random observations as part of other programs. Additional proposals with 2dF-HERMES have contributed targeted observations of globular cluster members (PI M. McKenzie and PI M. Howell), open clusters (PI G. De Silva and PI J. Kos), young stellar associations (PI J. Kos), and halo stars (PI S. Buder) in addition to their by-chance observation through the main surveys. The column \texttt{survey\_name} in our catalogues denotes this origin. An all-sky view of GALAH DR4 is shown in Fig.~\ref{fig:galah_dr4_skymap_gaiadr3}.
 
@@ -337,15 +337,6 @@ other & 44\,901\\
  \end{tabular}
 \end{table}
 
-GALAH Phase 2 extended these times to $3 \times 10$ and $3 \times 30$ minutes, respectively, and included repeat observations of GALAH Phase 1 main targets with another $3 \times 15$ minutes. K2-HERMES observations targeted stars with $13 < V_\mathrm{JK} < 15$ or even $13 < V_\mathrm{JK} < 15.8$ to complement the K2 Galactic Archaeology Program \citep{Stello2015}. These fields were observed for 2 hours, similar to most globular and open cluster stars. Worse seeing conditions or thin clouds triggered between one ($2 < \mathrm{seeing} < 2.5\,\mathrm{arcsec}$) and 3 ($2.5 < \mathrm{seeing} < 3\,\mathrm{arcsec}$) additional exposures. In addition to the science frames, quartz fibre flat and ThXe arc lamp observations were taken directly before or after each set of science exposures, and bias frames were taken at the beginning or end of each observing night.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Spectroscopic data from GALAH observations}
-\label{sec:spectroscopic_data_from_galah_observations}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Since the commissioning of the HERMES spectrograph in late 2013 until 6 August 2023, the GALAH collaboration and its partners have observed and successfully reduced \allspecnumber spectra of \allstarnumber stars. The spectroscopic data are collected by four separate CCDs that cover $\sim 1000\,\text{\AA}$ in the range of $4713-4903$ (blue CCD or CCD1), $5648-5873$ (green / CCD2), $6478-6737$ (red / CCD3), and $7585-7887\,\text{\AA}$ (infrared IR / CCD4), as can be seen from the reduced example spectrum of the asteroid 4 Vesta in Fig.~\ref{fig:210115002201239_abundance_examples}. The reduction process to create FITS files of reduced spectra from two-dimensional images of the cameras employs an updated and publicly available \href{https://github.com/sheliak/galah_reduction/blob/master/extract6.0.py}{version 6} of the already well-tested reduction pipeline \citep{Kos2017}. The extensions of these files are listed in Tab.~\ref{tab:reduction_fits} and created as follows.
-
 \begin{table}
     \centering
     \caption{Data product 1: FITS files of reduced spectra}
@@ -366,6 +357,15 @@ Since the commissioning of the HERMES spectrograph in late 2013 until 6 August 2
     \end{tabular}
 \end{table}
 
+GALAH Phase 2 extended these times to $3 \times 10$ and $3 \times 30$ minutes, respectively, and included repeat observations of GALAH Phase 1 main targets with another $3 \times 15$ minutes. K2-HERMES observations targeted stars with $13 < V_\mathrm{JK} < 15$ or even $13 < V_\mathrm{JK} < 15.8$ to complement the K2 Galactic Archaeology Program \citep{Stello2015}. These fields were observed for 2 hours, similar to most globular and open cluster stars. Worse seeing conditions or thin clouds triggered between one ($2 < \mathrm{seeing} < 2.5\,\mathrm{arcsec}$) and 3 ($2.5 < \mathrm{seeing} < 3\,\mathrm{arcsec}$) additional exposures. In addition to the science frames, quartz fibre flat and ThXe arc lamp observations were taken directly before or after each set of science exposures, and bias frames were taken at the beginning or end of each observing night.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Spectroscopic data from GALAH observations}
+\label{sec:spectroscopic_data_from_galah_observations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Since the commissioning of the HERMES spectrograph in late 2013 until 6 August 2023, the GALAH collaboration and its partners have observed and successfully reduced \allspecnumber spectra of \allstarnumber stars. A reduced example spectrum of the asteroid 4 Vesta (used as reference for a Solar spectrum) is shown in Fig.~\ref{fig:210115002201239_abundance_examples}. The reduction process to create FITS files of reduced spectra from two-dimensional images of the cameras employs an updated and publicly available \href{https://github.com/sheliak/galah_reduction/blob/master/extract6.0.py}{version 6} of the already well-tested reduction pipeline \citep{Kos2017}. The file extensions are listed in Tab.~\ref{tab:reduction_fits} and created as follows.
+
 Science frames are corrected by removing the bias, dividing out the different gain of the two readout amplifiers per CCD, flagging bad pixels, and dividing by master flatfield frames, as well as removing cosmic rays and scattered light. Subsequently, apertures for each fibre trace are identified and used to extract the individual spectra. 
 
 Wavelength calibrations are performed via Chebyshev polynomial functions based on the ThXe arc frames and the spectra are interpolated onto a linearly increasing wavelength grid. The starting wavelength \texttt{CRVAL1} and dispersion \texttt{CDELT1} are saved in the headers of each FITS file.
@@ -380,8 +380,14 @@ The wavelength dependent line spread functions (LSFs) are measured from the arc 
 \end{align}
 The array $\textbf{\textit{x}}$ then includes the pixels around each wavelength step that are used to apply the convolution from higher resolution to GALAH resolution spectra. The fitted values of $fwhm$ are saved in extension~7 with $b$ saved in the headers.
 
-\SB{Should we elaborate on any overall information, like SNR overview and pointing on the sky?}
-\SB{Elaborate on how the reduction pipeline parameters \texttt{teff\_r} etc. are estimated.}
+The achieve signal-to-noise ratio of the individual exposures depends on the spectral types, reddening, and observational conditions. Especially the repeat observations of previous pointings has increased the signal-to-noise for co-added spectra with respect to GALAH DR3. This can be appreciated from Fig.~\ref{fig:snr_distribution}, where we plot the cumulative distribution function for all stars of GALAH DR3 (dashed lines) and GALAH DR4 (solid lines) for the different CCDs. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/snr_distribution.pdf}
+    \caption{Cumulative Distribution Function (CDF) of the logarithmic Signal-to-Noise Ratio (SNR) for the 4 CCDs of the HERMES spectrograph comparing GALAH DR4 (solid lines) and GALAH DR3 (dashed lines).}
+    \label{fig:snr_distribution}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Auxiliary data from \Gaia, 2MASS, and literature} \label{sec:non-spec_data}
@@ -459,8 +465,7 @@ In this section, we lay out how we create smaller bins in the parameter space fr
 
 The base grid for our training set computation is the \marcs grid \citep{Gustafsson2008}, which is shown with red points in Fig.~\ref{fig:teff_logg_grid_coverage}. Following the aforementioned idea of restricting ourselves to stellar siblings, we create multiple 3-dimensional bins in \Teff, \logg, and \feh within $\pm 1$ grid points in \Teff (with either $\pm 250$ or $\pm 100\K$), \logg ($\pm 0.5\dex$), and \feh ($\pm 0.5$ or $\pm 0.25\dex $). An example box is shown for Solar siblings as a blue box in Fig.~\ref{fig:teff_logg_grid_coverage}, which is centred on $T_\text{eff} = 5750\pm250\K$, $\log g = 4.5\pm0.5\dex$ and $\mathrm{[Fe/H]} = 0.0\pm0.25\dex$.
 
-Within these bins we sample 280\footnote{This number is chosen to match the 28 CPUs of our computing nodes.} synthetic spectra with no rotational broadening, which are later broadened with different rotational velocities \vsini to create between 1680 and 2240 training set spectra for each bin. 
-%We explain the sampling of parameters and abundances in an exemplary way for the 3D bin centred on $T_\text{eff} = 5750\pm250\K$, $\log g = 4.5\pm0.5\dex$ and $\mathrm{[Fe/H]} = 0.0\pm0.25\dex$ (see blue box in Fig.~\ref{fig:teff_logg_grid_coverage}).
+Within these bins we sample 280\footnote{This number is chosen to match the 28 CPUs of our computing nodes.} synthetic spectra with no rotational broadening, which are later broadened with different rotational velocities \vsini to create between 1680 and 2240 training set spectra for each bin. For clarity, we explain the parameter and abundance sampling for an example 3D bin centred on $T_\text{eff} = 5750\pm250\K$, $\log g = 4.5\pm0.5\dex$ and $\mathrm{[Fe/H]} = 0.0\pm0.25\dex$ (see blue box in Fig.~\ref{fig:teff_logg_grid_coverage}).
 
 \begin{figure*}[ht]
  \centering
@@ -520,7 +525,7 @@ Our synthetic grid explicitly includes C and N abundances. C was previously incl
 
 To be able to test that the flux-label correlations found by our polynomial interpolation are limited to reasonable wavelength ranges, we also calculate one spectrum that is exactly in the middle of the parameter range and additional spectra, where we increase the value of one label at a time (e.g. increase [O/Fe] by $1\dex$) to test the response in the synthetic spectrum.
 
-To save computational costs, we compute synthetic spectra with no rotational or macroturbulence broadening ($v_\text{mac} = v\sin i = 0\kms$), but save the model continuum flux (\texttt{sme.cmod}) and the specific intensities (\texttt{sme.sint}) as a function of the equal-area midpoints of each equal-area annulus $\mu$ (see Fig.~\ref{fig:sme_mu_output}). We then apply the broadening of spectra due to rotation (\vsini) with the flux integration code of the python-implementation \textsc{PySME} \citep{Wehrhahn2021} of \textsc{SME} \citep{Piskunov2017}. Depending on the expected rotational velocities (increasing with temperature) we sample a range of
+To save computational costs, we compute synthetic spectra with no rotational or macroturbulence broadening ($v_\text{mac} = v\sin i = 0\kms$), but save the continuum flux (\texttt{sme.cmod}) and the specific intensities (\texttt{sme.sint}) as a function of the equal-area midpoints of each equal-area annulus $\mu$ (see Fig.~\ref{fig:sme_mu_output}). We then apply the broadening of spectra due to rotation (\vsini) with the flux integration code of the python-implementation \textsc{PySME} \citep{Wehrhahn2021} of \textsc{SME} \citep{Piskunov2017}. Depending on the expected rotational velocities (increasing with temperature) we sample a range of
 \begin{align} \label{eq:vsini}
     v \sin i~/~\kms \in \{ 1.5, 3, 6, 9, 12, 18, 24, 36\}.
 \end{align}
@@ -555,9 +560,9 @@ After optimising the loss function for $10^4$ steps, we consider the network tra
 \label{sec:allspec_analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As outlined in Sec.~\ref{sec:introduction}, the workflow of GALAH DR4 includes a first analysis step of all observed spectra without taking non-spectroscopic information for the optimisation. This allows us to identify shifts in radial velocity between separate spectroscopic observations of the same star\footnote{While repeat observations were only done for quality assurance in GALAH Phase 1, we have started to revisit a number of the fields for another 2x15 minutes to reach the updated needed exposure time for main GALAH fields of 1.5 hours.} and a more accurate co-adding of spectra for the \textit{allstar} analysis (see Sec.~\ref{sec:allstar_analysis}). Another motivation for this step is to get a first estimate of stellar labels without potentially biased photometric and astrometric information, for example for binary stars.
+As outlined in Sec.~\ref{sec:introduction}, the workflow of GALAH DR4 includes a first analysis step of all observed spectra without taking non-spectroscopic information for the optimisation. This allows us to identify shifts in radial velocity between separate spectroscopic observations of the same star\footnote{While repeat observations were only done for quality assurance in GALAH Phase 1, a significant number of repeat observations was performed as part of Phase 2.} and a more accurate co-adding of spectra for the \textit{allstar} analysis (see Sec.~\ref{sec:allstar_analysis}). Another motivation for this step is to get a first estimate of stellar labels without potentially biased photometric and astrometric information, for example for binary stars.
 
-The optimisation of stellar labels is thus aiming to minimise the absolute difference between synthetic and observed spectra for all unmasked\footnote{We describe the masking process in Section~\ref{sec:which_labels_are_optimised}.} pixels, weighted by their uncertainty. Starting from a set of initial labels (Sec.~\ref{sec:initial_stellar_labels}), we create high-resolution synthetic spectra and convolve them to the resolution and wavelength grid of each observed spectrum. In an important improvement of our analysis, we perform an on-the-fly re-normalisation of the observed spectrum, which allows a more accurate comparison of synthetic and observed spectra (Sec.~\ref{sec:comparison_synthetic_spectra_to_observations}) and thus a more accurate stellar label optimisation (see Sec.~\ref{sec:stellar_label_optimisation}).
+The optimisation of stellar labels is thus aiming to minimise the absolute difference between synthetic and observed spectra, weighted by their uncertainty. Starting from a set of initial labels (Sec.~\ref{sec:initial_stellar_labels}), we create high-resolution synthetic spectra and convolve them to the resolution and wavelength grid of each observed spectrum. In an important improvement of our analysis, we perform an on-the-fly re-normalisation of the observed spectrum, which allows a more accurate comparison of synthetic and observed spectra (Sec.~\ref{sec:comparison_synthetic_spectra_to_observations}) and thus a more accurate stellar label optimisation (see Sec.~\ref{sec:stellar_label_optimisation}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Initial stellar labels}
@@ -716,7 +721,7 @@ We interpolate over the default tables of {\sc parsec+colibri} isochrones \citep
 \label{sec:post_processing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-After the \textit{allspec} (Sec.~\ref{sec:allspec_analysis}) and  \textit{allstar} (Sec.~\ref{sec:allstar_analysis}) modules have been run for a night's data, a post-processing routine is used to estimate additional parameters from the residuals of the spectra (Sec.~\ref{sec:residual_analysis}), estimate and validate accuracy and precision uncertainties (Sec.~\ref{sec:uncertainty}), and perform quality assurance tests on a global scale (\texttt{flag\_sp}, see Sec.~\ref{sec:flag_sp}) as well as for the individual abundances of elements X (\texttt{flag\_X\_fe}, see Sec.~\ref{sec:flag_x_fe}).
+After the \textit{allspec} and  \textit{allstar} modules have been run for a night's data (see Secs.~\ref{sec:allspec_analysis} and \ref{sec:allstar_analysis}, respectively), a post-processing routine is used to estimate additional parameters from the residuals of the spectra (Sec.~\ref{sec:residual_analysis}), estimate and validate accuracy and precision uncertainties (Sec.~\ref{sec:uncertainty}), and perform quality assurance tests on a global scale (\texttt{flag\_sp}, see Sec.~\ref{sec:flag_sp}) as well as for the individual abundances of elements X (\texttt{flag\_X\_fe}, see Sec.~\ref{sec:flag_x_fe}).
 
 \subsection{Analysis of spectral residuals} \label{sec:residual_analysis}
 
@@ -724,7 +729,7 @@ After the \textit{allspec} (Sec.~\ref{sec:allspec_analysis}) and  \textit{allsta
 
 The residual spectrum of our best fitting single star analysis can help us to identify a second flux contributor to the observed spectrum. In our case, there are two points in the analysis where we can identify such an influence. Firstly, the residuals are visible in the $\chi^2$ distribution as a function of radial velocity shifts (see Fig.~\ref{fig:181221003101356_single_fit_rv}). While a single star would only show one peak (saved as \texttt{rv\_comp\_1}), a binary system like 2MASS J06084657-7815235 shows a second peak ($-70\,\mathrm{km\,s^{-1}}$ in addition to $74\,\mathrm{km\,s^{-1}}$) that is saved as \texttt{rv\_comp\_2}. Secondly, we perform an automatic search for reoccuring residuals as a function of radial velocity for a few selected lines. We chose the combination of strong lines in the spectra (Balmer lines, Fe lines at 4890 and $4891\,\text{\AA}$, Ni at $6644\,\text{\AA}$) as well as those with the largest expected wavelength shift in the infrared detector (O triplet att $7772-7775\,\text{\AA}$ as well as Mg at $7692\,\text{\AA}$). If we find several peaks with a reasonably similar radial velocity, the likely $X \in {16,50,84}^\text{th}$ percentiles of this radial velocity are saved in \texttt{sb2\_rv\_X}.
 
-Because radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2022} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare against those radial velocity estimates. For 6\% (50\,577) of our stars, we find a difference with respect to \Gaia DR3 larger than $10\,\mathrm{km\,s^{-1}}$. For these stars, as well as stars for which we estimate unrealistic \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in \textit{allspec}. We note that the \textit{allspec} analysis was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged. \textit{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.
+Because radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2022} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare against those radial velocity estimates.\footnote{\SB{KL: Expand on RV - this is important science in itself to many. Is there a plot of agreement?}} For 6\% (50\,577) of our stars, we find a difference with respect to \Gaia DR3 larger than $10\,\mathrm{km\,s^{-1}}$. For these stars, as well as stars for which we estimate unrealistic \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in \textit{allspec}. We note that the \textit{allspec} analysis was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged. \textit{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.
 
 
 \begin{figure*}[ht]
@@ -759,7 +764,7 @@ The difference between synthetic and observed Balmer line absorption holds valua
 \begin{figure}[ht]
  \centering
  \includegraphics[width=\textwidth]{figures/emission_young_stars.png}
- \caption{\textbf{Distribution of residual equivalent width between observation and synthesis in the \Gaia DR3 color-absolute magnitude diagram ($G_{BP}-G_{RP}$ vs. $M_G$) for cool dwarfs.} Balmer lines in emission result in negative equivalent width values, as is the case for most young stars that are more luminous than the cool main sequence. \SB{Should we point out the interesting sequence of binary MS around $M_G \sim 7\,\mathrm{mag}$?}} \label{fig:emission_young_stars.png}
+ \caption{\textbf{Distribution of residual equivalent width between observation and synthesis in the \Gaia DR3 color-absolute magnitude diagram ($G_{BP}-G_{RP}$ vs. $M_G$) for cool dwarfs.} Balmer lines in emission result in negative equivalent width values, as is the case for most young stars that are more luminous than the cool main sequence. \SB{Should we point out the interesting sequence of binary MS around $M_G \sim 7\,\mathrm{mag}$? KL: over-density of equal mass binaries?}} \label{fig:emission_young_stars.png}
 \end{figure}
 
 
@@ -790,7 +795,7 @@ $v_\text{rad}~/~\mathrm{km\,s^{-1}}$ &  0.15  & $0.17 \pm 0.02$ \\
 
 \subsubsection{Accuracy estimation and validation} \label{sec:uncertainty_accuracy}
 
-Estimating the accuracy of spectroscopic measurements has always been a complicated endeavour, because there are no universal benchmark sets for all parameters. Subsequently, we there describe the numerous comparisons that we have performed for both stellar parameters (\Teff, \logg, \feh, \vmic, \vsini, and \vrad) as well as the elemental abundance measurements. Due to the limited coverage of benchmark literature, we continue to apply a universal accuracy estimate for the stellar parameters and no accuracy estimate for the elemental abundances \citep[as for GALAH DR3][]{Buder2021}.
+Estimating the accuracy of spectroscopic measurements has always been a complicated endeavour, because there are no universal benchmark sets for all parameters. Subsequently, we describe the numerous comparisons that we have performed for both stellar parameters (\Teff, \logg, \feh, \vmic, \vsini, and \vrad) as well as the elemental abundance measurements. Due to the limited coverage of benchmark literature, we continue to apply a single accuracy estimate for each stellar parameter and no accuracy estimate for the elemental abundances \citep[as for GALAH DR3][]{Buder2021}.
 
 % \SB{Describe shifts applied to the parameters and abundances. Most important is the increase of $\mathrm{[Fe/H]}$: Here we had to apply a piece-wise shift, described in Eq.~\ref{eq:piecewise_feh_shift}}
 % \begin{align}
@@ -853,7 +858,7 @@ Zeropoints in Table~\ref{tab:zeropoints}
     \item K2/TESS \citet{Zinn2020} Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}b
     \item APOGEE DR17 Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}a-f
     \item \Gaia DR3 for \vrad Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}f
-    \item Globular Clusters for low \feh accuracy Fig.~\ref{fig:galah_dr4_gcs_teff_logg}
+    \item Globular Clusters for accuracy at low \feh accuracy Fig.~\ref{fig:galah_dr4_gcs_teff_logg}
     \begin{itemize}
         \item 47 Tuc \citet{Carretta2009, Carretta2009b}
         \item NGC 6362
