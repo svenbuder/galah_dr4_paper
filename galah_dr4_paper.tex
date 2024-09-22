@@ -212,6 +212,11 @@
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
+\author{G.~S.~Da~Costa}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+%%%% NEW AUTHOR
 \author{D.~Nataf}
 \affiliation{Center for Astrophysical Sciences and Department of Physics and Astron- omy, The Johns Hopkins University, Baltimore, MD 21218, USA}
 
@@ -1253,9 +1258,12 @@ In particular the dedicated observing programs of GALAH towards low angular mome
 
 \subsubsection{VAC of 3D NLTE lithium abundances}
 
-\SB{Ella: Can you add your description here? Maybe also an example of a fit to the Li6708 line to impress people?}
 
-For convenience, we have already included the most important columns \SB{LIST THEM HERE} of this catalogue in the \texttt{allstar} catalogue, as we recommend to use them instead of the less accurate 1D NLTE abundance estimates.
+In this value-added catalogue, we apply a methodology closely following \citet{Wang2024}, leveraging GALAH DR4's \texttt{allstar} spectra and parameters to derive equivalent width (EW) measurements and infer 3D non-local thermodynamic equilibrium (NLTE) lithium abundances, A(Li). The lithium line profiles are blended with nearby metal lines, such as Fe and Ti, which are modeled with a combination of Gaussian absorption lines. The equivalent width of the blended Li feature is measured using a Monte Carlo nested sampling algorithm, which explores the posterior distribution of the parameters and generates multiple realizations of the spectra.
+
+The abundance of A(Li) is then inferred by interpolation of the EW to A(Li) relation from a pre-calculated grid. EWs are measured for 892\,224 stars (97\% of GALAH DR4), with A(Li) detections reported for 417\,828 stars (46\%) and upper limits for 474\,396 stars (52\%). A quality flag is raised by 1 for upper limits and by 2 or more to indicate other quality issues, such as negative EW estimates. This detailed process ensures the catalogue provides high-precision lithium measurements, advancing our understanding of lithium production and depletion mechanisms throughout stellar evolution.
+
+For convenience, we have already included the most important columns of this catalogue in the \texttt{allstar} catalogue (see Table~\ref{tab:main_catalog_schema}), as we recommend to use them instead of the less accurate 1D NLTE abundance estimates, which we indicate with \texttt{nn\_li*}.
 
 \subsubsection{Ages}
 
@@ -1270,13 +1278,11 @@ The reduced spectra of each night are provided in the observations directory\foo
 
 \subsubsection{Additional products of the \texttt{allspec} module} \label{sec:products_allspec}
 
-The \texttt{allspec} analysis product directory\footnote{\texttt{analysis\_products\_single/YYMMDD/sobject\_id/}} provides the files that were produced by the \texttt{allspec} module. These include the on-the-fly assessment of the radial velocity fit \texttt{*rv.png} (similar Fig.~\ref{fig:181221003101356_single_fit_rv}), the raw fitting results \texttt{*results.fits} and their covariance matrices \texttt{*covariances.npz} (similar to the entries used to produce Fig.~\ref{fig:covariance_vesta_arcturus}). We also provide a combined \texttt{*spectrum.fits} file (concatenated over the four bands) that includes the wavelength, flux, and flux uncertainty of the velocity-corrected and re-normalised observed spectrum as well as the best-fit model spectrum interpolated onto the same wavelength. Finally, we provide an informative \texttt{*comparison.pdf} (similar to Fig.~\ref{fig:210115002201239_allstar_fit_comparison}) which details the fit results, comparison of observed and model spectrum, masked wavelength regions, and wavelengths of the most important element lines. If the module did not run to completion, for example because the signal-to-noise ratio of the spectra was below the threshold of $SNR > 10$ for any CCD to even attempt a fit, not all products are available for a spectrum.
+The \texttt{allspec} analysis product directory\footnote{\texttt{analysis\_products\_single/YYMMDD/sobject\_id/}} provides the files that were produced by the \texttt{allspec} module. These include the on-the-fly assessment of the radial velocity fit \texttt{*rv.png} (similar Fig.~\ref{fig:181221003101356_single_fit_rv}), the raw fitting results \texttt{*results.fits} and their covariance matrices \texttt{*covariances.npz} (similar to the entries used to produce Fig.~\ref{fig:covariance_vesta_arcturus}). We also provide a combined \texttt{*spectrum.fits} file (concatenated over the four bands) that includes the wavelength, flux, and flux uncertainty of the velocity-corrected and re-normalised observed spectrum as well as the best-fit model spectrum interpolated onto the same wavelength. Finally, we provide an \texttt{*comparison.pdf} (similar to Fig.~\ref{fig:210115002201239_allstar_fit_comparison}) which displays the fit results, comparison of observed and model spectrum, masked wavelength regions, and wavelengths of the most important element lines. If the module did not run to completion, for example because the signal-to-noise ratio of the spectra was below the threshold of $SNR > 10$ for any CCD to even attempt a fit, not all products are available for a spectrum.
 
 \subsubsection{Additional products of the \texttt{allstar} module} \label{sec:products_allstar}
 
-The \texttt{allstar} analysis product directory\footnote{\texttt{analysis\_products\_allstar/YYMMDD/sobject\_id/}} also include the radial velocity monitoring \texttt{*rv.png}, results files  \texttt{*results.fits}, combined spectra \texttt{*spectrum.fits} as well as the \texttt{*comparison.pdf} overview, similar to the ones described in Sec.~\ref{sec:products_allspec}.
-
-In addition, each directory also includes a \texttt{*sobject\_ids.txt} file that lists all individual spectra that were co-added to create the observed spectrum and its uncertainty in \texttt{*spectrum.fits}.
+The \texttt{allstar} analysis product directory\footnote{\texttt{analysis\_products\_allstar/YYMMDD/sobject\_id/}} also include the radial velocity monitoring \texttt{*rv.png}, results files  \texttt{*results.fits}, combined spectra \texttt{*spectrum.fits} and \texttt{*comparison.pdf} overview, similar to the ones described in Sec.~\ref{sec:products_allspec}. In addition, each directory also includes a \texttt{*sobject\_ids.txt} file that lists all individual spectra that were co-added to create the observed spectrum and its uncertainty in \texttt{*spectrum.fits}.
 
 % TBD: For easier downloading, we also provide these files in tar-files per night. Furthermore, we have interpolated all normalised allstar spectra onto a common wavelength that includes the largest possible wavelength coverage of 99.9\% of radial velocity corrected spectra (neglecting pixels below 7680\AA for the infrared channel).
 
@@ -1454,6 +1460,8 @@ We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
 
 
 \bibliography{bib}
+
+\newpage
 
 \appendix
 
