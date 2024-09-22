@@ -869,7 +869,8 @@ Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar} for stellar param
 
 Zeropoints in Table~\ref{tab:zeropoints}
 
-\input{tables/zeropoints_allstar}
+
+
 
 \begin{figure*}[ht]
  \centering
@@ -1011,7 +1012,6 @@ In python, the check for a bitmask flag (e.g. 3rd bit with flag value $2^3 = 8$)
     flag_8_raised = (dr4['flag_sp'] & 8) != 0
 \end{verbatim}
 
-\input{tables/flag_sp_statistics}
 
 
 \begin{figure*}[ht]
@@ -1195,10 +1195,7 @@ The data products are provided directly on the AAO DataCentral website at \url{h
    \item \texttt{galah\_dr4\_allstar\_240705.fits}: analysis for each star based on co-added spectra of each star and using non-spectroscopic information to constrain \logg
 \end{enumerate}
 
-% Main catalogue table schema with reference:
-% \label{tab:main_catalog_schema}
-\input{tables/table_schema_short.tex}
-
+We present the main catalogue table schema in Table~\ref{tab:main_catalog_schema}, but refer the reader to the FITS headers of each catalogue for more detailed information.
 
 \begin{landscape}
 \begin{figure}
@@ -1474,23 +1471,32 @@ In this section, we append the overview of initial and final stellar parameters 
 
 \section{Data Products}
 
-In this section, we append examples of data products of GALAH DR4 that were not already shown in the main manuscript. In Fig.~\ref{fig:210115002201239_allstar_fit_comparison}, we show the automatically created fit comparison of the \texttt{allstar} module for Vesta (210115002201239). In Fig.~\ref{fig:covariance_vesta_arcturus}, we show examples of the covariance matrices for Vesta and Arcturus, as representative examples for main sequence and giant stars. We note that these covariance matrices are a direct output of \texttt{scipy.optimize.curve\_fit} and note scaled up to the final label uncertainties.
+In this section, we append examples of data products of GALAH DR4 that were not already shown in the main manuscript. We present the shortened table schema of the \texttt{allstar} and \texttt{allspec} catalogues in Table~\ref{tab:main_catalog_schema}. In Fig.~\ref{fig:210115002201239_allstar_fit_comparison}, we show the automatically created fit comparison of the \texttt{allstar} module for Vesta (210115002201239). In Fig.~\ref{fig:covariance_vesta_arcturus}, we show examples of the covariance matrices for Vesta and Arcturus, as representative examples for main sequence and giant stars. We note that these covariance matrices are a direct output of \texttt{scipy.optimize.curve\_fit} and note scaled up to the final label uncertainties.
+
+% Main catalogue table schema with reference:
+% \label{tab:main_catalog_schema}
+\input{tables/table_schema_short.tex}
 
 \begin{figure*}[ht]
  \centering
  \includegraphics[width=0.9\textwidth]{figures/210115002201239_allstar_fit_comparison.pdf} \caption{\textbf{Example output of the \texttt{allstar} fitting routine for Vesta / 210115002201239.}} \label{fig:210115002201239_allstar_fit_comparison}
 \end{figure*}
 
-\begin{figure*}[ht]
+\begin{figure}[ht]
  \centering
- \includegraphics[width=0.49\textwidth]{figures/covariance_vesta.png}
+ \includegraphics[width=\textwidth]{figures/covariance_vesta.png}
  \hfill
- \includegraphics[width=0.49\textwidth]{figures/covariance_arcturus.png}
+ \includegraphics[width=\textwidth]{figures/covariance_arcturus.png}
  \caption{\textbf{Covariance matrices for labels for Vesta (panel a) and Arcturus (panel b).}}
  \label{fig:covariance_vesta_arcturus}
-\end{figure*}
+\end{figure}
 
+\section{Stellar parameter and abundance zeropoints}
 
+We list the final stellar parameter and abundance zeropoints of the \texttt{allstar} modlue in Table~\ref{tab:zeropoints}. A complete table, including the zeropoints for the \texttt{allspec} module can be found as FITS file in the online \href{https://github.com/svenbuder/GALAH_DR4/blob/main/catalogs/galah_dr4_zeropoints_240705.fits}{repository}.
+
+% Zeropoints table with \label{tab:zeropoints}
+\input{tables/zeropoints_allstar}
 
 
 \end{document}
