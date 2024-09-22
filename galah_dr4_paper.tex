@@ -899,12 +899,7 @@ Zeropoints in Table~\ref{tab:zeropoints}
 \end{figure}
 
 
-\begin{figure*}[ht]
- \centering
- \includegraphics[width=\textwidth]{figures/galah_dr4_zeropoint_checks_allstar.png}
- \caption{\textbf{Zeropoint estimates of elemental abundances for GALAH DR4.}. Each panel shows the comparison to literature (DR4 - literature) for Vesta (blue), \Gaia FKG Benchmark Stars (orange), Stars with $\vert \mathrm{[Fe/H]} \vert \leq 0.1$ closer than $D_\varpi < 0.5\,\mathrm{kpc}$ (red), as well as stars that were also observed by APOGEE DR17 (purple).}
- \label{fig:galah_dr4_zeropoint_checks_allstar}
-\end{figure*}
+
 
 \begin{itemize}
     \item \Gaia FGK Benchmark stars \citep{Jofre2018} Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}a-c
@@ -934,15 +929,15 @@ Zeropoints in Table~\ref{tab:zeropoints}
     \end{itemize}
 \end{itemize}
 
-\begin{landscape}
-\begin{figure}
-\includegraphics[width=0.975\columnwidth]{figures/galah_dr4_gcs_teff_logg.png}
+% \begin{landscape}
+\begin{figure*}
+\includegraphics[width=\textwidth]{figures/galah_dr4_gcs_teff_logg.png}
 \caption{
 \textbf{Collage of globular clusters in the \Teff-\logg space, coloured by stellar metallicity \feh.} There are no strong systematic trends between \feh and \Teff, even for the horizontal branch stars in NGC 288, NGC 6656 (M22), and NGC 6121 (M4). NGC 5139 ($\mathrm{\omega}$Cen) shows a significant range in \feh. RMS scatter and median metallicity uncertainties for each cluster are given in the lower right of each panel. Most other clusters are consistent with no metallicity spread beyond the measurement uncertainties. 
 }
 \label{fig:galah_dr4_gcs_teff_logg}
-\end{figure}
-\end{landscape}
+\end{figure*}
+% \end{landscape}
 
 
 \subsubsection{Precision estimation and validation} \label{sec:uncertainty_precision}
@@ -963,12 +958,6 @@ Zeropoints in Table~\ref{tab:zeropoints}
  \label{fig:galah_dr4_precision_parameters}
 \end{figure}
 
-\begin{figure*}[ht]
- \centering
- \includegraphics[width=\textwidth]{figures/galah_dr4_precision_abundances.png}
- \caption{\textbf{Precision monitoring of elemental abundances as a function of SNR for the green CCD2 across for GALAH DR4.}. Each panel shows the behavior for bins of width 10 for the scatter of repeat observations of the allspec runs (blue) as well as covariance uncertainties of allspec (orange) and allstar (red) setups. \SB{Missing legend}}
- \label{fig:galah_dr4_precision_abundances}
-\end{figure*}
 
 %        \item intrinsic scatter in clusters: M~67, 
 %    \end{itemize}
@@ -1019,12 +1008,7 @@ In python, the check for a bitmask flag (e.g. 3rd bit with flag value $2^3 = 8$)
 
 
 
-\begin{figure*}[ht]
- \centering
- \includegraphics[width=\textwidth]{figures/flag_sp_overview_allstar.png}
- \caption{\textbf{Parameter overview of stars with raised major quality flag \texttt{flag\_sp} for \texttt{allstar}.}
- \textbf{Each panel} shows the logarithmic density distribution of stars in the \Teff and \logg plane with blue colormaps. A PARSEC isochrone with $\mathrm{[M/H]}=0$ and $\tau = 4.5\,\mathrm{Gyr}$ is overplotted in orange and the same mass binary main sequence (shifted from the single star one by $\Delta \log g = -0.3\,\mathrm{dex}$) is shown in red. Panel heads denote the bit mask and its description as well as how many times the flag was raised. We neglect distributions with no flag (0), for flags which have not been raised (8,9,11), and for which no results were available (15).} \label{fig:flag_sp_overview_allstar}
-\end{figure*}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1125,13 +1109,13 @@ Spectra have been classified by eye
 
 Fig.~\ref{fig:comparison_dr4_dr3_apo17}
 
-\begin{figure}
+\begin{figure*}
  \centering
  \includegraphics[width=\textwidth]{figures/comparison_dr4_dr3_apo17_Mg_fe.png}
  \includegraphics[width=\textwidth]{figures/comparison_dr4_dr3_apo17_Ni_fe.png}
  \caption{\textbf{Comparison of stars with measurements for all of GALAH DR3 (left panel), GALAH DR4 (middle panel) as well as APOGEE DR17 (right panel) for [Mg/Fe] (top row), [Ni/Fe] (middle row)}.}
  \label{fig:comparison_dr4_dr3_apo17}
-\end{figure}
+\end{figure*}
 
 \subsection{Radial velocities}
 
@@ -1176,12 +1160,12 @@ We have crossmatched the sources from GALAH DR4 with those from \Gaia DR3's vari
 
 Fig. 3 from \citet{Spoo2022}: https://arxiv.org/abs/2203.05463: logAge vs. [C/N]
 
-\begin{figure}
+\begin{figure*}
     \centering
-    \includegraphics[width=\columnwidth]{figures/cn_mass.png}
+    \includegraphics[width=\textwidth]{figures/cn_mass.png}
     \caption{The ratio of [C/N] and isochrone masses in comparison (panel a), and as a function of \Teff and \logg in panels b) and c), respectively}
     \label{fig:cn_mass}
-\end{figure}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{DATA RELEASE PRODUCTS}
@@ -1499,12 +1483,42 @@ In this section, we append examples of data products of GALAH DR4 that were not 
  \label{fig:covariance_vesta_arcturus}
 \end{figure}
 
-\section{Stellar parameter and abundance zeropoints}
+\section{Stellar parameter and abundance validation}
 
-We list the final stellar parameter and abundance zeropoints of the \texttt{allstar} modlue in Table~\ref{tab:zeropoints}. A complete table, including the zeropoints for the \texttt{allspec} module can be found as FITS file in the online \href{https://github.com/svenbuder/GALAH_DR4/blob/main/catalogs/galah_dr4_zeropoints_240705.fits}{repository}.
+\subsection{Zeropoints}
+
+We list the final stellar parameter and abundance zeropoints of the \texttt{allstar} modlue in Table~\ref{tab:zeropoints}. A complete table, including the zeropoints for the \texttt{allspec} module can be found as FITS file in the online \href{https://github.com/svenbuder/GALAH_DR4/blob/main/catalogs/galah_dr4_zeropoints_240705.fits}{repository}. As discussed in Sec.~\ref{sec:uncertainty_accuracy}, the choice of abundance zeropoints was made as a compromise between the different accuracy indicators shown in Fig.~\ref{fig:galah_dr4_zeropoint_checks_allstar} for the \texttt{allstar} module.
 
 % Zeropoints table with \label{tab:zeropoints}
 \input{tables/zeropoints_allstar}
 
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=\textwidth]{figures/galah_dr4_zeropoint_checks_allstar.png}
+ \caption{\textbf{Zeropoint estimates of elemental abundances for GALAH DR4.}. Each panel shows the comparison to literature (DR4 - literature) for Vesta (blue), \Gaia FKG Benchmark Stars (orange), Stars with $\vert \mathrm{[Fe/H]} \vert \leq 0.1$ closer than $D_\varpi < 0.5\,\mathrm{kpc}$ (red), as well as stars that were also observed by APOGEE DR17 (purple).}
+ \label{fig:galah_dr4_zeropoint_checks_allstar}
+\end{figure*}
+
+\subsection{Precision}
+
+Fig.~\ref{fig:galah_dr4_precision_abundances}
+
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=\textwidth]{figures/galah_dr4_precision_abundances.png}
+ \caption{\textbf{Precision monitoring of elemental abundances as a function of SNR for the green CCD2 across for GALAH DR4.}. Each panel shows the behavior for bins of width 10 for the scatter of repeat observations of the allspec runs (blue) as well as covariance uncertainties of allspec (orange) and allstar (red) setups. \SB{Missing legend}}
+ \label{fig:galah_dr4_precision_abundances}
+\end{figure*}
+
+\subsection{Distribution of flagged stars}
+
+Fig.~\ref{fig:flag_sp_overview_allstar}
+
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=\textwidth]{figures/flag_sp_overview_allstar.png}
+ \caption{\textbf{Parameter overview of stars with raised major quality flag \texttt{flag\_sp} for \texttt{allstar}.}
+ \textbf{Each panel} shows the logarithmic density distribution of stars in the \Teff and \logg plane with blue colormaps. A PARSEC isochrone with $\mathrm{[M/H]}=0$ and $\tau = 4.5\,\mathrm{Gyr}$ is overplotted in orange and the same mass binary main sequence (shifted from the single star one by $\Delta \log g = -0.3\,\mathrm{dex}$) is shown in red. Panel heads denote the bit mask and its description as well as how many times the flag was raised. We neglect distributions with no flag (0), for flags which have not been raised (8,9,11), and for which no results were available (15).} \label{fig:flag_sp_overview_allstar}
+\end{figure*}
 
 \end{document}
