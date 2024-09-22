@@ -67,10 +67,10 @@
 {Amarsi}, A.~M., {Barklem}, P.~S., {Asplund}, M., {Collet}, R., \&
   {Zatsarinny}, O. 2018{\natexlab{a}}, \aap, 616, A89
 
-\bibitem[{{Amarsi} {et~al.}(2019){Amarsi}, {Barklem}, {Collet}, {Grevesse}, \&
-  {Asplund}}]{Amarsi2019}
+\bibitem[{{Amarsi} {et~al.}(2019{\natexlab{a}}){Amarsi}, {Barklem}, {Collet},
+  {Grevesse}, \& {Asplund}}]{Amarsi2019}
 {Amarsi}, A.~M., {Barklem}, P.~S., {Collet}, R., {Grevesse}, N., \& {Asplund},
-  M. 2019, \aap, 624, A111
+  M. 2019{\natexlab{a}}, \aap, 624, A111
 
 \bibitem[{{Amarsi} {et~al.}(2020{\natexlab{a}}){Amarsi}, {Grevesse}, {Grumer},
   {Asplund}, {Barklem}, \& {Collet}}]{Amarsi2020b}
@@ -80,6 +80,11 @@
 \bibitem[{{Amarsi} {et~al.}(2022){Amarsi}, {Liljegren}, \&
   {Nissen}}]{Amarsi2022}
 {Amarsi}, A.~M., {Liljegren}, S., \& {Nissen}, P.~E. 2022, \aap, 668, A68
+
+\bibitem[{{Amarsi} {et~al.}(2019{\natexlab{b}}){Amarsi}, {Nissen}, \&
+  {Sk{\'u}lad{\'o}ttir}}]{Amarsi2019c}
+{Amarsi}, A.~M., {Nissen}, P.~E., \& {Sk{\'u}lad{\'o}ttir}, {\'A}.
+  2019{\natexlab{b}}, \aap, 630, A104
 
 \bibitem[{{Amarsi} {et~al.}(2018{\natexlab{b}}){Amarsi}, {Nordlander},
   {Barklem}, {Asplund}, {Collet}, \& {Lind}}]{Amarsi2018}
@@ -875,11 +880,6 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
 {Gustafsson}, B., {Edvardsson}, B., {Eriksson}, K., {et~al.} 2008, \aap, 486,
   951
 
-\bibitem[{{Halbwachs} {et~al.}(2023){Halbwachs}, {Pourbaix}, {Arenou},
-  {Galluccio}, {Guillout}, {Bauchet}, {Marchal}, {Sadowski}, \&
-  {Teyssier}}]{Halbwachs2023}
-{Halbwachs}, J.-L., {Pourbaix}, D., {Arenou}, F., {et~al.} 2023, \aap, 674, A9
-
 \bibitem[{{Heijmans} {et~al.}(2012){Heijmans}, {Asplund}, {Barden}, {Birchall},
   {Carollo}, {Bland-Hawthorn}, {Brzeski}, {Case}, {Churilov}, {Colless},
   {Dean}, {De Silva}, {Farrell}, {Fiegert}, {Freeman}, {Gers}, {Goodwin},
@@ -1005,6 +1005,9 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
   {Hayden}, {Horner}, {Nataf}, \& {Ting}}]{Kos2018b}
 {Kos}, J., {Bland-Hawthorn}, J., {Betters}, C.~H., {et~al.} 2018, \mnras, 480,
   5475
+
+\bibitem[{{Lewis}(2019)}]{Lewis2019}
+{Lewis}, A. 2019, arXiv e-prints, arXiv:1910.13970
 
 \bibitem[{{Lewis} {et~al.}(2002){Lewis}, {Cannon}, {Taylor}, {Glazebrook},
   {Bailey}, {Baldry}, {Barton}, {Bridges}, {Dalton}, {Farrell}, {Gray},
@@ -1258,11 +1261,6 @@ Skrutskie, M.~F., Cutri, R.~M., Stiening, R., {et~al.} 2006, \aj, 131, 1163
   {Ram{\'{\i}}rez}, {Monroe}, {Asplund}, \& {Yong}}]{Spina2016}
 {Spina}, L., {Mel{\'e}ndez}, J., {Karakas}, A.~I., {et~al.} 2016, \aap, 593,
   A125
-
-\bibitem[{{Spoo} {et~al.}(2022){Spoo}, {Tayar}, {Frinchaboy}, {Cunha}, {Myers},
-  {Donor}, {Majewski}, {Bizyaev}, {Garc{\'\i}a-Hern{\'a}ndez}, {J{\"o}nsson},
-  {Lane}, {Pan}, {Longa-Pe{\~n}a}, \& {Roman-Lopes}}]{Spoo2022}
-{Spoo}, T., {Tayar}, J., {Frinchaboy}, P.~M., {et~al.} 2022, \aj, 163, 229
 
 \bibitem[{{Steinmetz} {et~al.}(2020){Steinmetz}, {Matijevi{\v{c}}}, {Enke},
   {Zwitter}, {Guiglion}, {McMillan}, {Kordopatis}, {Valentini}, {Chiappini},
