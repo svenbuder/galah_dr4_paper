@@ -273,19 +273,11 @@ Surveys; the Galaxy; methods: observational; methods: data analysis; stars: fund
 \begin{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The stars of the Milky Way carry the chemical history of our Galaxy within their atmospheres as they journey through its vast expanse. Like bar codes, we can extract the chemical fingerprint of stars from high-resolution spectroscopy. The fourth data release (DR4) of the Galactic Archaeology with HERMES (GALAH) Survey provides the chemical abundances of up to 31 elements for \allstarnumber stars that also have exquisite astrometric information from the \Gaia satellite.
+The stars of the Milky Way carry the chemical history of our Galaxy within their atmospheres as they journey through its vast expanse. Like barcodes, we can extract the chemical fingerprints of stars from high-resolution spectroscopy. The fourth data release (DR4) of the Galactic Archaeology with HERMES (GALAH) Survey, based on a decade of observations, provides the chemical abundances of up to 31 elements for \allstarnumber stars that also have exquisite astrometric data from the \textit{Gaia} satellite. For the first time, these elements include life-essential nitrogen to complement carbon, and oxygen (CNO) and more measurements of rare earth elements critical to modern life electronics, offering unparalleled insights into the chemical composition of the Milky Way.
 
-\SB{GALAH is celebrating its 10 year anniversary!}
+For this data release, we employ neural networks to simultaneously fit stellar parameters and chemical abundances across the full spectrum, leveraging synthetic grids computed with Spectroscopy Made Easy. The grids include atomic line formation in non-local thermodynamic equilibrium (NLTE) for 14 elements. In a two-iteration process, we first fit stellar labels for all \allspecnumber spectra, then co-add repeat spectra and refine these labels using astrometric data from \textit{Gaia} and 2MASS photometry to deliver improved accuracy and precision. Our validation thoroughly assesses the reliability of these measurements and highlights key caveats for catalogue users.
 
-"elements of modern life: CNO and rare heavy elements for electronics"
-
-For this data release, we utilise neural networks to simultaneously fit all stellar labels (stellar parameters and elemental abundances) based on the full wavelength range. The neural networks are trained on grids of synthetic spectra that are computed with Spectroscopy Made Easy with atomic line formation calculated in non-local thermodynamic equilibrium for 14 elements. In a first iteration, we fit the best set of labels and in particular radial velocities for all \allspecnumber spectra, including repeat observations. These are used to properly co-add spectra (for example of spectroscopic binaries without line-splitting) for the second major iteration. This loop uses the distances inferred from astrometric data of the \Gaia satellite and 2MASS photometry to self-consistently infer more accurate and precise stellar labels.
-
-Notable improvements of this data release are the newly available abundances of carbon and nitrogen from molecular features as well as the significantly improved precision and number of elemental abundances, in particular for neutron-capture elements.
-
-\SB{Some note that higher precision and more daring extraction of abundances through multiple neural networks comes at a risk, as we line out in caveats section.}
-
-The combination of chemical compositions across multiple nucleosynthetic paths, orbit information, and age estimates for almost a million stars from GALAH DR4 provides a rich data set for Galactic exploration.
+GALAH DR4 represents yet another milestone in Galactic archaeology, combining detailed chemical compositions from multiple nucleosynthetic channels with kinematic information and age estimates. The resulting dataset, covering nearly a million stars, opens new avenues for understanding not only the chemical and dynamical history of the Milky Way, but also the broader questions of the origin of elements and the evolution of planets, stars, and galaxies.
 
 \end{abstract}
 
@@ -943,10 +935,6 @@ To get a better idea of the actual improvement of accuracy and improvement, we h
 
 In addition to these instructive comparisons, we also want to return to the precision of Solar twins from Fig.~\ref{fig:galah_dr4_age_xfe_trends_solar_twins_allstar}. Here we specifically want to highlight the significant improvement of precision from GALAH DR3 to GALAH DR4 with respect to the linear estimate from \citet{Bedell2018} for C (from 0.09 to 0.045), Si (from 0.04 to 0.023), Ca (0.07 to 0.049), Ti (0.05 to 0.031), V (0.13 to 0.050), Cr (0.06 to 0.024), Ni (0.07 to 0.033), and Y (0.12 to 0.080). This improvement of sometimes a factor of 2 is remarkable and most of our comparisons indicate that these values are representative of a precision improvement beyond the Solar twins, as shown for example for Ni in Fig.~\ref{fig:comparison_dr4_dr3_apo17}.
 
-\SB{[C/N]}
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Stellar parameter flags \textsc{flag\_sp}}
@@ -1338,9 +1326,13 @@ These caveats are the unfortunate negative effects of our successful attempt to 
 \section{CONCLUSIONS}
 \label{sec:conclusion}
 
-\SB{GALAH is celebrating its 10 year anniversary!}
+The GALAH survey celebrates its 10th anniversary with the release of GALAH DR4, marking a decade of significant contributions to our understanding of the Milky Way and the elemental composition of its stars. Over the years, GALAH has been instrumental in measuring and cataloging the chemical fingerprints of stars, which serve as cosmic barcodes that reveal their formation histories, migration patterns, and the evolutionary processes that shaped our Galaxy.
 
-"elements of modern life: CNO and rare heavy elements for electronics"
+With GALAH DR4, we have improved upon the precision and accuracy of stellar parameters and elemental abundances for over a million stars. This release benefits from a decade of continuous development in spectroscopic techniques, calibration processes, and the adoption of cutting-edge models like 1D NLTE and even 3D NLTE synthesis for lithium abundances. The inclusion of photometric and astrometric information from \Gaia DR3 has further strengthened the reliability of stellar parameters, particularly for surface gravities, breaking long-standing degeneracies in spectroscopic data.
+
+The unique value of GALAH lies in its detailed mapping of elements crucial to life as we know it. By tracking the abundances of carbon, nitrogen, and oxygen (CNO), as well as rare heavy elements used in modern electronics, GALAH has provided key insights into how the building blocks of life and technology were forged in the interiors of stars and distributed throughout the Milky Way over billions of years.
+
+The next decade promises further improvements and discoveries as GALAH continues to push the boundaries of stellar spectroscopy. Upcoming surveys and future releases will likely address the caveats discussed in this work, refine the data products, and expand upon the wealth of knowledge already provided. The legacy of GALAH will undoubtedly continue to influence not only stellar and galactic archaeology but also our broader understanding of the cosmos and the elements that shape modern life.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
