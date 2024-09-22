@@ -168,9 +168,6 @@
   Silva}}]{Barden2010}
 {Barden}, S.~C., {Jones}, D.~J., {Barnes}, S.~I., {et~al.} 2010, SPIE, 7735, 09
 
-\bibitem[{{Bashi} {et~al.}(2023){Bashi}, {Mazeh}, \& {Faigler}}]{Bashi2023}
-{Bashi}, D., {Mazeh}, T., \& {Faigler}, S. 2023, \mnras, 522, 1184
-
 \bibitem[{{Baumgardt} \& {Vasiliev}(2021)}]{Baumgardt2021}
 {Baumgardt}, H., \& {Vasiliev}, E. 2021, \mnras, 505, 5957
 
@@ -218,6 +215,9 @@
 \bibitem[{{Brzeski} {et~al.}(2011){Brzeski}, {Case}, \& {Gers}}]{Brzeski2011}
 {Brzeski}, J., {Case}, S., \& {Gers}, L. 2011, SPIE, 8125, 04
 
+\bibitem[{{Buchner}(2021)}]{Buchner2021}
+{Buchner}, J. 2021, The Journal of Open Source Software, 6, 3001
+
 \bibitem[{{Buder} {et~al.}(2018){Buder}, {Asplund}, {Duong}, {Kos}, {Lind},
   {Ness}, {Sharma}, {Bland-Hawthorn}, {Casey}, {De Silva}, {D'Orazi},
   {Freeman}, {Lewis}, {Lin}, {Martell}, {Schlesinger}, {Simpson}, {Zucker},
@@ -247,32 +247,19 @@
 {Cardelli}, J.~A., {Clayton}, G.~C., \& {Mathis}, J.~S. 1989, \apj, 345, 245
 
 \bibitem[{{Carretta} {et~al.}(2009{\natexlab{a}}){Carretta}, {Bragaglia},
-  {Gratton}, {D'Orazi}, \& {Lucatello}}]{Carretta2009b}
-{Carretta}, E., {Bragaglia}, A., {Gratton}, R., {D'Orazi}, V., \& {Lucatello},
-  S. 2009{\natexlab{a}}, \aap, 508, 695
-
-\bibitem[{{Carretta} {et~al.}(2009{\natexlab{b}}){Carretta}, {Bragaglia},
   {Gratton}, \& {Lucatello}}]{Carretta2009c}
 {Carretta}, E., {Bragaglia}, A., {Gratton}, R., \& {Lucatello}, S.
-  2009{\natexlab{b}}, \aap, 505, 139
+  2009{\natexlab{a}}, \aap, 505, 139
 
-\bibitem[{{Carretta} {et~al.}(2009{\natexlab{c}}){Carretta}, {Bragaglia},
+\bibitem[{{Carretta} {et~al.}(2009{\natexlab{b}}){Carretta}, {Bragaglia},
   {Gratton}, {Lucatello}, {Catanzaro}, {Leone}, {Bellazzini}, {Claudi},
   {D'Orazi}, {Momany}, {Ortolani}, {Pancino}, {Piotto}, {Recio-Blanco}, \&
   {Sabbi}}]{Carretta2009}
-{Carretta}, E., {Bragaglia}, A., {Gratton}, R.~G., {et~al.} 2009{\natexlab{c}},
+{Carretta}, E., {Bragaglia}, A., {Gratton}, R.~G., {et~al.} 2009{\natexlab{b}},
   \aap, 505, 117
 
 \bibitem[{{Casagrande} \& {VandenBerg}(2018)}]{Casagrande2018}
 {Casagrande}, L., \& {VandenBerg}, D.~A. 2018, \mnras, 475, 5023
-
-\bibitem[{{Casagrande} {et~al.}(2020){Casagrande}, {Lin}, {Rains}, {Liu},
-  {Buder}, {Horner}, {Asplund}, {Lewis}, {Martell}, {Nordlander}, {Stello},
-  {Ting}, {Wittenmyer}, {Bland-Hawthorn}, {Casey}, {De Silva}, {D'Orazi},
-  {Freeman}, {Hayden}, {Kos}, {Lind}, {Schlesinger}, {Sharma}, {Simpson},
-  {Zucker}, \& {Zwitter}}]{Casagrande2020}
-{Casagrande}, L., {Lin}, J., {Rains}, A.~D., {et~al.} 2020, arXiv e-prints,
-  arXiv:2011.02517
 
 \bibitem[{{Casey} {et~al.}(2016){Casey}, {Hogg}, {Ness}, {Rix}, {Ho}, \&
   {Gilmore}}]{Casey2016}
@@ -384,6 +371,11 @@
 
 \bibitem[{Foreman-Mackey(2016)}]{corner}
 Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
+
+\bibitem[{{Foreman-Mackey} {et~al.}(2013){Foreman-Mackey}, {Hogg}, {Lang}, \&
+  {Goodman}}]{ForemanMackey2013}
+{Foreman-Mackey}, D., {Hogg}, D.~W., {Lang}, D., \& {Goodman}, J. 2013, \pasp,
+  125, 306
 
 \bibitem[{{Fouesneau} {et~al.}(2022){Fouesneau}, {Fr{\'e}mat}, {Andrae},
   {Korn}, {Soubiran}, {Kordopatis}, {Vallenari}, {Heiter}, {Creevey}, {Sarro},
@@ -826,6 +818,14 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
 {Gallagher}, A.~J., {Bergemann}, M., {Collet}, R., {et~al.} 2020, \aap, 634,
   A55
 
+\bibitem[{{Gent} {et~al.}(2022){Gent}, {Bergemann}, {Serenelli}, {Casagrande},
+  {Gerber}, {Heiter}, {Kovalev}, {Morel}, {Nardetto}, {Adibekyan}, {Silva
+  Aguirre}, {Asplund}, {Belkacem}, {del Burgo}, {Bigot}, {Chiavassa},
+  {Rodr{\'\i}guez D{\'\i}az}, {Goupil}, {Gonz{\'a}lez Hern{\'a}ndez},
+  {Mourard}, {Merle}, {M{\'e}sz{\'a}ros}, {Marshall}, {Ouazzani}, {Plez},
+  {Reese}, {Trampedach}, \& {Tsantaki}}]{Gent2022}
+{Gent}, M.~R., {Bergemann}, M., {Serenelli}, A., {et~al.} 2022, \aap, 658, A147
+
 \bibitem[{{Gilmore} {et~al.}(2022){Gilmore}, {Randich}, {Worley}, {Hourihane},
   {Gonneau}, {Sacco}, {Lewis}, {Magrini}, {Fran{\c{c}}ois}, {Jeffries},
   {Koposov}, {Bragaglia}, {Alfaro}, {Allende Prieto}, {Blomme}, {Korn},
@@ -890,6 +890,10 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
   Boer}, {Xavier}, {Zheng}, {Zhelem}, \& {Zucker}}]{Heijmans2012}
 {Heijmans}, J., {Asplund}, M., {Barden}, S., {et~al.} 2012, SPIE, 8446, 0W
 
+\bibitem[{{Heiter} {et~al.}(2015){Heiter}, {Jofr{\'e}}, {Gustafsson}, {Korn},
+  {Soubiran}, \& {Th{\'e}venin}}]{Heiter2015}
+{Heiter}, U., {Jofr{\'e}}, P., {Gustafsson}, B., {et~al.} 2015, \aap, 582, A49
+
 \bibitem[{{Heiter} {et~al.}(2021){Heiter}, {Lind}, {Bergemann}, {Asplund},
   {Mikolaitis}, {Barklem}, {Masseron}, {de Laverny}, {Magrini}, {Edvardsson},
   {J{\"o}nsson}, {Pickering}, {Ryde}, {Bayo Ar{\'a}n}, {Bensby}, {Casey},
@@ -912,10 +916,9 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
   {Zhang}, {Hou}, \& {Wang}}]{Ho2017}
 {Ho}, A.~Y.~Q., {Ness}, M.~K., {Hogg}, D.~W., {et~al.} 2017, \apj, 836, 5
 
-\bibitem[{{Hon} {et~al.}(2022){Hon}, {Kuszlewicz}, {Huber}, {Stello}, \&
-  {Reyes}}]{Hon2022}
-{Hon}, M., {Kuszlewicz}, J.~S., {Huber}, D., {Stello}, D., \& {Reyes}, C. 2022,
-  \aj, 164, 135
+\bibitem[{{Hon} {et~al.}(2021){Hon}, {Huber}, {Kuszlewicz}, {Stello}, {Sharma},
+  {Tayar}, {Zinn}, {Vrard}, \& {Pinsonneault}}]{Hon2021}
+{Hon}, M., {Huber}, D., {Kuszlewicz}, J.~S., {et~al.} 2021, \apj, 919, 131
 
 \bibitem[{Hunter(2007)}]{matplotlib}
 Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
@@ -925,6 +928,22 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 {Jofr{\'e}}, P., {Heiter}, U., {Tucci Maia}, M., {et~al.} 2018, Research Notes
   of the American Astronomical Society, 2, 152
 
+\bibitem[{{Jofr{\'e}} {et~al.}(2014){Jofr{\'e}}, {Heiter}, {Soubiran},
+  {Blanco-Cuaresma}, {Worley}, {Pancino}, {Cantat-Gaudin}, {Magrini},
+  {Bergemann}, {Gonz{\'a}lez Hern{\'a}ndez}, {Hill}, {Lardo}, {de Laverny},
+  {Lind}, {Masseron}, {Montes}, {Mucciarelli}, {Nordlander}, {Recio Blanco},
+  {Sobeck}, {Sordo}, {Sousa}, {Tabernero}, {Vallenari}, \& {Van
+  Eck}}]{Jofre2014}
+{Jofr{\'e}}, P., {Heiter}, U., {Soubiran}, C., {et~al.} 2014, \aap, 564, A133
+
+\bibitem[{{Jofr{\'e}} {et~al.}(2015){Jofr{\'e}}, {Heiter}, {Soubiran},
+  {Blanco-Cuaresma}, {Masseron}, {Nordlander}, {Chemin}, {Worley}, {Van Eck},
+  {Hourihane}, {Gilmore}, {Adibekyan}, {Bergemann}, {Cantat-Gaudin},
+  {Delgado-Mena}, {Gonz{\'a}lez Hern{\'a}ndez}, {Guiglion}, {Lardo}, {de
+  Laverny}, {Lind}, {Magrini}, {Mikolaitis}, {Montes}, {Pancino},
+  {Recio-Blanco}, {Sordo}, {Sousa}, {Tabernero}, \& {Vallenari}}]{Jofre2015}
+---. 2015, \aap, 582, A81
+
 \bibitem[{{Jofr{\'e}} {et~al.}(2017){Jofr{\'e}}, {Heiter}, {Worley},
   {Blanco-Cuaresma}, {Soubiran}, {Masseron}, {Hawkins}, {Adibekyan}, {Buder},
   {Casamiquela}, {Gilmore}, {Hourihane}, \& {Tabernero}}]{Jofre2017}
@@ -933,17 +952,24 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 \bibitem[{{Johnson} \& {Pilachowski}(2010)}]{Johnson2010}
 {Johnson}, C.~I., \& {Pilachowski}, C.~A. 2010, \apj, 722, 1373
 
-\bibitem[{{Katz} {et~al.}(2022){Katz}, {Sartoretti}, {Guerrier}, {Panuzzo},
+\bibitem[{{J{\"o}nsson} {et~al.}(2020){J{\"o}nsson}, {Holtzman}, {Prieto},
+  {Cunha}, {Garc{\'\i}a-Hern{\'a}ndez}, {Hasselquist}, {Masseron}, {Osorio},
+  {Shetrone}, {Smith}, {Stringfellow}, {Bizyaev}, {Edvardsson}, {Majewski},
+  {M{\'e}sz{\'a}ros}, {Souto}, {Zamora}, {Beaton}, {Bovy}, {Donor},
+  {Pinsonneault}, {Poovelil}, \& {Sobeck}}]{Joensson2020}
+{J{\"o}nsson}, H., {Holtzman}, J.~A., {Prieto}, C.~A., {et~al.} 2020, \aj, 160,
+  120
+
+\bibitem[{{Katz} {et~al.}(2023){Katz}, {Sartoretti}, {Guerrier}, {Panuzzo},
   {Seabroke}, {Th{\'e}venin}, {Cropper}, {Benson}, {Blomme}, {Haigron},
   {Marchal}, {Smith}, {Baker}, {Chemin}, {Damerdji}, {David}, {Dolding},
   {Fr{\'e}mat}, {Gosset}, {Jan{\ss}en}, {Jasniewicz}, {Lobel}, {Plum},
   {Samaras}, {Snaith}, {Soubiran}, {Vanel}, {Zwitter}, {Antoja}, {Arenou},
   {Babusiaux}, {Brouillet}, {Caffau}, {Di Matteo}, {Fabre}, {Fabricius},
-  {Frakgoudi}, {Haywood}, {Huckle}, {Hottier}, {Lasne}, {Leclerc},
+  {Fragkoudi}, {Haywood}, {Huckle}, {Hottier}, {Lasne}, {Leclerc},
   {Mastrobuono-Battisti}, {Royer}, {Teyssier}, {Zorec}, {Crifo}, {Jean-Antoine
-  Piccolo}, {Turon}, \& {Viala}}]{Katz2022}
-{Katz}, D., {Sartoretti}, P., {Guerrier}, A., {et~al.} 2022, arXiv e-prints,
-  arXiv:2206.05902
+  Piccolo}, {Turon}, \& {Viala}}]{Katz2023}
+{Katz}, D., {Sartoretti}, P., {Guerrier}, A., {et~al.} 2023, \aap, 674, A5
 
 \bibitem[{{Kawka} {et~al.}(2020){Kawka}, {Simpson}, {Vennes}, {Bessell}, {Da
   Costa}, {Marino}, \& {Murphy}}]{Kawka2020}
@@ -1228,6 +1254,11 @@ P\'erez, F., \& Granger, B.~E. 2007, Comput Sci Eng, 9, 21
   Wheelock}]{Skrutskie2006}
 Skrutskie, M.~F., Cutri, R.~M., Stiening, R., {et~al.} 2006, \aj, 131, 1163
 
+\bibitem[{{Spina} {et~al.}(2016){Spina}, {Mel{\'e}ndez}, {Karakas},
+  {Ram{\'{\i}}rez}, {Monroe}, {Asplund}, \& {Yong}}]{Spina2016}
+{Spina}, L., {Mel{\'e}ndez}, J., {Karakas}, A.~I., {et~al.} 2016, \aap, 593,
+  A125
+
 \bibitem[{{Spoo} {et~al.}(2022){Spoo}, {Tayar}, {Frinchaboy}, {Cunha}, {Myers},
   {Donor}, {Majewski}, {Bizyaev}, {Garc{\'\i}a-Hern{\'a}ndez}, {J{\"o}nsson},
   {Lane}, {Pan}, {Longa-Pe{\~n}a}, \& {Roman-Lopes}}]{Spoo2022}
@@ -1267,6 +1298,11 @@ Skrutskie, M.~F., Cutri, R.~M., Stiening, R., {et~al.} 2006, \aj, 131, 1163
 \bibitem[{{Ting} {et~al.}(2019){Ting}, {Conroy}, {Rix}, \&
   {Cargile}}]{Ting2019}
 {Ting}, Y.-S., {Conroy}, C., {Rix}, H.-W., \& {Cargile}, P. 2019, \apj, 879, 69
+
+\bibitem[{{Ting} {et~al.}(2012){Ting}, {Freeman}, {Kobayashi}, {De Silva}, \&
+  {Bland-Hawthorn}}]{Ting2012}
+{Ting}, Y.-S., {Freeman}, K.~C., {Kobayashi}, C., {De Silva}, G.~M., \&
+  {Bland-Hawthorn}, J. 2012, \mnras, 421, 1231
 
 \bibitem[{{Torra} {et~al.}(2021){Torra}, {Casta{\~n}eda}, {Fabricius},
   {Lindegren}, {Clotet}, {Gonz{\'a}lez-Vidal}, {Bartolom{\'e}}, {Bastian},
@@ -1348,11 +1384,6 @@ Walt, S. v.~d., Colbert, S.~C., \& Varoquaux, G. 2011, Comput Sci Eng, 13, 22
   {Asplund}}]{Yong2013}
 {Yong}, D., {Mel{\'e}ndez}, J., {Grundahl}, F., {et~al.} 2013, \mnras, 434,
   3542
-
-\bibitem[{{Yong} {et~al.}(2014){Yong}, {Roederer}, {Grundahl}, {Da Costa},
-  {Karakas}, {Norris}, {Aoki}, {Fishlock}, {Marino}, {Milone}, \&
-  {Shingles}}]{Yong2014}
-{Yong}, D., {Roederer}, I.~U., {Grundahl}, F., {et~al.} 2014, \mnras, 441, 3396
 
 \bibitem[{{Zhao} {et~al.}(2012){Zhao}, {Zhao}, {Chu}, {Jing}, \&
   {Deng}}]{Zhao2012}
