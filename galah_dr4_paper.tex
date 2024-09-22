@@ -1106,11 +1106,9 @@ We present the main catalogue table schema in Table~\ref{tab:main_catalog_schema
 \end{figure}
 \end{landscape}
 
-One of our greatest achievements as part of this data release is the extraction of C and N abundances for giant stars from molecular absorption features. While the comparison with 
+One of our greatest achievements as part of this data release is the extraction of C and N abundances for giant stars from molecular absorption features. In Fig.~\ref{fig:cn_mass}, we show how stellar mass and [C/N] ratios are correlated in GALAH DR4, as is expected based on the pioneering work by \citet{Masseron2015} and \citet{Martig2016}. Our measurement demonstrate the potential of [C/N] abundances to better separate the core-helium burning from the red giant phase (around the blue areas of Figs.~\ref{fig:cn_mass}b and \ref{fig:cn_mass}c).
 
-
-
-\begin{figure*}
+\begin{figure*}[ht]
     \centering
     \includegraphics[width=\textwidth]{figures/cn_mass.png}
     \caption{The ratio of [C/N] and isochrone masses in comparison (panel a), and as a function of \Teff and \logg in panels b) and c), respectively}
@@ -1164,16 +1162,16 @@ In particular the dedicated observing programs of GALAH towards low angular mome
 In this value-added catalogue\footnote{\texttt{galah\_dr4\_vac\_3dnlte\_a\_li}}, we use spectrum fitting to infer 3D non-local thermodynamic equilibrium (NLTE) lithium abundances. For each spectra, the Li line is modelled with a 3D NLTE \breidablik line profile. In cases where the Li line is blended with nearby lines such as Fe and CN, we model blending lines as Gaussian absorption profiles. From this model, we measure the equivalent width (EW) and errors in EW of the Li line using a Monte Carlo nested sampling algorithm. The Li abundance, A(Li), is then inferred from the measured EW using \breidablik and the stellar parameters from GALAH DR4's \texttt{allstar}. See \citet{Wang2024} for a detailed description of the methodology. 
 
 We update this methodology to provide better performance and fitting constraints. 
-\citet{Wang2024} measured a local line width for the Li region which incorporated the thermal broadening, rotational broadening, and instrumental profile of blending lines. For this work, we use the GALAH full width half max (FWHM) to represent this 
-%\citet{Wang2024} measured a local line width for the Li region and fit the width of the Li line separately from other lines. Instead, we use the GALAH full width half max (FWHM) as the width of our lines and set the width of the Li line to be the same as the other lines in the region, better constraining the line widths. 
-In addition, the sampled EW posterior is now modelled using a first order boundary corrected kernel density estimator from \citet{Lewis2019}, which has better convergence than histograms. Lastly, GALAH DR4 analyses stars down to 3000\,K, but the \stagger model atmospheres only reach 4000\,K, therefore, we provide an additional column of 1D NLTE A(Li) inferred through our EWs using \breidablik on \marcs model atmospheres. Using the updated methodology it takes $\sim$2 minutes per star in comparison to $0.5--2$ hours per star reported in \citet{Wang2024}, with the main speed up coming from the FWHM constraint. 
+\citet{Wang2024} measured a local line width for the Li region which incorporated the thermal broadening, rotational broadening, and instrumental profile of blending lines. For this work, we use the GALAH instrumental profile convolved with the GALAH rotational velocity for the line width. \citet{Wang2024} measured a separate Li line width which includes only the rotational broadening and instrumental profile as the 3D NLTE profiles are already thermally broadened. For this work, we set the width of the Li line to be the same as the blending lines. 
+%\citet{Wang2024} measured a local line width for the Li region and fit the width of the Li line separately from other lines. Instead, we use the GALAH instrumental profile convolved with the rotational velocity as the width of our lines and set the width of the Li line to be the same as the other lines in the region, better constraining the line widths. 
+Whilst we still measure a local radial velocity due to imperfections of the wavelength solution in CCD3, we apply the GALAH radial velocity for poorly constrained Li depleted stars where we cannot measure the local radial velocity. In addition, the sampled EW posterior is now modelled using a first order boundary corrected kernel density estimator from \citet{Lewis2019}, which has better convergence than histograms. Lastly, GALAH DR4 analyses stars down to 3000\,K, but the \stagger model atmospheres only reach 4000\,K, therefore, we provide an additional column of 1D NLTE A(Li) inferred through our EWs using \breidablik on \marcs model atmospheres. Using the updated methodology it takes $\sim$2 minutes per star in comparison to $0.5$--$2$ hours per star reported in \citet{Wang2024}, with the main speed up coming from the Li FWHM constraint. 
 
 %apply a methodology described in \citet{Wang2024}, leveraging GALAH DR4's \texttt{allstar} spectra and parameters to derive equivalent width (EW) measurements and infer 3D non-local thermodynamic equilibrium (NLTE) lithium abundances, A(Li). The lithium line profiles are blended with nearby lines, such as Fe and CN, which are modeled with a combination of Gaussian absorption lines. The equivalent width of the blended Li feature is measured using a Monte Carlo nested sampling algorithm, which explores the posterior distribution of the parameters and generates multiple realizations of the spectra.
 
 %The abundance of A(Li) is then inferred by interpolation of the EW to A(Li) relation from a pre-calculated grid. 
 
 EWs are measured for 892\,224 stars (97\% of GALAH DR4), with 3D NLTE A(Li) detections reported for 417\,828 stars (46\%) and upper limits for 474\,396 stars (52\%). 
-A quality flag is raised by 1 for upper limits, 2 or more to indicate other quality issues, such as stellar parameters falling outside of the model atmosphere grid. When using the 3D NLTE A(Li), we recommend \texttt{flag\_ALi < 2}. A similar quality flag \texttt{flag\_ALi\_1D} is provided corresponding to the VAC 1D NLTE A(Li) included in the VAC. 
+A quality flag (\texttt{flag\_ALi}) is raised by 1 for upper limits, 2 or more to indicate other quality issues, such as stellar parameters falling outside of the model atmosphere grid (see \citet{Wang2024} for more details on the bitmask flag). When using the 3D NLTE A(Li), we recommend \texttt{flag\_ALi < 2}. A similar quality flag \texttt{flag\_ALi\_1D} is provided corresponding to the VAC 1D NLTE A(Li) included in the VAC. 
 %A quality flag is raised by 1 for upper limits and by 2 or more to indicate other quality issues. This detailed process ensures the catalogue provides high-precision lithium measurements, advancing our understanding of lithium production and depletion mechanisms throughout stellar evolution.
 
 For convenience, we have already included the most important columns of this catalogue in the \texttt{allstar} catalogue (see Table~\ref{tab:main_catalog_schema}), as we recommend to use them instead of the less accurate 1D NLTE abundances estimated with an imperfect neural network interpolation, which we indicate with \texttt{nn\_li*}.
@@ -1293,9 +1291,7 @@ Although not part of this release, we have created an analysis module for spectr
 
 \subsection{Fit optimization} \label{sec:caveats_fitting}
 
-As described in Sec.~\ref{sec:allspec_analysis}, we are using the \textsc{curve\_fit} function of \texttt{scipy.optimize} \citep{scipy} to optimize the difference of observed and synthetic spectra, whose optimization can get stuck in local minima. We have tried to automatically identify regions of the parameter space where the \textsc{scipy.optimize.curve\_fit} function has gotten stuck. In particular for cool giants and some red clump stars, we have been able to recover a pattern of abundances being stuck around their initial value. Because of the zero point corrections, these are shifted away from the usual initial guess of $0\,\mathrm{dex}$ depending on the element (see zeropoints in Table~\ref{tab:zeropoints}).
-
-\SB{Describe stars with $T_\mathrm{eff} < 3750\,\mathrm{K}$ and $\log g < 0.5$ as problematic, but not flagged!}
+As described in Sec.~\ref{sec:allspec_analysis}, we are using the \textsc{curve\_fit} function of \texttt{scipy.optimize} \citep{scipy} to optimize the difference of observed and synthetic spectra, whose optimization can get stuck in local minima. We have tried to automatically identify regions of the parameter space where the \textsc{scipy.optimize.curve\_fit} function has gotten stuck. In particular for some red clump stars as well as cool giant stars with $T_\mathrm{eff} < 3750\,\mathrm{K}$ and $\log g < 0.5$ (see Sec.~\ref{sec:uncertainty_accuracy}), we have been able to recover a pattern of abundances being stuck around their initial value. However, this pattern is not consistent enough to flag stars without a significant amount of false-positives. Because of the zero point corrections, these are shifted away from the usual initial guess of $0\,\mathrm{dex}$ depending on the element (see zeropoints in Table~\ref{tab:zeropoints}).
 
 Such a fitting failure would also be expected when applying \textit{The Payne} \citep{Ting2019} with its similar default setup that adopts parameter bounds for the fitting parameters and thus employs the \texttt{curve\_fit} function with the \textit{trust region reflective} (\texttt{trf}) method. Contrary to this, \textit{The Cannon} version by \citep{Casey2016} uses the \textsc{scipy.optimize.leastsq} fitting approach.
 
@@ -1341,6 +1337,8 @@ These caveats are the unfortunate negative effects of our successful attempt to 
 \SB{GALAH is celebrating its 10 year anniversary!}
 
 "elements of modern life: CNO and rare heavy elements for electronics"
+
+planets, origin of elements, other galaxies, cosmology, stellar evolution, Galactic archaeology, other surveys.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
