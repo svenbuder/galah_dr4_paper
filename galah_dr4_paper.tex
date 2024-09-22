@@ -789,9 +789,7 @@ After the \texttt{allspec} and  \texttt{allstar} modules have been run for a nig
 
 The residual spectrum of our best fitting single star analysis can help us to identify a second flux contributor to the observed spectrum. In our case, there are two points in the analysis where we can identify such an influence. Firstly, the residuals are visible in the $\chi^2$ distribution as a function of radial velocity shifts (see Fig.~\ref{fig:181221003101356_single_fit_rv}). While a single star would only show one peak (saved as \texttt{rv\_comp\_1}), a binary system like 2MASS J06084657-7815235 shows a second peak ($-70\,\mathrm{km\,s^{-1}}$ in addition to $74\,\mathrm{km\,s^{-1}}$) that is saved as \texttt{rv\_comp\_2}. Secondly, we perform an automatic search for reoccuring residuals as a function of radial velocity for a few selected lines. We chose the combination of strong lines in the spectra (Balmer lines, Fe lines at 4890 and $4891\,\text{\AA}$, Ni at $6644\,\text{\AA}$) as well as those with the largest expected wavelength shift in the infrared detector (O triplet at $7772-7775\,\text{\AA}$ as well as Mg at $7692\,\text{\AA}$). If we find several peaks with a reasonably similar radial velocity, the likely $X \in {16,50,84}^\text{th}$ percentiles of this radial velocity are saved in \texttt{sb2\_rv\_X}.
 
-Because radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2023} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare against those radial velocity estimates (see Sec.~\ref{sec:rv_comparison}). For 6\% (50\,577) of our stars, we find a difference with respect to \Gaia DR3 larger than $10\,\mathrm{km\,s^{-1}}$. For these stars, as well as stars for which we estimate unrealistic \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in \texttt{allspec}. We note that the \texttt{allspec} analysis was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged. \texttt{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.
-
-
+Because radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2023} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare against those radial velocity estimates. For 6\% (50\,577) of our stars, we find a difference with respect to \Gaia DR3 larger than $10\,\mathrm{km\,s^{-1}}$. For these stars, as well as stars for which we estimate unrealistic \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in \texttt{allspec}. We note that the \texttt{allspec} analysis was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged. \texttt{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.
 
 \begin{figure*}[ht]
  \centering
@@ -948,17 +946,6 @@ In addition to these instructive comparisons, we also want to return to the prec
 \SB{[C/N]}
 
 
-\begin{itemize}
-    \item Fig.~\ref{fig:galah_dr4_precision_parameters} and \ref{fig:galah_dr4_precision_abundances}
-    \item \SB{Create Table with overall scatter values for individual elements based on:}
-    \item Covariance uncertainties
-    \item Repeat observations
-    \item Scatter in open clusters
-    \item Wide binary scatter
-    \item scatter among Solar twins (Fig.~\ref{fig:galah_dr4_age_xfe_trends_solar_twins_allstar})
-\end{itemize}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1067,22 +1054,16 @@ To assess whether the abundance estimates are a true detection or an upper limit
 \label{sec:validation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Comparison with GALAH DR3 and APOGEE DR17}
-
-
-\subsection{Radial velocities} \label{sec:rv_comparison}
-
-Fig.~\ref{fig:galah_dr4_vrad_gaia_dr3} show the comparison with the \Gaia radial velocities. Note that the radial velocity differences are reflecting the \Gaia uncertainties, which are higher given the significantly lower resolution and smaller wavelength coverage in addition to a significantly lower signal-to-noise of \Gaia DR3 spectra for stars fainter than $G > 12\,\mathrm{mag}$, that is, the nominal range of GALAH.
 
 
 
 Fig.~\ref{fig:vrad_comparison_comp1_comp2_gaiadr3}
 
 \begin{figure*}[hbt]
- \centering
- \includegraphics[width=\textwidth]{figures/vrad_comparison_comp1_comp2_gaiadr3.png}
- \caption{\textbf{Comparison of radial velocity estimates of GALAH DR4 and \textit{Gaia} DR3.} \textbf{Panel a)} shows the difference of GALAH's primary component radial velocity with the mean \textit{Gaia} DR3. \textbf{Panels b) and c)} show stars for which two components were detected in GALAH DR3 and shows the difference between each component and \textit{Gaia} DR3 against the difference of mean (roughly systemic) radial velocities. The panels also include regions where actual binaries and false positive detections are expected.}
- \label{fig:vrad_comparison_comp1_comp2_gaiadr3}
+\centering
+\includegraphics[width=\textwidth]{figures/vrad_comparison_comp1_comp2_gaiadr3.png}
+\caption{\textbf{Comparison of radial velocity estimates of GALAH DR4 and \textit{Gaia} DR3.} \textbf{Panel a)} shows the difference of GALAH's primary component radial velocity with the mean \textit{Gaia} DR3. \textbf{Panels b) and c)} show stars for which two components were detected in GALAH DR3 and shows the difference between each component and \textit{Gaia} DR3 against the difference of mean (roughly systemic) radial velocities. The panels also include regions where actual binaries and false positive detections are expected.}
+\label{fig:vrad_comparison_comp1_comp2_gaiadr3}
 \end{figure*}
 
 Binarity. How accurate is the flagging. Compare ratios of true/false, false-positive detections aided by \citet{Traven2020}. Get in contact with Alex Wallace and Andy Casey regarding their binarity identification from BP/RP spectra.
@@ -1093,19 +1074,6 @@ We have crossmatched the sources from GALAH DR4 with those from \Gaia DR3's vari
 
 \SB{Put list of vari catalogues and their respective publications in here, e.g. \Gaia DR3 binary star parameters from \texttt{gaiadr3.nss\_non\_linear\_spectro.fits} \citep{Halbwachs2023}.
 }
-
-
-
-\subsection{Minimal Science Verification}
-
-Fig. 3 from \citet{Spoo2022}: https://arxiv.org/abs/2203.05463: logAge vs. [C/N]
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=\textwidth]{figures/cn_mass.png}
-    \caption{The ratio of [C/N] and isochrone masses in comparison (panel a), and as a function of \Teff and \logg in panels b) and c), respectively}
-    \label{fig:cn_mass}
-\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{DATA RELEASE PRODUCTS}
@@ -1137,6 +1105,17 @@ We present the main catalogue table schema in Table~\ref{tab:main_catalog_schema
 \label{fig:galah_dr4_overview_allstar}
 \end{figure}
 \end{landscape}
+
+One of our greatest achievements as part of this data release is the extraction of C and N abundances for giant stars from molecular absorption features. While the comparison with 
+
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\textwidth]{figures/cn_mass.png}
+    \caption{The ratio of [C/N] and isochrone masses in comparison (panel a), and as a function of \Teff and \logg in panels b) and c), respectively}
+    \label{fig:cn_mass}
+\end{figure*}
 
 \subsection{Value-Added Catalogues (VAC)} \label{sec:vacs}
 
@@ -1184,14 +1163,17 @@ In particular the dedicated observing programs of GALAH towards low angular mome
 
 In this value-added catalogue\footnote{\texttt{galah\_dr4\_vac\_3dnlte\_a\_li}}, we use spectrum fitting to infer 3D non-local thermodynamic equilibrium (NLTE) lithium abundances. For each spectra, the Li line is modelled with a 3D NLTE \breidablik line profile. In cases where the Li line is blended with nearby lines such as Fe and CN, we model blending lines as Gaussian absorption profiles. From this model, we measure the equivalent width (EW) and errors in EW of the Li line using a Monte Carlo nested sampling algorithm. The Li abundance, A(Li), is then inferred from the measured EW using \breidablik and the stellar parameters from GALAH DR4's \texttt{allstar}. See \citet{Wang2024} for a detailed description of the methodology. 
 
-We update this methodology to provide better performance and fitting constraints. \citet{Wang2024} measured a local line width for the Li region and fit the width of the Li line separately from other lines. Instead, we use the GALAH full width half max (FWHM) as the width of our lines and set the width of the Li line to be the same as the other lines in the region, better constraining the line widths. In addition, the sampled EW posterior is now modelled using a first order boundary corrected kernel density estimator from \citet{Lewis2019}, which has better convergence than histograms. Lastly, GALAH DR4 analyses stars down to 3000\,K, but the \stagger model atmospheres only reach 4000\,K, therefore, we provide an additional column of 1D NLTE A(Li) inferred through our EWs using \breidablik on \marcs model atmospheres. With the updated methodology it takes $\sim$2 minutes per star in comparison to $0.5--2$ hours per star reported in \citet{Wang2024}.
+We update this methodology to provide better performance and fitting constraints. 
+\citet{Wang2024} measured a local line width for the Li region which incorporated the thermal broadening, rotational broadening, and instrumental profile of blending lines. For this work, we use the GALAH full width half max (FWHM) to represent this 
+%\citet{Wang2024} measured a local line width for the Li region and fit the width of the Li line separately from other lines. Instead, we use the GALAH full width half max (FWHM) as the width of our lines and set the width of the Li line to be the same as the other lines in the region, better constraining the line widths. 
+In addition, the sampled EW posterior is now modelled using a first order boundary corrected kernel density estimator from \citet{Lewis2019}, which has better convergence than histograms. Lastly, GALAH DR4 analyses stars down to 3000\,K, but the \stagger model atmospheres only reach 4000\,K, therefore, we provide an additional column of 1D NLTE A(Li) inferred through our EWs using \breidablik on \marcs model atmospheres. Using the updated methodology it takes $\sim$2 minutes per star in comparison to $0.5--2$ hours per star reported in \citet{Wang2024}, with the main speed up coming from the FWHM constraint. 
 
 %apply a methodology described in \citet{Wang2024}, leveraging GALAH DR4's \texttt{allstar} spectra and parameters to derive equivalent width (EW) measurements and infer 3D non-local thermodynamic equilibrium (NLTE) lithium abundances, A(Li). The lithium line profiles are blended with nearby lines, such as Fe and CN, which are modeled with a combination of Gaussian absorption lines. The equivalent width of the blended Li feature is measured using a Monte Carlo nested sampling algorithm, which explores the posterior distribution of the parameters and generates multiple realizations of the spectra.
 
 %The abundance of A(Li) is then inferred by interpolation of the EW to A(Li) relation from a pre-calculated grid. 
 
-EWs are measured for 892\,224 stars (97\% of GALAH DR4), with A(Li) detections reported for 417\,828 stars (46\%) and upper limits for 474\,396 stars (52\%). 
-A quality flag is raised by 1 for upper limits, 2 or more to indicate other quality issues, such as stellar parameters falling outside of the model atmosphere grid. When using the 3D NLTE A(Li), we recommend \texttt{flag_ALi < 2}. A similar quality flag \texttt{flag_ALi_1D} is provided corresponding to the 1D NLTE A(Li) included in the VAC. 
+EWs are measured for 892\,224 stars (97\% of GALAH DR4), with 3D NLTE A(Li) detections reported for 417\,828 stars (46\%) and upper limits for 474\,396 stars (52\%). 
+A quality flag is raised by 1 for upper limits, 2 or more to indicate other quality issues, such as stellar parameters falling outside of the model atmosphere grid. When using the 3D NLTE A(Li), we recommend \texttt{flag\_ALi < 2}. A similar quality flag \texttt{flag\_ALi\_1D} is provided corresponding to the VAC 1D NLTE A(Li) included in the VAC. 
 %A quality flag is raised by 1 for upper limits and by 2 or more to indicate other quality issues. This detailed process ensures the catalogue provides high-precision lithium measurements, advancing our understanding of lithium production and depletion mechanisms throughout stellar evolution.
 
 For convenience, we have already included the most important columns of this catalogue in the \texttt{allstar} catalogue (see Table~\ref{tab:main_catalog_schema}), as we recommend to use them instead of the less accurate 1D NLTE abundances estimated with an imperfect neural network interpolation, which we indicate with \texttt{nn\_li*}.
