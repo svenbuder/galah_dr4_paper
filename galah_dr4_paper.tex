@@ -943,7 +943,7 @@ While the precision levels of stellar parameters have on average actually remain
 
 To get a better idea of the actual improvement of accuracy and improvement, we have performed more elaborate comparisons as those in Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar} and only showcase a few in this manuscript with reference to the online repository. We have found the comparison of GALAH DR4 with both GALAH DR3 and APOGEE DR17 highly informative.
 
-Because GALAH DR3 did not include N measurements yet and only a limited amount of C measurements, our first comparison concerns the abundances of C and N between GALAH DR4 and APOGEE DR17 in Fig.~\ref{fig:comparison_dr4_apo17}. While we see a generally good agreement of the shapes, we notice both a bias of $-0.03\dex$ and $0.10\dex$ for C and N, respectively. These can be, however, explained with the lower precision of GALAH and might, in part, be driven by the slightly different trends of C and N towards lower metallicities. In particular, [C/Fe] decreases to sub-Solar level for APOGEE DR17 for metal-poor stars, whereas it is Solar or even enhanced in GALAH DR4. Enhanced levels would be expected for metal-poor disk stars, whereas sub-Solar levels are expected for accreted stars \citep{Amarsi2019c}, warranting a future population analysis to test the accuracy of either survey.
+Because GALAH DR3 did not include N measurements yet and only a limited amount of C measurements, our first comparison concerns the abundances of C and N between GALAH DR4 and APOGEE DR17 in Fig.~\ref{fig:comparison_dr4_apo17}. We attach the comparisons for the other overlapping elements O, Na, Al, Si, K, Ca, Ti, V, Cr, Mn, Co, and Ce in Figs.~\ref{fig:comparison_dr3_dr4_apo17_rest} and \ref{fig:comparison_dr3_dr4_apo17_rest2}. While we see a generally good agreement of the shapes, we notice both a bias of $-0.03\dex$ and $0.10\dex$ for C and N, respectively. These can be, however, explained with the lower precision of GALAH and might, in part, be driven by the slightly different trends of C and N towards lower metallicities. In particular, [C/Fe] decreases to sub-Solar level for APOGEE DR17 for metal-poor stars, whereas it is Solar or even enhanced in GALAH DR4. Enhanced levels would be expected for metal-poor disk stars, whereas sub-Solar levels are expected for accreted stars \citep{Amarsi2019c}, warranting a future population analysis to test the accuracy of either survey.
 
 In addition to these novel abundances, we also showcase two previously measured abundances, namely [Mg/Fe] and [Ni/Fe] in Fig.~\ref{fig:comparison_dr4_dr3_apo17}. The $\upalpha$-process element Mg has significant value Galactic studies because it is predominantly produced by core-collapse supernovae \citep{Kobayashi2020}. In GALAH DR3, only the \ion{Mg}{i}5711 line was used, whereas we are now using a combination of several lines. This has led to a significant improvement of precision, as can be appreciated from the comparison of Figs.~\ref{fig:comparison_dr4_dr3_apo17}a and \ref{fig:comparison_dr4_dr3_apo17}b. Even more positive, we see an improved agreement of the [Fe/H] vs. [Mg/Fe] measurements between GALAH DR4 (Fig.~\ref{fig:comparison_dr4_dr3_apo17}b) and APOGEE DR17 (Fig.~\ref{fig:comparison_dr4_dr3_apo17}c), with no abundance bias. One of the elements with the most significant precision improvement is Ni. For this element, our move to fitting the full wavelength range has increased the number of lines from two very reliable lines to several dozen lines. Albeit less reliable in their line data and possibly blended, the sheer increment in used flux information has improved the precision almost to the level of APOGEE DR17 - with no bias and a standard deviation of only $0.05\,\mathrm{dex}$ between APOGEE DR17 and GALAH DR4 (see Figs.~\ref{fig:comparison_dr4_dr3_apo17}c-f).
 
@@ -1407,6 +1407,32 @@ Fig.~\ref{fig:galah_dr4_precision_abundances}
  \caption{\textbf{Precision monitoring of elemental abundances as a function of SNR for the green CCD2 across for GALAH DR4.}. Each panel shows the behavior for bins of width 10 for the scatter of repeat observations of the \texttt{allspec} runs (blue) as well as covariance uncertainties of \texttt{allspec} (orange) and \texttt{allstar} (red) setups.}
  \label{fig:galah_dr4_precision_abundances}
 \end{figure*}
+
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_O_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Na_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Al_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Si_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_K_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Ca_fe.png}
+ \caption{\textbf{Comparison of stars with available measurements in GALAH DR3 (left column), GALAH DR4 (middle column) and APOGEE DR17 (right) for O, Na, Al, Si, K, and Ca}.}
+ \label{fig:comparison_dr3_dr4_apo17_rest}
+\end{figure*}
+
+
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Ti_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_V_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Cr_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Mn_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Co_fe.png}
+ \includegraphics[width=0.88\textwidth]{figures/comparison_dr4_dr3_apo17_Ce_fe.png}
+ \caption{\textbf{Continuation of Fig.~\ref{fig:comparison_dr3_dr4_apo17_rest} for Ti, V, Cr, Mn, Co, and Ce}.}
+ \label{fig:comparison_dr3_dr4_apo17_rest2}
+\end{figure*}
+
 
 % \begin{landscape}
 \begin{figure*}
