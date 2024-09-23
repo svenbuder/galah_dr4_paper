@@ -71,7 +71,6 @@
 
 \title{The GALAH Survey: Data Release 4}
 
-
 %%%% NEW AUTHOR
 \author{S.~Buder}
 \affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
@@ -120,21 +119,15 @@
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
-\author{R.~de~Grijs}
-\affiliation{School of Mathematical and Physical Sciences, Macquarie University, Balaclava Road, Sydney, NSW 2109, Australia}
-\alsoaffiliation{Astrophysics and Space Technologies Research Centre, Macquarie University, Balaclava Road, Sydney, NSW 2109, Australia}
-\alsoaffiliation{International Space Science Institute-Beijing, 1 Nanertiao, Zhongguancun, Beijing 100190, China}
+\author{T.~Nordlander}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
 \author{B.~T.~Montet}
 \affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 \alsoaffiliation{UNSW Data Science Hub, University of New South Wales, Sydney, NSW 2052, Australia}
-
-%%%% NEW AUTHOR
-\author{T.~Nordlander}
-\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
-\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
 \author{G.~Traven}
@@ -219,8 +212,18 @@
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
-\author{D.~Nataf}
-\affiliation{Center for Astrophysical Sciences and Department of Physics and Astron- omy, The Johns Hopkins University, Baltimore, MD 21218, USA}
+\author{R.~de~Grijs}
+\affiliation{School of Mathematical and Physical Sciences, Macquarie University, Balaclava Road, Sydney, NSW 2109, Australia}
+\alsoaffiliation{Astrophysics and Space Technologies Research Centre, Macquarie University, Balaclava Road, Sydney, NSW 2109, Australia}
+\alsoaffiliation{International Space Science Institute-Beijing, 1 Nanertiao, Zhongguancun, Beijing 100190, China}
+
+%%%% NEW AUTHOR
+\author{B.~Martin}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+
+%%%% NEW AUTHOR
+\author{D.~M.~Nataf} % 0000-0001-5825-4431
+\affiliation{Department of Physics \& Astronomy, University of Iowa, Iowa City, IA 52242, USA}
 
 %%%% NEW AUTHOR
 \author{M.~K.~Ness}
@@ -230,6 +233,10 @@
 %%%% NEW AUTHOR
 \author{A.~Rains}
 \affiliation{Department of Physics and Astronomy, Uppsala University, Box 516, SE-75120 Uppsala, Sweden}
+
+%%%% NEW AUTHOR
+\author{T.~Scarr}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
 
 %%%% NEW AUTHOR
 \author{R.~Vogrin{\v{c}}i{\v{c}}}
@@ -242,10 +249,15 @@
 \alsoaffiliation{Department of Physics and Astronomy, University of Utah, Salt Lake City, UT 84112, USA}
 
 %%%% NEW AUTHOR
+\author{Y.~Xie}
+\affiliation{Research School of Astronomy and Astrophysics, Australian National University, Canberra, ACT 2611, Australia}
+\alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+%%%% NEW AUTHOR
 \author{The GALAH Collaboration}
 \affiliation{https://www.galah-survey.org}
 
-%%%% OBSERVERS NOT COAUTHORS YET: M. Perko, S. Campbell, F. Liu, A. Hughes, G. Nandakumar, W. Oliver, M. Zerjal,
+%%%% OBSERVERS NOT COAUTHORS YET: M. Perko, S. Campbell, F. Liu, A. Hughes, G. Nandakumar, W. Oliver, M. Zerjal
 
 \doi{10.1017/pasa.2020.32}
 
@@ -254,17 +266,7 @@
 \accepted {dd Mmm 2024}
 \published{dd Mmm 2024}
 
-\keywords{
-Surveys; the Galaxy; methods: observational; methods: data analysis; stars: fundamental parameters; stars: abundances} %% First letter not capped
-% \jel{Q11; Q12; D81; M31}
-% \msc{Q14; Q18; E21}
-% \abbreviations{
-%     BDHS: Bangladesh Demographic and Health Survey, 
-%     IDA: Fe-deficiency anaemia, 
-%     IFA: Fe-folic acid, 
-%     MNP: multiple micronutrient powder, 
-%     VAD: vitamin A deficiency
-% }
+\keywords{Surveys; the Galaxy; methods: observational; methods: data analysis; stars: fundamental parameters; stars: abundances}
 
 \begin{document}
 
@@ -1024,7 +1026,7 @@ To assess whether the abundance estimates are a true detection or an upper limit
 
 GALAH DR4 encompasses a diverse range of data products. We describe the most important main catalogues in Sec.~\ref{sec:data_release_catalogues} and value-added catalogues in Sec.~\ref{sec:vacs}. We further explain the data products for each spectrum and star, that is, the reduced spectra (Sec.~\ref{sec:reduced_spectra}), \texttt{allspec} products (Sec.~\ref{sec:products_allspec}), and \texttt{allstar} products (Sec.~\ref{sec:products_allstar}).
 
-The data products are provided directly on the AAO DataCentral website at \url{https://cloud.datacentral.org.au/teamdata/GALAH/public/GALAH_DR4/} and are provided in an interactive way 
+The data products are provided directly on the AAO DataCentral website at \url{https://cloud.datacentral.org.au/teamdata/GALAH/public/GALAH_DR4/}. We further provide multiple ways to interact with the data release products, which are described in Sec.~\ref{sec:interactive}.
 
 \subsection{Main Data Release Catalogues}
 \label{sec:data_release_catalogues}
@@ -1135,6 +1137,8 @@ For convenience, we have already included the most important columns of this cat
 \subsection{Data products for each spectrum and star}
 \label{sec:data_products_for_each_spectrum}
 
+We provide individual data products in an orderly fashion that allows to create links to these products based solely on the \texttt{sobject\_id}. To download data products for individual stars we recommend to create a url string and use \textsc{wget} or similar commands. For bulk downloads of the advanced data products of this section, we recommend to contact the GALAH collaboration or use the bulk download interfaces of AAO DataCentral.
+
 \subsubsection{Reduced spectra} \label{sec:reduced_spectra}
 
 The reduced spectra of each night are provided in the observations directory\footnote{\texttt{observations/YYMMDD/spectra/com/sobject\_id*.fits}} and sorted into directories with four spectra - one for each of the four CCDs. These spectra are produced by the reduction pipeline (see Sec.~\ref{sec:spectroscopic_data_from_galah_observations}) and include several extensions as outlined in Table~\ref{tab:reduction_fits}, with wavelength information stored in the fits headers with starting wavelength \texttt{CRVAL1} in \AA and linear pixel scale \texttt{CDELT1} in \AA/px, and the number of pixels \texttt{NAXIS1}. The reduced spectra are only provided per exposure and not in a co-added manner, since the co-adding was performed as part of the \texttt{allstar} module (see Sec.~\ref{sec:products_allstar} for co-added spectra). We note that not all files might be available for a given exposure due to the seldom failure of CCD readouts.
@@ -1148,6 +1152,11 @@ The \texttt{allspec} analysis product directory\footnote{\texttt{analysis\_produ
 The \texttt{allstar} analysis product directory\footnote{\texttt{analysis\_products\_allstar/YYMMDD/sobject\_id/}} also include the radial velocity monitoring \texttt{*rv.png}, results files  \texttt{*results.fits}, combined spectra \texttt{*spectrum.fits} and \texttt{*comparison.pdf} overview, similar to the ones described in Sec.~\ref{sec:products_allspec}. In addition, each directory also includes a \texttt{*sobject\_ids.txt} file that lists all individual spectra that were co-added to create the observed spectrum and its uncertainty in \texttt{*spectrum.fits}.
 
 % TBD: For easier downloading, we also provide these files in tar-files per night. Furthermore, we have interpolated all normalised allstar spectra onto a common wavelength that includes the largest possible wavelength coverage of 99.9\% of radial velocity corrected spectra (neglecting pixels below 7680\AA for the infrared channel).
+
+\subsection{Interactive access via AAO DataCentral}
+\label{sec:interactive}
+
+In collaboration with the AAO Data Central, a number of interactive ways are provided to explore the data of this release. Data Central provides both Simple Spectral Access and Single Object Viewer services. In addition, we recommend to download files or easily crossmatch user catalogues with the TAP server \url{https://datacentral.org.au/vo/tap} in TOPCAT \citep{Taylor2005}. \url{https://apps.datacentral.org.au/galah/spectra} also provides An interactive plotting application to show normalised or un-normalised spectra of different repeat observations. As these tools are under active development, we refer to the latest documentation on both the DataCentral and the main Survey website \url{https://www.galah-survey.org}.
 
 \section{CAVEATS AND FUTURE IMPROVEMENTS} \label{sec:caveats}
 
@@ -1197,7 +1206,7 @@ In GALAH DR4, we have relaxed this restriction again, since we have trained on r
 
 \subsubsection{Flexibility of neural networks in general}
 
-The choice of using a large number neural networks of restricted regions in the \TLF space was done based on the hope that they would require less flexibility from neural networks and thus a smaller network architecture. It has to be acknowledged that due to the limit of human power to properly train and test the neural networks, the chosen network architecture of a 2-layer perceptron with 300 neurons and a fixed learning rate is certainly imperfect at best. For this data release, we have decided not to rerun these steps, but make the current results available to the community. In the future, the restriction to one or only a few network models is recommended. The latter could cover regions of cool dwarfs, MSTO stars, hot stars, and giant stars with individual models -- and possibly explore the split in metal-poor and solar-like regimes. This would also decrease overhead, in particular for training and loading different models, and would also decrease possible noding effects between different models.
+The choice of using a large number neural networks of restricted regions in the \TLF space was done based on the hope that they would require less flexibility from neural networks and thus a smaller network architecture. For this data release, we have fixed the chosen network architecture of a 2-layer perceptron with 300 neurons and specific learning rate. While we have tested other activation functions than leaky rectified linear units, namely sigmoid, tanh and exponential linear unit functions, we have found the lowest root mean square errors for our chosen activation function. We have further tested a larger number of neurons, but found the root mean square errors to stabilize around 300 neurons for our test cases. It has to be acknowledged that due to the limit of human power to properly train and test the neural networks, we have not been able to properly test all neural networks and explore more flexible architectures. For this data release, we have decided not to rerun these steps, but make the current results available to the community. In the future, the restriction to one or only a few network models is recommended. The latter could cover regions of cool dwarfs, MSTO stars, hot stars, and giant stars with individual models -- and possibly explore the split in metal-poor and solar-like regimes. This would also decrease overhead, in particular for training and loading different models, and would also decrease possible noding effects between different models.
 
 \subsubsection{Flexibility of neural networks for extreme abundances}
 
@@ -1303,6 +1312,9 @@ planets, origin of elements, other galaxies, cosmology, stellar evolution, Galac
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We acknowledge the traditional owners of the land on which the AAT and ANU stand, the Gamilaraay, the Ngunnawal and Ngambri people. We pay our respects to Elders, past and present, and are proud to continue their tradition of surveying the night sky in the Southern hemisphere.
+
+We thank the staff at Siding Spring Observatory for their decade-long maintenance of 2dF-HERMES and support during observations, without whom this project would not have been possible: NAME1, NAME2, ...
+
 This work was supported by the Australian Research Council Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), through project number CE170100013. SB acknowledges support from the Australian Research Council under grant number DE240100150.
 
 \section*{Facilities}
