@@ -109,7 +109,9 @@
 
 %%%% NEW AUTHOR
 \author{M.~R.~Hayden}
-\affiliation{Sydney Institute for Astronomy, School of Physics, A28, The University of Sydney, NSW 2006, Australia}
+\affiliation{Homer L. Dodge Department of Physics \& Astronomy, University of Oklahoma, 440 W. Brooks St., Norman, OK 73019, USA}
+\alsoaffiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
+\alsoaffiliation{Sydney Institute for Astronomy, School of Physics, A28, The University of Sydney, NSW 2006, Australia}
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
 
 %%%% NEW AUTHOR
@@ -191,6 +193,10 @@
 \author{K.~Banks}
 \affiliation{School of Physics, UNSW, Sydney, NSW 2052, Australia}
 \alsoaffiliation{ARC Centre of Excellence for All Sky Astrophysics in 3 Dimensions (ASTRO 3D), Australia}
+
+%%%% NEW AUTHOR
+\author{M.~A.~Beavis}
+\affiliation{Centre for Astrophysics, University of Southern Queensland, West Street, Toowoomba, QLD 4350, Australia}
 
 %%%% NEW AUTHOR
 \author{K.~Beeson}
@@ -734,7 +740,7 @@ After the \texttt{allspec} module (Sec.~\ref{sec:allspec_analysis}) has been use
 \begin{figure}[ht]
  \centering
  \includegraphics[width=\textwidth]{figures/examples_flag_sp_2.png}
- \caption{\textbf{Example of radial velocity evolution over time for a single-lined spectroscopic binary (SBI)}.}
+ \caption{\textbf{Example of radial velocity evolution over time for a single-lined spectroscopic binary (SB1)}.}
  \label{fig:examples_flag_sp_2}
 \end{figure}
 
@@ -821,9 +827,9 @@ Because we can create synthetic stellar spectra for the full wavelength range, w
  \caption{\textbf{Example of a star with clear emission in the Balmer lines (here $\mathrm{H_\upalpha}$). The bit indicating emission has been raised in the major quality flag \texttt{flag\_sp} for this star.}} \label{fig:examples_flag_sp_1}
 \end{figure}
 
-\subsubsection{Emission estimates for the Balmer lines}
+\subsubsection{Emission estimates for the Balmer lines} \label{sec:emission}
 
-The difference between synthetic and observed Balmer line absorption holds valuable information on active stars, as well as the known inaccuracy of the synthetic Balmer lines, as well as masses for evolved stars \citep{Bergemann2016} and possibly even information on unresolved binary systems \citep{Sayeed2024}. We therefore perform a trapezoidal integration around the Balmer lines at $4861.3230$ and $6562.7970\,\text{\AA}$ whose values we report in \texttt{ew\_h\_beta} and \texttt{ew\_h\_alpha}. By default we integrate in a window of $\pm 0.75$ and $1.25\,\text{\AA}$ for $\text{H}_\upbeta$ and $\text{H}_\upalpha$, respectively, and increase this window to $5\,\text{\AA}$ if the average observed, normalised flux within $\pm 0.5\,\text{\AA}$ of the Balmer line core exceeds 1. An example of such a star is shown in Fig.~\ref{fig:examples_flag_sp_1}, for which we measure a residual EW of $1.09\,\text{\AA}$. Most emission line stars in the GALAH sample are found the the region of pre-main-sequence and hot stars (see Fig.~\ref{fig:flag_sp_overview_allstar}a).
+The shape of the Balmer absorption lines holds valuable information on active stars as well as masses for evolved stars \citep{Bergemann2016} and possibly even information on unresolved binary systems \citep{Sayeed2024}. Although the cores of these lines suffer from inaccuracies in the synthesis, the residuals of synthetic and observed lines can be used in relative analyses. We therefore perform a trapezoidal integration around the Balmer lines of each normalised spectrum at $4861.3230$ and $6562.7970\,\text{\AA}$ whose values we report in \texttt{ew\_h\_beta} and \texttt{ew\_h\_alpha}. By default we integrate in a window of $\pm 0.75$ and $1.25\,\text{\AA}$ for $\text{H}_\upbeta$ and $\text{H}_\upalpha$, respectively, and increase this window to $5\,\text{\AA}$ if the average observed, normalised flux within $\pm 0.5\,\text{\AA}$ of the Balmer line core exceeds 1. An example of such a star is shown in Fig.~\ref{fig:examples_flag_sp_1}, for which we measure a residual EW of $1.09\,\text{\AA}$. Most emission line stars in the GALAH sample are found the the region of pre-main-sequence and hot stars (see Fig.~\ref{fig:flag_sp_overview_allstar}a). We conservatively only flag stars with a median normalised flux above 1 in $\text{H}_\upbeta$ or $\text{H}_\upalpha$ as emission line stars.
 
 
 \begin{figure*}[ht]
@@ -972,7 +978,7 @@ In addition to these instructive comparisons, we also want to return to the prec
 \label{sec:flag_sp}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We have implemented a series of post-processing routines to assess the quality of the stellar parameter determinations. These routines check for a variety of potential issues with the spectra and stellar label fitting, with each flag corresponding to a specific quality check. If any of these checks are not passed, the respective bit in the quality flag \texttt{flag\_sp} is raised. The description of the implemented bits/flags for \texttt{flag\_sp} and how often they were raised is listed in Tab.~\ref{tab:flag_sp} and distributions in the Kiel diagram (\Teff and \logg) are shown for each raised bit in Fig.~\ref{fig:flag_sp_overview_allstar} for the \texttt{allstar} catalogue. For examples of stars with raised flags, we refer back to the emission line star (\texttt{flag\_sp} = 1) of Fig.~\ref{fig:examples_flag_sp_1} and the clearly double-lined binary of Fig.~\ref{fig:examples_flag_sp_2}.
+We have implemented a series of post-processing routines to assess the quality of the stellar parameter determinations. These routines check for a variety of potential issues with the spectra and stellar label fitting, with each flag corresponding to a specific quality check. If any of these checks are not passed, the respective bit in the quality flag \texttt{flag\_sp} is raised. The description of the implemented bits/flags for \texttt{flag\_sp} and how often they were raised is listed in Tab.~\ref{tab:flag_sp} and distributions in the Kiel diagram (\Teff and \logg) are shown for each raised bit in Fig.~\ref{fig:flag_sp_overview_allstar} for the \texttt{allstar} catalogue. For examples of stars with raised flags, we refer back to the emission line star (\texttt{flag\_sp} = 1) of Fig.~\ref{fig:examples_flag_sp_1} (Sec.~\ref{sec:emission}) and the clearly double-lined binary of Fig.~\ref{fig:examples_flag_sp_2}.
 
 Because quality cuts should be applied based on the specific science case at hand, we do not make a strict recommendation for which upper limit of \texttt{flag\_sp} should be applied. We not, however, that we have tried to implement flags that increase in concert. The first 8 bit masks (with values up to $9^2-1 = 511$) are therefore less problematic than those of 9  or higher ($\texttt{flag\_sp} \leq 512$).
 
@@ -1258,7 +1264,7 @@ Although not part of this release, we have created an analysis module for spectr
 \begin{figure}[ht]
  \centering
  \includegraphics[width=\textwidth]{figures/examples_flag_sp_3.png}
- \caption{\textbf{Example spectrum for a double-lined spectroscopic binary star (SBII) that is better fit with our binary fitting algorithm.}} \label{fig:examples_flag_sp_3}
+ \caption{\textbf{Example spectrum for a double-lined spectroscopic binary star (SB2) that is better fit with our binary fitting algorithm.}} \label{fig:examples_flag_sp_3}
 \end{figure}
 
 \subsection{Globular clusters} \label{sec:caveats_globulars}
