@@ -401,8 +401,7 @@
 \bibitem[{{Corliss} \& {Bozman}(1962)}]{CB}
 {Corliss}, C.~H., \& {Bozman}, W.~R. 1962, NBS Monograph, Vol.~53,
   {Experimental transition probabilities for spectral lines of seventy
-  elements; derived from the NBS Tables of spectral-line intensities} (US
-  Government Printing Office), (CB)
+  elements} (US Government Printing Office), (CB)
 
 \bibitem[{{Cutri} {et~al.}(2014)}]{Cutri2013}
 {Cutri}, R.~M., {et~al.} 2014, VizieR Online Data Catalog, 2328
@@ -1132,6 +1131,22 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
   {Buder}}]{Horta2022}
 {Horta}, D., {Ness}, M.~K., {Rybizki}, J., {Schiavon}, R.~P., \& {Buder}, S.
   2022, \mnras, 513, 5477
+
+\bibitem[{{Hourihane} {et~al.}(2023){Hourihane}, {Fran{\c{c}}ois}, {Worley},
+  {Magrini}, {Gonneau}, {Casey}, {Gilmore}, {Randich}, {Sacco}, {Recio-Blanco},
+  {Korn}, {Allende Prieto}, {Smiljanic}, {Blomme}, {Bragaglia}, {Walton}, {Van
+  Eck}, {Bensby}, {Lanzafame}, {Frasca}, {Franciosini}, {Damiani}, {Lind},
+  {Bergemann}, {Bonifacio}, {Hill}, {Lobel}, {Montes}, {Feuillet},
+  {Tautvai{\v{s}}ien{\.{e}}}, {Guiglion}, {Tabernero}, {Gonz{\'a}lez
+  Hern{\'a}ndez}, {Gebran}, {Van der Swaelmen}, {Mikolaitis}, {Daflon},
+  {Merle}, {Morel}, {Lewis}, {Gonz{\'a}lez Solares}, {Murphy}, {Jeffries},
+  {Jackson}, {Feltzing}, {Prusti}, {Carraro}, {Biazzo}, {Prisinzano},
+  {Jofr{\'e}}, {Zaggia}, {Drazdauskas}, {Stonkut{\'e}}, {Marfil},
+  {Jim{\'e}nez-Esteban}, {Mahy}, {Guti{\'e}rrez Albarr{\'a}n}, {Berlanas},
+  {Santos}, {Morbidelli}, {Spina}, \&
+  {Minkevi{\v{c}}i{\={u}}t{\.{e}}}}]{Hourihane2023}
+{Hourihane}, A., {Fran{\c{c}}ois}, P., {Worley}, C.~C., {et~al.} 2023, \aap,
+  676, A129
 
 \bibitem[{{Howell} {et~al.}(2022){Howell}, {Campbell}, {Stello}, \& {De
   Silva}}]{Howell2022}
