@@ -530,7 +530,7 @@ In the following sections, we describe our approach to dividing the parameter sp
  \label{fig:example_3d_bin_sample}
 \end{figure*}
 
-\begin{table*}[h]
+\begin{table*}[ht]
 \centering
  \caption{Example of boundaries for the uniform sampling of synthetic spectrum labels (stellar parameters and elemental abundances) for the 3-dimensional bin of Solar siblings \texttt{5750\_4.50\_0.00}.}
 \label{tab:sampling_xfe}
@@ -971,7 +971,7 @@ In addition to these instructive comparisons, we also want to return to the prec
 
 \begin{figure*}[ht]
 \centering
-\includegraphics[width=\textwidth]{figures/vrad_comparison_comp1_comp2_gaiadr3.png}
+\includegraphics[width=0.95\textwidth]{figures/vrad_comparison_comp1_comp2_gaiadr3.png}
 \caption{\textbf{Comparison of radial velocity estimates of GALAH DR4 and \textit{Gaia} DR3.} \textbf{Panel a)} shows the difference of GALAH's primary component radial velocity with the mean \textit{Gaia} DR3. \textbf{Panels b) and c)} show stars for which two components were detected in GALAH DR4 and shows the difference between each component and \textit{Gaia} DR3 against the difference of mean (roughly systemic) radial velocities. The panels also include regions where actual binaries and false positive detections are expected.}
 \label{fig:vrad_comparison_comp1_comp2_gaiadr3}
 \end{figure*}
@@ -987,7 +987,7 @@ Because quality cuts should be applied based on the specific science case at han
 
 \input{tables/flag_sp_statistics}
 
-While not intended to identify binaries, we believe that both the \vsini and \vmic flags are informative for binaries below $T_\mathrm{eff} < 6000\,\mathrm{K}$ (see their elevated position in Figs.~A\ref{fig:flag_sp_overview_allstar}f and A\ref{fig:flag_sp_overview_allstar}g). We have trained the stars of this region with a lower maximum \vsini range that would be reached for a spectrum that is broadened due to binarity. This region certainly overlaps with the one of identified single-lined and double-lined binaries with \texttt{flag\_sp} = 4 and 8, respectively (see Figs.~A\ref{fig:flag_sp_overview_allstar}c and A\ref{fig:flag_sp_overview_allstar}d). For the latter, we notice that especially cool giants are picked up by the automatic algorithm as well. This might be either due to strong extinction biasing our analysis or due to lines in the spectrum not being modelled sufficiently and thus showing up as residual signal. While these stars are possibly flagged false-positively, we do also find a remarkable amount of true binaries, for which the \Gaia DR3 radial velocity is likely the systemic radial velocity, as it is close to the mean radial velocity of both components identified in GALAH DR4. In Fig.~\ref{fig:vrad_comparison_comp1_comp2_gaiadr3}, we visualise how one could use the radial velocities from GALAH DR4 and \Gaia DR3 to further assess the reliability of this flag.
+While not intended to identify binaries, we believe that both the \vsini and \vmic flags are informative for binaries below $T_\mathrm{eff} < 6000\,\mathrm{K}$ (see their elevated position in Figs.~A\ref{fig:flag_sp_overview_allstar}f and g). We have trained the stars of this region with a lower maximum \vsini range that would be reached for a spectrum that is broadened due to binarity. This region certainly overlaps with the one of identified single-lined and double-lined binaries with \texttt{flag\_sp} = 4 and 8, respectively (see Figs.~A\ref{fig:flag_sp_overview_allstar}c and d). For the latter, we notice that especially cool giants are picked up by the automatic algorithm as well. This might be either due to strong extinction biasing our analysis or due to lines in the spectrum not being modelled sufficiently and thus showing up as residual signal. While these stars are possibly flagged false-positively, we do also find a remarkable amount of true binaries, for which the \Gaia DR3 radial velocity is likely the systemic radial velocity, as it is close to the mean radial velocity of both components identified in GALAH DR4. In Fig.~\ref{fig:vrad_comparison_comp1_comp2_gaiadr3}, we visualise how one could use the radial velocities from GALAH DR4 and \Gaia DR3 to further assess the reliability of this flag.
 
 To check if a particular bitmask flag (e.g. $2^3 = 8$ is raised, one can perform the check in \textsc{python} via
 \begin{verbatim}
