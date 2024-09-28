@@ -486,7 +486,7 @@ The achieved Signal-to-Noise Ratio (SNR) per pixel of the individual exposures d
 %	user_sbuder.dr6_0_230101_unique_ids as galah
 %	ON galah.tmass_id = tmass.designation
 
-To support our spectroscopic analysis, we make use of astrometric and photometric information from the \Gaia satellite \citep{Gaia-Collaboration2016} and 2MASS survey \citep{Skrutskie2006}, which is available for essentially all our targets. We further use the value-added catalogues, like distance estimates for field stars by \citep{BailerJones2021} as well as open and globular cluster membership probabilities from \citet{CantatGaudin2020} as well as \citet{Vasiliev2021} and \citet{Baumgardt2021}.
+To support our spectroscopic analysis, we make use of astrometric and photometric information from the \Gaia satellite \citep{Gaia-Collaboration2016} and 2MASS survey \citep{Skrutskie2006}, which is available for essentially all our targets. We further use the value-added catalogues, like distance estimates for field stars by \citet{BailerJones2021} as well as open and globular cluster membership probabilities from \citet{CantatGaudin2020} as well as \citet{Vasiliev2021} and \citet{Baumgardt2021}.
 
 \subsubsection{\Gaia DR3}
 
@@ -569,7 +569,7 @@ v_\text{mic} = \begin{array}{l}
 \label{sec:higher_resolution_synthetic_spectra}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We create training sets from high-resolution stellar spectra for each smaller 3D bin region of the parameter space. We compute over-sampled synthetic intensity spectra at ten times higher resolution than the typical GALAH resolution with \sme for seven equal-area angles $\mu$ (see Fig.~\ref{fig:sme_mu_output}) of the plane-parallel or spherically symmetric stellar surfaces \citep{Gustafsson2008}.
+We create training sets from high-resolution stellar spectra for each smaller 3D bin region of the parameter space. We compute over-sampled synthetic intensity spectra at ten times higher resolution than the typical GALAH resolution with \sme for seven equal-area angles (see Fig.~\ref{fig:sme_mu_output}) of the plane-parallel or spherically symmetric stellar surfaces \citep{Gustafsson2008}.
 
 \begin{figure*}[ht]
  \centering
@@ -793,7 +793,7 @@ After the \texttt{allspec} and  \texttt{allstar} modules have been run for a nig
 
 The residual spectrum of our best fitting single star analysis can help us to identify a second flux contributor to the observed spectrum. In our case, there are two points in the analysis where we can identify such an influence. Firstly, the residuals are visible in the $\chi^2$ distribution as a function of radial velocity shifts (see Fig.~\ref{fig:181221003101356_single_fit_rv}). While a single star would only show one peak (saved as \texttt{rv\_comp\_1}), a binary system like 2MASS J06084657-7815235 shows a second peak ($-70\,\mathrm{km\,s^{-1}}$ in addition to $74\,\mathrm{km\,s^{-1}}$) that is saved as \texttt{rv\_comp\_2}. Secondly, we perform an automatic search for reoccuring residuals as a function of radial velocity for a few selected lines. We chose the combination of strong lines in the spectra (Balmer lines, Fe lines at 4890 and $4891\,\text{\AA}$, Ni at $6644\,\text{\AA}$) as well as those with the largest expected wavelength shift in the infrared detector (O triplet at $7772-7775\,\text{\AA}$ as well as Mg at $7692\,\text{\AA}$). If we find several peaks with a reasonably similar radial velocity, the likely $X \in {16,50,84}^\text{th}$ percentiles of this radial velocity are saved in \texttt{sb2\_rv\_X}.
 
-Because radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2023} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare against those radial velocity estimates. For 6\% (50\,577) of our stars, we find a difference with respect to \Gaia DR3 larger than $10\,\mathrm{km\,s^{-1}}$. For these stars, as well as stars for which we estimate unrealistic \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in \texttt{allspec}. We note that the \texttt{allspec} analysis was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged. \texttt{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.
+Because radial velocities from the \Gaia radial velocity spectrometer \citep{Katz2023} are reported in \Gaia DR3 for 94\% (774\,914) of the stars observed for GALAH DR4, we can also compare against those radial velocity estimates. For 6\% (50\,577) of our stars, we find a difference with respect to \Gaia DR3 larger than $10\,\mathrm{km\,s^{-1}}$. For these stars, we often noticed unrealistically high or low \vmic and \vsini below $0\,\mathrm{km\,s^{-1}}$ in our \texttt{allspec} analysis. We note that the \texttt{allspec} analysis was run without boundary conditions for global parameters and thus also resulted in negative velocities, which are later flagged and might indicate binarity (Sec.~\ref{sec:flag_sp}). \texttt{allstar}, however, was run with \vmic and \vsini forced to be above $0\,\mathrm{km\,s^{-1}}$.
 
 \begin{figure*}[ht]
  \centering
@@ -829,7 +829,7 @@ Because we can create synthetic stellar spectra for the full wavelength range, w
 
 \subsubsection{Emission estimates for the Balmer lines} \label{sec:emission}
 
-The shape of the Balmer absorption lines holds valuable information on active stars as well as masses for evolved stars \citep{Bergemann2016} and possibly even information on unresolved binary systems \citep{Sayeed2024}. Although the cores of these lines suffer from inaccuracies in the synthesis, the residuals of synthetic and observed lines can be used in relative analyses. We therefore perform a trapezoidal integration around the Balmer lines of each normalised spectrum at $4861.3230$ and $6562.7970\,\text{\AA}$ whose values we report in \texttt{ew\_h\_beta} and \texttt{ew\_h\_alpha}. By default we integrate in a window of $\pm 0.75$ and $1.25\,\text{\AA}$ for $\text{H}_\upbeta$ and $\text{H}_\upalpha$, respectively, and increase this window to $5\,\text{\AA}$ if the average observed, normalised flux within $\pm 0.5\,\text{\AA}$ of the Balmer line core exceeds 1. An example of such a star is shown in Fig.~\ref{fig:examples_flag_sp_1}, for which we measure a residual EW of $1.09\,\text{\AA}$. Most emission line stars in the GALAH sample are found the the region of pre-main-sequence and hot stars (see Fig.~\ref{fig:flag_sp_overview_allstar}a). We conservatively only flag stars with a median normalised flux above 1 in $\text{H}_\upbeta$ or $\text{H}_\upalpha$ as emission line stars.
+The shape of the Balmer absorption lines holds valuable information on active stars as well as masses for evolved stars \citep{Bergemann2016} and possibly even information on unresolved binary systems \citep{Sayeed2024}. Although the cores of these lines suffer from inaccuracies in the synthesis, the residuals of synthetic and observed lines can be used in relative analyses. We therefore perform a trapezoidal integration around the Balmer lines of each normalised spectrum at $4861.3230$ and $6562.7970\,\text{\AA}$ whose values we report in \texttt{ew\_h\_beta} and \texttt{ew\_h\_alpha}. By default we integrate in a window of $\pm 0.75$ and $1.25\,\text{\AA}$ for $\text{H}_\upbeta$ and $\text{H}_\upalpha$, respectively, and increase this window to $5\,\text{\AA}$ if the average observed, normalised flux within $\pm 0.5\,\text{\AA}$ of the Balmer line core exceeds 1. An example of such a star is shown in Fig.~\ref{fig:examples_flag_sp_1}, for which we measure a residual EW of $1.09\,\text{\AA}$. Most emission line stars in the GALAH sample are found in the region of pre-main-sequence and hot stars (see Fig.~\ref{fig:flag_sp_overview_allstar}a). We conservatively only flag stars with a median normalised flux above 1 in $\text{H}_\upbeta$ or $\text{H}_\upalpha$ as emission line stars.
 
 
 \begin{figure*}[ht]
@@ -872,7 +872,7 @@ $v_\text{rad}~/~\mathrm{km\,s^{-1}}$ &  0.15  & $0.17 \pm 0.02$ \\
 
 \subsubsection{Accuracy estimation and validation} \label{sec:uncertainty_accuracy}
 
-Estimating the accuracy of spectroscopic measurements has always been a complicated endeavour, because there are no universal benchmark sets for all parameters across all stellar types yet. Subsequently, we describe the numerous comparisons that we have performed for both stellar parameters (\Teff, \logg, \feh, \vmic, \vsini, and \vrad) as well as the elemental abundance measurements. Consistent with GALAH DR3 \citep{Buder2021}, and caused by the limited coverage of benchmark literature, we continue to use a single accuracy estimate for each stellar parameter and ignore the possibly large accuracy uncertainties for the elemental abundances. In all cases, we do estimate an overall bias with respect to literature values and then combine these estimates to a globally applied zeropoint correction. Where not explicitly stated otherwise, we use assume that the spread of stellar parameters residuals is indicative of the accuracy of either method and estimate our accuracy by dividing the parameter spread by $\sqrt{2}$. The applied shifts are listed in Table~\ref{tab:zeropoints}. We estimate the accuracy and bias correction for stellar parameters (including the iron abundance as a global parameter) and abundances separately.
+Estimating the accuracy of spectroscopic measurements has always been a complicated endeavour, because there are no universal benchmark sets for all parameters across all stellar types yet. Subsequently, we describe the numerous comparisons that we have performed for both stellar parameters (\Teff, \logg, \feh, \vmic, \vsini, and \vrad) as well as the elemental abundance measurements. Consistent with GALAH DR3 \citep{Buder2021}, and caused by the limited coverage of benchmark literature, we continue to use a single accuracy estimate for each stellar parameter and ignore the possibly large accuracy uncertainties for the elemental abundances. In all cases, we do estimate an overall bias with respect to literature values and then combine these estimates to a globally applied zeropoint correction. Where not explicitly stated otherwise, we assume that the spread of stellar parameters residuals is indicative of the accuracy of either method and estimate our accuracy by dividing the parameter spread by $\sqrt{2}$. The applied shifts are listed in Table~\ref{tab:zeropoints}. We estimate the accuracy and bias correction for stellar parameters (including the iron abundance as a global parameter) and abundances separately.
 
 Our primary reference source for parameter accuracy remain the \Gaia FGK benchmark stars \citep{Jofre2014, Jofre2015, Jofre2018, Heiter2015}. Additionally, we use estimates from asteroseismic estimates of the K2 and TESS photometry \citep{Zinn2020, Hon2021} to compare our surface gravities and perform a validation to higher quality observations of globular cluster stars with typically lower metallicities \citep{Carretta2009c, Carretta2009, Johnson2010}. Because the overlap with APOGEE DR17 \citep{SDSSDR17} has increased from 41\,941 stars in GALAH DR3 to 60\,046 stars with 92\,368 repeat observation matches in GALAH DR4, we also can assess systematic trends for a larger parameter space. For clarity, we discuss the stellar parameters separately, but show most accuracy estimates in a combined figure Fig.~\ref{fig:galah_dr4_validation_parameter_accuracy_allstar}.
 
@@ -971,7 +971,7 @@ In addition to these instructive comparisons, we also want to return to the prec
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=0.825\textwidth]{figures/vrad_comparison_comp1_comp2_gaiadr3.png}
-\caption{\textbf{Comparison of radial velocity estimates of GALAH DR4 and \textit{Gaia} DR3.} \textbf{Panel a)} shows the difference of GALAH's primary component radial velocity with the mean \textit{Gaia} DR3. \textbf{Panels b) and c)} show stars for which two components were detected in GALAH DR3 and shows the difference between each component and \textit{Gaia} DR3 against the difference of mean (roughly systemic) radial velocities. The panels also include regions where actual binaries and false positive detections are expected.}
+\caption{\textbf{Comparison of radial velocity estimates of GALAH DR4 and \textit{Gaia} DR3.} \textbf{Panel a)} shows the difference of GALAH's primary component radial velocity with the mean \textit{Gaia} DR3. \textbf{Panels b) and c)} show stars for which two components were detected in GALAH DR4 and shows the difference between each component and \textit{Gaia} DR3 against the difference of mean (roughly systemic) radial velocities. The panels also include regions where actual binaries and false positive detections are expected.}
 \label{fig:vrad_comparison_comp1_comp2_gaiadr3}
 \end{figure*}
 
@@ -1021,6 +1021,7 @@ To assess whether the abundance estimates are a true detection or an upper limit
 \end{figure}
 \end{landscape}
 
+We further raise a flag for \texttt{allspec} abundances, if the element was fit above (3) or below (4) the neural network training set range. For CNO, we have identified specific regions, in particular dwarfs, for which could not verify abundances and therefore caution their use (flag 5). We have further tried to identify abundances, for which the optimisation may have failed and flagged these with flag 6 (see Sec.~\ref{sec:caveats_fitting}).
 
 \begin{table}
 \centering
@@ -1050,7 +1051,7 @@ Raised Bit & Flag & Description \\
 %     )
 % )
 %: $\mathrm{[C/N]} < -1$ for non-giants ($T_\text{eff} > 5500\,\mathrm{K}$ or $\log g > 3.5$) or no $\mathrm{[N/Fe]}$ measured for non-giants ($T_\text{eff} > 5500\,\mathrm{K}$ or $\log g > 3.5$) -> raising flag of $\mathrm{[C/Fe]}$ in that case as well as $\mathrm{[N/Fe]}$ extended non-giants ($T_\text{eff} > 5750\,\mathrm{K}$ or $\log g > 4.$ -> raising flag of $\mathrm{[N/Fe]}$ 
-6 & 64 & measurement of Li, Ca, or Ba \\ %$ when CCD3 wavelength seems to be off (cdelt beyond the usual range of xx-xx) \\
+6 & 64 & optimisation may have failed \\
 \hline
 \end{tabular}
 \end{table}
@@ -1092,7 +1093,7 @@ We provide several value-added catalogues, namely a crossmatch catalogue to all 
 
 The value-added catalogue of the crossmatch\footnote{\texttt{galah\_dr4\_vac\_wise\_tmass\_gaiadr3}} with the \Gaia DR3, 2MASS, and WISE catalogues as well as the distance catalogue by \citet{BailerJones2021} was calculated by performing an \texttt{OUTER JOIN} ADQL-query in the \Gaia archive. 
 
-The query first performed an \texttt{INNER JOIN} with the 2MASS near-infrared photometry catalogue\footnote{\texttt{gaiadr1.tmass\_original\_valid}} \citep{Skrutskie2006} via its \texttt{designation} and linked this match to the \Gaia DR3 catalogue via the best neighbour\footnote{ \texttt{gaiadr3.tmass\_psc\_xsc\_best\_neighbour}} and joined\footnote{\texttt{gaiadr3.tmass\_psc\_xsc\_join}} catalogues of 2MASS to \Gaia DR3 \citep{Torra2021}. When cross-matching between Gaia DR3 and 2MASS, some stars were associated with multiple possible matches. To ensure the best match, the data was sorted by from brightest to faintest \(G\)-band magnitude, and only the brightest match for each \texttt{sobject\_id} was retained.
+The query first performed an \texttt{INNER JOIN} with the 2MASS near-infrared photometry catalogue\footnote{\texttt{gaiadr1.tmass\_original\_valid}} \citep{Skrutskie2006} via its \texttt{designation} and linked this match to the \Gaia DR3 catalogue via the best neighbour\footnote{ \texttt{gaiadr3.tmass\_psc\_xsc\_best\_neighbour}} and joined\footnote{\texttt{gaiadr3.tmass\_psc\_xsc\_join}} catalogues of 2MASS to \Gaia DR3 \citep{Torra2021}. When cross-matching between Gaia DR3 and 2MASS, less than 1\% of stars were associated with multiple possible matches. To ensure the best match, the data was sorted by from brightest to faintest \(G\)-band magnitude, and only the brightest match for each \texttt{sobject\_id} was retained.
 
 The crossmatch to the WISE far-infrared photometry catalogue\footnote{\texttt{gaiadr1.allwise\_original\_valid}} \citep{Cutri2013} was performed via the \Gaia DR3's best neighbour catalogue\footnote{\texttt{gaiadr3.allwise\_best\_neighbour}} \citep{Torra2021}. The match to the distance catalogue\footnote{\texttt{external.gaiaedr3\_distance}} by \citet{BailerJones2021}  via the \Gaia DR3 \texttt{source\_id}.
 
@@ -1188,7 +1189,7 @@ Although a significant amount of work was spent on improving the spectrum reduct
 
 \subsubsection{Wavelength solutions}
 
-For each CCD, the reduction pipeline estimates the most suitable wavelength solution, linking pixels with actual wavelengths based on the ThXe arc lines. In GALAH DR3 \citep{Buder2021} we identified several issues for spectra where not enough ThXe lines could be used to constrain the wavelength solution. Improvements have been made for the new reduction version to improve the number of useful ThXe lines and restrict the flexibility of wavelength solutions to move them closer to previous results. This has helped us to decrease the amount of problematic wavelength solutions towards the end of CCD3, with the only used absorption lines of Li and Eu, from an initially bad wavelength solution for 7.9\% of the spectra.
+For each CCD, the reduction pipeline estimates the most suitable wavelength solution, linking pixels with actual wavelengths based on the ThXe arc lines. In GALAH DR3 \citep{Buder2021} we identified several issues for spectra where not enough ThXe lines could be used to constrain the wavelength solution. Improvements have been made for the new reduction version to improve the number of useful ThXe lines and restrict the flexibility of wavelength solutions to move them closer to previous results. This has helped us to decrease the amount of problematic wavelength solutions towards the end of CCD3, with the only used absorption lines of Li and Eu, from an initially bad wavelength solution for 7.9\% of the spectra. Similar to the other CCDs, we expect less than 1\% bad solutions to have remained.
 
 \subsubsection{Holistic spectrum extraction}
 
@@ -1399,7 +1400,7 @@ We further made use of \textsc{topcat} \citep[version 4.7;][]{Taylor2005};
 
 Our linelist, as described in Sec.~\ref{sec:higher_resolution_synthetic_spectra}, makes use of the following work: References: 1982ApJ...260..395C: \cite{1982ApJ...260..395C},  1983MNRAS.204..883B|1989A\&A...208..157G: \cite{1983MNRAS.204..883B,1989A&A...208..157G},  1990JQSRT..43..207C: \cite{1990JQSRT..43..207C}, 
 1992A\&A...255..457D: \cite{1992A&A...255..457D},  1993A\&AS...99..179H: \cite{1993A&AS...99..179H}, \\ 1993PhyS...48..297N: \cite{1993PhyS...48..297N},  1998PhRvA..57.1652Y: \cite{1998PhRvA..57.1652Y}, 
-1999ApJS..122..557N: \cite{1999ApJS..122..557N},  2008JPCRD..37..709K: \cite{2008JPCRD..37..709K},  \\ 2009A\&A...497..611M: \cite{2009A&A...497..611M},  \\ 2009A\&A...497..611M:solar-gf: \cite{2009A&A...497..611M}, 
+1999ApJS..122..557N: \cite{1999ApJS..122..557N},  2008JPCRD..37..709K: \cite{2008JPCRD..37..709K},  \\ 2009A\&A...497..611M: \cite{2009A&A...497..611M},  \\ 
 2014ApJS..211...20W: \cite{2014ApJS..211...20W},  2014ApJS..215...20L: \cite{2014ApJS..215...20L},  2014ApJS..215...23D: \cite{2014ApJS..215...23D},  2014MNRAS.441.3127R: \cite{2014MNRAS.441.3127R},  \\
 2015ApJS..220...13L: \cite{2015ApJS..220...13L},   \\ 2015ApJS..220...13L\_1982ApJ...260..395C: \cite{2015ApJS..220...13L,1982ApJ...260..395C},  2017MNRAS.471..532P: \cite{2017MNRAS.471..532P}, 
 2017PhRvA..95e2507T: \cite{2017PhRvA..95e2507T},  BGHL: \cite{BGHL},  BIPS: \cite{BIPS},  BK: \cite{BK},  BK+BWL: \cite{BK,BWL},  BK+GESB82d+BWL: \cite{BK,GESB82d,BWL},  BKK: \cite{BKK}, 
@@ -1415,7 +1416,7 @@ NWL: \cite{NWL},  PQWB: \cite{PQWB},  RU: \cite{RU},  S: \cite{S},  SLS: \cite{S
 
 \section{Initial parameters}
 
-In this section, we append the overview of the initial and final stellar parameters of GALAH DR4. We show the density distribution of \logg, \feh, \vmic, and \vsini in each row as a function of \Teff. The columns show the same stars and their final parameters, the initial value, the reduction pipeline suggestion, the \Gaia DR3 \texttt{gspphot} estimates and the GALAH DR3 estimates, respectively.
+We append the overview of the initial and final stellar parameters of GALAH DR4 in Fig.~\ref{fig:initial_parameters}. We show the density distribution of \logg, \feh, \vmic, and \vsini in each row as a function of \Teff.
 
 \begin{figure*}[ht]
  \centering
@@ -1427,7 +1428,7 @@ In this section, we append the overview of the initial and final stellar paramet
 
 \section{Data Products}
 
-In this section, we append examples of data products of GALAH DR4 that were not already shown in the main manuscript. We present the shortened table schema of the \texttt{allstar} and \texttt{allspec} catalogues in Table~\ref{tab:main_catalog_schema}. In Fig.~\ref{fig:210115002201239_allstar_fit_comparison}, we show the automatically created fit comparison of the \texttt{allstar} module for Vesta (210115002201239). In Fig.~\ref{fig:covariance_vesta_arcturus}, we show examples of the covariance matrices for Vesta and Arcturus, as representative examples for main sequence and giant stars. We note that these covariance matrices are a direct output of \texttt{scipy.optimize.curve\_fit} and note scaled up to the final label uncertainties.
+We append examples of data products of GALAH DR4 that were not already shown in the main manuscript. Table~\ref{tab:main_catalog_schema} shows a shortened table schema of the \texttt{allstar} and \texttt{allspec} catalogues. Fig.~\ref{fig:210115002201239_allstar_fit_comparison} shows the automatically created fit comparison of the \texttt{allstar} module for Vesta (210115002201239). Fig.~\ref{fig:covariance_vesta_arcturus} shows examples of the covariance matrices for Vesta and Arcturus, as representative examples for main sequence and giant stars.
 
 % Main catalogue table schema with reference:
 % \label{tab:main_catalog_schema}
@@ -1435,7 +1436,7 @@ In this section, we append examples of data products of GALAH DR4 that were not 
 
 \begin{figure*}[ht]
  \centering
- \includegraphics[width=0.9\textwidth]{figures/210115002201239_allstar_fit_comparison.pdf} \caption{\textbf{ Example output of the \texttt{allstar} analysis for Vesta (210115002201239).} The observed flux (black) is compared with the fitted model flux (red), and the residuals (purple) show the difference between the observed and modelled spectra. Important spectral lines are annotated with their corresponding elements, with element groups colour-coded for clarity. Blue-shaded regions represent the 5\% of the spectrum that was masked and excluded from the fit to avoid contamination from outliers or poorly modelled lines.}
+ \includegraphics[width=0.875\textwidth]{figures/210115002201239_allstar_fit_comparison.pdf} \caption{\textbf{ Example output of the \texttt{allstar} analysis for Vesta (210115002201239).} The observed flux (black) is compared with the fitted model flux (red), and the residuals (purple) show the difference between the observed and modelled spectra. Important spectral lines are annotated with their corresponding elements, with element groups colour-coded for clarity. Blue-shaded regions represent the 5\% of the spectrum that was masked and excluded from the fit to avoid contamination from outliers or poorly modelled lines.}
 \label{fig:210115002201239_allstar_fit_comparison}
 \end{figure*}
 
@@ -1450,9 +1451,10 @@ In this section, we append examples of data products of GALAH DR4 that were not 
 
 \section{Stellar parameter and abundance validation}
 
-\subsection{Accuracy}
+% \subsection{Accuracy}
 
-We list the final stellar parameter and abundance zeropoints of the \texttt{allstar} modlue in Table~\ref{tab:zeropoints}. A complete table, including the zeropoints for the \texttt{allspec} module can be found as FITS file in the online \href{https://github.com/svenbuder/GALAH_DR4/blob/main/catalogs/galah_dr4_zeropoints_240705.fits}{repository}. As discussed in Sec.~\ref{sec:uncertainty_accuracy}, the choice of abundance zeropoints was made as a compromise between the different accuracy indicators shown in Fig.~\ref{fig:galah_dr4_zeropoint_checks_allstar} for the \texttt{allstar} module.
+Stellar parameter and abundance zeropoints of the \texttt{allstar} module are listed in Table~\ref{tab:zeropoints}. A complete table, including the zeropoints for the \texttt{allspec} module can be found as FITS file in the online \href{https://github.com/svenbuder/GALAH_DR4/blob/main/catalogs/galah_dr4_zeropoints_240705.fits}{repository}. A compromise between the different accuracy abundance indicators is shown in Fig.~\ref{fig:galah_dr4_zeropoint_checks_allstar} for the \texttt{allstar} module. Fig.~\ref{fig:galah_dr4_precision_abundances} shows the precision of individual abundances. Figs.~\ref{fig:comparison_dr3_dr4_apo17_rest} and \ref{fig:comparison_dr3_dr4_apo17_rest2} show the remaining comparisons with APOGEE DR17 in addition to Figs.~\ref{fig:comparison_dr4_apo17} and \ref{fig:comparison_dr4_dr3_apo17}.
+Although multiple of the observed globular clusters are expected to show an abundance spread, including for iron, we show a collage of globular clusters with ascending iron abundance in Fig.~\ref{fig:galah_dr4_gcs_teff_logg}, with each panel indicating the median iron abundance per cluster as well as the spread (scatter) of the iron abundance distribution and the average measurement uncertainty. A more comprehensive analysis of the globular clusters will be presented in upcoming work (McKenzie et al., in preparation). Finally, Fig.~\ref{fig:flag_sp_overview_allstar} shows the distribution of flagged stars in the Kiel diagram.
 
 % Zeropoints table with \label{tab:zeropoints}
 \input{tables/zeropoints_allstar}
@@ -1463,10 +1465,6 @@ We list the final stellar parameter and abundance zeropoints of the \texttt{alls
  \caption{\textbf{Zeropoint estimates of elemental abundances for GALAH DR4.}. Each panel shows the comparison to literature (DR4 - literature) for Vesta (blue), \Gaia FKG Benchmark Stars (orange), Stars with $\vert \mathrm{[Fe/H]} \vert \leq 0.1$ closer than $D_\varpi < 0.5\,\mathrm{kpc}$ (red), as well as stars that were also observed by APOGEE DR17 (purple).}
  \label{fig:galah_dr4_zeropoint_checks_allstar}
 \end{figure*}
-
-\subsection{Precision}
-
-Fig.~\ref{fig:galah_dr4_precision_abundances}
 
 \begin{figure*}[ht]
  \centering
@@ -1500,7 +1498,6 @@ Fig.~\ref{fig:galah_dr4_precision_abundances}
  \label{fig:comparison_dr3_dr4_apo17_rest2}
 \end{figure*}
 
-
 % \begin{landscape}
 \begin{figure*}
 \includegraphics[width=\textwidth]{figures/galah_dr4_gcs_teff_logg.png}
@@ -1509,12 +1506,6 @@ Fig.~\ref{fig:galah_dr4_precision_abundances}
 \label{fig:galah_dr4_gcs_teff_logg}
 \end{figure*}
 % \end{landscape}
-
-Although multiple of the observed globular clusters are expected to show an abundance spread, including for iron, we show a collage of globular clusters with ascending iron abundance in Fig.~\ref{fig:galah_dr4_gcs_teff_logg}, with each panel indicating the median iron abundance per cluster as well as the spread (scatter) of the iron abundance distribution and the average measurement uncertainty. A more comprehensive analysis of the globular clusters will be presented in upcoming work (McKenzie et al., in preparation).
-
-\subsection{Distribution of flagged stars}
-
-Fig.~\ref{fig:flag_sp_overview_allstar}
 
 \begin{figure*}[ht]
  \centering
