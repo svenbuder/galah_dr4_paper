@@ -206,6 +206,9 @@
   Silva}}]{Barden2010}
 {Barden}, S.~C., {Jones}, D.~J., {Barnes}, S.~I., {et~al.} 2010, SPIE, 7735, 09
 
+\bibitem[{{Bastian} \& {Lardo}(2018)}]{Bastian2018}
+{Bastian}, N., \& {Lardo}, C. 2018, \araa, 56, 83
+
 \bibitem[{{Baumgardt} \& {Vasiliev}(2021)}]{Baumgardt2021}
 {Baumgardt}, H., \& {Vasiliev}, E. 2021, \mnras, 505, 5957
 
@@ -1046,6 +1049,10 @@ Foreman-Mackey, D. 2016, The Journal of Open Source Software, 1, 24
 {Ginsburg}, A., {Sip{\H{o}}cz}, B.~M., {Brasseur}, C.~E., {et~al.} 2019, \aj,
   157, 98
 
+\bibitem[{{Gratton} {et~al.}(2019){Gratton}, {Bragaglia}, {Carretta},
+  {D'Orazi}, {Lucatello}, \& {Sollima}}]{Gratton2019}
+{Gratton}, R., {Bragaglia}, A., {Carretta}, E., {et~al.} 2019, \aapr, 27, 8
+
 \bibitem[{{Grevesse} {et~al.}(2007){Grevesse}, {Asplund}, \&
   {Sauval}}]{Grevesse2007}
 {Grevesse}, N., {Asplund}, M., \& {Sauval}, A.~J. 2007, \ssr, 130, 105
@@ -1340,13 +1347,20 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 {Lin}, J., {Dotter}, A., {Ting}, Y.-S., \& {Asplund}, M. 2018, \mnras,
   doi:\url{10.1093/mnras/sty709}
 
-\bibitem[{{Lind} {et~al.}(2009){Lind}, {Asplund}, \& {Barklem}}]{Lind2009}
-{Lind}, K., {Asplund}, M., \& {Barklem}, P.~S. 2009, \aap, 503, 541
+\bibitem[{{Lind} {et~al.}(2009{\natexlab{a}}){Lind}, {Asplund}, \&
+  {Barklem}}]{Lind2009}
+{Lind}, K., {Asplund}, M., \& {Barklem}, P.~S. 2009{\natexlab{a}}, \aap, 503,
+  541
 
 \bibitem[{{Lind} {et~al.}(2011){Lind}, {Asplund}, {Barklem}, \&
   {Belyaev}}]{Lind2011}
 {Lind}, K., {Asplund}, M., {Barklem}, P.~S., \& {Belyaev}, A.~K. 2011, \aap,
   528, A103
+
+\bibitem[{{Lind} {et~al.}(2009{\natexlab{b}}){Lind}, {Primas}, {Charbonnel},
+  {Grundahl}, \& {Asplund}}]{Lind2009b}
+{Lind}, K., {Primas}, F., {Charbonnel}, C., {Grundahl}, F., \& {Asplund}, M.
+  2009{\natexlab{b}}, \aap, 503, 545
 
 \bibitem[{{Lindegren} {et~al.}(2018){Lindegren}, {Hern{\'a}ndez}, {Bombrun},
   {Klioner}, {Bastian}, {Ramos-Lerate}, {de Torres}, {Steidelm{\"u}ller},
@@ -1431,6 +1445,11 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
   {Bladh}, {Dalcanton}, {Groenewegen}, {Montalb{\'a}n}, \& {Wood}}]{Marigo2017}
 {Marigo}, P., {Girardi}, L., {Bressan}, A., {et~al.} 2017, \apj, 835, 77
 
+\bibitem[{{Marino} {et~al.}(2011){Marino}, {Sneden}, {Kraft}, {Wallerstein},
+  {Norris}, {Da Costa}, {Milone}, {Ivans}, {Gonzalez}, {Fulbright}, {Hilker},
+  {Piotto}, {Zoccali}, \& {Stetson}}]{Marino2011}
+{Marino}, A.~F., {Sneden}, C., {Kraft}, R.~P., {et~al.} 2011, \aap, 532, A8
+
 \bibitem[{{Martell} {et~al.}(2017){Martell}, {Sharma}, {Buder}, {Duong},
   {Schlesinger}, {Simpson}, {Lind}, {Ness}, {Marshall}, {Asplund},
   {Bland-Hawthorn}, {Casey}, {De Silva}, {Freeman}, {Kos}, {Lin}, {Zucker},
@@ -1470,6 +1489,16 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 {McKemmish}, L.~K., {Masseron}, T., {Hoeijmakers}, H.~J., {et~al.} 2019,
   \mnras, 488, 2836
 
+\bibitem[{{McKenzie} {et~al.}(2022){McKenzie}, {Yong}, {Marino}, {Monty},
+  {Wang}, {Karakas}, {Milone}, {Legnardi}, {Roederer}, {Martell}, \&
+  {Horta}}]{McKenzie2022}
+{McKenzie}, M., {Yong}, D., {Marino}, A.~F., {et~al.} 2022, \mnras, 516, 3515
+
+\bibitem[{{McKenzie} {et~al.}(2024){McKenzie}, {Yong}, {Karakas}, {Wang},
+  {Monty}, {Marino}, {Milone}, {Nordlander}, {Mura-Guzm{\'a}n}, {Martell}, \&
+  {Carlos}}]{McKenzie2024}
+{McKenzie}, M., {Yong}, D., {Karakas}, A.~I., {et~al.} 2024, \mnras, 527, 7940
+
 \bibitem[{{McMillan}(2017)}]{McMillan2017}
 {McMillan}, P.~J. 2017, \mnras, 465, 76
 
@@ -1479,6 +1508,9 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 
 \bibitem[{{Mel{\'e}ndez} \& {Barbuy}(2009)}]{2009A&A...497..611M}
 {Mel{\'e}ndez}, J., \& {Barbuy}, B. 2009, \aap, 497, 611
+
+\bibitem[{{Milone} \& {Marino}(2022)}]{Milone2022}
+{Milone}, A.~P., \& {Marino}, A.~F. 2022, Universe, 8, 359
 
 \bibitem[{{Miszalski} {et~al.}(2006){Miszalski}, {Shortridge}, {Saunders},
   {Parker}, \& {Croom}}]{Miszalski2006}
