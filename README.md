@@ -12,9 +12,9 @@ GALAH DR4 represents yet another milestone in Galactic archaeology, combining de
 
 ## Data Access
 
-All public data products can be found at https://cloud.datacentral.org.au/teamdata/GALAH/public/GALAH_DR4/ as FITS files or for automated download.
-
-Interactive access is provided via DataCentral here: https://docs.datacentral.org.au/galah
+**Data Products**: All public data products can be found at https://cloud.datacentral.org.au/teamdata/GALAH/public/GALAH_DR4/ as FITS files or for automated download.  
+**Data Analysis Code**: The public data analysis repository can be found at https://github.com/svenbuder/GALAH_DR4.  
+**Interactive access**: provided via DataCentral here: https://docs.datacentral.org.au/galah.  
 
 ## How to Cite
 
