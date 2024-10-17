@@ -217,6 +217,11 @@
   {Monroe}, \& {Casagrande}}]{Bedell2018}
 {Bedell}, M., {Bean}, J.~L., {Mel{\'e}ndez}, J., {et~al.} 2018, \apj, 865, 68
 
+\bibitem[{{Beeson} {et~al.}(2024){Beeson}, {Kos}, {de Grijs}, {Martell},
+  {Buder}, {Traven}, {Lewis}, {Zafar}, {Bland-Hawthorn}, {Freeman}, {Hayden},
+  {Sharma}, \& {De Silva}}]{Beeson2024}
+{Beeson}, K.~L., {Kos}, J., {de Grijs}, R., {et~al.} 2024, \mnras, 529, 2483
+
 \bibitem[{{Belokurov} {et~al.}(2018){Belokurov}, {Erkal}, {Evans}, {Koposov},
   \& {Deason}}]{Belokurov2018}
 {Belokurov}, V., {Erkal}, D., {Evans}, N.~W., {Koposov}, S.~E., \& {Deason},
@@ -1344,8 +1349,8 @@ Hunter, J.~D. 2007, Comput Sci Eng, 9, 90
 {Lewis}, I.~J., {Cannon}, R.~D., {Taylor}, K., {et~al.} 2002, \mnras, 333, 279
 
 \bibitem[{{Lin} {et~al.}(2018){Lin}, {Dotter}, {Ting}, \& {Asplund}}]{Lin2018}
-{Lin}, J., {Dotter}, A., {Ting}, Y.-S., \& {Asplund}, M. 2018, \mnras,
-  doi:\url{10.1093/mnras/sty709}
+{Lin}, J., {Dotter}, A., {Ting}, Y.-S., \& {Asplund}, M. 2018, \mnras, 477,
+  2966
 
 \bibitem[{{Lind} {et~al.}(2009{\natexlab{a}}){Lind}, {Asplund}, \&
   {Barklem}}]{Lind2009}
@@ -1648,6 +1653,24 @@ P\'erez, F., \& Granger, B.~E. 2007, Comput Sci Eng, 9, 21
   {Steinmetz}}]{Ratcliffe2024}
 {Ratcliffe}, B., {Minchev}, I., {Cescutti}, G., {et~al.} 2024, \mnras, 528,
   3464
+
+\bibitem[{{Recio-Blanco} {et~al.}(2023){Recio-Blanco}, {de Laverny}, {Palicio},
+  {Kordopatis}, {{\'A}lvarez}, {Schultheis}, {Contursi}, {Zhao}, {Torralba
+  Elipe}, {Ordenovic}, {Manteiga}, {Dafonte}, {Oreshina-Slezak}, {Bijaoui},
+  {Fr{\'e}mat}, {Seabroke}, {Pailler}, {Spitoni}, {Poggio}, {Creevey}, {Abreu
+  Aramburu}, {Accart}, {Andrae}, {Bailer-Jones}, {Bellas-Velidis}, {Brouillet},
+  {Brugaletta}, {Burlacu}, {Carballo}, {Casamiquela}, {Chiavassa}, {Cooper},
+  {Dapergolas}, {Delchambre}, {Dharmawardena}, {Drimmel}, {Edvardsson},
+  {Fouesneau}, {Garabato}, {Garc{\'\i}a-Lario}, {Garc{\'\i}a-Torres}, {Gavel},
+  {Gomez}, {Gonz{\'a}lez-Santamar{\'\i}a}, {Hatzidimitriou}, {Heiter},
+  {Jean-Antoine Piccolo}, {Kontizas}, {Korn}, {Lanzafame}, {Lebreton}, {Le
+  Fustec}, {Licata}, {Lindstr{\o}m}, {Livanou}, {Lobel}, {Lorca}, {Magdaleno
+  Romeo}, {Marocco}, {Marshall}, {Mary}, {Nicolas}, {Pallas-Quintela}, {Panem},
+  {Pichon}, {Riclet}, {Robin}, {Rybizki}, {Santove{\~n}a}, {Silvelo}, {Smart},
+  {Sarro}, {Sordo}, {Soubiran}, {S{\"u}veges}, {Ulla}, {Vallenari}, {Zorec},
+  {Utrilla}, \& {Bakker}}]{RecioBlanco2023}
+{Recio-Blanco}, A., {de Laverny}, P., {Palicio}, P.~A., {et~al.} 2023, \aap,
+  674, A29
 
 \bibitem[{{Reggiani} {et~al.}(2019){Reggiani}, {Amarsi}, {Lind}, {Barklem},
   {Zatsarinny}, {Bartschat}, {Fursa}, {Bray}, {Spina}, \&
