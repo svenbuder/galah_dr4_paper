@@ -1,16 +1,16 @@
 \begin{table*}[ht]
 \centering
-\caption{Table schema of the GALAH DR4 main catalogues. Columns that are part of \texttt{allspec}, but not \texttt{allstar} are listed below the middle line. For compactness, we have combined repetitive columns (for example with integers N). Detailed table schemas are available in the FITS headers of each catalogue file.}
+\caption{Table schema of the GALAH DR4 main catalogues. Columns that are part of \texttt{allspec}, but not \texttt{allstar} are listed below the middle line. For compactness, we have combined repetitive columns (for example with integers $N$). Detailed table schemas are available in the FITS headers of each catalogue file.}
 \label{tab:main_catalog_schema}
 \begin{tabular}{llll}
 \hline \hline
 Column & Description & Column & Description \\
 \hline
 sobject\_id & GALAH identifier & tmass\_id & 2MASS identifier \\ 
-gaiadr3\_source\_id & Gaia DR3 source\_id & survey\_name & 2dF-HERMES Program \\ 
+gaiadr3\_source\_id & \Gaia DR3 source\_id & survey\_name & 2dF-HERMES Program \\ 
 field\_id & GALAH Field ID & setup & allspec/allstar \\ 
-mjd & Modified Julian Date & ra & propagated from Gaia DR3 \\ 
-dec & propagated from Gaia DR3 & flag\_sp & Major spectroscopic quality bitmask flag \\ 
+mjd & Modified Julian Date & ra & propagated from \Gaia DR3 \\ 
+dec & propagated from \Gaia DR3 & flag\_sp & Major spectroscopic quality bitmask flag \\ 
 flag\_sp\_fit & Major fitting quality flag & opt\_loop & Nr of optimisation loops used for fitting \\ 
 flag\_red & Quality bitmask flag of reduction pipeline & snr\_px\_ccdN & Average SNR for CCD N \\ 
 chi2\_sp & Chi2 value of spectroscopic fitting & px\_used\_perc & Percentage of spectrum used for fit \\ 
@@ -18,18 +18,18 @@ model\_name & Used neural network for synthesis & closest\_model & Closest neura
 comp\_time & Computation time spent on spectrum & fit\_global\_rv & RV fitted or fixed after co-adding? \\ 
 rv\_comp\_1 & Radial velocity of primary source & e\_rv\_comp\_1 & Uncertainty of rv\_comp\_1 \\ 
 rv\_comp\_2 & Radial velocity of potential secondary source & e\_rv\_comp\_2 & Uncertainty of rv\_comp\_1 \\ 
-rv\_gaia\_dr3 & Radial velocity in Gaia DR3 & e\_rv\_gaia\_dr3 & Uncertainty of rv\_gaia\_dr3 \\ 
+rv\_gaia\_dr3 & Radial velocity in \Gaia DR3 & e\_rv\_gaia\_dr3 & Uncertainty of rv\_gaia\_dr3 \\ 
 v\_bary\_eff & Barycentric velocity correction & teff & Spectr. effective temperature \\ 
 e\_teff & Uncertainty teff & logg & Photometric surface gravity \\ 
 e\_logg & Uncertainty logg\_plx & fe\_h & Abundance of Fe as pseudo-metallicity \\ 
 e\_fe\_h & Uncertainty fe\_h & flag\_fe\_h & Quality flag fe\_h \\ 
 vmic & Microturbulence velocity (fitted) & e\_vmic & Uncertainty vmic \\ 
 vsini & Broadening velocity & e\_vsini & Uncertainty of vsini \\ 
-nn\_li\_fe & Elemental abundance for [Li/Fe] & nn\_e\_li\_fe & Uncertainty Li\_fe \\ 
+nn\_li\_fe & Elemental abundance for [Li/Fe] & nn\_e\_li\_fe & Uncertainty nn\_li\_fe \\ 
 nn\_flag\_li\_fe & Quality bitmask flag of Li\_fe & x\_fe & Elemental abundance for [X/Fe] \\ 
 e\_x\_fe & Uncertainty of elemental abundance [X/Fe] & flag\_x\_fe & Quality bitmask flag of [X/Fe] \\ 
-mass & Mass used for calculating logg(plx) & age & Age estimated when calculating mass \\ 
-bc\_ks & Bolometric Correction of Ks band & a\_ks & Attenuation in Ks-band A(Ks) \\ 
+mass & Mass used for calculating $\log g$ (plx) & age & Age estimated when calculating mass \\ 
+bc\_ks & Bolometric Correction of $K_S$ band & a\_ks & Attenuation in $K_S$-band $A(K_S)$ \\ 
 lbol & Bolometric Luminosity & r\_med & Median Distance \\ 
 r\_lo & Lower Limit Distance & r\_hi & Higher Limit Distance \\ 
 sb2\_rv\_N & Nth perc. of RV residual signal & ew\_h\_beta & Equivalent Width of observed Hbeta core \\ 
@@ -37,13 +37,13 @@ ew\_h\_alpha & Equivalent Width of observed Halpha core & res\_h\_beta & Residua
 res\_h\_alpha & Residual EW in Halpha core & ew\_k\_is & EW of K7699 Interstellar Line \\ 
 sigma\_k\_is & Gaussian sigma of K7699 Interstellar Line & rv\_k\_is & RV of K7699 Interstellar Line \\ 
 ew\_dib5780 & Equivalent width of DIB NNNN & sigma\_dib5780 & Gaussian sigma of DIB NNNN \\ 
-rv\_dib5780 & RV of DIB NNNN & ebv & Extinction E(B-V) \\ 
-phot\_g\_mean\_mag & Mean Gaia DR3 G-band apparent magnitude & bp\_rp & Color of BP-RP bands \\ 
-j\_m & 2MASS J-band magnitude & j\_msigcom & Uncertainty of j\_m \\ 
-h\_m & 2MASS H-band magnitude & h\_msigcom & Uncertainty of h\_m \\ 
-ks\_m & 2MASS Ks-band magnitude & ks\_msigcom & Uncertainty of ks\_m \\ 
+rv\_dib5780 & RV of DIB NNNN & ebv & Extinction $E(B-V)$ \\ 
+phot\_g\_mean\_mag & Mean \Gaia DR3 G-band apparent magnitude & bp\_rp & Color of $BP-RP$ bands \\ 
+j\_m & 2MASS $J$-band magnitude & j\_msigcom & Uncertainty of j\_m \\ 
+h\_m & 2MASS $H$-band magnitude & h\_msigcom & Uncertainty of h\_m \\ 
+ks\_m & 2MASS $K_S$-band magnitude & ks\_msigcom & Uncertainty of ks\_m \\ 
 W2mag & AllWISE W2-band magnitude & e\_W2mag & uncertainty of W2mag \\ 
-ruwe & RUWE reported by Gaia DR3 & parallax & Astrometric parallax used for GALAH DR4 \\ 
+ruwe & RUWE reported by \Gaia DR3 & parallax & Astrometric parallax used for GALAH DR4 \\ 
 parallax\_error & Uncertainty of astrometric parallax & ew\_li & Eqiuvalent width of Lithium 6708 LiI line \\ 
 e\_ew\_li\_low & Lower uncertainty ew\_li & e\_ew\_li\_upp & Upper uncertainty ew\_li \\ 
 a\_li & Absolute 3D NLTE Li abundance & a\_li\_upp\_lim & Upper limit of absolute 3D NLTE A(Li) \\ 
